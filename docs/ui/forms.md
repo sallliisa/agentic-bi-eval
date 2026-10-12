@@ -175,9 +175,29 @@ forwards `validate`, `submit`, `reset`, and `refresh` to that Form.
 
 Use a registered input renderer, a framework composite, or `TableInput` for
 editable row arrays. Build a local custom field only for a named requirement
-that these controls do not support. The outer form owns the visible label,
-required state, error, help text, and grid span. A custom input renders the
-control only.
+that these controls do not support. Form owns validation state, the visible
+label, required state, and grid span. BaseInput renders helper and error text
+after the control. It shows both when both are present. A custom input slot
+renders its control and binds the supplied `controlBindings` to that control.
+Do not render another validation message or nest a second message-bearing
+BaseInput in the slot.
+
+```vue
+<Form v-bind="profileForm">
+  <template #input:name="{ value, setValue, controlBindings }">
+    <input
+      v-bind="controlBindings"
+      :value="value ?? ''"
+      @input="setValue(($event.target as HTMLInputElement).value)"
+    />
+  </template>
+</Form>
+```
+
+`controlBindings` carries the control ID, disabled and required state, and
+current message links. Bind it to the actual focusable control. It keeps the
+Form label linked to that control and keeps its descriptions current when
+messages change.
 
 `TableInput` keeps its table definition and submit-free row form separate. Pass
 `toDraft` to map a stored row into the row form's input shape. TableInput owns

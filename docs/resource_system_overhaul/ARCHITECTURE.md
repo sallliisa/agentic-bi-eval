@@ -205,7 +205,14 @@ Edits, blur validation, validation, reset, refresh, controlled draft replacement
 
 Input slots are keyed by selected field. Their values and setters use that field's FormDraft type. Outward values and nested objects are detached or read-only. Slots replace controls; they do not replace the Form session.
 
-Form owns labels, descriptions, issue focus, and a stable per-instance DOM ID. Keep the existing input, loading, error, and actions slots. DialogForm and FormView use the same slot and ref contract.
+Form owns labels, validation state, issue focus, and managed control IDs.
+BaseInput renders helper and error text after the control. It keeps both messages
+visible when both are present. A raw `input:<key>` slot receives typed
+`controlBindings`; bind them to the actual focusable control so the Form label
+and current message links target it. Do not render validation text in the slot
+or nest another message-bearing BaseInput. Keep the existing input, loading,
+error, and actions slots. DialogForm and FormView use the same slot and ref
+contract.
 
 ### 5.4 DialogForm parity
 

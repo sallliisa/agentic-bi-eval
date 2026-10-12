@@ -86,8 +86,8 @@ async function login() {
       <div class="text-4xl font-bold">Demo App</div>
     </div>
     <form class="flex flex-col items-center gap-4" @submit.prevent="login">
-      <TextInput class="w-full" :model-value="formData.email" @update:model-value="(value) => (formData.email = String(value))" label="Email" enableHelperMessage required />
-      <PasswordInput class="w-full" :model-value="formData.password" @update:model-value="(value) => (formData.password = String(value))" label="Password" enableHelperMessage required />
+      <TextInput class="w-full" :model-value="formData.email" @update:model-value="(value) => (formData.email = String(value))" label="Email" required />
+      <PasswordInput class="w-full" :model-value="formData.password" @update:model-value="(value) => (formData.password = String(value))" label="Password" required />
       <div v-if="!loading" class="flex w-full flex-row items-center gap-2">
         <Button :disabled="loading" type="submit" class="mt-6 w-full">Login</Button>
       </div>

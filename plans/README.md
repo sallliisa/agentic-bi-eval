@@ -1,5 +1,31 @@
 # File-routing plans
 
+## BaseInput validation messages — 2026-10-12
+
+The user approved BaseInput as the sole validation message renderer. Form
+keeps validation state and delegates field and summary messages. Helper text
+and error text appear together below the control, in that order. Planning uses
+`improve` at `684589a`. Implementation uses `task-subagent-delegation` with
+GPT 6 Luna at max reasoning. Parent review is required. No commit, push,
+merge, external write, or dependency upgrade is authorized.
+
+| Plan | Result | Priority | Effort | Risk | Depends on | Status |
+|---|---|---|---|---|---|---|
+| [092](092-base-input-validation-messages.md) | One validation renderer, independent helper/error text, current control links, and migrated callers | P1 | L | MED | None | DONE — parent APPROVE; 501 unit tests, 75 browser tests, types, diagnostics, architecture, and login lint pass; local commit authorized |
+
+Order: **092 implementation → two review repairs → parent APPROVE**.
+
+Scope: Loom validation message composition, affected callers, stable behavior
+tests, and current documentation. This is a focused migration investigation;
+the API, Sprindle, and general security/performance were not audited.
+
+Considered and rejected:
+
+- Remove only Form's paragraph: Switch and raw custom slots would lose errors.
+- Keep the helper flag: supplied text must control helper visibility.
+- Drop unmatched/root issues: rejected submission must remain explained.
+- Add another message component: BaseInput is the approved sole renderer.
+
 ## Enforce route import agreement — 2026-10-05
 
 The user selected a shared check that makes route import agreement part of
