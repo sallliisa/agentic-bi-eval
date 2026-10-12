@@ -1,5 +1,97 @@
 # File-routing plans
 
+## Loom application findings — 2026-10-12
+
+The user selected findings 1, 3, 4, 5, 6–8, and 9. Planning uses improve at
+`16e7b08`. The parent reviews, commits, and pushes to the current Carta branch.
+No package promotion or merge is authorized.
+
+| Plan | Result | Priority | Effort | Risk | Status |
+|---|---|---|---|---|---|
+| [093](093-time-input-confirmation.md) | Confirm time values before validation | P1 | M | MED | DONE — parent APPROVE |
+| [094](094-dialog-form-close-lifecycle.md) | Keep the form through dialog close animation | P1 | M | MED | DONE — parent APPROVE |
+| [095](095-switch-native-attributes.md) | Route switch attributes to the button | P2 | S | LOW | DONE — parent APPROVE |
+| [096](096-textarea-native-attributes.md) | Route textarea attributes to the native control | P2 | S | LOW | DONE — parent APPROVE |
+| [097](097-list-view-empty-slot.md) | Declare the existing empty slot contract | P2 | S | LOW | DONE — parent APPROVE |
+| [098](098-rich-text-unused-imports.md) | Remove unused RichText import bindings | P3 | S | LOW | DONE — parent APPROVE |
+
+Order: **093 → 094 → 095 → 096 → 097 → 098 → parent review → commit → push**.
+All depend on completed Plan 092; they have no mutual production dependency.
+093 and 094 share browser configuration and therefore have one implementation owner.
+
+## Implementation handoff — 2026-10-12
+
+All six plans are complete and approved by the parent. The parent reran the
+unit, browser, Loom type, diagnostics, architecture, and diff gates. The
+consumer type gate remains an accepted baseline failure. GPT 6 Luna at max
+reasoning implemented the changes through task-subagent-delegation; the
+parent owns the authorized commit and push.
+
+| Gate | Command | Result |
+|---|---|---|
+| Loom unit tests | `pnpm --filter @southneuhof/loom test` | PASS — 64 files, 502 tests |
+| Loom browser tests | `pnpm --filter @southneuhof/loom test:browser` | PASS — 17 files, 79 tests |
+| Loom types | `pnpm --filter @southneuhof/loom type-check` | PASS |
+| Framework web types | `pnpm --filter @southneuhof/framework-web type-check` | FAIL — 10 diagnostics also reproduce at baseline `16e7b08`: three renderer-prop errors in `apps/web/src/framework/__type-tests__/form-renderer-props.type-test.ts`, two `FormInput` errors in `packages/loom/src/contracts/forms.ts`, four renderer constraint errors in `packages/loom/src/forms/defineForm.ts`, and one `FormRendererKey` cycle in `packages/loom/src/renderers/formContracts.ts` |
+| Contract diagnostics | `pnpm --filter @southneuhof/loom test:diagnostics` | PASS — 29 Loom cases, 14 TypeScript surface cases, 8 Vue surface cases |
+| Surface architecture | `pnpm test:surface-architecture` | PASS — 34 tests and architecture checks |
+| Diff hygiene | `git diff --check` | PASS |
+
+Baseline regressions failed for their stated contracts. Plan 093 had no picker
+confirmation action. A second temporary variant kept confirmation but restored
+the deferred watcher and suppressed blur touch; its real Form browser test
+failed because the required error stayed visible after committing `09:30:00`.
+Plan 094 removed both forms during the closed animation;
+Plan 095 put `name` on the wrapper; Plan 096 put `name` on the wrapper; and
+Plan 097 rejected `#empty` in the type test. Plan 098 removed only the unused
+`watch` binding; no test was justified for that import cleanup.
+
+The browser command form `pnpm --filter @southneuhof/loom test:browser -- <file>`
+ran every browser spec in the config. The full browser gate above passed.
+TimeInput selects `09:30` in the real picker and asserts the exact committed
+string. DialogForm uses a long test-only exit animation and dispatches its
+completion after checking that the form remains mounted. A direct ListView run
+also passed 3 tests. The focused unit commands for Switch and Textarea used
+`pnpm --filter @southneuhof/loom exec vitest run`.
+
+For the consumer type baseline, all six modified Loom Vue component sources
+were restored from `git show 16e7b08:<path>` while their current contents were
+backed up. The exact same 10 diagnostics appeared at baseline and after source
+restoration. The current changes do not produce these diagnostics; no unrelated
+contracts were edited.
+
+Warnings in the successful gates were existing jsdom `localStorage` notices;
+missing Reka Dialog descriptions; NumberInput placeholder and DOM `prefix`
+warnings; TinyMCE evaluation-license output; and a Vue Router warning from a
+browser suite that mounts outside `router-view`.
+
+The `test-audit` skill refers to `$openclaw-testing`, `$crabbox`, and
+`$autoreview`; these tools were not available here. The implementation used the
+repository commands and is ready for direct parent review. No production,
+external, or dependency writes were made.
+
+| Finding | Evidence | Impact | Confidence |
+|---|---|---|---|
+| Time confirmation and validation | TimeInput.vue:38,75,91; datepicker-popup.spec.ts:132 | Missing confirmation and stale required error until confirmed value is validated | HIGH |
+| Dialog form close lifecycle | DialogForm.vue:113,248 | Form disappears during close animation | HIGH |
+| Switch native attributes and semantics | Switch.vue:114 | Attributes attach to wrapper, checked semantics absent | HIGH |
+| Textarea native attributes and touch contract | TextareaInput.vue:27 and template | Native options attach to wrapper | HIGH |
+| Typed empty slot | ListView.vue:47,217,674 | Supported runtime slot absent from types | HIGH |
+| Unused RichText binding | RichTextInput.vue:4 | Unused watch import | HIGH |
+
+Scope: selected Loom inputs, DialogForm lifecycle, and ListView slot typing.
+General API/security/performance, resource declarations, and application pages
+were not audited. README framework boundary assigns reusable behavior to Loom
+and image requirements to applications.
+
+Considered and rejected:
+
+- Image aspect ratio warnings (finding 2): application image policy; excluded by user.
+- Repeat Plan 092 required/disabled/message bindings: already implemented.
+- Change all datepicker family confirmation behavior: only TimeInput selected.
+- Remove TinyMCE registration imports as unused: side effects are runtime behavior.
+
+
 ## BaseInput validation messages — 2026-10-12
 
 The user approved BaseInput as the sole validation message renderer. Form
