@@ -1,5 +1,5 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
-import { createApp, defineComponent, h, nextTick } from 'vue'
+import { createApp, defineComponent, h } from 'vue'
 import { createMemoryHistory, createRouter } from 'vue-router'
 import { FrameworkPlugin, createFrameworkQueryClient, resetResourceRuntimeForTests } from '@southneuhof/loom'
 import { toast } from 'vue-sonner'
@@ -11,6 +11,7 @@ let deferPut = false
 let resolvePut: (() => void) | undefined
 
 const ok = (payload: unknown) => ({ ok: true, json: async () => payload })
+let cleanupMountedScreen: (() => void) | undefined
 
 vi.mock('vue-sonner', () => ({ toast: { error: vi.fn() } }))
 vi.mock('@/stores/permissions', () => ({ permissions: () => ({ can: () => true }) }))
@@ -90,13 +91,6 @@ vi.mock('@/framework/rpc', () => ({
 
 const Screen = (await import('./index.route.vue')).default
 
-async function flush(times = 8) {
-  for (let attempt = 0; attempt < times; attempt += 1) {
-    await Promise.resolve()
-    await nextTick()
-  }
-}
-
 async function mountScreen() {
   const router = createRouter({
     history: createMemoryHistory(),
@@ -107,16 +101,33 @@ async function mountScreen() {
   const host = document.createElement('div')
   document.body.appendChild(host)
   const app = createApp(defineComponent(() => () => h(Screen)))
+  const queryClient = createFrameworkQueryClient({ retry: 0, staleTime: 0 })
+  let mounted = false
+  let active = true
+  const unmount = () => {
+    if (!active) return
+    active = false
+    try {
+      if (mounted) app.unmount()
+    } finally {
+      host.remove()
+      queryClient.clear()
+    }
+  }
+  cleanupMountedScreen = unmount
   app.use(router)
-  app.use(FrameworkPlugin, { queryClient: createFrameworkQueryClient({ retry: 0, staleTime: 0 }) })
+  app.use(FrameworkPlugin, { queryClient })
   app.mount(host)
-  await flush()
+  mounted = true
+  await vi.waitFor(() => expect(host.querySelectorAll('button[role="switch"][data-permission]')).toHaveLength(3))
   return {
     host,
-    unmount: () => {
-      app.unmount()
-      host.remove()
+    permissionSwitch: (id: string) => {
+      const button = host.querySelector<HTMLButtonElement>(`button[role="switch"][data-permission="${id}"]`)
+      if (!button) throw new Error(`The permission switch for ${id} is missing.`)
+      return button
     },
+    unmount,
   }
 }
 
@@ -131,7 +142,14 @@ beforeEach(() => {
   resolvePut = undefined
 })
 
-afterEach(() => resetResourceRuntimeForTests())
+afterEach(() => {
+  try {
+    cleanupMountedScreen?.()
+  } finally {
+    cleanupMountedScreen = undefined
+    resetResourceRuntimeForTests()
+  }
+})
 
 describe('role permission editor', () => {
   it('shows permissions in one standard list and exposes accessible switches', async () => {
@@ -140,60 +158,72 @@ describe('role permission editor', () => {
     expect(view.host.textContent).toContain('View users')
     expect(view.host.textContent).toContain('Manage users')
     expect(view.host.textContent).toContain('View roles')
-    const switches = view.host.querySelectorAll<HTMLElement>('[data-permission]')
+    const switches = view.host.querySelectorAll<HTMLButtonElement>('button[role="switch"][data-permission]')
     expect(switches).toHaveLength(3)
-    for (const control of switches) {
-      expect(control.querySelector('button')!.getAttribute('role')).toBe('switch')
-      expect(control.querySelector('button')!.getAttribute('aria-checked')).toMatch(/^(true|false)$/)
-      expect(control.querySelector('button')!.getAttribute('aria-label')).toMatch(/^Permission /)
-    }
-    expect(view.host.querySelector('[data-permission="p1"]')?.querySelector('button')?.getAttribute('aria-label')).toBe('Permission View users')
+    expect(view.permissionSwitch('p1').getAttribute('aria-label')).toBe('Permission View users')
+    expect(view.permissionSwitch('p1').getAttribute('aria-checked')).toBe('false')
+    expect(view.permissionSwitch('p1').disabled).toBe(false)
+    expect(view.permissionSwitch('p2').getAttribute('aria-label')).toBe('Permission Manage users')
+    expect(view.permissionSwitch('p2').getAttribute('aria-checked')).toBe('true')
+    expect(view.permissionSwitch('p2').disabled).toBe(false)
+    expect(view.permissionSwitch('p3').getAttribute('aria-label')).toBe('Permission View roles')
+    expect(view.permissionSwitch('p3').getAttribute('aria-checked')).toBe('false')
+    expect(view.permissionSwitch('p3').disabled).toBe(false)
     view.unmount()
   })
 
   it('uses PUT and DELETE and keeps the saved state', async () => {
     const view = await mountScreen()
-    const add = view.host.querySelector<HTMLElement>('[data-permission="p1"]')!
-    add.querySelector<HTMLButtonElement>('button')!.click()
-    await flush()
-    expect(calls).toEqual([{ method: 'put', permissionId: 'p1' }])
-    expect(view.host.querySelector<HTMLElement>('[data-permission="p1"]')?.querySelector('button')?.getAttribute('aria-checked')).toBe('true')
+    const add = view.permissionSwitch('p1')
+    add.click()
+    await vi.waitFor(() => {
+      expect(calls).toEqual([{ method: 'put', permissionId: 'p1' }])
+      expect(add.getAttribute('aria-checked')).toBe('true')
+    })
 
-    const remove = view.host.querySelector<HTMLElement>('[data-permission="p2"]')!
-    remove.querySelector<HTMLButtonElement>('button')!.click()
-    await flush()
-    expect(calls).toEqual([
-      { method: 'put', permissionId: 'p1' },
-      { method: 'delete', permissionId: 'p2' },
-    ])
-    expect(view.host.querySelector<HTMLElement>('[data-permission="p2"]')?.querySelector('button')?.getAttribute('aria-checked')).toBe('false')
+    const remove = view.permissionSwitch('p2')
+    remove.click()
+    await vi.waitFor(() => {
+      expect(calls).toEqual([
+        { method: 'put', permissionId: 'p1' },
+        { method: 'delete', permissionId: 'p2' },
+      ])
+      expect(remove.getAttribute('aria-checked')).toBe('false')
+    })
     view.unmount()
   })
 
   it('shows the new state and disables the switch while the request is pending', async () => {
     deferPut = true
     const view = await mountScreen()
-    const add = view.host.querySelector<HTMLElement>('[data-permission="p1"]')!
-    add.querySelector<HTMLButtonElement>('button')!.click()
-    await nextTick()
-    expect(add.querySelector('button')!.getAttribute('aria-checked')).toBe('true')
-    expect(add.querySelector<HTMLButtonElement>('button')?.disabled).toBe(true)
-    expect(view.host.querySelector<HTMLButtonElement>('[data-permission="p2"] button')?.disabled).toBe(false)
+    const add = view.permissionSwitch('p1')
+    add.click()
+    await vi.waitFor(() => {
+      expect(add.getAttribute('aria-checked')).toBe('true')
+      expect(add.disabled).toBe(true)
+      expect(view.permissionSwitch('p2').disabled).toBe(false)
+    })
 
-    resolvePut?.()
-    await flush()
-    expect(view.host.querySelector<HTMLElement>('[data-permission="p1"]')?.querySelector('button')?.getAttribute('aria-checked')).toBe('true')
+    const release = resolvePut
+    if (!release) throw new Error('The pending permission request has no release function.')
+    release()
+    await vi.waitFor(() => {
+      expect(add.getAttribute('aria-checked')).toBe('true')
+      expect(add.disabled).toBe(false)
+    })
     view.unmount()
   })
 
   it('keeps the previous state and shows an error when a toggle fails', async () => {
     failure = true
     const view = await mountScreen()
-    const add = view.host.querySelector<HTMLElement>('[data-permission="p1"]')!
-    add.querySelector<HTMLButtonElement>('button')!.click()
-    await flush()
-    expect(view.host.querySelector<HTMLElement>('[data-permission="p1"]')?.querySelector('button')?.getAttribute('aria-checked')).toBe('false')
-    expect(vi.mocked(toast.error)).toHaveBeenCalledWith('Denied')
+    const add = view.permissionSwitch('p1')
+    add.click()
+    await vi.waitFor(() => {
+      expect(add.getAttribute('aria-checked')).toBe('false')
+      expect(add.disabled).toBe(false)
+      expect(vi.mocked(toast.error)).toHaveBeenCalledWith('Denied')
+    })
     view.unmount()
   })
 
@@ -201,14 +231,20 @@ describe('role permission editor', () => {
     deferPut = true
     failure = true
     const view = await mountScreen()
-    const add = view.host.querySelector<HTMLElement>('[data-permission="p1"]')!
-    add.querySelector<HTMLButtonElement>('button')!.click()
-    await nextTick()
-    expect(add.querySelector('button')!.getAttribute('aria-checked')).toBe('true')
-    resolvePut?.()
-    await flush()
-    expect(add.querySelector('button')!.getAttribute('aria-checked')).toBe('false')
-    expect(vi.mocked(toast.error)).toHaveBeenCalledWith('Denied')
+    const add = view.permissionSwitch('p1')
+    add.click()
+    await vi.waitFor(() => {
+      expect(add.getAttribute('aria-checked')).toBe('true')
+      expect(add.disabled).toBe(true)
+    })
+    const release = resolvePut
+    if (!release) throw new Error('The pending permission request has no release function.')
+    release()
+    await vi.waitFor(() => {
+      expect(add.getAttribute('aria-checked')).toBe('false')
+      expect(add.disabled).toBe(false)
+      expect(vi.mocked(toast.error)).toHaveBeenCalledWith('Denied')
+    })
     view.unmount()
   })
 
@@ -221,11 +257,21 @@ describe('role permission editor', () => {
 
   it('does not send duplicate requests while a row is pending', async () => {
     const view = await mountScreen()
-    const add = view.host.querySelector<HTMLElement>('[data-permission="p1"]')!
-    const button = add.querySelector<HTMLButtonElement>('button')!
+    deferPut = true
+    const button = view.permissionSwitch('p1')
     button.click()
     button.click()
-    await flush()
+    await vi.waitFor(() => {
+      expect(button.disabled).toBe(true)
+      expect(calls).toHaveLength(1)
+    })
+    const release = resolvePut
+    if (!release) throw new Error('The pending permission request has no release function.')
+    release()
+    await vi.waitFor(() => {
+      expect(button.disabled).toBe(false)
+      expect(button.getAttribute('aria-checked')).toBe('true')
+    })
     expect(calls).toHaveLength(1)
     view.unmount()
   })

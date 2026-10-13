@@ -1,5 +1,5 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
-import { createApp, defineComponent, h, nextTick } from 'vue'
+import { createApp, defineComponent, h } from 'vue'
 import { createMemoryHistory, createRouter } from 'vue-router'
 import { FrameworkPlugin, createFrameworkQueryClient, resetResourceRuntimeForTests, resolveFrameworkAdapters } from '@southneuhof/loom'
 import { createRouteQueryAdapter } from '@/framework/adapters/query/routeQuery'
@@ -29,13 +29,7 @@ const baseRows = [
   { id: 'r4', roleCode: 'available', name: 'Available', description: null, active: true, assigned: false },
 ]
 
-async function flush(times = 8) {
-  for (let attempt = 0; attempt < times; attempt += 1) {
-    await Promise.resolve()
-    await nextTick()
-    await new Promise((resolve) => setTimeout(resolve, 0))
-  }
-}
+let cleanupMountedRoute: (() => void) | undefined
 
 async function mountRoute(path = '/settings/users/u1/detail/role-assignments') {
   const router = createRouter({
@@ -47,25 +41,40 @@ async function mountRoute(path = '/settings/users/u1/detail/role-assignments') {
   const host = document.createElement('div')
   document.body.appendChild(host)
   const app = createApp(defineComponent(() => () => h(Route)))
+  const queryClient = createFrameworkQueryClient({ retry: 0, staleTime: 0 })
+  let mounted = false
+  let active = true
+  const unmount = () => {
+    if (!active) return
+    active = false
+    try {
+      if (mounted) app.unmount()
+    } finally {
+      host.remove()
+      queryClient.clear()
+    }
+  }
+  cleanupMountedRoute = unmount
   app.use(router)
   app.use(FrameworkPlugin, {
     adapters: resolveFrameworkAdapters({ query: createRouteQueryAdapter(router) }),
     renderers: { display: appDisplayRenderers },
-    queryClient: createFrameworkQueryClient({ retry: 0, staleTime: 0 }),
+    queryClient,
   })
   app.directive('tippy', {})
   app.mount(host)
-  await flush()
+  mounted = true
+  await vi.waitFor(() => expect(host.querySelectorAll('button[role="switch"][data-role]')).toHaveLength(baseRows.length))
 
   return {
     host,
     router,
-    switchButton: (id: string) => host.querySelector<HTMLButtonElement>(`[data-role="${id}"] button`)!,
-    switchRoot: (id: string) => host.querySelector<HTMLElement>(`[data-role="${id}"]`)!,
-    unmount: () => {
-      app.unmount()
-      host.remove()
+    switchButton: (id: string) => {
+      const button = host.querySelector<HTMLButtonElement>(`button[role="switch"][data-role="${id}"]`)
+      if (!button) throw new Error(`The role switch for ${id} is missing.`)
+      return button
     },
+    unmount,
   }
 }
 
@@ -88,7 +97,14 @@ beforeEach(() => {
   })
 })
 
-afterEach(() => resetResourceRuntimeForTests())
+afterEach(() => {
+  try {
+    cleanupMountedRoute?.()
+  } finally {
+    cleanupMountedRoute = undefined
+    resetResourceRuntimeForTests()
+  }
+})
 
 describe('role assignment screen', () => {
   it('lists roles and toggles assignment without scope filters', async () => {
@@ -98,13 +114,26 @@ describe('role assignment screen', () => {
     expect(view.host.textContent).toContain('Available')
     expect(mocks.load.mock.calls.at(-1)?.[1]).toMatchObject({ userId: 'u1' })
 
-    view.switchButton('r4').click()
-    await flush()
-    expect(mocks.set).toHaveBeenCalledWith('u1', 'r4', true)
+    const available = view.switchButton('r4')
+    expect(available.getAttribute('aria-label')).toBe('Role Available')
+    expect(available.getAttribute('aria-checked')).toBe('false')
+    expect(available.disabled).toBe(false)
+    const assigned = view.switchButton('r1')
+    expect(assigned.getAttribute('aria-label')).toBe('Role Admin')
+    expect(assigned.getAttribute('aria-checked')).toBe('true')
+    expect(assigned.disabled).toBe(false)
 
-    view.switchButton('r1').click()
-    await flush()
-    expect(mocks.set).toHaveBeenCalledWith('u1', 'r1', false)
+    available.click()
+    await vi.waitFor(() => {
+      expect(mocks.set).toHaveBeenCalledWith('u1', 'r4', true)
+      expect(view.switchButton('r4').getAttribute('aria-checked')).toBe('true')
+    })
+
+    assigned.click()
+    await vi.waitFor(() => {
+      expect(mocks.set).toHaveBeenLastCalledWith('u1', 'r1', false)
+      expect(assigned.getAttribute('aria-checked')).toBe('false')
+    })
     view.unmount()
   })
 })

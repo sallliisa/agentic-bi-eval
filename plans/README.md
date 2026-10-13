@@ -1,5 +1,136 @@
 # File-routing plans
 
+## Green baseline and push authorization — 2026-10-14
+
+The user authorized commit and push after confirming a green baseline.
+This authorization follows the implementation-only limits recorded below.
+The parent reran the root checks on the complete reviewed worktree:
+
+| Gate | Result |
+|---|---|
+| `pnpm test` | PASS: 12 build/test tasks across all 6 packages, plus 34 architecture checks |
+| `pnpm type-check` | PASS: all 6 packages |
+| `pnpm lint` | PASS: all 3 available lint tasks |
+| Web lint | PASS: 0 errors, 14 review warnings |
+| Loom contract diagnostics | PASS: 35 Loom, 14 TypeScript, 8 Vue cases |
+| Route source contract freshness | PASS: 8 checks |
+| Module tooling | PASS: 91 Node checks and 2 Python tests |
+| Diff hygiene | PASS |
+
+Raw output is in the ignored `plans/loom-feedback-evidence/push-baseline-*.log`
+files. The root test command also builds the applications. Loom browser proof
+remains 17 files/79 tests from the unchanged-source parent review. Commit only
+the reviewed Plans 099–103 files and push the current `main` to `origin/main`.
+No manual package promotion or additional repository push is authorized.
+
+## App test failures — 2026-10-14
+
+The user authorized repair of the seven app route failures and three import
+errors reported after Plans 099–102. The parent wrote Plan 103 and its exact
+contract. GPT-6 Luna at max reasoning implements it through
+`task-subagent-delegation`; the parent reviews source and evidence before DONE.
+
+| Plan | Result | Priority | Effort | Risk | Depends on | Status |
+|---|---|---|---|---|---|---|
+| [103](103-repair-app-test-storage-and-switch-controls.md) | Real browser storage in tests; current Switch integration and selectors | P1 | S | LOW | 099–102 DONE | DONE — parent APPROVE, 2026-10-14 |
+
+The parent reproduced all failures in the five affected files. The scope is
+app test setup, two route test fixtures, and the obsolete permission-page
+workaround. Packages and approved local work remain outside this repair.
+No commit, push, install, or external write is authorized.
+
+Final parent verification passes: app unit 48 files/245 tests, focused
+owners 6 files/23 tests, storage 2 cases, Loom unit 64 files/529 tests,
+architecture 34 checks, and focused app lint. The normal app type check passes
+twice after replacing a stale ignored build-info cache. All 41 protected files
+from the previous work match their recorded hashes. The earlier reported app
+baseline failures in the sections below are now fixed. No commit or push.
+
+## Loom development feedback — 2026-10-13
+
+The user selected feedback items 1, 3, 5, and 6 for plans and implementation.
+Planning uses improve at `f507f5e`. One serial GPT-6 Luna worker at max
+reasoning implements the four plans through task-subagent-delegation. The
+parent reads the actual diff, checks the evidence, and owns final acceptance.
+No commit, push, package promotion, install, server/database operation, or
+external write is authorized by this task.
+
+| Plan | Result | Priority | Effort | Risk | Depends on | Status |
+|---|---|---|---|---|---|---|
+| [099](099-centralize-read-failure-feedback.md) | Report genuine current read failures once | P1 | M | MED | — | DONE — parent APPROVE, 2026-10-14 |
+| [100](100-distinguish-confirmed-writes-from-refresh-failures.md) | Distinguish rejected, uncertain, and confirmed writes with failed refresh | P1 | L | HIGH | 099 | DONE — parent APPROVE, 2026-10-14 |
+| [101](101-check-resource-sort-keys-against-loader-query.md) | Check resource sorting against the effective loader query | P2 | M | MED | Serial after 100 | DONE — parent APPROVE, 2026-10-14 |
+| [102](102-prove-write-refresh-behavior-through-real-http.md) | Join real mounted views, resources, query client, and controlled HTTP | P1 | M | LOW | 099, 100 | DONE — parent APPROVE, 2026-10-14 |
+
+Order: prepare Plan 102's primary failing HTTP proof where useful, then
+**099 → 100 → 101 → 102 final proof → parent review**. Preparing a failing
+regression is not completion of 102. One owner handles shared files and runs
+tests only while production edits are paused.
+
+Final checks on 2026-10-14: Loom unit 64 files/529 tests, browser 17 files/79
+tests, diagnostics 35 Loom + 14 TypeScript + 8 Vue cases, and architecture 34
+checks pass. App types, focused HTTP (3 files/27 tests), app lint, and diff
+hygiene pass. The parent reran these gates and reviewed the final diff. The views/Form session owner gate has 2 files/89 tests pass. The
+full app failure snapshot at Plans 099–102 acceptance had 7 failing tests and
+3 import failures; the same failures reproduced at clean HEAD `f507f5e` in
+`plans/loom-feedback-evidence/app-unit-baseline.log`. Plan 103 now passes the
+full app unit suite with 48 files and 245 tests. Its required app type check
+reports 10 diagnostics outside Plan 103 scope; see that plan's STOPPED record.
+Parent review is complete for Plans 099–102. The clean HEAD app type baseline
+has no diagnostics.
+
+| Finding | Evidence | Impact | Confidence |
+|---|---|---|---|
+| No shared read notification owner | `packages/loom/src/query/loader.ts:54`, `query/client.ts:19`, `adapters/plugin.ts` | Consumer catches can report canceled or duplicated failures | HIGH |
+| Write and refresh outcome combined | `packages/loom/src/resources/bindResource.ts:269`, `forms/useFormSession.ts:548`, `apps/web/src/framework/hono/actions.ts:33` | Saved writes receive uncertain/error wording; lost responses can be retryable | HIGH |
+| Sort columns checked only against records | `packages/loom/src/tables/defineTable.ts:13`, `resources/operations.ts:163` | Unsupported endpoint sort values fail after development | HIGH |
+| HTTP and mounted resource proof are separate | `components/views/__tests__/resource-cache.spec.ts:32`, `apps/web/src/framework/hono/actions.spec.ts:50`, `resources/__tests__/boundResource.spec.ts:605` | Mock invalidation does not prove a failed real HTTP refresh | HIGH |
+
+Scope: selected Loom query/resource/form/delete owners, application Hono
+transport and normalizer, resource sort types, and their existing test paths.
+This is a focused feedback plan, not a Carta release audit. General API,
+security, performance, deployment, business modules, and independent
+Lookup/location/file-manager read implementations were not audited.
+
+Considered and rejected:
+
+- Feedback 2 declarative command presentation: rejected by the user; use
+  existing slots. This series does not change its wording options or command UI.
+- Feedback 4 RemoteMultiSelectInput: rejected by the user; LookupInput already
+  supports the relevant selection behavior.
+- New enabled aliases or a second cancellation scheduler: existing useLoader
+  enabled and query-client lifecycle already own these contracts.
+- A public write-result envelope or global mutation registry: extend the
+  existing postWrite state and retain domain-result operation returns.
+- New resource ID/audit actor schemas: backend-derived application schemas
+  already own these values; no positive-ID assumption was found here.
+- New module generator or reference module: Plan 073 retired scaffolding;
+  real Users resource/routes already provide the compiled examples.
+- Another generic harness or copied access/session test matrix: extend real
+  HTTP integration proof at its owning seam.
+
+The parent compiled an isolated source snapshot of HEAD `f507f5e` with the
+installed dependencies and unchanged generated API contract; the app compiler
+passed with exit 0. The prior index's ten renderer diagnostics are historical,
+not the current baseline. Every new app type failure must be repaired.
+Historical commit/push authorization in other index sections does not apply
+to this task.
+
+First Luna pass: STOPPED after the bounded Plan 102 correction limit. Parent
+review rejected acceptance: HTTP integration has five failures and an
+unhandled rejection; five compiler diagnostic locations are wrong; app types
+have new errors. The parent reconciled the plans with the retained-row,
+sortable-inference, completion classification, recovery-lifecycle, fixture,
+and evidence corrections before requesting revision from the same worker.
+
+Final parent verdict: **APPROVE**. Luna implemented the selected contracts.
+The parent rejected incomplete evidence and stale-delete ownership, then
+reconciled expected Vue setup-error cleanup after the two-round limit.
+The final test-only correction removed unrelated formatting. Current parent
+logs use `parent-final-accepted-*` for unit/types and `parent-accepted-*` for
+browser, HTTP, diagnostics, architecture, and lint. Source changes remain
+uncommitted. Feedback items 2 and 4 remain rejected.
+
 ## Loom application findings — 2026-10-12
 
 The user selected findings 1, 3, 4, 5, 6–8, and 9. Planning uses improve at

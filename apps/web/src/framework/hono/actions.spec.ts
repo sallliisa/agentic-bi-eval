@@ -253,10 +253,114 @@ describe('createHonoResourceActions', () => {
     await expect(actions.list({ query: {}, searchParameters: {} })).rejects.toEqual({ error: 'bad' })
   })
 
+  it('marks rejected write requests as uncertain after dispatch', async () => {
+    const failedFetch = vi.fn(async () => {
+      throw new Error('The connection closed.')
+    })
+    const rpc = hc<typeof app>('https://api.test', { fetch: failedFetch })
+    const actions = createHonoResourceActions(rpc.rows, { querySchema })
+
+    await expect(actions.create({ name: 'One', nested: { value: 'one' } })).rejects.toMatchObject({
+      message: 'The connection closed.',
+      operation: 'create',
+      retryable: false,
+      postWrite: true,
+      writeOutcome: 'uncertain',
+    })
+    expect(failedFetch).toHaveBeenCalledOnce()
+  })
+
+  it.each([
+    [408, JSON.stringify({ message: 'Request timed out.' })],
+    [500, JSON.stringify({ message: 'The server failed.', errors: { name: ['Unavailable.'] } })],
+    [201, '{'],
+  ])('marks an HTTP %s response with no reliable write result as uncertain', async (status, body) => {
+    const responseFetch = vi.fn(async () => new Response(body, { status }))
+    const rpc = hc<typeof app>('https://api.test', { fetch: responseFetch })
+    const actions = createHonoResourceActions(rpc.rows, { querySchema })
+
+    await expect(actions.create({ name: 'One', nested: { value: 'one' } })).rejects.toMatchObject({
+      operation: 'create',
+      retryable: false,
+      postWrite: true,
+      writeOutcome: 'uncertain',
+    })
+    expect(responseFetch).toHaveBeenCalledOnce()
+  })
+
+  it('keeps definite write rejections ordinary and preserves server issues', async () => {
+    const responseFetch = vi.fn(
+      async () =>
+        new Response(
+          JSON.stringify({
+            message: 'Name is required.',
+            errors: { name: ['Required.'] },
+            postWrite: true,
+            writeOutcome: 'confirmed',
+            result: { id: 'unexpected' },
+          }),
+          { status: 422 }
+        )
+    )
+    const rpc = hc<typeof app>('https://api.test', { fetch: responseFetch })
+    const actions = createHonoResourceActions(rpc.rows, { querySchema })
+    const error = await actions.create({ name: '', nested: { value: 'invalid' } }).then(
+      () => undefined,
+      (caught: unknown) => caught
+    )
+
+    expect(error).toMatchObject({
+      message: 'Name is required.',
+      issues: [{ path: ['name'], message: 'Required.' }],
+    })
+    expect(error).not.toHaveProperty('postWrite')
+    expect(error).not.toHaveProperty('writeOutcome')
+    expect(error).not.toHaveProperty('result')
+    expect(responseFetch).toHaveBeenCalledOnce()
+  })
+
+  it('does not add write metadata to failed reads', async () => {
+    const responseFetch = vi.fn(
+      async () =>
+        new Response(
+          JSON.stringify({
+            message: 'Read unavailable.',
+            postWrite: true,
+            writeOutcome: 'confirmed',
+            result: { id: 'unexpected' },
+            refresh: 'not-a-callback',
+          }),
+          { status: 503 }
+        )
+    )
+    const rpc = hc<typeof app>('https://api.test', { fetch: responseFetch })
+    const actions = createHonoResourceActions(rpc.rows, { querySchema })
+    const error = await actions.list({ query: {}, searchParameters: {} }).then(
+      () => undefined,
+      (caught: unknown) => caught
+    )
+
+    expect(error).toEqual({ message: 'Read unavailable.' })
+    expect(error).not.toHaveProperty('postWrite')
+    expect(error).not.toHaveProperty('writeOutcome')
+    expect(error).not.toHaveProperty('result')
+    expect(error).not.toHaveProperty('refresh')
+    expect(responseFetch).toHaveBeenCalledOnce()
+  })
+
   it('rejects a non-object route and names a malformed operation when it is invoked', async () => {
     expect(() => createHonoResourceActions(undefined as never)).toThrow(/kebab-case|rpc\[/)
     const actions = createHonoResourceActions({} as never)
-    await expect(Reflect.get(actions, 'create')({ name: 'One' })).rejects.toThrow(/create operation could not be invoked/)
+    const error = await Reflect.get(
+      actions,
+      'create'
+    )({ name: 'One' }).then(
+      () => undefined,
+      (caught: unknown) => caught
+    )
+    expect(error).toMatchObject({ message: expect.stringMatching(/create operation could not be invoked/) })
+    expect(error).not.toHaveProperty('postWrite')
+    expect(error).not.toHaveProperty('writeOutcome')
   })
 
   it('accepts hyphenated first segments', async () => {

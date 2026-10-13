@@ -42,4 +42,33 @@ describe('web data adapter', () => {
       postWrite: true,
     })
   })
+
+  it('preserves a confirmed undefined result and its read recovery callback', () => {
+    const refresh = async () => {}
+    const issues = [{ path: ['name'], message: 'Required.' }]
+    const error = Object.assign(new Error('The write was saved, but the read failed.'), {
+      code: 'RESOURCE_POST_WRITE_INVALIDATION_FAILED',
+      operation: 'delete',
+      retryable: false,
+      postWrite: true,
+      writeOutcome: 'confirmed',
+      result: undefined,
+      refresh,
+      issues,
+    })
+    const normalized = normalizeError(error)
+
+    expect(normalized).toEqual({
+      message: 'The write was saved, but the read failed.',
+      code: 'RESOURCE_POST_WRITE_INVALIDATION_FAILED',
+      operation: 'delete',
+      retryable: false,
+      postWrite: true,
+      writeOutcome: 'confirmed',
+      result: undefined,
+      refresh,
+      issues,
+    })
+    expect(Object.hasOwn(normalized, 'result')).toBe(true)
+  })
 })

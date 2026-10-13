@@ -1,6 +1,6 @@
 <route>{ "meta": { "permission": "list-role-permissions" } }</route>
 <script setup lang="ts">
-import { computed, ref, type DirectiveBinding } from 'vue'
+import { computed, ref } from 'vue'
 import { useRoute } from 'vue-router'
 import { toast } from 'vue-sonner'
 import { ListView } from '@southneuhof/loom'
@@ -29,15 +29,6 @@ function canToggle(row: RolePermission) {
   return rolePermissions.actions.set.withContext({ record: row }).can(roleId.value, row.id, !row.assigned)
 }
 
-// Switch applies attributes to its wrapper. Label the focusable button locally.
-function switchAttributes(element: HTMLElement, { value }: DirectiveBinding<RolePermission>) {
-  const button = element.querySelector('button')
-  button?.setAttribute('role', 'switch')
-  button?.setAttribute('aria-label', `Permission ${value.name}`)
-  button?.setAttribute('aria-checked', String(assigned(value)))
-}
-const vPermissionSwitch = { mounted: switchAttributes, updated: switchAttributes }
-
 async function toggle(row: RolePermission) {
   const key = rowKey(row.id)
   const command = rolePermissions.actions.set.withContext({ record: row })
@@ -58,9 +49,8 @@ async function toggle(row: RolePermission) {
   <ListView v-bind="list" title="Permissions" :export="false">
     <template #cell:assigned="{ record }">
       <Switch
-        v-permission-switch="record"
         :model-value="assigned(record)"
-        v-bind="{ 'data-permission': record.id }"
+        v-bind="{ 'aria-label': `Permission ${record.name}`, 'data-permission': record.id }"
         :disabled="!canToggle(record) || pending.has(rowKey(record.id))"
         @update:model-value="toggle(record)"
       />

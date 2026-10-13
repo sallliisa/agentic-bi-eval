@@ -1,4 +1,4 @@
-import type { CollectionResult, DataAdapter, RecordResult, SchemaIssue, SubmitError } from '@southneuhof/loom'
+import { defaultDataAdapter, type CollectionResult, type DataAdapter, type RecordResult, type SchemaIssue, type SubmitError } from '@southneuhof/loom'
 
 /**
  * Backend conventions of this project, kept out of framework components.
@@ -48,24 +48,10 @@ function collectIssues(errors: unknown): SchemaIssue[] | undefined {
   return issues.length ? issues : undefined
 }
 
-function submitErrorMetadata(error: unknown): Pick<SubmitError, 'code' | 'operation' | 'retryable' | 'postWrite'> {
-  if (!isRecord(error)) return {}
-  return {
-    ...(typeof error.code === 'string' ? { code: error.code } : {}),
-    ...(typeof error.operation === 'string' ? { operation: error.operation } : {}),
-    ...(typeof error.retryable === 'boolean' ? { retryable: error.retryable } : {}),
-    ...(typeof error.postWrite === 'boolean' ? { postWrite: error.postWrite } : {}),
-  }
-}
-
 export function normalizeError(error: unknown): SubmitError {
-  if (error instanceof Error) return { message: error.message, ...submitErrorMetadata(error) }
-  if (isRecord(error)) {
-    const message = typeof error.message === 'string' ? error.message : 'Request failed.'
-    const issues = collectIssues(error.errors)
-    return { message, ...submitErrorMetadata(error), ...(issues ? { issues } : {}) }
-  }
-  return { message: 'Request failed.' }
+  const normalized = defaultDataAdapter.normalizeError(error)
+  const issues = isRecord(error) ? (normalized.issues ?? collectIssues(error.errors)) : normalized.issues
+  return issues ? { ...normalized, issues } : normalized
 }
 
 export function errorMessage(error: unknown, fallback: string): string {

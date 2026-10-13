@@ -76,6 +76,7 @@ export default defineConfig(({ command, mode }) => {
     },
     test: {
       environment: 'jsdom',
+      setupFiles: [fileURLToPath(new URL('./src/test/setup.ts', import.meta.url))],
       testTimeout: 30000,
       hookTimeout: 30000,
       teardownTimeout: 10000,
