@@ -301,7 +301,18 @@ Query changes, refresh, pagination, namespace changes, and replacement row objec
 
 With a controlled query prop, the parent owns query values. Forward replacements and emit one update. Without a controlled query, Collection owns query state and URL synchronization. Do not mutate the parent query. Browser back and parent replacements update the controls without an echo loop.
 
-TreeTable renders its default indentation cell with the original record context. Use an explicit cell slot only to replace that rendering. Do not apply a display accessor or format twice.
+TreeTable renders every loaded hierarchy row with its default indentation cell and original record context. Use an explicit cell slot only to replace that rendering. Do not apply a display accessor or format twice.
+
+Use TreeTableContent when a nonstandard route owns collection loading and passes
+the loaded root records, query, and load state to Loom. The component keeps
+TableContent's display, query, and slot behavior. It shows child rows when
+their parent rows are expanded. `rowKey` values must be unique after string
+normalization, and the children callback must return an array for every record.
+Expansion is local by default. `expandedKeys` makes it controlled, and
+`defaultExpandedKeys` sets its initial value. Do not supply both. Its
+`expandAll`, `collapseAll`, and `reveal(keys)` methods change expansion state.
+They do not refresh the collection or change its query. `reveal(keys)` opens
+the parent rows needed to show those keys.
 
 ### 7.2 Filters
 
