@@ -301,7 +301,7 @@ Query changes, refresh, pagination, namespace changes, and replacement row objec
 
 With a controlled query prop, the parent owns query values. Forward replacements and emit one update. Without a controlled query, Collection owns query state and URL synchronization. Do not mutate the parent query. Browser back and parent replacements update the controls without an echo loop.
 
-TreeTable renders every loaded hierarchy row with its default indentation cell and original record context. Use an explicit cell slot only to replace that rendering. Do not apply a display accessor or format twice.
+TreeTable starts collapsed and renders expanded hierarchy rows with their original record context. It requires rowKey, children, and treeColumn. Use a cell slot to replace the label content while keeping the disclosure control. TreeTable and TreeTableContent share expansion state and rendering. Do not apply a display accessor or format twice.
 
 Use TreeTableContent when a nonstandard route owns collection loading and passes
 the loaded root records, query, and load state to Loom. The component keeps
