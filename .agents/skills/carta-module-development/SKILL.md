@@ -38,6 +38,10 @@ required development setup within existing write authority, including migrations
 system seed, access, navigation, and preview. Use current framework contracts and
 compiled examples. Keep unsupported requirements local within scope.
 
+When delivery adds migrations, apply them to the app's configured development
+database before declaring completion. Migrating only the test database does not
+count. If migration application fails, report delivery as incomplete.
+
 Resolve technical failures and repair in-scope defects without routine approval.
 If a business decision or write authority blocks part of delivery, continue
 independent work and report the dependency. Business changes update the design
