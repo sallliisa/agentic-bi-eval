@@ -5,55 +5,24 @@ description: Build or review Carta backend file routes, inherited scopes, entiti
 
 # API conventions
 
-Use [Carta module terms](../../../CONTEXT.md) for module ownership language.
-Apply [discovery reuse](../carta-module-development/SKILL.md#discovery-reuse).
-Read the approved behavior and affected owners in `apps/api/src`. For route
-changes, read [file routing](references/file-routing.md) before choosing files
-or hooks. Check `packages/sprindle/docs/reference.md` for an unresolved export
-or callback contract; reuse current pattern decisions from the plan.
+Use the current Sprindle [reference](../../../packages/sprindle/docs/reference.md)
+and [recipes](../../../packages/sprindle/docs/recipes.md) for framework APIs.
+Use the approved design for business rules and selected operations.
 
-| Work | Read |
+| Work | Carta guidance |
 |---|---|
-| Resource schemas, CRUD, custom actions, migrations | [Resource contracts](references/standard-crud.md) |
-| State transitions, child writes, shared transactions | [Workflow modules](references/workflow-service.md) |
+| Routes and inherited access | [File routing](references/file-routing.md) |
+| Schemas, CRUD, custom persistence, migrations | [Application integration](references/standard-crud.md) |
 | Public records, derived fields, stored files | [Public records](references/public-records.md) |
 
-## Access
+The root scope resolves identity; `(authenticated)` requires a session. Use
+`requirePermission` from `src/identity.ts` when the approved operation needs a
+permission. Public placement needs an explicit product requirement.
 
-The root scope resolves identity; the `(authenticated)` scope requires a session.
-Use `requirePermission` from `src/identity.ts` when the approved operation requires
-a permission. If the requirement permits all signed-in users to read records,
-the authenticated scope is sufficient for those reads. Do not copy a stricter
-read guard from an example. Authentication does not grant other permissions.
-Public placement needs an explicit product requirement.
+Define permission codes in `src/authorization/catalog.ts`. Keep API guards,
+resource access, navigation, and required seed consistent. Authentication alone
+does not establish record-level authorization.
 
-Define exact codes in `src/authorization/catalog.ts`. Standard verbs are `view`,
-`list`, `detail`, `create`, `update`, and `delete`, followed by the module code.
-Custom actions use their action verb. Keep catalog, guard, navigation, and seed
-consistent. Select supported targets from the catalog; add ownership rules only
-when the behavior requires them.
-
-Use route guards for static permission and route-owned or focused-module checks
-for record-dependent access. UI visibility and URL structure do not authorize a
-request.
-
-For file inputs in CRUD or custom actions, read the
-[asset contract](../carta-module-development/references/frontend-field-contract.md#asset-fields).
-
-## Verification
-
-Select checks with the module
-[verification strategy](../carta-module-development/references/verification-strategy.md).
-Test rules owned by the change: restricted records, foreign children, invalid
-state, server-owned values, rollback, or changed queries. Assert persisted effects
-and unchanged rows after rejection. Framework parsing and envelope matrices
-belong in framework tests.
-
-Use a real database for SQL, constraints, and transactions; mock external services
-at their boundary. Each case owns its fixtures and cleanup. Read
-`src/testing/session.ts` for session helpers.
-
-Read `apps/api/package.json` for check commands. API tests migrate their configured
-target: inspect the target guard and `.env.test.example` before running them.
-Run type-check, lint, and affected tests; check SDK and web consumers when route
-contracts, dependencies, or resolution change. Report failed or unrun checks.
+API tests migrate their target. Inspect the target guard and `.env.test.example`
+before running storage checks. Reuse `src/testing/session.ts` for session helpers.
+Verification scope belongs to module delivery.

@@ -40,7 +40,7 @@ const updateForm = ({ id }: { id: string }) => ({
 
 afterEach(async () => Promise.all(fixtures.splice(0).map((fixture) => rm(fixture, { recursive: true, force: true }))))
 
-async function fixture(files: Record<string, string>) {
+async function fixture(files: Record<string, string>, navigation = '[]') {
   const root = await mkdtemp(join(tmpdir(), 'carta-route-types-'))
   fixtures.push(root)
   for (const [relative, source] of Object.entries(files)) {
@@ -48,6 +48,8 @@ async function fixture(files: Record<string, string>) {
     await mkdir(dirname(file), { recursive: true })
     await writeFile(file, source)
   }
+  await mkdir(join(root, 'src/manifest'), { recursive: true })
+  await writeFile(join(root, 'src/manifest/navigation.ts'), `export const navigation = ${navigation}`)
   return root
 }
 
@@ -61,6 +63,51 @@ async function names(root: string) {
 }
 
 describe('route type generation', () => {
+  it.each([
+    ['sales/index.route.vue', '/sales'],
+    ['sales/orders/archive/index.route.vue', '/sales/orders/archive'],
+    ['purchases/orders/index.route.vue', '/purchases/orders'],
+    ['sales/[section]/index.route.vue', '/sales/:section'],
+  ])('rejects module navigation to %s before generating types', async (file, path) => {
+    const root = await fixture({ [file]: '<route>{ "name": "entry" }</route><template />' }, `[{ kind: 'module', name: 'sales', routes: [{ to: { name: 'entry' } }] }]`)
+
+    const result = generate(root)
+    await expect(result).rejects.toMatchObject({
+      code: 1,
+      stderr: expect.stringContaining(`Invalid module entry: ${join(root, 'src/routes', file)}`),
+    })
+    await expect(result).rejects.toMatchObject({
+      stderr: expect.stringContaining(`Actual URL: ${path}. Expected structure: /sales/<submodule>`),
+    })
+  })
+
+  it('generates module entries, nested records, standalone pages, and public routes together', async () => {
+    const root = await fixture(
+      {
+        'sales/orders/index.route.vue': '<template />',
+        'sales/orders/[id]/detail.route.vue': '<template />',
+        'dashboard/index.route.vue': '<template />',
+        '(public)/auth/login/index.route.vue': '<template />',
+      },
+      `[
+        { kind: 'module', name: 'sales', routes: [{ to: { name: 'sales-orders' } }] },
+        { kind: 'standalone', name: 'dashboard', routes: [{ to: { name: 'dashboard' } }] },
+      ]`
+    )
+
+    await expect(generate(root)).resolves.toMatchObject({ stderr: '' })
+    expect(await names(root)).toEqual(['auth-login', 'dashboard', 'sales-orders', 'sales-orders-detail'])
+  })
+
+  it.each([
+    [`{ name: 'sales', routes: [{ to: { name: 'sales-orders' } }] }`, 'must declare kind'],
+    [`{ kind: 'module', name: 'sales', routes: [{ to: { name: 'missing' } }] }`, 'Unknown navigation route "missing"'],
+  ])('rejects an invalid navigation declaration: %s', async (module, message) => {
+    const root = await fixture({ 'sales/orders/index.route.vue': '<template />' }, `[${module}]`)
+
+    await expect(generate(root)).rejects.toMatchObject({ code: 1, stderr: expect.stringContaining(message) })
+  })
+
   it('creates and refreshes route declarations for additions, renames, and deletions', async () => {
     const root = await fixture({ 'alpha.route.vue': '<template />' })
     await expect(generate(root)).resolves.toMatchObject({ stderr: '' })

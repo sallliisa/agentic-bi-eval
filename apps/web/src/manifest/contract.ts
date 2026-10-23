@@ -11,8 +11,7 @@ export type NavigationModule = {
   title: string
   icon: NavigationIcon
   description?: string
-  routes: readonly NavigationEntry[]
-}
+} & ({ kind: 'module'; routes: readonly NavigationEntry[] } | { kind: 'standalone'; routes: readonly [NavigationDirect] })
 export function defineNavigation<const TNavigation extends readonly NavigationModule[]>(navigation: TNavigation): TNavigation {
   return navigation
 }

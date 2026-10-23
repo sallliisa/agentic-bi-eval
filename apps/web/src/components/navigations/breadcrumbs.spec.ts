@@ -12,6 +12,7 @@ const routes: RouteRecordRaw[] = [
 ]
 const navigation: VisibleNavigationModule[] = [
   {
+    kind: 'standalone',
     name: 'dashboard',
     title: 'Dashboard',
     icon: 'home',
@@ -19,6 +20,7 @@ const navigation: VisibleNavigationModule[] = [
     routes: [{ name: 'dashboard', title: 'Dashboard', icon: 'home', to: { name: 'dashboard' } }],
   },
   {
+    kind: 'module',
     name: 'settings',
     title: 'Settings',
     icon: 'settings',

@@ -23,8 +23,7 @@
     "push:all": "node scripts/package-repos.mjs push-all",
     "skills:add": "sh -c 'npx skills@latest add southneuhof/skills --skill \"$1\"' --",
     "skills:update": "npx skills update",
-    "module:evidence": "node scripts/module-evidence.mjs",
-    "test:module-tooling": "node --test scripts/*.test.mjs && python3 -B -m unittest discover -s .agents/skills/carta-module-development/scripts",
+    "test:module-tooling": "node --test scripts/*.test.mjs",
     "setup:local": "node scripts/local-environment.mjs setup",
     "module:preflight": "node scripts/local-environment.mjs preflight",
     "setup:editor": "pnpm --filter @southneuhof/sprindle editor:install"

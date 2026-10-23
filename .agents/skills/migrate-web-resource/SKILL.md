@@ -9,7 +9,6 @@ Do not use this skill to edit a web resource. Its target API has been removed.
 
 For new module work, use [`carta-module-development`](../carta-module-development/SKILL.md)
 and the current [resource architecture](../../../docs/resource_system_overhaul/ARCHITECTURE.md).
-Plan an approved module with [`carta-module-plan`](../carta-module-plan/SKILL.md).
 
 The current contract uses raw operation schemas, independent
 `defineForm`/`defineTable`/`defineDetail` maps, and one-object

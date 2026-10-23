@@ -882,8 +882,8 @@ records apply only to a scope that needs them, not to every module with a workfl
 Relation display and edit values, requested access and usable results lead review.
 Standard detail pages do not gain custom Edit/Delete controls by default.
 
-Implementation instructions are in
-[`standard-module.md`](../.agents/skills/carta-module-development/references/standard-module.md).
+Current delivery instructions are in
+[`carta-module-development`](../.agents/skills/carta-module-development/SKILL.md).
 Forward verification of this revision is reserved for the user. Plan 024 is
 already implemented (see the table below); plan 025 remains optional
 follow-up work, not a prerequisite for this trial. The short

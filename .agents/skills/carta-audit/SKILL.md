@@ -1,6 +1,6 @@
 ---
 name: carta-audit
-description: Audit Sprindle plus Loom releases against the Carta quality profile using the CARTA-AW-1 worksheet. Use for a routine, release, change-focused, or baseline Carta framework audit. Not for a single application module; use $verify-carta-module for that.
+description: Audit Sprindle plus Loom releases against the Carta quality profile using the CARTA-AW-1 worksheet. Use for a routine, release, change-focused, or baseline Carta framework audit. For an application module review, use $carta-module-development.
 ---
 
 # Carta audit

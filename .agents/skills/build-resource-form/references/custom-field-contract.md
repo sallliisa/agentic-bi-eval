@@ -1,45 +1,12 @@
-# Custom field contract
+# Custom fields
 
-Read this file only after `docs/ui/forms.md` selects a module-owned custom
-field. Keep the selection decision in the approved design or existing work
-record. Use
-[form-field-types.md](form-field-types.md) only to confirm that no registered
-renderer or composite expresses the value.
+Use the current [form extension contract](../../../../docs/ui/forms.md#select-a-field-implementation)
+and [slot bindings](../../../../docs/resource_system_overhaul/ARCHITECTURE.md#53-slots-and-accessibility).
+The outer Form owns the label, required state, errors, help, and grid span.
 
-## Ownership
-
-The outer framework form field owns the label, required state, error, help
-text, and grid span. The custom component owns one domain value and its control
-layout. Keep the outer field as the single label owner.
-
-Use the form field slot `input:<field-key>` for one-form use. Consume the
-slot's `value`, `setValue`, `disabled`, `error`, and draft context. Keep one
-clear value flow from the slot into the component and back through `setValue`.
-
-For a resource renderer used by several fields, expose the component's public
-props and Vue model directly. Form binds `modelValue` and listens to
-`update:modelValue`; the component also owns its validation events. Use module
-augmentation to map its key to `typeof Component` in `FormRendererComponents`
-from `@southneuhof/loom/renderers/formContracts`, then register that component
-under the same runtime key. Do not add a renderer adapter or a second value
-protocol.
-
-## Composition
-
-Compose registered framework inputs and composites. Existing controls continue
-to own selection, upload, date, number, disabled, error, and accessibility
-behavior. Forward the field ID and accessible description to the actual
-control; emit the touch event expected by the form. The custom component owns only the domain layout, conditional
-sections, and coordination that no selected renderer or composite expresses.
-
-An editable row array uses `TableInput`. A custom field can compose
-`TableInput`; it does not build another row-editor pattern.
-
-## Verification
-
-Add one focused component or form test that proves:
-
-- the complete domain value moves through the owning form field;
-- disabled and error state reaches each applicable control;
-- the visible label identifies the editable control; and
-- the submitted value matches the schema contract.
+For one-form use, bind the `input:<field-key>` slot to the custom control. For
+reuse as a renderer, augment `FormRendererComponents` from
+`@southneuhof/loom/renderers/formContracts` with the actual component type and
+register that component under the same runtime key. Its public Vue model remains
+the input contract. Forward the supplied field and accessibility bindings to
+the actual editable control. Reuse existing inputs for behavior they already own.

@@ -330,34 +330,28 @@ The main entry point for cross-layer application work is:
 $carta-module-development
 ```
 
-It looks at the work that already exists and continues from the appropriate stage.
+Use `$carta-module-design` to define the module's behavior and obtain explicit
+approval. Keep the design in an existing design record or
+`plans/<feature>/design.md`, using the consistent
+[design template](.agents/skills/carta-module-design/assets/design-template.md).
+The design owns purpose and scope, functional requirements, data and business
+rules, and user journeys and workflows. Update it directly; Git holds history.
+Its header records design approval and whether implementation is current.
 
-A module can move through:
+After approval, `$carta-module-development` owns planning, implementation,
+development setup, checks, review, and repair. Routine technical choices need no
+further approval. A material business change returns to design for approval of
+the changed scope. Delivery uses non-browser checks and reports rendered behavior
+as unverified.
 
-```text
-Requirement
-    ↓
-Design
-    ↓
-Plan
-    ↓
-Implementation
-    ↓
-Verification
-```
+Use an optional `plan.md` for work order and technical notes or blockers, following
+the [plan format](.agents/skills/carta-module-development/references/planning.md).
+The plan organizes execution. The approved functional requirements and their
+applicable rules define completion. Verification stops after design coverage,
+required checks, and focused proof of new application behavior are complete.
 
-The main Carta skills include:
-
-* `$carta-module-design` for resolving module behavior and acceptance requirements
-* `$carta-module-plan` for turning an approved design into implementation work
-* `$api-conventions` for backend work
-* `$web-ui-surfaces` for frontend routes and UI
-* `$verify-carta-module` for checking an implementation against its approved behavior
-* `$carta-audit` for auditing the Sprindle and Loom framework
-
-Designs and implementation plans normally live under `plans/<feature>/`. This gives later agent sessions a persistent record of what was agreed and what remains to be done.
-
-After the design and plan are approved, use `$carta-module-development` to author the API and web modules directly under their current contracts.
+Layer guidance is available through `$api-conventions`, `$web-ui-surfaces`, and
+`$build-resource-form`. Use `$carta-audit` for a Sprindle and Loom framework audit.
 
 Repository-wide instructions are in [AGENTS.md](AGENTS.md).
 

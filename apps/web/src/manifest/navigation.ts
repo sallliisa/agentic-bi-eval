@@ -1,8 +1,9 @@
 import { defineNavigation, type NavigationIcon, type NavigationModule } from './contract'
 
 export const navigation = defineNavigation([
-  { name: 'dashboard', title: 'Dashboard', icon: 'home', description: 'Dashboard', routes: [{ to: { name: 'dashboard' }, permission: null, title: 'Dashboard', icon: 'home' }] },
+  { kind: 'standalone', name: 'dashboard', title: 'Dashboard', icon: 'home', description: 'Dashboard', routes: [{ to: { name: 'dashboard' }, permission: null, title: 'Dashboard', icon: 'home' }] },
   {
+    kind: 'module',
     name: 'settings',
     title: 'Settings',
     icon: 'settings',

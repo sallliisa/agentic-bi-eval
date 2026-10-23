@@ -5,6 +5,7 @@ import vue from '@vitejs/plugin-vue'
 import VueRouter from 'vue-router/vite'
 import { schemaBoundaryPlugin } from './scripts/schema-boundary.mjs'
 import { fileRouteOptions } from './src/router/file-routing/options'
+import { navigation } from './src/manifest/navigation'
 
 // https://vitejs.dev/config/
 export default defineConfig(({ command, mode }) => {
@@ -30,7 +31,7 @@ export default defineConfig(({ command, mode }) => {
     },
     plugins: [
       schemaBoundary,
-      VueRouter(fileRouteOptions),
+      VueRouter(fileRouteOptions(navigation)),
       vue({
         script: {
           defineModel: true,

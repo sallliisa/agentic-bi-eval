@@ -1,6 +1,7 @@
 import { readFileSync } from 'node:fs'
 import { parse } from 'vue/compiler-sfc'
 import type { EditableTreeNode } from 'vue-router/unplugin'
+import type { NavigationModule } from '../../manifest/contract'
 
 function source(node: EditableTreeNode): string {
   return node.component ?? [...node.components.values()][0] ?? '<componentless route>'
@@ -47,6 +48,29 @@ export function validateRoutes(root: EditableTreeNode): void {
       const patterned = paths.get(node.fullPath)
       if (patterned && patterned !== node && !isAllowedSharedPath(patterned, node)) throw new Error(`Duplicate route path "${node.fullPath}": ${source(patterned)} and ${source(node)}`)
       paths.set(node.fullPath, node)
+    }
+  }
+}
+
+export function validateNavigationRoutes(root: EditableTreeNode, navigation: readonly NavigationModule[]): void {
+  const names = new Map([...root].filter((node) => node.name).map((node) => [node.name, node]))
+
+  for (const module of navigation) {
+    const moduleName = module.name
+    if (module.kind !== 'module' && module.kind !== 'standalone') throw new Error(`Navigation "${moduleName}" must declare kind "module" or "standalone".`)
+    if (module.kind === 'standalone' && module.routes.length !== 1) throw new Error(`Standalone navigation "${module.name}" must have one page.`)
+
+    for (const entry of module.routes) {
+      const target = 'to' in entry ? entry.to : 'action' in entry ? entry.action.to : undefined
+      if (!target) continue
+      const node = names.get(target.name)
+      if (!node) throw new Error(`Unknown navigation route "${target.name}" in "${module.name}".`)
+      const segments = node.fullPath.split('/').filter(Boolean)
+      const valid = module.kind === 'standalone' ? node.fullPath === `/${module.name}` : segments.length === 2 && segments[0] === module.name && !segments[1].includes(':')
+      if (!valid) {
+        const expected = module.kind === 'standalone' ? `/${module.name}` : `/${module.name}/<submodule>`
+        throw new Error(`Invalid module entry: ${source(node)}. Actual URL: ${node.fullPath}. Expected structure: ${expected}`)
+      }
     }
   }
 }

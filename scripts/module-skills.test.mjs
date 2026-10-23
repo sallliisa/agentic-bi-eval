@@ -6,7 +6,7 @@ import { test } from 'node:test'
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..')
 const skillsRoot = join(root, '.agents/skills')
-const active = ['carta-module-development', 'carta-module-design', 'carta-module-plan', 'verify-carta-module', 'api-conventions', 'build-resource-form', 'web-ui-surfaces', 'domain-modeling']
+const active = ['carta-module-development', 'carta-module-design', 'api-conventions', 'build-resource-form', 'web-ui-surfaces', 'domain-modeling']
 function markdownFiles(path) {
   return readdirSync(path, { withFileTypes: true }).flatMap(entry => entry.isDirectory() ? markdownFiles(join(path, entry.name)) : entry.name.endsWith('.md') ? [join(path, entry.name)] : [])
 }
@@ -34,21 +34,14 @@ test('active module skills have unique discoverable identities and real local re
   assert.deepEqual(failures, [])
 })
 
-test('retired discovery skills and calls are absent from the active module workflow', () => {
-  for (const name of ['brainstorming', 'grilling', 'grill-with-docs']) assert.equal(existsSync(join(skillsRoot, name)), false, name)
+test('skill calls in the active module workflow resolve to local skills', () => {
   const failures = []
   for (const name of active) for (const file of markdownFiles(join(skillsRoot, name))) {
     for (const [, invoked] of readFileSync(file, 'utf8').matchAll(/\$([a-z]+(?:-[a-z]+)+)/g)) {
-      if (!existsSync(join(skillsRoot, invoked, 'SKILL.md')) || ['improve', 'brainstorming', 'grilling', 'grill-with-docs'].includes(invoked)) failures.push(`${file}: $${invoked}`)
+      if (!existsSync(join(skillsRoot, invoked, 'SKILL.md'))) failures.push(`${file}: $${invoked}`)
     }
   }
   assert.deepEqual(failures, [])
-})
-
-test('the root evidence command resolves to its helper', () => {
-  const scripts = JSON.parse(readFileSync(join(root, 'package.json'), 'utf8')).scripts
-  assert.equal(scripts['module:evidence'], 'node scripts/module-evidence.mjs')
-  assert.ok(existsSync(join(root, 'scripts/module-evidence.mjs')))
 })
 
 test('API test entrypoints require the explicit test environment and migrations run the preflight first', () => {

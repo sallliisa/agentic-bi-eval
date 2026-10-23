@@ -8,7 +8,9 @@ const appRoot = resolve(fileURLToPath(new URL('..', import.meta.url)))
 const root = resolve(process.argv[2] ?? appRoot)
 const optionsPath = fileURLToPath(new URL('../src/router/file-routing/options.ts', import.meta.url))
 const { module } = await runnerImport(optionsPath, { root: appRoot, configFile: false, envDir: false })
-const options = module.fileRouteOptions
+const navigationPath = resolve(root, 'src/manifest/navigation.ts')
+const { module: manifest } = await runnerImport(navigationPath, { root: appRoot, configFile: false, envDir: false })
+const options = module.fileRouteOptions(manifest.navigation)
 const context = createRoutesContext(resolveOptions({ ...options, root, watch: false }))
 
 try {

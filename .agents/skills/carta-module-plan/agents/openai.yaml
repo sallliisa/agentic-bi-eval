@@ -1,4 +1,0 @@
-interface:
-  display_name: "Carta Module Plan"
-  short_description: "Turn approved module designs into executable plans"
-  default_prompt: "Use $carta-module-plan to create repository-grounded plans for this approved design."

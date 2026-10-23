@@ -1,4 +1,4 @@
 interface:
   display_name: "Carta Module Development"
-  short_description: "Build or resume a Carta application module"
-  default_prompt: "Use $carta-module-development to build or resume this module through design, planning, implementation, and review."
+  short_description: "Deliver a module after design approval"
+  default_prompt: "Use $carta-module-development to deliver this module after design approval, including setup, checks, and repair."

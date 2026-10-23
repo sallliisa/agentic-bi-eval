@@ -40,7 +40,7 @@ The user does not need an Open button or a single tab to see that section.
 For several child sections, place the app routing `Tabs` below `DetailView`,
 then `AppRouterView`. Use named `RouteTab` targets. The detail remains visible.
 Length alone does not earn a route.
-See [file routing](.agents/skills/web-ui-surfaces/references/file-routing.md)
+See [file routing](docs/architecture/file-routing.md)
 for file placement, replacement pages, and Back targets.
 
 Keep the record summary first, with the primary task and its controls. Show

@@ -1,4 +1,4 @@
 interface:
   display_name: "Carta Module Design"
   short_description: "Ground module behavior in evidence and decisions"
-  default_prompt: "Use $carta-module-design to turn this request into an approved module contract."
+  default_prompt: "Use $carta-module-design to define this module's behavior and obtain explicit approval before delivery."

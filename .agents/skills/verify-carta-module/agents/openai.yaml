@@ -1,4 +1,0 @@
-interface:
-  display_name: "Verify Carta Module"
-  short_description: "Verify Carta modules from scoped evidence"
-  default_prompt: "Use $verify-carta-module to review this implemented feature against its approved contract and current evidence."
