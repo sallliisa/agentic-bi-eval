@@ -32,7 +32,7 @@ These bindings are literal template expressions in the [users list route](../../
 |---|---|---|
 | 1. Select behavior | Use the approved design and plan. State which operations, routes, and page behavior the module needs. | The route owns dialogs, navigation, notices, and workflow state. For nonstandard composition, see the compiled [direct Form and Table fixture](../../apps/web/src/framework/acceptance/QueryOwnershipFixture.vue). |
 | 2. Define schemas and transport | Use the API module's schema values for backend create, update, and record values. Put Collection query values and web form conversion in the web module. Put app calls in its action file. | Keep input, parsed output, returned record, and query values distinct. A typed list operation needs a query schema. A route without list calls the Hono factory without options. |
-| 3. Define surfaces | Use defineForm for an editor, defineTable for a collection, and defineDetail for a record display. Use only the surfaces the page needs. | Every form entry names a renderer. Tables and details use record keys; forms use input keys. The users module is the compiled example. |
+| 3. Define surfaces | Use defineForm for an editor, defineTable for a collection, and defineDetail for a record display. Use only the surfaces the page needs. | Every form entry names a renderer. Tables and details use record keys; forms use input keys or explicit field bindings. The users module is the compiled example. |
 | 4. Bind operations | Use one defineResource object for supported standard operations. Keep list and create bags static. Bind detail, update, and delete to a resource identity. | An update form maps the loaded record to its input draft. An update-only resource does not need a visible detail operation. |
 | 5. Compose the route | Pass the resource bag to ListView, DetailView, or FormView. Let the route own page-specific workflow. | The [users list](../../apps/web/src/routes/%28authenticated%29/settings/users/index.route.vue), [create](../../apps/web/src/routes/%28authenticated%29/settings/users/create.route.vue), [detail](../../apps/web/src/routes/%28authenticated%29/settings/users/%5BuserId%5D/detail.route.vue), and [edit](../../apps/web/src/routes/%28authenticated%29/settings/users/%5BuserId%5D/edit.route.vue) routes show the current page bindings. |
 | 6. Check the module | Run ordinary app lint and type checks plus focused behavior tests for changed owners. Review field and relation wiring in source. | Use [web verification](../../.agents/skills/web-ui-surfaces/references/verification.md) and the [Loom examples](../../packages/loom/README.md#executable-examples). |
@@ -75,7 +75,7 @@ A present modelValue prop is different from an absent modelValue prop, even when
 | Collection query state | The controlled parent, or Collection when uncontrolled |
 | HTTP query encoding and response normalization | The app transport adapter |
 
-Form passes schema requiredness to the selected component. It does not choose a renderer, create choice data, rename component props, or convert a component model. Display accessors are synchronous and pure. Resources do not inspect fields or asset values.
+Form passes schema requiredness to the selected component. It does not choose a renderer, create choice data, rename component props, or convert a component model without an explicit field binding. Display accessors are synchronous and pure. Resources do not inspect fields or asset values.
 
 ## 2. Definitions and reuse
 
@@ -119,7 +119,7 @@ A relation label needs relation data in the returned record. Keep joined values 
 
 Keep three shapes distinct: schema input, editable FormDraft, and parsed submit output. FormDraft makes each input optional and permits null as an explicit clear. Undefined is unset. The raw schema still decides which values are valid on submit. A null draft does not make a non-nullable schema accept null.
 
-A form field is a selected top-level schema input. Each field names its renderer and may define component props, span, a per-session initial-value factory, and behavior. There is no second key, source, or native-attribute bag. A props object stays under the selected component's contract. Do not widen it to an arbitrary map.
+A form field selects a top-level schema input or declares a field binding. Each field names its renderer and may define component props, span, a per-session initial-value factory, and behavior. There is no second key, source, or native-attribute bag. A props object stays under the selected component's contract. Do not widen it to an arbitrary map.
 
 Behavior can control visibility, disabled state, props, presentation, and derived values. It reads detached draft values. Validators return issues and can run on blur or submit; they do not replace parsed schema output. A dynamic renderer must accept the same editable value contract as the original renderer. Schema validation remains authoritative when presentation changes required hints.
 
@@ -149,7 +149,7 @@ Wrapped controls send class and style to the presentation wrapper and control at
 
 Author component props such as data, load, pick, view, namespace, searchParameters, and loadDetail on the component that owns them. A loader must match that component's argument, result, and cancellation contract. Do not infer a loader or response shape from a resource.
 
-Form passes the selected component's model unchanged. For example, DateInput uses a string model. If the operation needs another value, map it in the draft loader or schema. Do not add a Form-only conversion buffer.
+A direct field passes the selected component's model unchanged. For example, DateInput uses a string model. Use a schema transform for input-to-command conversion. Use a field binding when one control reads and writes several schema properties; no separate conversion buffer is needed.
 
 ## 4. Schemas and value ownership
 
@@ -170,6 +170,26 @@ Map record data to form input explicitly. A draft loader returns an editable inp
 Initial values have this precedence: input factory, initialData, loaded draft, then user edit. An own property with undefined, null, false, zero, or an empty string is an explicit value. Factories run per Form session. Clone editable arrays, plain objects, and Dates. Keep File, Blob, and opaque services by reference.
 
 A controlled model is authoritative. Form emits initialized values instead of mutating the supplied object. It does not hydrate component values or serialize identifiers. Preserve canonical assets and selected records; put a domain transform in the declared schema.
+
+### Field bindings
+
+A field binding maps one control to schema properties. The draft, loader, and
+submit keep the schema shape. The UI field name is not added to the draft.
+Declare `binding.keys`, `read`, and `write` beside the renderer. `read` receives
+a read-only draft; `write` returns exactly the declared keys. Clearing writes
+`null` to all keys without calling `write`. The schema decides if null is valid.
+
+Form applies each edit before emitting one model update. Schema errors on bound
+keys appear on the UI field. Any required bound key makes the field required.
+Two selected fields cannot write the same schema key. Invalid keys, overlapping
+writers, and incomplete or extra write results fail with field-specific errors.
+`defineForm` also checks overlapping writers and exact write-result keys at
+compile time for literal key tuples. Dynamic key arrays retain runtime checks.
+
+The compiled [pin form](../../packages/loom/src/renderers/__type-tests__/field-binding.type-test.ts)
+and [component bindings](../../packages/loom/src/components/composites/__type-tests__/field-binding.type-test.vue)
+show the declaration in Form, DialogForm, and a resource update. Keep names in
+separate text fields; bind the location renderer to latitude and longitude.
 
 ### 4.4 Global asset service
 
@@ -357,7 +377,7 @@ Search and page changes do not change selection validity. LookupInput uses loadD
 
 Keep remote hydration separate from staged edits. Observe a changed model and changed source context together so the parent model wins. A late response cannot replace a newer selection. A loader error preserves the current value for retry.
 
-LocationInput owns its coordinates and location behavior. Its form uses an explicit raw schema and renderer. Keep cancellation and stale-callback checks at the input.
+LocationInput emits `{ lat, lng }` or `null`. It does not edit names or emit provider labels. Its form uses an explicit raw schema and renderer. Keep cancellation and stale-callback checks at the input.
 
 ### 7.5 Frontend transport query boundary
 

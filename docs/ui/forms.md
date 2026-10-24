@@ -34,7 +34,9 @@ when that input needs a fresh value for each form session. Do not add hidden
 inputs only to satisfy a schema. The schema owns requiredness and the submitted
 shape.
 
-The draft uses each control's model value. Form does not convert that value.
+A direct field uses the control's model value. For a control that edits several
+schema properties, use a [field binding](../resource_system_overhaul/ARCHITECTURE.md#field-bindings)
+with paired read and write functions. Keep the draft in the schema shape.
 For example, DateInput uses a string model. Use a string input schema and an
 explicit schema transform when the operation needs another value. The schema
 parses the draft before `submit` runs. Keep business validators in the form
