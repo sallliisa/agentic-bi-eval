@@ -149,7 +149,7 @@ Wrapped controls send class and style to the presentation wrapper and control at
 
 Author component props such as data, load, pick, view, namespace, searchParameters, and loadDetail on the component that owns them. A loader must match that component's argument, result, and cancellation contract. Do not infer a loader or response shape from a resource.
 
-A direct field passes the selected component's model unchanged. For example, DateInput uses a string model. Use a schema transform for input-to-command conversion. Use a field binding when one control reads and writes several schema properties; no separate conversion buffer is needed.
+A direct field passes the selected component's model unchanged. For example, DateInput uses a string model. Use schema transforms to convert field values. `defineForm` checks that input and output have the same top-level keys. Use a field binding when one control reads and writes several schema properties. A separate draft shape requires explicit `mode: 'custom-draft'` and a record-to-draft loader.
 
 ## 4. Schemas and value ownership
 
@@ -167,7 +167,7 @@ The schema owns static requiredness. Form passes it to the input component and i
 
 Map record data to form input explicitly. A draft loader returns an editable input draft; it does not invert a schema transform or cast a full record to an update form. The schema parses the draft to submit output. Bind parent identities in the operation closure.
 
-Initial values have this precedence: input factory, initialData, loaded draft, then user edit. An own property with undefined, null, false, zero, or an empty string is an explicit value. Factories run per Form session. Clone editable arrays, plain objects, and Dates. Keep File, Blob, and opaque services by reference.
+Initial values have this precedence: field default, initialData, loaded draft, then user edit. Set initialValue to a value or a zero-argument factory. Form clones editable arrays, plain objects, and Dates per session. Factories compute fresh values per session and do not run when supplied values override them. An own property with undefined, null, false, zero, or an empty string is explicit. Keep File, Blob, and opaque services by reference.
 
 A controlled model is authoritative. Form emits initialized values instead of mutating the supplied object. It does not hydrate component values or serialize identifiers. Preserve canonical assets and selected records; put a domain transform in the declared schema.
 

@@ -7,8 +7,9 @@ the form surface or action placement.
 ## Form definition
 
 Use a raw input schema with `defineForm`. Keep the selected inputs in that
-form's own ordered `fields` map. The keys must belong to the schema. A display
-map does not configure form inputs.
+form's own ordered `fields` map. Use schema keys for direct fields and explicit
+bindings for controls that edit several keys. A display map does not configure
+form inputs.
 
 ```ts
 const createUserForm = defineForm({
@@ -29,19 +30,21 @@ same prop bag when the component is standalone and when Form renders it.
 Component-required props stay required. The schema supplies requiredness to the
 real control; it does not select a renderer or create choices.
 
-Use `initialData` for a fixed draft value. Use an input's `initialValue` only
-when that input needs a fresh value for each form session. Do not add hidden
-inputs only to satisfy a schema. The schema owns requiredness and the submitted
-shape.
+Set `initialValue` to a value or a zero-argument factory. Form clones mutable
+values for each session. Use a factory for values computed when the session
+starts, such as a timestamp or UUID. `initialData` overrides field defaults.
+Do not add hidden inputs only to satisfy a schema.
 
 A direct field uses the control's model value. For a control that edits several
 schema properties, use a [field binding](../resource_system_overhaul/ARCHITECTURE.md#field-bindings)
 with paired read and write functions. Keep the draft in the schema shape.
 For example, DateInput uses a string model. Use a string input schema and an
 explicit schema transform when the operation needs another value. The schema
-parses the draft before `submit` runs. Keep business validators in the form
-definition when they belong to the client workflow, and enforce the same rule
-on the server.
+parses the draft before `submit` runs. `defineForm` requires the same top-level
+input and output keys. Value transforms remain valid. If a separate draft shape
+is required, declare `mode: 'custom-draft'` and map loaded records to that draft.
+Keep business validators in the form definition when they belong to the client
+workflow, and enforce the same rule on the server.
 
 ## Session values and validation
 
