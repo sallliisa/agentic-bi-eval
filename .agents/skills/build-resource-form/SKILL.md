@@ -1,30 +1,24 @@
 ---
 name: build-resource-form
-description: Build or review Carta forms and their value conversion, relation sources, and submission.
+description: Build or review Carta forms, value conversion, relation sources, and submission.
 ---
 
 # Build resource forms
 
-Use [DESIGN.md](../../../DESIGN.md) for visual conventions and the
-[form guide](../../../docs/ui/forms.md) for controls and composition. Use the
-[current value contract](../../../docs/resource_system_overhaul/ARCHITECTURE.md#4-schemas-and-value-ownership)
-for record-to-draft mapping, defaults, and schema input/output.
+Read [DESIGN.md](../../../DESIGN.md) for layout. Use the [form guide](../../../docs/ui/forms.md)
+for controls and composition, and the [value contract](../../../docs/resource_system_overhaul/ARCHITECTURE.md#4-schemas-and-value-ownership)
+for drafts, defaults, and schema input/output. Identical input contracts can
+share schemas.
 
-Choose controls by the value and approved interaction. Use the current
-[control guidance](../../../docs/ui/forms.md#select-a-field-implementation)
-and component types. Read [custom fields](references/custom-field-contract.md)
-when existing controls cannot express the interaction.
+Use [custom fields](references/custom-field-contract.md) for interactions
+existing controls cannot express.
 
-For relations, use the owner's authorized source and supply display labels.
-Read the [web/API connection](references/backend-form-contract.md) when that
-boundary changes. Resource-backed option loaders need their `resource` owner
-as well as `load` and `namespace`; the owner enables invalidation. Use the
-[input source contract](../../../docs/resource_system_overhaul/ARCHITECTURE.md#74-lookup-option-and-location-inputs)
-for selected-record hydration and dependencies.
+For relations, use authorized owner sources with display labels. Read the
+[web/API connection](references/backend-form-contract.md) when changing that
+boundary. Pass `resource` with `load` and `namespace` so resource writes invalidate
+options. For hydration and dependencies, read the
+[input source contract](../../../docs/resource_system_overhaul/ARCHITECTURE.md#74-lookup-option-and-location-inputs).
 
-Distinct input contracts need distinct schemas; identical contracts can share
-one. For custom submission, read the
+Submit overrides replace access and invalidation. Follow the
 [binding](../../../docs/resource_system_overhaul/ARCHITECTURE.md#11-required-consumption)
-and [post-write contract](../../../docs/resource_system_overhaul/ARCHITECTURE.md#52-submission).
-An override owns the access and invalidation behavior it replaces. Module
-delivery owns verification scope.
+and [post-write contracts](../../../docs/resource_system_overhaul/ARCHITECTURE.md#52-submission).

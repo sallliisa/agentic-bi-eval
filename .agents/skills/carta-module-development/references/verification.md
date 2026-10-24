@@ -1,30 +1,24 @@
 # Module verification
 
-Verification has three responsibilities:
+1. Review every approved functional requirement and applicable rule against the
+   implementation. Identify missing work.
+2. Run required package checks for changed owners. API route changes include
+   normal SDK and web type checks. Read commands from the checkout.
+3. Trust unchanged framework behavior. Reuse application tests; add focused checks
+   only for uncovered risks introduced by the change, through real schemas and
+   operation owners.
 
-1. Review every approved functional requirement against the implementation and
-   its applicable rules. Account for missing work. This does not require a new
-   test for each requirement.
-2. Run required checks for changed owners. Use normal package commands from the
-   checkout; API route changes also need normal SDK and web type checks. Trust
-   unchanged framework behavior.
-3. Check new application behavior that existing proof does not cover. Each
-   additional check addresses a concrete risk introduced by this change. Use
-   real schemas and operations for that boundary and reuse suitable existing tests.
+Stop when requirements are implemented, required checks pass, and new behavior
+has focused proof. Broaden only for changed shared boundaries or observed wider
+defects. Reuse passes while inputs remain applicable. Diagnose repeated failures
+with a specific question. Report unrelated failures; optional improvements do
+not block completion.
 
-Stop when the design review finds no missing work, required checks pass, and
-focused checks cover the new application behavior. Broaden checks only for a
-changed shared boundary or a failure that reveals a wider defect. Reuse passes
-while relevant inputs remain unchanged. Investigate repeated failures with a
-specific diagnostic question; report unrelated failures without expanding scope.
-Optional improvements do not prevent completion.
+Exclude browser tests and manual journeys; inspect aggregate commands before
+use. Report rendering as unverified without compensatory checks. For changed web
+wiring, use [UI review](../../web-ui-surfaces/references/verification.md).
+Record commands, actual results, and gaps in delivery notes or the final report.
 
-Module delivery excludes browser tests and manual browser journeys. Inspect
-aggregate commands before use. Report rendering as unverified without extending
-verification to compensate. Use [UI review](../../web-ui-surfaces/references/verification.md)
-for changed web wiring. Keep commands, actual results, and gaps in delivery notes
-or the final report, separate from requirements.
-
-For external integrations, establish the selected provider contract through
-current authoritative documentation or an authorized, bounded live check before
-dependent work. A mock does not prove provider compatibility.
+Before depending on an external integration, establish its contract through
+current authoritative documentation or an authorized, bounded live check.
+Mocks do not prove provider compatibility.

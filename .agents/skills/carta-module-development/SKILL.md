@@ -1,60 +1,45 @@
 ---
 name: carta-module-development
-description: Build or resume a Carta module after design approval, or plan or review a module when requested.
+description: Deliver approved Carta modules, or produce requested implementation plans or reviews.
 ---
 
 # Carta module delivery
 
-Design approval is the human handoff. After approval, own planning, setup,
-implementation, checks, review, and repair through completion.
+## Start
 
-## Start from the design
+Read the current design, diff, and saved work. Preserve valid approval and
+completed work. Use [$carta-module-design](../carta-module-design/SKILL.md) for
+missing approval or changed behavior. After approval, own delivery without
+routine human input.
 
-Read the request, current design, relevant diff, and saved work. The design is
-the source of requirements. Use [$carta-module-design](../carta-module-design/SKILL.md)
-when explicit approval is missing or behavior needs to change. Reuse valid
-approval and completed work on resume.
+Plan-only requests end at the plan. Review-only requests return findings
+without changing application code or delivery status.
 
-A plan-only request ends with the plan. A review-only request inspects the named
-result and reports findings without changing application code or delivery status.
+## Implement
 
-## Plan and implement
-
-Choose work order and technical details within the approved behavior. Use an
-optional `plan.md` beside the design when dependencies or unfinished work need
-persistent notes. Follow the [plan format](references/planning.md). Small changes
-can proceed directly. A plan organizes execution and does not define requirements.
-
-Read guidance at the changed boundary:
+Use the optional [plan format](references/planning.md) when execution or resume
+needs a file. Choose technical details within approved behavior.
 
 | Change | Guidance |
 |---|---|
 | API, data, permissions, transactions | [$api-conventions](../api-conventions/SKILL.md) |
-| Web pages, resources, routes, navigation | [$web-ui-surfaces](../web-ui-surfaces/SKILL.md) |
-| Forms and user input | [$build-resource-form](../build-resource-form/SKILL.md) |
+| Pages, resources, routes, navigation | [$web-ui-surfaces](../web-ui-surfaces/SKILL.md) |
+| Forms and inputs | [$build-resource-form](../build-resource-form/SKILL.md) |
 
 Set implementation status to `In progress`. Complete connected behavior and
-required development setup within existing write authority, including migrations,
-system seed, access, navigation, and preview. Use current framework contracts and
-compiled examples. Keep unsupported requirements local within scope.
+required development setup: migrations, system seed, access, navigation, and
+preview. Use current compiled examples for unfamiliar APIs.
 
-When delivery adds migrations, apply them to the app's configured development
-database before declaring completion. Migrating only the test database does not
-count. If migration application fails, report delivery as incomplete.
+Apply new migrations to the app's configured development database before
+completion. Migrating only the test database does not count; failures leave
+delivery incomplete.
 
-Resolve technical failures and repair in-scope defects without routine approval.
-If a business decision or write authority blocks part of delivery, continue
-independent work and report the dependency. Business changes update the design
-and need approval of the changed scope.
+Repair in-scope defects. Report blocked decisions or write authority and continue
+independent work. Business changes require design updates and approval.
 
-## Verify and finish
+## Finish
 
-Use [verification](references/verification.md). Account for every approved
-functional requirement under its applicable rules. Finishing a plan alone does
-not establish module completion. Update task state and delivery notes from actual
-results; keep them outside the design's requirements.
-
-Set implementation status to `Current` only when required behavior, development
-setup, and checks are complete. Keep incomplete work visible and make the final
-response agree with the recorded result. Report the result, preview and setup
-status, checks, and gaps. Browser verification remains excluded.
+Follow [verification](references/verification.md). Set implementation status to
+`Current` only after approved requirements, development setup, and required
+checks are complete. Update task status from actual results; the final report
+must agree. Report the result, preview/setup status, checks, and remaining gaps.

@@ -5,24 +5,17 @@
 
 ## Module navigation
 
-The typed navigation manifest in `apps/web/src/manifest/navigation.ts` declares
-each entry as `kind: 'module'` or `kind: 'standalone'`.
+`src/manifest/navigation.ts` declares `kind: 'module'` or `kind: 'standalone'`.
+Module targets use static `/<name>/<submodule>` URLs, such as `/settings/users`;
+record pages extend that path. Module landing pages need a submodule folder:
+`sales/sell/index.route.vue`, not `sales/index.route.vue`.
 
-A module's `name` is its first URL segment. Every navigation target in that
-module resolves to a static `/module/submodule` page, such as `/settings/users`.
-Record pages and other descendants extend that submodule path. A module landing
-entry has its own submodule folder; `sales/sell/index.route.vue` opens `/sales/sell`,
-while `sales/index.route.vue` cannot be a module entry at `/sales`.
+Standalone entries declare one direct page at `/<name>`, such as `/dashboard`.
+Public routes and pages outside navigation are excluded from this check.
 
-A standalone entry declares one direct page at `/<name>`, such as Dashboard at
-`/dashboard`. This declaration distinguishes application-level pages from module
-entry pages. Public routes and pages outside navigation remain outside this check.
-
-Route generation resolves targets against actual generated paths, including
-explicit names and path overrides. Unknown targets, missing kinds, and invalid
-module paths fail with the source file, actual URL, and expected structure where
-available. Normal web `type-check`, `build`, and Vite route generation use the
-same validator, so these failures appear before browser use.
+Normal web type checks, builds, and Vite route generation validate resolved
+paths, including overrides. Missing kinds, unknown targets, and invalid paths
+fail with source, actual URL, and expected structure where available.
 
 ## Page placement
 
@@ -70,15 +63,14 @@ when a matching rendered parent must be left.
 
 ## Route access
 
-Resource routes declare the registered resource key and actual operation.
-Standard operations have a permission string or explicit `null`; `null` removes
-the permission-code requirement, not other access rules. Use `meta.permission`
-for routes without a resource registration.
+Resource routes declare their registered key and operation. Standard operations
+require a permission string or explicit `null`. `null` skips the permission-code
+check; other access rules still apply.
+Use `meta.permission` for routes without a resource registration.
 
-A routed command with argument-dependent permission needs static
-`routePermission` for entry. Execution still checks its actual arguments and row
-context. Static commands use their permission directly. API authorization remains
-independent of route entry.
+A command with argument-dependent permission needs static `routePermission`
+for entry. Execution checks arguments and row context. Static commands use their
+permission directly. The API authorizes requests independently.
 
 Router changes in `apps/web` are project-owned and need a separate reviewed
 adoption in each application.

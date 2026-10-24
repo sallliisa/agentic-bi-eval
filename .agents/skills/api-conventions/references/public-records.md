@@ -1,30 +1,28 @@
 # Public records and files
 
-## Read shape
+## Reads
 
-Use the [Sprindle conversion contract](../../../../packages/sprindle/docs/reference.md#file-routes)
-for scope and route enrichment. Supply the display data the approved screen needs
-without per-row queries. Scope enrichment runs per record; use batch list
-hydration for additional database or remote reads.
+Follow Sprindle's [conversion contract](../../../../packages/sprindle/docs/reference.md#file-routes).
+Supply display data without per-row queries. Scope enrichment runs per record;
+batch additional database or remote reads at list level.
 
-A custom `defineRoute` must apply its own public schema; scope record enrichment
-does not run for it. Keep private columns out of that public schema.
+`defineRoute` bypasses scope record enrichment; apply its public schema directly.
+Exclude private columns.
 
-## Selection values
+## Selections
 
-`selectionValues(exactItemSchema)` in `src/schema.ts` accepts selected objects
-with the field's actual keys. Use `selectionQuery` for their JSON query value.
-Resolve identity, membership, and current labels on the server. A filtered UI
-source and client-supplied labels do not establish write authority.
+`selectionValues(exactItemSchema)` in `src/schema.ts` accepts objects with the
+field's actual keys; `selectionQuery` accepts their JSON query value. Resolve
+identity, membership, and current labels on the server. Picker filters and
+client labels do not authorize writes.
 
-## Stored files
+## Files
 
-Use `storedAssetSchema`, `storedAssetInput`, and `uploadKey` from `src/schema.ts`,
-and the conversion functions in `src/storage/assets.ts`. Use `z.input` for HTTP
-values and `z.output` for parsed persistence values. Reuse `storedAssetModel`
-and `publicRecord` for canonical records where applicable.
+Use `storedAssetSchema`, `storedAssetInput`, and `uploadKey` from `src/schema.ts`
+and conversions from `src/storage/assets.ts`. HTTP values use `z.input`;
+persistence uses `z.output`. Reuse `storedAssetModel` and `publicRecord` where
+applicable. Preserve canonical objects through [forms](../../../../docs/ui/forms.md#assets).
 
-Keep canonical asset objects through [form submission](../../../../docs/ui/forms.md#assets).
-Reuse `src/storage/s3.ts` for storage operations. Temporary signed URLs are not
-stored identities. Removing a record's association does not authorize deletion
-of a shared object. Database rollback does not undo a storage write or removal.
+Use `src/storage/s3.ts` for storage. Signed URLs are not stored identities.
+Removing an association does not authorize shared-object deletion. Database
+rollback does not undo storage writes or removals.

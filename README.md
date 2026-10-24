@@ -330,28 +330,22 @@ The main entry point for cross-layer application work is:
 $carta-module-development
 ```
 
-Use `$carta-module-design` to define the module's behavior and obtain explicit
-approval. Keep the design in an existing design record or
-`plans/<feature>/design.md`, using the consistent
-[design template](.agents/skills/carta-module-design/assets/design-template.md).
-The design owns purpose and scope, functional requirements, data and business
-rules, and user journeys and workflows. Update it directly; Git holds history.
-Its header records design approval and whether implementation is current.
+Use `$carta-module-design` and the
+[template](.agents/skills/carta-module-design/assets/design-template.md) for the
+design record, normally `plans/<feature>/design.md`. Update requirements there;
+Git holds history. The header records approval and implementation status.
 
-After approval, `$carta-module-development` owns planning, implementation,
-development setup, checks, review, and repair. Routine technical choices need no
-further approval. A material business change returns to design for approval of
-the changed scope. Delivery uses non-browser checks and reports rendered behavior
-as unverified.
+After explicit approval, `$carta-module-development` owns setup, implementation,
+checks, and repair. Technical choices are autonomous; behavior changes need
+design approval. Functional requirements and their rules define completion.
+Delivery excludes browser verification and reports rendering as unverified.
 
-Use an optional `plan.md` for work order and technical notes or blockers, following
-the [plan format](.agents/skills/carta-module-development/references/planning.md).
-The plan organizes execution. The approved functional requirements and their
-applicable rules define completion. Verification stops after design coverage,
-required checks, and focused proof of new application behavior are complete.
+Use optional `plan.md` for work order and technical notes, following the
+[plan format](.agents/skills/carta-module-development/references/planning.md).
+Verification covers requirements, required checks, and new application behavior.
 
-Layer guidance is available through `$api-conventions`, `$web-ui-surfaces`, and
-`$build-resource-form`. Use `$carta-audit` for a Sprindle and Loom framework audit.
+Layer skills: `$api-conventions`, `$web-ui-surfaces`, `$build-resource-form`.
+Use `$carta-audit` for framework audits.
 
 Repository-wide instructions are in [AGENTS.md](AGENTS.md).
 

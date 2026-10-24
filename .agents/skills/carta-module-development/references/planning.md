@@ -1,8 +1,7 @@
-# Delivery planning
+# Delivery plan
 
-Use a plan when it helps execution or resume, or when the user requests one.
-Start with one `plan.md` beside the design. Split only for work that can be
-executed independently. Keep these sections:
+Keep optional `plan.md` beside the design. Split only independently executable
+work. Use these two sections:
 
 ```markdown
 # Delivery plan: <Module>
@@ -11,21 +10,17 @@ Design: [design.md](design.md)
 
 ## 1. Work order
 
-- [ ] <Specific implementation task>
-  - Owners: <Files or modules to change>
-  - Depends on: <Earlier task, only when needed>
+- [ ] <Implementation task>
+  - Owners: <Files or modules>
+  - Depends on: <Earlier task, if needed>
 
 ## 2. Technical notes and blockers
 
-- <Technical choice or discovery needed to finish the remaining work.>
-- Blocked: <Affected task, missing dependency, and next action.>
+- <Technical choice or discovery needed to finish.>
+- Blocked: <Task, missing dependency, next action.>
 ```
 
-Order tasks by dependency and use a size that makes progress visible without
-listing individual coding steps. Reference functional requirement numbers when
-they help identify the work. Keep requirement definitions in the design.
-
-Include setup or a specific check as a task when it affects work order, resolves
-an uncertainty, or is easy to overlook. Normal check commands remain in the
-repository. Mark tasks from actual results and revise affected tasks when the
-design changes. Keep current execution notes; Git holds history.
+Order tasks by dependency. Reference design requirements instead of copying
+them. Mark actual progress and revise affected tasks after design changes.
+Include setup or checks only when they affect execution, resolve uncertainty,
+or are easy to miss. Read routine commands from the repository.
