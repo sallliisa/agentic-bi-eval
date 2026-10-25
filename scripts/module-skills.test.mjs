@@ -6,7 +6,7 @@ import { test } from 'node:test'
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..')
 const skillsRoot = join(root, '.agents/skills')
-const active = ['carta-module-development', 'carta-module-design', 'api-conventions', 'build-resource-form', 'web-ui-surfaces', 'domain-modeling']
+const active = ['carta-module-development', 'carta-module-design', 'api-conventions', 'build-resource-form', 'web-ui-surfaces', 'domain-modeling', 'verify-carta-module', 'test-audit']
 function markdownFiles(path) {
   return readdirSync(path, { withFileTypes: true }).flatMap(entry => entry.isDirectory() ? markdownFiles(join(path, entry.name)) : entry.name.endsWith('.md') ? [join(path, entry.name)] : [])
 }

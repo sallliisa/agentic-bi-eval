@@ -17,6 +17,9 @@ without changing application code or delivery status.
 
 ## Implement
 
+Use [$verify-carta-module](../verify-carta-module/SKILL.md) to select proof
+before implementation.
+
 Use the optional [plan format](references/planning.md) when execution or resume
 needs a file. Choose technical details within approved behavior.
 
@@ -39,7 +42,8 @@ independent work. Business changes require design updates and approval.
 
 ## Finish
 
-Follow [verification](references/verification.md). Set implementation status to
-`Current` only after approved requirements, development setup, and required
-checks are complete. Update task status from actual results; the final report
-must agree. Report the result, preview/setup status, checks, and remaining gaps.
+Complete [$verify-carta-module](../verify-carta-module/SKILL.md). Set
+implementation status to `Current` only after approved requirements,
+development setup, and required checks are complete. Update task status from
+actual results; the final report must agree. Report the result, preview/setup
+status, checks, and remaining gaps.

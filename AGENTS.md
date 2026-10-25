@@ -6,7 +6,7 @@
 - Make sure each test that you write justifies itself. Tautological tests ARE BANNED.
 - Keep changes within the user request and preserve unrelated work.
 - Prefer existing code and the smallest change that meets the requirement.
-- Test changed behavior with stable tests.
+- Use `$verify-carta-module` to select proof for application modules and `$test-audit` before writing, changing, or reviewing tests.
 - Implement the current contract. Add no compatibility alias or wrapper unless the user request requires it.
 - Change framework packages only when the user request explicitly includes them. Keep unsupported behavior local.
 - For an update from upstream, read [the update procedure](docs/framework-sync.md#update-carta-packages-in-a-project). It defines authorization, local work protection, conflict resolution, and required checks.

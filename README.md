@@ -338,7 +338,10 @@ Git holds history. The header records approval and implementation status.
 After explicit approval, `$carta-module-development` owns setup, implementation,
 checks, and repair. Technical choices are autonomous; behavior changes need
 design approval. Functional requirements and their rules define completion.
-Delivery excludes browser verification and reports rendering as unverified.
+`$verify-carta-module` selects proof by application risk. Trust unchanged
+framework contracts; standard composition can need zero new tests. Use fixture
+payloads at API boundaries and browser proof only for custom interactions that
+lower boundaries cannot establish. `$test-audit` gates new and changed tests.
 
 Use optional `plan.md` for work order and technical notes, following the
 [plan format](.agents/skills/carta-module-development/references/planning.md).

@@ -1,169 +1,77 @@
 ---
 name: test-audit
-description: "Invoke whenever writing, changing, reviewing, or sweeping tests. Authoring gate for new tests plus audit workflow for low-value, implementation-coupled, or duplicative tests and the test-only production seams they demand."
+description: Gate new or changed tests and audit existing tests for independent value, duplicate coverage, and test-only production code.
 ---
 
-# Test Audit
-
-Three modes, one value bar. Authoring mode gates every new or changed test at
-write time. Audit mode runs focused sweeps of tests that re-assert source,
-duplicate stronger proof, couple behavior to implementation, or keep test-only
-production seams alive. Continue broad audits as separate coherent follow-up
-PRs; optimize for confidence, not deletion count. Campaign mode prunes one
-whole subsystem's test surface (every test file a plugin or core area owns);
-before starting one, read [CAMPAIGN.md](CAMPAIGN.md).
+# Test value
 
 ## Authoring gate
 
-Before adding any test, answer four questions; a missing answer means do not
-add it yet:
+Before writing or changing a test, establish:
 
-1. What observable behavior, invariant, or independent contract does it protect?
-2. What credible regression makes it fail?
-3. Why does existing coverage not already catch that failure? Each contract has
-   one primary test owner at the strongest boundary; another layer needs its
-   own distinct risk, such as a transport or lifecycle failure the owner cannot
-   reach. Prefer extending a table-driven case or shared fixture over a
-   near-duplicate test; consolidate duplicated setup in the same change.
-4. Does it need a production seam (export, flag, wrapper, injection hook) that no
-   production caller needs? If yes, move the test to the real boundary instead.
+1. The observable application rule or independent contract it protects.
+2. A plausible incorrect implementation that its assertion would detect.
+3. The gap in framework guarantees, types, and existing coverage, and why this
+   boundary is the cheapest reliable proof.
+4. A production entry point that needs no test-only export, flag, setter,
+   wrapper, or endpoint.
 
-Then check the test against every [junk pattern](#junk-patterns); a match fails
-the gate unless the [retention bar](#retention-bar) names the contract it
-independently guards. A test that would break under behavior-preserving
-refactoring is asserting implementation, not behavior; rewrite it at the
-owning boundary before landing it.
+A missing answer means do not add the test. Extend existing cases where useful.
+Each contract has one primary test owner; another layer needs a distinct risk.
+For application modules, use [proof selection](../verify-carta-module/SKILL.md).
+No test count, coverage target, or test file is required per module.
 
-Bug regression tests must fail on the pre-fix code for the intended reason and
-pass after the owner-boundary repair. A regression test that never demonstrably
-failed proves the mock, not the fix. One regression at the owner boundary
-covers the bug; do not replay the same scenario at every layer it crosses.
+## Independent proof
 
-## Junk patterns
+- Derive expected results from the approved rule or external contract, not the
+  function under test, its output, or a copy of its algorithm.
+- Fixtures establish preconditions. The production action produces the claimed
+  outcome. Check persisted effects through a fresh read of the real store.
+- Run the real owner. Mock only an external system at an existing production
+  boundary; the mock must not implement the rule being asserted.
+- Make fixtures distinguish correct from incorrect behavior: multiple sessions
+  for all-session revocation, matching and non-matching rows for filtering.
+- For rejection, satisfy other prerequisites, assert the intended error, and
+  check unchanged state. Use a valid control when an unrelated failure could
+  explain the rejection.
+- A bug regression must fail before the fix for the intended reason and pass
+  after it. For consequential or doubtful new proof, disable one relevant
+  behavior temporarily and require the assertion to fail. Restore the exact
+  artifact and rerun. A whole-suite mutation campaign is not required.
 
-The shared checklist for both modes: the authoring gate rejects a new test that
-matches one, and audits hunt for existing tests that do.
+## Reject low-value tests
 
-- assertion-free coverage probes;
-- self-comparisons and identity copiers;
-- copied fixtures, inventories, manifests, or export lists;
-- exact source, import, or string greps;
-- private predicate or call-shape tests duplicated at real boundaries;
-- duplicate invocations of the same contract;
-- provider-local replays of shared helpers;
-- tests whose only purpose is preserving test-only exports, globals, or wrappers;
-- dead production code whose only callers are tests;
-- expected values produced by the helper or renderer under test;
-- mocks that implement the asserted behavior, or one identical mock standing in
-  for different APIs;
-- fixtures that supply the receipt, admission, or callback ordering the owner
-  should produce, or persistence asserted against a store the path never writes;
-- capability tests that restate declared flags instead of exercising the
-  delivery or acknowledgement the flag promises;
-- negative controls that pass for an unrelated reason, such as a denial from a
-  different guard or a rejection the production path never reaches;
-- names or fixtures that promise more than the input exercises, such as a
-  "retires the window" test asserting the window was not cleared.
+Reject self-comparisons, copied field/export inventories, expected values
+computed by the tested helper, assertion-free probes, implementation call
+shapes, mocks supplying the asserted result, fixture-supplied final outcomes,
+and duplicate framework or owner coverage. A behavior-preserving internal
+refactor should not require changing a behavior test.
 
-## Value bar
+Retain source or byte inspection only for an independent contract that survives
+identifier-only refactoring, such as an external protocol key or published
+path. Keep call ordering only when the order is observable behavior. Slow or
+static alone does not make an existing test disposable.
 
-Tests justify their maintenance cost by protecting behavior, a credible
-regression, or an independently meaningful contract. In an audit, an existing
-test that must change for behavior-preserving source reorganization is suspect,
-not automatically deletable; the authoring gate still rejects new ones.
+## Audit existing tests
 
-Before judging a candidate, read the complete test and production owner, its
-entry point, callers, callees, sibling implementations, overlapping tests, CI
-routing, and relevant history. Read root and scoped `AGENTS.md` files first.
-When the test claims dependency-backed behavior, inspect the dependency source
-or types directly.
+Read the complete test, production owner, callers, overlapping coverage,
+relevant history, and CI selection before deletion. Record the contract, actual
+failure detected, remaining proof or reason none is needed, and removal risk in
+existing work notes. Preserve uncertain cases. A baseline failure may be a
+product defect; it is not a deletion reason.
 
-## Discovery
+Consolidate distinct assertions at the owning boundary. Remove test-only
+production code only after checking all callers. Keep unrelated cleanup out of
+scope. For an explicitly requested whole-subsystem audit, use
+[the campaign procedure](CAMPAIGN.md).
 
-Keep discovery read-only and report evidence before editing. For broad scope,
-run parallel discovery lanes when available:
+## Validation and handoff
 
-- core and packages (`src/`, `packages/`);
-- plugins (`extensions/`);
-- UI, apps, scripts, and tooling;
-- a cross-cutting pattern sweep.
+Keep shared database runs serial and source stable while tests execute. Use
+package scripts and scoped AGENTS.md instructions; no alternate Vitest launcher
+is needed. Run affected retained tests and required checks. For removed source
+checks, exercise the real command or boundary they claimed to protect.
 
-Outside campaign mode, prefer a few high-confidence candidates over a large
-speculative inventory. Hunt for the [junk patterns](#junk-patterns).
-
-## Retention bar
-
-Keep a test when it independently enforces a public API, plugin SDK, protocol,
-config, migration, storage, security, platform, default, prompt-byte, generated
-cross-language, package, release, or architecture contract. Also keep:
-
-- call ordering when order is observable behavior;
-- regressions with a credible failure mode;
-- source inspection when it is the cheapest independent guard: it fails when
-  the contract changes (the user-facing key, byte, or path) and survives an
-  identifier-only refactor;
-- a retained test that fails on the baseline: treat it as a possible product
-  bug, reproduce it, and repair the owner rather than deleting it.
-
-Static or slow is not a deletion reason. A test that resembles implementation
-may still be the independent contract; prove otherwise before removing it.
-
-## Candidate evidence
-
-Record every field below before editing. A missing field means the candidate is
-not ready for deletion:
-
-- exact test name and location;
-- what failure it can actually detect;
-- non-test callers of the covered production or support seam;
-- stronger remaining owner-boundary proof, or why no proof is needed;
-- relevant history and the reason the test or seam exists;
-- production or test-support deletion unlocked;
-- risk and the focused validation command.
-
-## Edit shape
-
-Choose one coherent owner-boundary batch. Delete obsolete test-only exports,
-globals, wrappers, and dead production paths instead of preserving aliases.
-Move retained regressions to their canonical owners. Consolidate repeated
-package or dependency assertions into one generic contract.
-
-Prefer net-negative production LOC. Do not add replacement tests that restate
-the same implementation, and do not convert uncertain candidates into cleanup
-to increase deletion counts.
-
-## Validation
-
-Never edit source or tests while Vitest is running in the checkout. Follow
-`$openclaw-testing`; route heavy proof through its `$crabbox` rules.
-
-1. Run the smallest owner and sibling tests with
-   `node scripts/run-vitest.mjs <path-or-filter>`.
-2. For removed source greps or plan assertions, run the executable script or
-   dry-run that owns the real contract.
-3. Run targeted formatting, then `git diff --check`.
-4. Classify with
-   `node scripts/check-changed.mjs --dry-run -- <changed-paths>`, then run the
-   actual changed gate required by repository policy.
-5. Inspect `git diff --numstat`; report production/tooling separately from
-   tests and test support.
-6. After final audit edits, run mandatory `$autoreview`.
-
-## Landing and continuation
-
-Commit, push, open a PR, or land only when authorized. Use
-`$openclaw-pr-maintainer` and the repository `scripts/pr` flow. Land one
-coherent PR at a time; after landing, refresh from current `main` and rerun
-read-only discovery for the next high-confidence batch.
-
-## Handoff
-
-Report:
-
-- root cause and removed low-value categories;
-- production owner simplifications;
-- retained false positives and why they remain valuable;
-- focused and full proof actually run;
-- production versus test LOC;
-- PR and merge state;
-- named follow-ups.
+Review the final test diff against this gate, then run `git diff --check`.
+Report actual checks, removed or consolidated contracts, remaining proof, and
+failures. Commit, push, or open a PR only within the user's authorized scope.

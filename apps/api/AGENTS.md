@@ -7,8 +7,8 @@ requirements.
 
 Resolve commands from `package.json`. Use `test:focused -- <spec paths>` for
 affected API tests: it compiles routes, checks the test target and migrates it.
-Use the full suite after focused checks pass. Preserve complete command output
-and the real exit status under the module verification strategy.
+Use `$verify-carta-module` to select any broader checks. Preserve complete
+command output and the real exit status under the module verification strategy.
 
 Tests use the migrated schema and own their fixture rows. Keep shared database
 tests serial. Schema-replacement tests need a separate isolated target.
