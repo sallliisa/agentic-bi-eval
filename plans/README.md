@@ -1,5 +1,28 @@
 # File-routing plans
 
+## Implicit form input/output shapes — 2026-10-25
+
+The user selected removal of Loom's explicit custom-draft mode and authorized
+GPT 6 Luna/max implementation, parent review, and a direct push to main.
+Plan 105 uses improve selected-description planning at `5be952c`. The HK Shield
+migration is on hold. Only Loom's mode contract, its fixtures, and current
+authoring guides are in scope; backend and workflow skills remain unchanged.
+
+| Plan | Result | Priority | Effort | Risk | Depends on | Status |
+|---|---|---|---|---|---|---|
+| [105](105-remove-explicit-form-draft-mode.md) | Derive editable input and submitted output from the schema without a mode | P1 | M | MED | None | DONE — parent APPROVE; independent Loom 549 unit/87 browser, Web 252 tests, types, diagnostics, build and tooling pass |
+
+The parent owns this index and Git publication. The implementation worker owns
+only the declared source/fixture/guide files. Every delegation wait must use
+`collaboration.wait_agent` with `timeout_ms: 3600000`; no polling or interim work.
+
+Rejected: retaining an optional compatibility flag or replacing it with another
+flag. Input/output type checks and explicit record-to-draft loading remain.
+
+Parent reviewed the full diff and one focused revision, then independently ran
+all Plan 105 gates plus 81 module-tooling tests. Direct main push is authorized;
+the task result records publication. Existing warnings are recorded in Plan 105.
+
 ## Route generation recovery — 2026-10-25
 
 The user selected this fix and authorized implementation by GPT 6 Luna at

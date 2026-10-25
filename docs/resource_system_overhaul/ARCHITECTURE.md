@@ -149,7 +149,7 @@ Wrapped controls send class and style to the presentation wrapper and control at
 
 Author component props such as data, load, pick, view, namespace, searchParameters, and loadDetail on the component that owns them. A loader must match that component's argument, result, and cancellation contract. Do not infer a loader or response shape from a resource.
 
-A direct field passes the selected component's model unchanged. For example, DateInput uses a string model. Use schema transforms to convert field values. `defineForm` checks that input and output have the same top-level keys. Use a field binding when one control reads and writes several schema properties. A separate draft shape requires explicit `mode: 'custom-draft'` and a record-to-draft loader.
+A direct field passes the selected component's model unchanged. For example, DateInput uses a string model. Use schema transforms to convert field values. Fields, field defaults, initialData, controlled values, and edit loaders use schema input. The schema parses that input before submit callbacks receive parsed output; submitted events report the callback result. A transform may add, remove, or rename top-level keys. Map loaded records to input explicitly; Loom does not invert a transform. Keep validation issue paths tied to editable input when a field error needs a path. Use a field binding when one control reads and writes several schema properties.
 
 ## 4. Schemas and value ownership
 

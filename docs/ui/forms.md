@@ -39,12 +39,15 @@ A direct field uses the control's model value. For a control that edits several
 schema properties, use a [field binding](../resource_system_overhaul/ARCHITECTURE.md#field-bindings)
 with paired read and write functions. Keep the draft in the schema shape.
 For example, DateInput uses a string model. Use a string input schema and an
-explicit schema transform when the operation needs another value. The schema
-parses the draft before `submit` runs. `defineForm` requires the same top-level
-input and output keys. Value transforms remain valid. If a separate draft shape
-is required, declare `mode: 'custom-draft'` and map loaded records to that draft.
-Keep business validators in the form definition when they belong to the client
-workflow, and enforce the same rule on the server.
+explicit schema transform when the operation needs another value. Fields, field
+defaults, `initialData`, controlled values, and edit loaders use schema input.
+The schema parses that input before `submit` receives parsed output. The
+`submitted` event reports the submit callback's result. A transform may add,
+remove, or rename top-level keys. Map loaded records to input explicitly; Loom
+does not invert a transform. Keep validation issue paths tied to editable input
+when a field error needs a path. Keep business validators in the form definition
+when they belong to the client workflow, and enforce the same rule on the
+server.
 
 ## Session values and validation
 
