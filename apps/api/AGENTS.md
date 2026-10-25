@@ -14,7 +14,7 @@ Tests use the migrated schema and own their fixture rows. Keep shared database
 tests serial. Schema-replacement tests need a separate isolated target.
 Use `src/testing/session.ts` for sessions and cleanup.
 
-Before development setup, confirm the target, migration history and authority.
-Test setup is not development setup. A table/history mismatch needs a reported
-reconciliation decision, not an improvised reset. Applied migrations remain
-unchanged. Production, external and destructive writes require authorization.
+Before development setup, confirm the target, migration history and authority.  
+Test setup is not development setup. A table/history mismatch needs a reported  
+reconciliation decision, not an improvised reset. Applied migrations remain  
+unchanged.
