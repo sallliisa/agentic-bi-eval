@@ -6,6 +6,9 @@ import { watchRuntime, type RuntimeWatcher } from './watch-runtime'
 const projectRoot = fileURLToPath(new URL('..', import.meta.url))
 const manifest = '.sprindle-dev/routes.mjs'
 const bootStarted = Date.now()
+const generationAbort = new AbortController()
+const serverStopGraceMs = 2_000
+const serverStopWaitMs = 2_500
 const log = (message: string) => console.log(`[api:dev] ${message} (+${Date.now() - bootStarted}ms)`)
 log('Compiling file routes and starting route watcher...')
 
@@ -22,9 +25,19 @@ let ready = false
 const closedServers = new WeakSet<ChildProcess>()
 const expectedServerStops = new WeakSet<ChildProcess>()
 
-function waitForExit(child: ChildProcess) {
-  if (closedServers.has(child)) return Promise.resolve()
-  return new Promise<void>((resolve) => child.once('close', () => resolve()))
+function waitForExitWithin(child: ChildProcess, timeoutMs: number) {
+  if (closedServers.has(child)) return Promise.resolve(true)
+  return new Promise<boolean>((resolve) => {
+    const timer = setTimeout(() => {
+      child.off('close', finish)
+      resolve(false)
+    }, timeoutMs)
+    function finish() {
+      clearTimeout(timer)
+      resolve(true)
+    }
+    child.once('close', finish)
+  })
 }
 
 async function closeWatchers() {
@@ -77,8 +90,7 @@ async function restartLoop() {
     const current = server
     if (current) {
       expectedServerStops.add(current)
-      if (current.exitCode === null && current.signalCode === null) current.kill('SIGTERM')
-      await waitForExit(current)
+      await stopServer(current)
     }
     if (stopping) return
     if (revision !== requestedRevision) continue
@@ -112,15 +124,19 @@ function requestRestart() {
   }, 120)
 }
 
-function stopServer(child: ChildProcess, signal: NodeJS.Signals = 'SIGTERM') {
+async function stopServer(child: ChildProcess, signal: NodeJS.Signals = 'SIGTERM') {
   expectedServerStops.add(child)
-  if (child.exitCode === null && child.signalCode === null) child.kill(signal)
-  return waitForExit(child)
+  if (child.exitCode !== null || child.signalCode !== null || closedServers.has(child)) return
+  child.kill(signal)
+  if (await waitForExitWithin(child, serverStopGraceMs)) return
+  child.kill('SIGKILL')
+  if (!await waitForExitWithin(child, serverStopWaitMs)) throw new Error(`The owned API server process ${child.pid ?? 'without a pid'} did not stop after SIGKILL.`)
 }
 
 function finish(code: number, signal?: NodeJS.Signals) {
   if (shutdown) return shutdown
   stopping = true
+  generationAbort.abort(new Error(`API development shutdown started with status ${code}.`))
   if (restartTimer) clearTimeout(restartTimer)
   restartTimer = undefined
   const watcherClose = closeWatchers()
@@ -128,11 +144,15 @@ function finish(code: number, signal?: NodeJS.Signals) {
   const serverClose = current ? stopServer(current, signal ?? 'SIGTERM') : Promise.resolve()
   shutdown = (async () => {
     const initial = initialization?.catch(() => {})
-    await Promise.allSettled([watcherClose, serverClose, initial, restartTask])
-    await closeWatchers()
+    const results = await Promise.allSettled([watcherClose, serverClose, initial, restartTask])
+    const failures = results.flatMap((result) => result.status === 'rejected' ? [result.reason] : [])
+    for (const error of failures) process.stderr.write(`${error?.stack ?? error}\n`)
+    try { await closeWatchers() } catch (error) { failures.push(error); process.stderr.write(`${error instanceof Error ? error.stack ?? error.message : String(error)}\n`) }
     const remaining = server
-    if (remaining) await stopServer(remaining, signal ?? 'SIGTERM')
-    process.exitCode = code
+    if (remaining) {
+      try { await stopServer(remaining, signal ?? 'SIGTERM') } catch (error) { failures.push(error); process.stderr.write(`${error instanceof Error ? error.stack ?? error.message : String(error)}\n`) }
+    }
+    process.exitCode = signal ? code : failures.length ? 1 : code
   })()
   return shutdown
 }
@@ -146,7 +166,7 @@ async function initialize() {
       return
     }
     if (ready) requestRestart()
-  }, manifest, false)
+  }, manifest, false, { signal: generationAbort.signal })
   if (stopping) {
     await closeWatchers()
     return

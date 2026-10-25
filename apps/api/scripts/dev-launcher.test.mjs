@@ -25,7 +25,7 @@ async function freePort() {
   return address.port
 }
 
-function createWorkspace(t, port, serverCloseDelayMs = 0) {
+function createWorkspace(t, port, serverCloseDelayMs = 0, serverIgnoresTerm = false) {
   const temporaryRoot = mkdtempSync(join(tmpdir(), 'carta-dev-launcher-'))
   const workspaceRoot = realpathSync(temporaryRoot)
   let stopFixture = async () => {}
@@ -43,6 +43,9 @@ function createWorkspace(t, port, serverCloseDelayMs = 0) {
   const delayPath = join(workspaceRoot, '.build-delay')
   const processLogPath = join(workspaceRoot, '.owned-processes')
   const shutdownLogPath = join(workspaceRoot, '.server-shutdowns')
+  const runtimeBlockPath = join(workspaceRoot, '.block-runtime-probe')
+  const runtimeMarkerPath = join(workspaceRoot, '.runtime-probe')
+  const routePath = join(apiRoot, 'src/routes/public/reports/+server.ts')
   const preloadPath = join(workspaceRoot, 'record-builds.mjs')
   const extensionRoot = join(workspaceRoot, '.vscode/extensions')
   const toolingBase = readFileSync(join(repositoryRoot, 'packages/sprindle/src/tooling/index.ts'), 'utf8')
@@ -64,7 +67,8 @@ function createWorkspace(t, port, serverCloseDelayMs = 0) {
   }
   writeFileSync(join(apiRoot, 'package.json'), '{"name":"fixture-api","type":"module"}\n')
   writeFileSync(join(apiRoot, 'tsconfig.json'), JSON.stringify({ compilerOptions: { strict: true, noEmit: true, target: 'ES2022', module: 'ESNext', moduleResolution: 'Bundler', skipLibCheck: true }, include: ['src/**/*.ts'] }))
-  writeFileSync(join(apiRoot, 'src/routes/+server.ts'), 'export const GET = () => ({ ok: true })\n')
+  mkdirSync(join(apiRoot, 'src/routes/public/reports'), { recursive: true })
+  writeFileSync(routePath, 'export const GET = () => ({ ok: true })\n')
   writeFileSync(join(apiRoot, 'src/server.ts'), [
     "import { createServer } from 'node:http'",
     "import { appendFileSync } from 'node:fs'",
@@ -72,7 +76,9 @@ function createWorkspace(t, port, serverCloseDelayMs = 0) {
     "const server = createServer((_request, response) => { response.setHeader('x-worker-pid', String(process.pid)); response.end(fixtureValue) })",
     "appendFileSync(process.env.CARTA_DEV_PROCESS_LOG, JSON.stringify({ role: 'worker', pid: process.pid }) + '\\n')",
     "server.listen(Number(process.env.API_PORT), '127.0.0.1')",
-    "for (const signal of ['SIGINT', 'SIGTERM']) process.on(signal, () => { appendFileSync(process.env.CARTA_DEV_SHUTDOWN_LOG, `${process.pid}\\n`); setTimeout(() => server.close(), Number(process.env.CARTA_DEV_SERVER_CLOSE_DELAY_MS)) })",
+    "const recordShutdown = () => appendFileSync(process.env.CARTA_DEV_SHUTDOWN_LOG, `${process.pid}\\n`)",
+    "if (process.env.CARTA_DEV_SERVER_IGNORE_SIGTERM === '1') process.on('SIGTERM', recordShutdown)",
+    "else for (const signal of ['SIGINT', 'SIGTERM']) process.on(signal, () => { recordShutdown(); setTimeout(() => server.close(), Number(process.env.CARTA_DEV_SERVER_CLOSE_DELAY_MS)) })",
     '',
   ].join('\n'))
   writeFileSync(shutdownLogPath, '')
@@ -88,8 +94,11 @@ function createWorkspace(t, port, serverCloseDelayMs = 0) {
   writeFileSync(preloadPath, [
     "import { appendFileSync, existsSync, readFileSync, unlinkSync } from 'node:fs'",
     "const command = String(process.argv[1] ?? '').replaceAll('\\\\', '/')",
-    "const role = command.endsWith('/typescript/bin/tsc') ? 'typescript' : command.endsWith('scripts/ensure-tooling.mjs') ? 'ensure' : command.endsWith('tooling/package.mjs') ? 'package' : undefined",
+    "const runtimeProbe = process.execArgv.some((value) => value.includes('sprindle-resolution:'))",
+    "const role = command.endsWith('/typescript/bin/tsc') ? 'typescript' : command.endsWith('scripts/ensure-tooling.mjs') ? 'ensure' : command.endsWith('tooling/package.mjs') ? 'package' : command.endsWith('scripts/dev.ts') ? 'api-dev' : command.endsWith('src/server.ts') ? 'api-server' : command.endsWith('/generation-worker.js') ? 'generation' : runtimeProbe ? 'runtime-probe' : undefined",
     "if (role && process.env.CARTA_DEV_PROCESS_LOG) appendFileSync(process.env.CARTA_DEV_PROCESS_LOG, JSON.stringify({ role, pid: process.pid, ppid: process.ppid, command, args: process.argv.slice(2) }) + '\\n')",
+    "if (runtimeProbe && process.env.CARTA_DEV_RUNTIME_MARKER) appendFileSync(process.env.CARTA_DEV_RUNTIME_MARKER, JSON.stringify({ pid: process.pid, ppid: process.ppid }) + '\\n')",
+    "if (runtimeProbe && process.env.CARTA_DEV_RUNTIME_BLOCK_FILE && existsSync(process.env.CARTA_DEV_RUNTIME_BLOCK_FILE)) Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0)",
     "if (command.endsWith('/typescript/bin/tsc') && !process.argv.includes('--listFilesOnly') && process.env.CARTA_DEV_BUILD_COUNT) {",
     "  appendFileSync(process.env.CARTA_DEV_BUILD_COUNT, 'build\\n')",
     "  const delayFile = process.env.CARTA_DEV_BUILD_DELAY_FILE",
@@ -105,6 +114,9 @@ function createWorkspace(t, port, serverCloseDelayMs = 0) {
     delayPath,
     processLogPath,
     shutdownLogPath,
+    runtimeBlockPath,
+    runtimeMarkerPath,
+    routePath,
     toolingBase,
     env: {
       ...process.env,
@@ -114,6 +126,9 @@ function createWorkspace(t, port, serverCloseDelayMs = 0) {
       CARTA_DEV_PROCESS_LOG: processLogPath,
       CARTA_DEV_SHUTDOWN_LOG: shutdownLogPath,
       CARTA_DEV_SERVER_CLOSE_DELAY_MS: String(serverCloseDelayMs),
+      CARTA_DEV_SERVER_IGNORE_SIGTERM: serverIgnoresTerm ? '1' : '0',
+      CARTA_DEV_RUNTIME_BLOCK_FILE: runtimeBlockPath,
+      CARTA_DEV_RUNTIME_MARKER: runtimeMarkerPath,
       SPRINDLE_VSCODE_EXTENSIONS_DIR: extensionRoot,
       NODE_OPTIONS: [process.env.NODE_OPTIONS, `--import=${pathToFileURL(preloadPath).href}`].filter(Boolean).join(' '),
     },
@@ -198,7 +213,16 @@ function waitForBuildCount(workspace, count, output) {
 }
 
 function waitForProcessesToStop(pids, output, timeoutMs = 5000) {
-  return waitFor(() => pids.every((pid) => !processIsAlive(pid)), 'owned preparation processes to stop', output, timeoutMs)
+  return waitFor(() => pids.every((pid) => !processIsAlive(pid)), 'owned processes to stop', output, timeoutMs)
+}
+
+async function waitForBlockedProbe(workspace, output) {
+  await waitFor(() => existsSync(workspace.runtimeMarkerPath), 'the route resolver to reach the controlled block', output)
+  const probe = JSON.parse(readFileSync(workspace.runtimeMarkerPath, 'utf8').trim())
+  const ownerPath = join(workspace.apiRoot, '.sprindle/generation.lock/owner.json')
+  const owner = JSON.parse(readFileSync(ownerPath, 'utf8'))
+  assert.equal(probe.ppid, owner.pid)
+  return { probe, owner }
 }
 
 function waitForLog(output, text) {
@@ -432,4 +456,58 @@ test('a failed edit during worker shutdown keeps the last prepared response and 
   const recovered = await waitForHttp(port, 'recovered', launcher.output, retained.pid)
   assert.equal(buildCount(workspace), 4)
   assert.notEqual(recovered.pid, retained.pid)
+})
+
+test('SIGTERM during initial route compilation stops the owned generator before the launcher exits', { timeout: 120_000 }, async (t) => {
+  const port = await freePort()
+  const workspace = createWorkspace(t, port)
+  writeFileSync(workspace.runtimeBlockPath, 'block')
+  writeFileSync(workspace.routePath, "import { basename } from 'node:path';export const GET=()=>basename('/reports')\n")
+  const launcher = startFixtureLauncher(workspace)
+  const { probe, owner } = await waitForBlockedProbe(workspace, launcher.output)
+  assert.ok(ownedProcesses(workspace).some((entry) => entry.role === 'api-dev'))
+
+  const started = Date.now()
+  launcher.child.kill('SIGTERM')
+  await waitForCloseWithin(launcher.child, `The development launcher did not stop within five seconds during initial compilation.\n${launcher.output()}`, 5000)
+  assert.ok(Date.now() - started <= 5000)
+  const pids = [...new Set([...ownedProcesses(workspace).map((entry) => entry.pid), owner.pid, probe.pid])]
+  await waitForProcessesToStop(pids, launcher.output, 5000)
+  assert.equal(await portIsAvailable(port), true)
+})
+
+test('SIGTERM during a blocked route edit stops the generator, probe, and API server', { timeout: 120_000 }, async (t) => {
+  const port = await freePort()
+  const workspace = createWorkspace(t, port)
+  const launcher = startFixtureLauncher(workspace)
+  const initial = await waitForHttp(port, 'before', launcher.output)
+  assert.ok(ownedProcesses(workspace).some((entry) => entry.role === 'api-server' && entry.pid === initial.pid))
+
+  writeFileSync(workspace.runtimeBlockPath, 'block')
+  writeFileSync(workspace.routePath, "import { basename } from 'node:path';export const GET=()=>basename('/reports')\n")
+  const { probe, owner } = await waitForBlockedProbe(workspace, launcher.output)
+  assert.notEqual(owner.pid, initial.pid)
+  const started = Date.now()
+  launcher.child.kill('SIGTERM')
+  await waitForCloseWithin(launcher.child, `The development launcher did not stop within five seconds during route reload.\n${launcher.output()}`, 5000)
+  assert.ok(Date.now() - started <= 5000)
+  const pids = [...new Set([...ownedProcesses(workspace).map((entry) => entry.pid), owner.pid, probe.pid, initial.pid])]
+  await waitForProcessesToStop(pids, launcher.output, 5000)
+  await new Promise((resolveDelay) => setTimeout(resolveDelay, 300))
+  assert.equal(ownedProcesses(workspace).filter((entry) => entry.role === 'api-server').length, 1)
+  assert.equal(await portIsAvailable(port), true)
+})
+
+test('an owned API server that ignores SIGTERM is force stopped within the shutdown bound', { timeout: 120_000 }, async (t) => {
+  const port = await freePort()
+  const workspace = createWorkspace(t, port, 0, true)
+  const launcher = startFixtureLauncher(workspace)
+  const initial = await waitForHttp(port, 'before', launcher.output)
+
+  launcher.child.kill('SIGTERM')
+  await waitForCloseWithin(launcher.child, `The development launcher did not stop after the API server ignored SIGTERM.\n${launcher.output()}`, 5000)
+  const pids = [...new Set([...ownedProcesses(workspace).map((entry) => entry.pid), initial.pid])]
+  await waitForProcessesToStop(pids, launcher.output, 5000)
+  assert.ok(readFileSync(workspace.shutdownLogPath, 'utf8').split('\n').includes(String(initial.pid)))
+  assert.equal(await portIsAvailable(port), true)
 })

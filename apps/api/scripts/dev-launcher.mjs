@@ -12,6 +12,8 @@ const extensionsRoot = process.env.SPRINDLE_VSCODE_EXTENSIONS_DIR || join(homedi
 const debounceMs = 150
 const preparationGraceMs = 1500
 const preparationKillWaitMs = 3000
+const workerGraceMs = 4000
+const workerKillWaitMs = 1000
 let frameworkInputState = packageInputState(sprindleRoot)
 const watcher = chokidar.watch(frameworkInputState.watchPaths, {
   ignoreInitial: true,
@@ -20,6 +22,7 @@ const watcher = chokidar.watch(frameworkInputState.watchPaths, {
 })
 const expectedWorkerExits = new Set()
 const closedPreparations = new WeakSet()
+const stoppingWorkers = new WeakMap()
 const editorNotices = new Set()
 let worker
 let preparation
@@ -34,13 +37,8 @@ function log(message) {
   process.stdout.write(`[api:dev] ${message}\n`)
 }
 
-function waitForExit(child) {
-  if (!child || child.exitCode !== null || child.signalCode !== null) return Promise.resolve()
-  return new Promise((resolveExit) => child.once('close', resolveExit))
-}
-
 function waitForCloseWithin(child, timeoutMs) {
-  if (!child || closedPreparations.has(child)) return Promise.resolve(true)
+  if (!child || child.exitCode !== null || child.signalCode !== null || closedPreparations.has(child)) return Promise.resolve(true)
   return new Promise((resolveClose) => {
     const timer = setTimeout(() => {
       child.off('close', finish)
@@ -187,7 +185,7 @@ async function checkEditor() {
 function startWorker() {
   if (stopping) return undefined
   log('Starting TypeScript development worker...')
-  const child = spawn(process.execPath, ['--import', 'tsx', 'scripts/dev.ts'], { cwd: apiRoot, stdio: 'inherit' })
+  const child = spawn(process.execPath, ['--import', 'tsx', 'scripts/dev.ts'], { cwd: apiRoot, detached: process.platform !== 'win32', stdio: 'inherit' })
   worker = child
   child.once('error', (error) => {
     process.stderr.write(`${error.stack ?? error.message}\n`)
@@ -201,12 +199,41 @@ function startWorker() {
   return child
 }
 
-async function stopWorker(child) {
+async function stopWorker(child, signal) {
+  const stopping = stoppingWorkers.get(child)
+  if (stopping) return stopping
   expectedWorkerExits.add(child)
-  if (child.exitCode === null && child.signalCode === null) child.kill('SIGTERM')
-  await waitForExit(child)
-  expectedWorkerExits.delete(child)
-  if (worker === child) worker = undefined
+  const stopStarted = Date.now()
+  const task = (async () => {
+    try {
+      if (child.exitCode === null && child.signalCode === null) {
+        if (process.platform === 'win32') {
+          if (!child.pid) {
+            if (!await waitForCloseWithin(child, workerKillWaitMs)) throw new Error('The API development worker did not close after startup failed.')
+          } else {
+            const result = spawnSync('taskkill.exe', ['/PID', String(child.pid), '/T', '/F'], { stdio: 'ignore', windowsHide: true, timeout: workerKillWaitMs })
+            if (result.error && result.error.code !== 'ESRCH') throw new Error('Cannot stop the API development worker tree with taskkill.exe.', { cause: result.error })
+            if (result.status !== 0 && child.exitCode === null && child.signalCode === null) throw new Error('The API development worker tree did not stop with taskkill.exe.')
+          }
+        } else {
+          const deadline = Date.now() + workerGraceMs + workerKillWaitMs
+          const remaining = () => Math.max(0, deadline - Date.now())
+          try { process.kill(-child.pid, signal ?? 'SIGTERM') } catch (error) { if (error?.code !== 'ESRCH') throw error }
+          if (!await waitForProcessGroupToStop(child.pid, Math.min(workerGraceMs, remaining()))) {
+            try { process.kill(-child.pid, 'SIGKILL') } catch (error) { if (error?.code !== 'ESRCH') throw error }
+            if (!await waitForProcessGroupToStop(child.pid, remaining())) throw new Error('The API development worker process group did not stop after SIGKILL.')
+          }
+        }
+      }
+      const closeTimeout = process.platform === 'win32' ? workerKillWaitMs : Math.max(0, workerGraceMs + workerKillWaitMs - (Date.now() - stopStarted))
+      if (!await waitForCloseWithin(child, closeTimeout)) throw new Error('The API development worker did not close after its process tree stopped.')
+    } finally {
+      expectedWorkerExits.delete(child)
+      if (worker === child) worker = undefined
+    }
+  })()
+  stoppingWorkers.set(child, task)
+  return task
 }
 
 async function prepareUntilStable() {
@@ -283,9 +310,8 @@ async function shutdown(status, signal) {
     const currentWorker = worker
     const currentPreparation = preparation
     const watcherClose = watcher.close()
-    if (currentWorker && currentWorker.exitCode === null && currentWorker.signalCode === null) currentWorker.kill(signal ?? 'SIGTERM')
     const stops = await Promise.allSettled([
-      waitForExit(currentWorker),
+      currentWorker ? stopWorker(currentWorker, signal ?? 'SIGTERM') : Promise.resolve(),
       stopPreparationTree(currentPreparation, signal ?? 'SIGTERM'),
       watcherClose,
     ])

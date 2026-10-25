@@ -1,5 +1,33 @@
 # File-routing plans
 
+## Route generation recovery — 2026-10-25
+
+The user selected this fix and authorized implementation by GPT 6 Luna at
+max reasoning effort, with parent review under `task-subagent-delegation`.
+Plan 104 uses the `improve` plan workflow at `e1a9b1c`. Planning changed only
+this index and Plan 104. The existing user change in `AGENTS.md` is preserved.
+
+| Plan | Result | Priority | Effort | Risk | Depends on | Status |
+|---|---|---|---|---|---|---|
+| [104](104-bound-route-generation-and-dev-shutdown.md) | Stop blocked owned generation safely and bound dev shutdown | P1 | L | MED | None | DONE — parent APPROVE; 235 Sprindle tests, 8 launcher tests, API/Sprindle types and lint pass; Windows/Linux unverified |
+
+Execute 104 as one lifecycle change, then review the actual diff and test
+evidence. No commit, push, publication, or upstream update is authorized.
+
+Confirmed evidence: a live watcher held the lock, its API child served stale
+routes, a second compiler timed out, and the watcher required SIGKILL after
+SIGTERM. The original blocked operation remains unknown. Source confirms an
+unbounded synchronous resolution probe and shutdown waits without deadlines.
+An isolated generator is needed so the supervisor can stop synchronous work.
+
+Rejected: reclaim a live owner's lock based only on elapsed time. The old
+generator could resume and overwrite a newer result. Keep dead-owner recovery.
+
+Scope is limited to Sprindle generation tooling and API development process
+lifecycle. Business modules, UI, dependencies, general security, production
+deployment, and the rest of the repository were not audited. No new product
+direction is included. No runtime checks ran during planning.
+
 ## Green baseline and push authorization — 2026-10-14
 
 The user authorized commit and push after confirming a green baseline.
