@@ -48,6 +48,14 @@ duplicate names, duplicate paths, multiple layouts, layout collisions, and
 rendered parents without an outlet. The error lists the files to correct.
 An empty index child can share its parent URL. A conditional outlet is valid.
 
+`AppRouterView` renders its default slot only when no child component matches
+at that outlet depth. A matched child replaces the slot while its `Suspense`
+fallback or child-owned error and access UI is active. Put content in the slot
+when a child route must replace it. Put content beside the outlet when the
+parent must keep it visible on child routes. Use a default `index.route.vue`
+child when the content needs its own route component identity for direct links,
+refresh, or Back navigation.
+
 Tabs replace a bare parent with the first available child. They stay active
 for deeper pages in their collection section. Page Back uses the resource
 collection `backTo`. A workflow without a routed collection supplies an

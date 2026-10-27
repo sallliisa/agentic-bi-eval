@@ -15,14 +15,18 @@ afterEach(() => {
   vi.useRealTimers()
 })
 
-function tracked(name: string, counters: Counters, childOutlet = false) {
+function tracked(name: string, counters: Counters, childOutlet = false, outletDefault?: string) {
   return defineComponent({
     name,
     setup() {
       const counter = (counters[name] ??= { mounts: 0, unmounts: 0 })
       onMounted(() => counter.mounts++)
       onUnmounted(() => counter.unmounts++)
-      return () => h('section', { 'data-route': name }, [name, childOutlet ? h(AppRouterView) : null])
+      return () =>
+        h('section', { 'data-route': name }, [
+          name,
+          childOutlet ? h(AppRouterView, null, outletDefault ? { default: () => h('article', { 'data-route-default': outletDefault }, outletDefault) } : undefined) : null,
+        ])
     },
   })
 }
@@ -43,6 +47,19 @@ async function mountRoutes(initialPath: string) {
   const Edit = tracked('edit', counters)
   const Deep = tracked('deep', counters)
   const Grouped = tracked('grouped', counters)
+  const TestSet = tracked('test-set', counters, true, 'case-list')
+  const CreateCase = tracked('create-case', counters)
+  const EditCase = tracked('edit-case', counters)
+  const loadingStarted = vi.fn()
+  let releaseLoading: (() => void) | undefined
+  const LoadingCase = defineComponent({
+    setup() {
+      loadingStarted()
+      return new Promise<() => ReturnType<typeof h>>((resolve) => {
+        releaseLoading = () => resolve(() => h('form', { 'data-route': 'loading-case' }, 'loading-case'))
+      })
+    },
+  })
   const router = createRouter({
     history: createMemoryHistory(),
     routes: [
@@ -77,6 +94,16 @@ async function mountRoutes(initialPath: string) {
             component: Detail,
             children: [{ path: '', name: 'user-default', component: List }],
           },
+          {
+            path: 'test-sets/:setId',
+            name: 'test-set-detail',
+            component: TestSet,
+            children: [
+              { path: 'cases/create', name: 'test-set-case-create', component: CreateCase },
+              { path: 'cases/:caseId/edit', name: 'test-set-case-edit', component: EditCase },
+              { path: 'cases/:caseId/loading', name: 'test-set-case-loading', component: LoadingCase },
+            ],
+          },
         ],
       },
     ],
@@ -102,10 +129,11 @@ async function mountRoutes(initialPath: string) {
   app.mount(host)
   await settle()
   mounted.push(() => {
+    releaseLoading?.()
     app.unmount()
     host.remove()
   })
-  return { counters, host, router }
+  return { counters, host, loadingStarted, releaseLoading: () => releaseLoading?.(), router }
 }
 
 describe('AppRouterView', () => {
@@ -226,5 +254,52 @@ describe('AppRouterView', () => {
       app.unmount()
       host.remove()
     })
+  })
+
+  it('shows the parent default only without a child and restores it on browser Back', async () => {
+    const { host, router } = await mountRoutes('/test-sets/7')
+    expect(host.querySelector('[data-route-default="case-list"]')).not.toBeNull()
+
+    await router.push('/test-sets/7/cases/create')
+    await settle()
+    expect(host.querySelector('[data-route="create-case"]')).not.toBeNull()
+    expect(host.querySelector('[data-route-default="case-list"]')).toBeNull()
+
+    await router.push('/test-sets/7/cases/3/edit')
+    await settle()
+    expect(host.querySelector('[data-route="edit-case"]')).not.toBeNull()
+    expect(host.querySelector('[data-route-default="case-list"]')).toBeNull()
+
+    router.back()
+    await settle()
+    expect(host.querySelector('[data-route="create-case"]')).not.toBeNull()
+    expect(host.querySelector('[data-route-default="case-list"]')).toBeNull()
+
+    router.back()
+    await settle()
+    expect(host.querySelector('[data-route="test-set"]')).not.toBeNull()
+    expect(host.querySelector('[data-route-default="case-list"]')).not.toBeNull()
+  })
+
+  it('keeps the parent default hidden on direct child entry', async () => {
+    const { host } = await mountRoutes('/test-sets/7/cases/3/edit')
+    expect(host.querySelector('[data-route="edit-case"]')).not.toBeNull()
+    expect(host.querySelector('[data-route-default="case-list"]')).toBeNull()
+  })
+
+  it('keeps the parent default hidden while a matched child is loading', async () => {
+    const { host, loadingStarted, releaseLoading, router } = await mountRoutes('/test-sets/7')
+    await router.push('/test-sets/7/cases/3/loading')
+    await settle()
+
+    expect(loadingStarted).toHaveBeenCalledTimes(1)
+    expect(host.querySelector('svg.spinner')).not.toBeNull()
+    expect(host.querySelector('[data-route-default="case-list"]')).toBeNull()
+    expect(host.querySelector('[data-route="loading-case"]')).toBeNull()
+
+    releaseLoading()
+    await settle()
+    expect(host.querySelector('[data-route-default="case-list"]')).toBeNull()
+    expect(host.querySelector('[data-route="loading-case"]')).not.toBeNull()
   })
 })

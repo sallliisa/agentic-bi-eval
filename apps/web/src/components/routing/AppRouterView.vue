@@ -42,6 +42,9 @@ const routeViewKey = computed(() => {
           </template>
         </Suspense>
       </div>
+      <div v-else-if="$slots.default" key="default">
+        <slot />
+      </div>
     </Transition>
   </RouterView>
 </template>
