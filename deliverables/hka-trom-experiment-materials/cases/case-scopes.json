@@ -1,0 +1,246 @@
+{
+  "source": "Saved test case prompts and fixture case definitions",
+  "cases": [
+    {
+      "caseId": "T1-C1",
+      "sectionAlias": "PEKBANG",
+      "caseFamily": "T1",
+      "semanticBranches": [
+        "multiple reports",
+        "multiple booths",
+        "unequal detail sample counts",
+        "null duration excluded from observation mean"
+      ],
+      "source": "fixture case definition plus exact saved prompt",
+      "dateRange": {
+        "start": "2026-02-01",
+        "end": "2026-02-07"
+      }
+    },
+    {
+      "caseId": "T1-C2",
+      "sectionAlias": "BINSTA",
+      "caseFamily": "T1",
+      "semanticBranches": [
+        "matching booth and longbooth durations have equal observation weight"
+      ],
+      "source": "fixture case definition plus exact saved prompt",
+      "dateRange": {
+        "start": "2030-01-25",
+        "end": "2030-01-30"
+      }
+    },
+    {
+      "caseId": "T2-C1",
+      "sectionAlias": "PEKBANG",
+      "caseFamily": "T2",
+      "semanticBranches": [
+        "missing calendar day",
+        "zero-volume configured vehicle class",
+        "multiple active vehicle classes"
+      ],
+      "source": "fixture case definition plus exact saved prompt",
+      "dateRange": {
+        "start": "2030-03-01",
+        "end": "2030-03-07"
+      }
+    },
+    {
+      "caseId": "T3-C1",
+      "sectionAlias": "PEKBANG",
+      "caseFamily": "T3",
+      "semanticBranches": [
+        "different month lengths",
+        "missing report days",
+        "non-monotonic trend",
+        "multiple vehicle classes"
+      ],
+      "source": "fixture case definition plus exact saved prompt",
+      "dateRange": {
+        "start": "2026-01-01",
+        "end": "2026-04-30"
+      }
+    },
+    {
+      "caseId": "T4-C1",
+      "sectionAlias": "PEKBANG",
+      "caseFamily": "T4",
+      "semanticBranches": [
+        "zero actions",
+        "unfinished action",
+        "all actions complete",
+        "mixed complete/unfinished actions",
+        "null action stage is incomplete"
+      ],
+      "source": "fixture case definition plus exact saved prompt",
+      "dateRange": {
+        "start": "2026-04-01",
+        "end": "2026-04-30"
+      }
+    },
+    {
+      "caseId": "T5-C1",
+      "sectionAlias": "PEKBANG",
+      "caseFamily": "T5",
+      "semanticBranches": [
+        "single cause",
+        "multiple causes",
+        "repeated cause across accidents",
+        "non-accident incident",
+        "cause assignments on non-accident incidents are excluded"
+      ],
+      "source": "fixture case definition plus exact saved prompt",
+      "dateRange": {
+        "start": "2030-04-01",
+        "end": "2030-04-30"
+      }
+    },
+    {
+      "caseId": "T6-C1",
+      "sectionAlias": "PEKBANG",
+      "caseFamily": "T6",
+      "semanticBranches": [
+        "undamaged items",
+        "r1/r2/r3",
+        "p1/p2/no-priority",
+        "multiple assets",
+        "unknown non-null damage category remains in total only"
+      ],
+      "source": "fixture case definition plus exact saved prompt",
+      "dateRange": {
+        "start": "2026-05-01",
+        "end": "2026-05-31"
+      }
+    },
+    {
+      "caseId": "T7-C1",
+      "sectionAlias": "PEKBANG",
+      "caseFamily": "T7",
+      "semanticBranches": [
+        "all five SLA rules applicable",
+        "threshold equality",
+        "SPM/SLA failures"
+      ],
+      "source": "fixture case definition plus exact saved prompt",
+      "date": "2026-06-01",
+      "gateName": "Bangkinang",
+      "shift": 1,
+      "gateAndShiftPhrase": "Gerbang Bangkinang, shift 1"
+    },
+    {
+      "caseId": "T7-C2",
+      "sectionAlias": "BINSTA",
+      "caseFamily": "T7",
+      "semanticBranches": [
+        "only kecepatan-transaksi-3 SLA-applicable",
+        "threshold equality",
+        "SPM failures"
+      ],
+      "source": "fixture case definition plus exact saved prompt",
+      "date": "2030-06-02",
+      "gateName": "Stabat",
+      "shift": 1,
+      "gateAndShiftPhrase": "Gerbang Stabat, shift 1"
+    },
+    {
+      "caseId": "T7-C3",
+      "sectionAlias": "INKIS",
+      "caseFamily": "T7",
+      "semanticBranches": [
+        "all five SLA rules non-applicable",
+        "threshold equality",
+        "SPM failures"
+      ],
+      "source": "fixture case definition plus exact saved prompt",
+      "date": "2026-06-03",
+      "gateName": "Limapuluh",
+      "shift": 1,
+      "gateAndShiftPhrase": "Gerbang Limapuluh, shift 1"
+    },
+    {
+      "caseId": "T7-C4",
+      "sectionAlias": "PEKBANG",
+      "caseFamily": "T7",
+      "semanticBranches": [
+        "applicable SLA target is independently overridden from SPM",
+        "requested event is scoped by section, gate, operational date, and dated shift",
+        "same-date other-gate, other-date same-gate, and other-shift same-gate reports are valid competing events"
+      ],
+      "source": "fixture case definition plus exact saved prompt",
+      "date": "2026-01-26",
+      "gateName": "Bangkinang",
+      "shift": 1,
+      "gateAndShiftPhrase": "Gerbang Bangkinang, shift 1"
+    },
+    {
+      "caseId": "T8-C1",
+      "sectionAlias": "BINSTA",
+      "caseFamily": "T8",
+      "semanticBranches": [
+        "multiple monitoring events",
+        "mixed SPM period statuses",
+        "partial SLA applicability",
+        "individual failures"
+      ],
+      "source": "fixture case definition plus exact saved prompt",
+      "dateRange": {
+        "start": "2026-06-01",
+        "end": "2026-06-07"
+      }
+    },
+    {
+      "caseId": "T8-C2",
+      "sectionAlias": "BINSTA",
+      "caseFamily": "T8",
+      "semanticBranches": [
+        "applicable SLA target is independently overridden from SPM",
+        "SLA applicability remains independent of its numeric threshold",
+        "SPM/SLA use booth observations while longbooth observations remain outside compliance"
+      ],
+      "source": "fixture case definition plus exact saved prompt",
+      "dateRange": {
+        "start": "2026-01-20",
+        "end": "2026-01-30"
+      }
+    },
+    {
+      "caseId": "T9-C1",
+      "sectionAlias": "PEKBANG",
+      "caseFamily": "T9",
+      "semanticBranches": [
+        "unchanged pass",
+        "improved to pass",
+        "unchanged fail",
+        "all SLA applicable"
+      ],
+      "source": "fixture case definition plus exact saved prompt",
+      "periodA": {
+        "start": "2026-07-01",
+        "end": "2026-07-07"
+      },
+      "periodB": {
+        "start": "2026-07-08",
+        "end": "2026-07-14"
+      }
+    },
+    {
+      "caseId": "T9-C2",
+      "sectionAlias": "PEKBANG",
+      "caseFamily": "T9",
+      "semanticBranches": [
+        "two distinct routine reports contribute in each period",
+        "each period status fails when any report/booth evaluation fails",
+        "SPM and independently overridden SLA both deteriorate from pass to fail"
+      ],
+      "source": "fixture case definition plus exact saved prompt",
+      "periodA": {
+        "start": "2026-01-05",
+        "end": "2026-01-10"
+      },
+      "periodB": {
+        "start": "2026-01-12",
+        "end": "2026-01-17"
+      }
+    }
+  ]
+}

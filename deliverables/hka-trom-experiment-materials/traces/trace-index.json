@@ -1,0 +1,224 @@
+{
+  "source": "Cloudflare OS read-only chat-history API",
+  "retrievedAt": "2026-11-01T16:38:24.099040+00:00",
+  "traces": [
+    {
+      "case": "T1-C2",
+      "chatId": 39,
+      "file": "traces/selected/T1-C2-chat-39.json",
+      "status": "run-linked",
+      "messageCount": 17,
+      "fullSequenceRange": [
+        0,
+        16
+      ],
+      "toolCallCount": 7,
+      "contextReadCalls": 0,
+      "modelAuthors": [
+        "Muse Spark 1.3"
+      ],
+      "promptMatchesCurrentSavedCase": true,
+      "initialPromptSha256": "a9b4212635b132d856980f8c67fe9bc90934eca618ba923d9a9237b954829d11",
+      "matchingCaseId": "T1-C2",
+      "runId": "e3353347-8ac0-4ca0-b5d6-b46ac78dac13",
+      "runResultRowId": "7a0c7580-6857-4740-8185-0539adfeafab",
+      "initialPromptMatchesRunRow": true,
+      "finalResponseMatchesRunRow": true
+    },
+    {
+      "case": "T2-C1",
+      "chatId": 40,
+      "file": "traces/selected/T2-C1-chat-40.json",
+      "status": "run-linked",
+      "messageCount": 23,
+      "fullSequenceRange": [
+        0,
+        22
+      ],
+      "toolCallCount": 8,
+      "contextReadCalls": 0,
+      "modelAuthors": [
+        "Muse Spark 1.3"
+      ],
+      "promptMatchesCurrentSavedCase": true,
+      "initialPromptSha256": "af64725a97b328849cb2ca34b0c864d8e970970dd1af97d65e1b55c0c13d1af3",
+      "matchingCaseId": "T2-C1",
+      "runId": "e3353347-8ac0-4ca0-b5d6-b46ac78dac13",
+      "runResultRowId": "a72b2c6c-61fd-4f1f-a515-f6b07d12b021",
+      "initialPromptMatchesRunRow": true,
+      "finalResponseMatchesRunRow": true
+    },
+    {
+      "case": "T4-C1",
+      "chatId": 42,
+      "file": "traces/selected/T4-C1-chat-42.json",
+      "status": "run-linked",
+      "messageCount": 64,
+      "fullSequenceRange": [
+        0,
+        63
+      ],
+      "toolCallCount": 13,
+      "contextReadCalls": 0,
+      "modelAuthors": [
+        "Muse Spark 1.3"
+      ],
+      "promptMatchesCurrentSavedCase": true,
+      "initialPromptSha256": "5b73fbf5d0d4227eb9ab60ab0a94ade3a15c7aba6af1bd14a6b3648d29151971",
+      "matchingCaseId": "T4-C1",
+      "runId": "e3353347-8ac0-4ca0-b5d6-b46ac78dac13",
+      "runResultRowId": "5c5a49bf-669c-455c-a5a5-0e289770531e",
+      "initialPromptMatchesRunRow": true,
+      "finalResponseMatchesRunRow": true
+    },
+    {
+      "case": "T6-C1",
+      "chatId": 44,
+      "file": "traces/selected/T6-C1-chat-44.json",
+      "status": "run-linked",
+      "messageCount": 38,
+      "fullSequenceRange": [
+        0,
+        37
+      ],
+      "toolCallCount": 10,
+      "contextReadCalls": 0,
+      "modelAuthors": [
+        "Muse Spark 1.3"
+      ],
+      "promptMatchesCurrentSavedCase": true,
+      "initialPromptSha256": "9eeef66abac149d7591256b2e8a87ebc728cb2c4dc5eb3ab22b3ce9f9f8e4a05",
+      "matchingCaseId": "T6-C1",
+      "runId": "e3353347-8ac0-4ca0-b5d6-b46ac78dac13",
+      "runResultRowId": "33cb2172-49b2-4b94-97a9-6017f384a8b5",
+      "initialPromptMatchesRunRow": true,
+      "finalResponseMatchesRunRow": true
+    },
+    {
+      "case": "T7-C1",
+      "chatId": 45,
+      "file": "traces/selected/T7-C1-chat-45.json",
+      "status": "run-linked",
+      "messageCount": 34,
+      "fullSequenceRange": [
+        0,
+        33
+      ],
+      "toolCallCount": 10,
+      "contextReadCalls": 0,
+      "modelAuthors": [
+        "Muse Spark 1.3"
+      ],
+      "promptMatchesCurrentSavedCase": true,
+      "initialPromptSha256": "8af2a8070c0bcc417d251a83a98c73d1c8687b73c100fad08cd7314c08831332",
+      "matchingCaseId": "T7-C1",
+      "runId": "e3353347-8ac0-4ca0-b5d6-b46ac78dac13",
+      "runResultRowId": "a18b69dc-cc80-4e06-a15a-1c05d04eff07",
+      "initialPromptMatchesRunRow": true,
+      "finalResponseMatchesRunRow": true
+    },
+    {
+      "case": "T9-C2",
+      "chatId": 62,
+      "file": "traces/selected/T9-C2-chat-62.json",
+      "status": "run-linked",
+      "messageCount": 26,
+      "fullSequenceRange": [
+        0,
+        25
+      ],
+      "toolCallCount": 10,
+      "contextReadCalls": 2,
+      "modelAuthors": [
+        "Muse Spark 1.3"
+      ],
+      "promptMatchesCurrentSavedCase": true,
+      "initialPromptSha256": "44bdc358aaa908faca86f73d7d02148f198ebeec25b036dc7aa894c939b68bf6",
+      "matchingCaseId": "T9-C2",
+      "runId": "e3353347-8ac0-4ca0-b5d6-b46ac78dac13",
+      "runResultRowId": "541ad51f-a793-418e-8a4e-57db57ea4621",
+      "initialPromptMatchesRunRow": true,
+      "finalResponseMatchesRunRow": true
+    },
+    {
+      "case": "UNLINKED-T8-C1",
+      "chatId": 49,
+      "file": "traces/unlinked-matching-chats/UNLINKED-T8-C1-chat-49.json",
+      "status": "unlinked-matching-chat",
+      "messageCount": 28,
+      "fullSequenceRange": [
+        0,
+        27
+      ],
+      "toolCallCount": 9,
+      "contextReadCalls": 0,
+      "modelAuthors": [
+        "Muse Spark 1.3"
+      ],
+      "promptMatchesCurrentSavedCase": true,
+      "initialPromptSha256": "151901c26d67f45549123d5f227542116949d3c76bad8ae42459b8648f1032b4",
+      "matchingCaseId": "T8-C1"
+    },
+    {
+      "case": "UNLINKED-T9-C2",
+      "chatId": 61,
+      "file": "traces/unlinked-matching-chats/UNLINKED-T9-C2-chat-61.json",
+      "status": "unlinked-matching-chat",
+      "messageCount": 36,
+      "fullSequenceRange": [
+        0,
+        35
+      ],
+      "toolCallCount": 14,
+      "contextReadCalls": 3,
+      "modelAuthors": [
+        "Muse Spark 1.3"
+      ],
+      "promptMatchesCurrentSavedCase": true,
+      "initialPromptSha256": "44bdc358aaa908faca86f73d7d02148f198ebeec25b036dc7aa894c939b68bf6",
+      "matchingCaseId": "T9-C2"
+    }
+  ],
+  "redactions": [
+    {
+      "chatId": 42,
+      "messageSequence": 32,
+      "reason": "This tool output included sample incident and report rows outside the controlled April case scope. The output was redacted to avoid sharing unrelated operational records."
+    },
+    {
+      "chatId": 42,
+      "messageSequence": 47,
+      "reason": "This tool output included broad verification/log rows outside the controlled case scope. The output was redacted to avoid sharing unrelated operational records."
+    },
+    {
+      "chatId": 42,
+      "messageSequence": 60,
+      "reason": "This tool output included a table-wide sample of incident action stages. The output was redacted to avoid sharing unrelated operational records."
+    },
+    {
+      "chatId": 44,
+      "messageSequence": 26,
+      "reason": "This tool output included a broad maintenance-asset master listing. The relevant asset rows are in database/current-effective-configuration.json."
+    },
+    {
+      "chatId": 45,
+      "messageSequence": 29,
+      "reason": "This tool output included broad SPM/SLA source rows outside the case-specific speed indicators. The filtered current rules are in database/current-effective-configuration.json."
+    },
+    {
+      "chatId": 62,
+      "messageSequence": 19,
+      "reason": "This tool output included all effective SPM rows for a section. The filtered current speed rules are in database/current-effective-configuration.json."
+    },
+    {
+      "chatId": 49,
+      "messageSequence": 16,
+      "reason": "This tool output included broad SPM/SLA rows. The filtered current speed rules are in database/current-effective-configuration.json."
+    },
+    {
+      "chatId": 61,
+      "messageSequence": 28,
+      "reason": "This tool output included all effective SPM rows for a section. The filtered current speed rules are in database/current-effective-configuration.json."
+    }
+  ]
+}

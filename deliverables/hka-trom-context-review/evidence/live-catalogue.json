@@ -1,0 +1,8859 @@
+{
+  "retrieved_at": "2026-11-04T21:24:34.005314+00:00",
+  "endpoint": "http://127.0.0.1:8091/api/agentic-bi/",
+  "entities": [
+    {
+      "name": "absence_attachments",
+      "label": "Absence Attachments",
+      "description": ""
+    },
+    {
+      "name": "absence_categories",
+      "label": "Absence Categories",
+      "description": ""
+    },
+    {
+      "name": "absence_evidence_categories",
+      "label": "Absence Evidence Categories",
+      "description": ""
+    },
+    {
+      "name": "absences",
+      "label": "Absences",
+      "description": ""
+    },
+    {
+      "name": "accident_asset_damage_attachments",
+      "label": "Accident Asset Damage Attachments",
+      "description": ""
+    },
+    {
+      "name": "accident_asset_damages",
+      "label": "Accident Asset Damages",
+      "description": ""
+    },
+    {
+      "name": "accident_attachments",
+      "label": "Accident Attachments",
+      "description": ""
+    },
+    {
+      "name": "accident_reports",
+      "label": "Accident Reports",
+      "description": ""
+    },
+    {
+      "name": "accident_service_vehicle_arrived",
+      "label": "Accident Service Vehicle Arrived",
+      "description": ""
+    },
+    {
+      "name": "accident_teams",
+      "label": "Accident Teams",
+      "description": ""
+    },
+    {
+      "name": "accident_towings",
+      "label": "Accident Towings",
+      "description": ""
+    },
+    {
+      "name": "accident_vehicle_involved",
+      "label": "Accident Vehicle Involved",
+      "description": ""
+    },
+    {
+      "name": "accident_victims",
+      "label": "Accident Victims",
+      "description": ""
+    },
+    {
+      "name": "activity_period_types",
+      "label": "Activity Period Types",
+      "description": ""
+    },
+    {
+      "name": "annual_leaves",
+      "label": "Annual Leaves",
+      "description": ""
+    },
+    {
+      "name": "app_configs",
+      "label": "App Configs",
+      "description": ""
+    },
+    {
+      "name": "app_versions",
+      "label": "App Versions",
+      "description": ""
+    },
+    {
+      "name": "applicant_status_codes",
+      "label": "Applicant Status Codes",
+      "description": ""
+    },
+    {
+      "name": "area_types",
+      "label": "Area Types",
+      "description": ""
+    },
+    {
+      "name": "asset_inspection_attachments",
+      "label": "Asset Inspection Attachments",
+      "description": ""
+    },
+    {
+      "name": "asset_inspections",
+      "label": "Asset Inspections",
+      "description": ""
+    },
+    {
+      "name": "asset_lane",
+      "label": "Asset Lane",
+      "description": ""
+    },
+    {
+      "name": "asset_locations",
+      "label": "Asset Locations",
+      "description": ""
+    },
+    {
+      "name": "asset_types",
+      "label": "Asset Types",
+      "description": ""
+    },
+    {
+      "name": "assets",
+      "label": "Assets",
+      "description": ""
+    },
+    {
+      "name": "attandance_recap",
+      "label": "Attandance Recap",
+      "description": ""
+    },
+    {
+      "name": "attendance_recap",
+      "label": "Attendance Recap",
+      "description": ""
+    },
+    {
+      "name": "backup_raw_presences",
+      "label": "Backup Raw Presences",
+      "description": ""
+    },
+    {
+      "name": "bank",
+      "label": "Bank",
+      "description": ""
+    },
+    {
+      "name": "banners",
+      "label": "Banners",
+      "description": ""
+    },
+    {
+      "name": "bbm_types",
+      "label": "Bbm Types",
+      "description": ""
+    },
+    {
+      "name": "broadcast_categories",
+      "label": "Broadcast Categories",
+      "description": ""
+    },
+    {
+      "name": "cities",
+      "label": "Cities",
+      "description": ""
+    },
+    {
+      "name": "config_annual_leave",
+      "label": "Config Annual Leave",
+      "description": ""
+    },
+    {
+      "name": "config_handover_forms",
+      "label": "Config Handover Forms",
+      "description": ""
+    },
+    {
+      "name": "config_handover_item_categories",
+      "label": "Config Handover Item Categories",
+      "description": ""
+    },
+    {
+      "name": "config_inspection_elements",
+      "label": "Config Inspection Elements",
+      "description": ""
+    },
+    {
+      "name": "config_inspection_forms",
+      "label": "Config Inspection Forms",
+      "description": ""
+    },
+    {
+      "name": "config_inspection_items",
+      "label": "Config Inspection Items",
+      "description": ""
+    },
+    {
+      "name": "config_lattol_handover",
+      "label": "Config Lattol Handover",
+      "description": ""
+    },
+    {
+      "name": "config_presence",
+      "label": "Config Presence",
+      "description": ""
+    },
+    {
+      "name": "config_questioner_choice_label",
+      "label": "Config Questioner Choice Label",
+      "description": ""
+    },
+    {
+      "name": "config_questioner_items",
+      "label": "Config Questioner Items",
+      "description": ""
+    },
+    {
+      "name": "config_questioners",
+      "label": "Config Questioners",
+      "description": ""
+    },
+    {
+      "name": "config_radius_presence",
+      "label": "Config Radius Presence",
+      "description": ""
+    },
+    {
+      "name": "config_spm_manual_forms",
+      "label": "Config Spm Manual Forms",
+      "description": ""
+    },
+    {
+      "name": "config_spm_manual_items",
+      "label": "Config Spm Manual Items",
+      "description": ""
+    },
+    {
+      "name": "config_verificators",
+      "label": "Config Verificators",
+      "description": ""
+    },
+    {
+      "name": "configs",
+      "label": "Configs",
+      "description": ""
+    },
+    {
+      "name": "contracts",
+      "label": "Contracts",
+      "description": ""
+    },
+    {
+      "name": "cost_plans",
+      "label": "Cost Plans",
+      "description": ""
+    },
+    {
+      "name": "damage_categories",
+      "label": "Damage Categories",
+      "description": ""
+    },
+    {
+      "name": "damage_sources",
+      "label": "Damage Sources",
+      "description": ""
+    },
+    {
+      "name": "default_employee_salary",
+      "label": "Default Employee Salary",
+      "description": ""
+    },
+    {
+      "name": "employee_certifications",
+      "label": "Employee Certifications",
+      "description": ""
+    },
+    {
+      "name": "employee_diseases",
+      "label": "Employee Diseases",
+      "description": ""
+    },
+    {
+      "name": "employee_documents",
+      "label": "Employee Documents",
+      "description": ""
+    },
+    {
+      "name": "employee_educations",
+      "label": "Employee Educations",
+      "description": ""
+    },
+    {
+      "name": "employee_emergency_contacts",
+      "label": "Employee Emergency Contacts",
+      "description": ""
+    },
+    {
+      "name": "employee_salary",
+      "label": "Employee Salary",
+      "description": ""
+    },
+    {
+      "name": "employee_salary_components",
+      "label": "Employee Salary Components",
+      "description": ""
+    },
+    {
+      "name": "employee_skills",
+      "label": "Employee Skills",
+      "description": ""
+    },
+    {
+      "name": "employees",
+      "label": "Employees",
+      "description": ""
+    },
+    {
+      "name": "employment_status",
+      "label": "Employment Status",
+      "description": ""
+    },
+    {
+      "name": "equipment_availability",
+      "label": "Equipment Availability",
+      "description": ""
+    },
+    {
+      "name": "expense_categories",
+      "label": "Expense Categories",
+      "description": ""
+    },
+    {
+      "name": "expenses",
+      "label": "Expenses",
+      "description": ""
+    },
+    {
+      "name": "face_registrations",
+      "label": "Face Registrations",
+      "description": ""
+    },
+    {
+      "name": "failed_jobs",
+      "label": "Failed Jobs",
+      "description": ""
+    },
+    {
+      "name": "fuel_distributors",
+      "label": "Fuel Distributors",
+      "description": ""
+    },
+    {
+      "name": "fuel_types",
+      "label": "Fuel Types",
+      "description": ""
+    },
+    {
+      "name": "fuel_voucher_attachments",
+      "label": "Fuel Voucher Attachments",
+      "description": ""
+    },
+    {
+      "name": "fuel_voucher_status_codes",
+      "label": "Fuel Voucher Status Codes",
+      "description": ""
+    },
+    {
+      "name": "fuel_vouchers",
+      "label": "Fuel Vouchers",
+      "description": ""
+    },
+    {
+      "name": "gas_station_deposits",
+      "label": "Gas Station Deposits",
+      "description": ""
+    },
+    {
+      "name": "gas_station_fuel_types",
+      "label": "Gas Station Fuel Types",
+      "description": ""
+    },
+    {
+      "name": "gas_station_owners",
+      "label": "Gas Station Owners",
+      "description": ""
+    },
+    {
+      "name": "gas_stations",
+      "label": "Gas Stations",
+      "description": ""
+    },
+    {
+      "name": "general_transaction_attachments",
+      "label": "General Transaction Attachments",
+      "description": ""
+    },
+    {
+      "name": "general_transaction_progress",
+      "label": "General Transaction Progress",
+      "description": ""
+    },
+    {
+      "name": "general_transactions",
+      "label": "General Transactions",
+      "description": ""
+    },
+    {
+      "name": "handover_categories",
+      "label": "Handover Categories",
+      "description": ""
+    },
+    {
+      "name": "handover_items",
+      "label": "Handover Items",
+      "description": ""
+    },
+    {
+      "name": "handover_transactions",
+      "label": "Handover Transactions",
+      "description": ""
+    },
+    {
+      "name": "highway_patrol_attachments",
+      "label": "Highway Patrol Attachments",
+      "description": ""
+    },
+    {
+      "name": "highway_patrol_personel",
+      "label": "Highway Patrol Personel",
+      "description": ""
+    },
+    {
+      "name": "highway_patrols",
+      "label": "Highway Patrols",
+      "description": ""
+    },
+    {
+      "name": "history_employee_section",
+      "label": "History Employee Section",
+      "description": ""
+    },
+    {
+      "name": "history_verifications",
+      "label": "History Verifications",
+      "description": ""
+    },
+    {
+      "name": "hse_permit_attachments",
+      "label": "Hse Permit Attachments",
+      "description": ""
+    },
+    {
+      "name": "hse_permit_attribute_categories",
+      "label": "Hse Permit Attribute Categories",
+      "description": ""
+    },
+    {
+      "name": "hse_permit_attributes",
+      "label": "Hse Permit Attributes",
+      "description": ""
+    },
+    {
+      "name": "hse_permits",
+      "label": "Hse Permits",
+      "description": ""
+    },
+    {
+      "name": "hse_transaction_attachments",
+      "label": "Hse Transaction Attachments",
+      "description": ""
+    },
+    {
+      "name": "hse_transaction_progress",
+      "label": "Hse Transaction Progress",
+      "description": ""
+    },
+    {
+      "name": "hse_transactions",
+      "label": "Hse Transactions",
+      "description": ""
+    },
+    {
+      "name": "incident_action_attachments",
+      "label": "Incident Action Attachments",
+      "description": ""
+    },
+    {
+      "name": "incident_action_progress",
+      "label": "Incident Action Progress",
+      "description": ""
+    },
+    {
+      "name": "incident_actions",
+      "label": "Incident Actions",
+      "description": ""
+    },
+    {
+      "name": "incident_attachments",
+      "label": "Incident Attachments",
+      "description": ""
+    },
+    {
+      "name": "incidents",
+      "label": "Incidents",
+      "description": ""
+    },
+    {
+      "name": "index_performance_adjustments",
+      "label": "Index Performance Adjustments",
+      "description": ""
+    },
+    {
+      "name": "inspection_categories",
+      "label": "Inspection Categories",
+      "description": ""
+    },
+    {
+      "name": "inspection_damages",
+      "label": "Inspection Damages",
+      "description": ""
+    },
+    {
+      "name": "inspection_elements",
+      "label": "Inspection Elements",
+      "description": ""
+    },
+    {
+      "name": "inspection_form_areas",
+      "label": "Inspection Form Areas",
+      "description": ""
+    },
+    {
+      "name": "inspection_item_progress",
+      "label": "Inspection Item Progress",
+      "description": ""
+    },
+    {
+      "name": "inspection_item_progress_attachments",
+      "label": "Inspection Item Progress Attachments",
+      "description": ""
+    },
+    {
+      "name": "inspection_item_progress_history",
+      "label": "Inspection Item Progress History",
+      "description": ""
+    },
+    {
+      "name": "inspection_item_repair_history",
+      "label": "Inspection Item Repair History",
+      "description": ""
+    },
+    {
+      "name": "inspection_items",
+      "label": "Inspection Items",
+      "description": ""
+    },
+    {
+      "name": "inspection_repair_progress",
+      "label": "Inspection Repair Progress",
+      "description": ""
+    },
+    {
+      "name": "inspection_repair_progress_attachments",
+      "label": "Inspection Repair Progress Attachments",
+      "description": ""
+    },
+    {
+      "name": "inspection_schedule_assets",
+      "label": "Inspection Schedule Assets",
+      "description": ""
+    },
+    {
+      "name": "inspection_schedule_forms",
+      "label": "Inspection Schedule Forms",
+      "description": ""
+    },
+    {
+      "name": "inspection_schedule_personel",
+      "label": "Inspection Schedule Personel",
+      "description": ""
+    },
+    {
+      "name": "inspection_schedules",
+      "label": "Inspection Schedules",
+      "description": ""
+    },
+    {
+      "name": "inspections",
+      "label": "Inspections",
+      "description": ""
+    },
+    {
+      "name": "issue_categories",
+      "label": "Issue Categories",
+      "description": ""
+    },
+    {
+      "name": "job_application_additional_questions",
+      "label": "Job Application Additional Questions",
+      "description": ""
+    },
+    {
+      "name": "job_application_documents",
+      "label": "Job Application Documents",
+      "description": ""
+    },
+    {
+      "name": "job_applications",
+      "label": "Job Applications",
+      "description": ""
+    },
+    {
+      "name": "job_positions",
+      "label": "Job Positions",
+      "description": ""
+    },
+    {
+      "name": "job_vacancies",
+      "label": "Job Vacancies",
+      "description": ""
+    },
+    {
+      "name": "job_vacancy_additional_question_options",
+      "label": "Job Vacancy Additional Question Options",
+      "description": ""
+    },
+    {
+      "name": "job_vacancy_additional_questions",
+      "label": "Job Vacancy Additional Questions",
+      "description": ""
+    },
+    {
+      "name": "job_vacancy_documents",
+      "label": "Job Vacancy Documents",
+      "description": ""
+    },
+    {
+      "name": "job_vacancy_positions",
+      "label": "Job Vacancy Positions",
+      "description": ""
+    },
+    {
+      "name": "jobs",
+      "label": "Jobs",
+      "description": ""
+    },
+    {
+      "name": "lattol_handover_items",
+      "label": "Lattol Handover Items",
+      "description": ""
+    },
+    {
+      "name": "lattol_handovers",
+      "label": "Lattol Handovers",
+      "description": ""
+    },
+    {
+      "name": "leaderboard_parameters",
+      "label": "Leaderboard Parameters",
+      "description": ""
+    },
+    {
+      "name": "leave_categories",
+      "label": "Leave Categories",
+      "description": ""
+    },
+    {
+      "name": "leave_evidence_categories",
+      "label": "Leave Evidence Categories",
+      "description": ""
+    },
+    {
+      "name": "library",
+      "label": "Library",
+      "description": ""
+    },
+    {
+      "name": "log_activity",
+      "label": "Log Activity",
+      "description": ""
+    },
+    {
+      "name": "log_deposits",
+      "label": "Log Deposits",
+      "description": ""
+    },
+    {
+      "name": "log_failed_login",
+      "label": "Log Failed Login",
+      "description": ""
+    },
+    {
+      "name": "log_fuel_vouchers",
+      "label": "Log Fuel Vouchers",
+      "description": ""
+    },
+    {
+      "name": "log_inspection_damage_repair",
+      "label": "Log Inspection Damage Repair",
+      "description": ""
+    },
+    {
+      "name": "log_login",
+      "label": "Log Login",
+      "description": ""
+    },
+    {
+      "name": "log_reports",
+      "label": "Log Reports",
+      "description": ""
+    },
+    {
+      "name": "log_routine_maintenances",
+      "label": "Log Routine Maintenances",
+      "description": ""
+    },
+    {
+      "name": "log_verifications",
+      "label": "Log Verifications",
+      "description": ""
+    },
+    {
+      "name": "m_accident_attribute_categories",
+      "label": "M Accident Attribute Categories",
+      "description": ""
+    },
+    {
+      "name": "m_accident_attributes",
+      "label": "M Accident Attributes",
+      "description": ""
+    },
+    {
+      "name": "m_accident_victim_attribute_categories",
+      "label": "M Accident Victim Attribute Categories",
+      "description": ""
+    },
+    {
+      "name": "m_accident_victim_attributes",
+      "label": "M Accident Victim Attributes",
+      "description": ""
+    },
+    {
+      "name": "m_activities",
+      "label": "M Activities",
+      "description": ""
+    },
+    {
+      "name": "m_diseases",
+      "label": "M Diseases",
+      "description": ""
+    },
+    {
+      "name": "m_educations",
+      "label": "M Educations",
+      "description": ""
+    },
+    {
+      "name": "m_employee_documents",
+      "label": "M Employee Documents",
+      "description": ""
+    },
+    {
+      "name": "m_form_groups",
+      "label": "M Form Groups",
+      "description": ""
+    },
+    {
+      "name": "m_inventories",
+      "label": "M Inventories",
+      "description": ""
+    },
+    {
+      "name": "m_payment_methods",
+      "label": "M Payment Methods",
+      "description": ""
+    },
+    {
+      "name": "m_poc",
+      "label": "M Poc",
+      "description": ""
+    },
+    {
+      "name": "m_section_groups",
+      "label": "M Section Groups",
+      "description": ""
+    },
+    {
+      "name": "m_section_rantings",
+      "label": "M Section Rantings",
+      "description": ""
+    },
+    {
+      "name": "m_section_shifts",
+      "label": "M Section Shifts",
+      "description": ""
+    },
+    {
+      "name": "m_service_substances",
+      "label": "M Service Substances",
+      "description": ""
+    },
+    {
+      "name": "m_service_vehicles",
+      "label": "M Service Vehicles",
+      "description": ""
+    },
+    {
+      "name": "m_skills",
+      "label": "M Skills",
+      "description": ""
+    },
+    {
+      "name": "m_sla",
+      "label": "M Sla",
+      "description": ""
+    },
+    {
+      "name": "m_spm",
+      "label": "M Spm",
+      "description": ""
+    },
+    {
+      "name": "m_spm_operators",
+      "label": "M Spm Operators",
+      "description": ""
+    },
+    {
+      "name": "m_spm_units",
+      "label": "M Spm Units",
+      "description": ""
+    },
+    {
+      "name": "m_uoms",
+      "label": "M Uoms",
+      "description": ""
+    },
+    {
+      "name": "m_vehicle_class",
+      "label": "M Vehicle Class",
+      "description": ""
+    },
+    {
+      "name": "m_vehicle_ownership_types",
+      "label": "M Vehicle Ownership Types",
+      "description": ""
+    },
+    {
+      "name": "maintenance_activities",
+      "label": "Maintenance Activities",
+      "description": ""
+    },
+    {
+      "name": "maintenance_asset_types",
+      "label": "Maintenance Asset Types",
+      "description": ""
+    },
+    {
+      "name": "maintenance_locations",
+      "label": "Maintenance Locations",
+      "description": ""
+    },
+    {
+      "name": "maintenance_schedule_assets",
+      "label": "Maintenance Schedule Assets",
+      "description": ""
+    },
+    {
+      "name": "maintenance_schedule_personel",
+      "label": "Maintenance Schedule Personel",
+      "description": ""
+    },
+    {
+      "name": "maintenance_schedules",
+      "label": "Maintenance Schedules",
+      "description": ""
+    },
+    {
+      "name": "mapping_activity_area",
+      "label": "Mapping Activity Area",
+      "description": ""
+    },
+    {
+      "name": "mapping_asset_maintenance_activity",
+      "label": "Mapping Asset Maintenance Activity",
+      "description": ""
+    },
+    {
+      "name": "mapping_asset_type_damage_category",
+      "label": "Mapping Asset Type Damage Category",
+      "description": ""
+    },
+    {
+      "name": "mapping_asset_type_repair_type",
+      "label": "Mapping Asset Type Repair Type",
+      "description": ""
+    },
+    {
+      "name": "mapping_contract_activity",
+      "label": "Mapping Contract Activity",
+      "description": ""
+    },
+    {
+      "name": "mapping_contract_poc",
+      "label": "Mapping Contract Poc",
+      "description": ""
+    },
+    {
+      "name": "mapping_job_positions_activities",
+      "label": "Mapping Job Positions Activities",
+      "description": ""
+    },
+    {
+      "name": "mapping_library_job_positions",
+      "label": "Mapping Library Job Positions",
+      "description": ""
+    },
+    {
+      "name": "mapping_roles_permissions",
+      "label": "Mapping Roles Permissions",
+      "description": ""
+    },
+    {
+      "name": "mapping_section_salary_components",
+      "label": "Mapping Section Salary Components",
+      "description": ""
+    },
+    {
+      "name": "mapping_section_vehicle",
+      "label": "Mapping Section Vehicle",
+      "description": ""
+    },
+    {
+      "name": "mapping_sections_maintenance_assets",
+      "label": "Mapping Sections Maintenance Assets",
+      "description": ""
+    },
+    {
+      "name": "mapping_users_roles",
+      "label": "Mapping Users Roles",
+      "description": ""
+    },
+    {
+      "name": "migrations",
+      "label": "Migrations",
+      "description": ""
+    },
+    {
+      "name": "minor_asset_damages",
+      "label": "Minor Asset Damages",
+      "description": ""
+    },
+    {
+      "name": "monitoring_transaction_details",
+      "label": "Monitoring Transaction Details",
+      "description": ""
+    },
+    {
+      "name": "monitoring_transactions",
+      "label": "Monitoring Transactions",
+      "description": ""
+    },
+    {
+      "name": "notification_types",
+      "label": "Notification Types",
+      "description": ""
+    },
+    {
+      "name": "notifications",
+      "label": "Notifications",
+      "description": ""
+    },
+    {
+      "name": "notifications2",
+      "label": "Notifications2",
+      "description": ""
+    },
+    {
+      "name": "officer_types",
+      "label": "Officer Types",
+      "description": ""
+    },
+    {
+      "name": "overtimes",
+      "label": "Overtimes",
+      "description": ""
+    },
+    {
+      "name": "owner_categories",
+      "label": "Owner Categories",
+      "description": ""
+    },
+    {
+      "name": "password_histories",
+      "label": "Password Histories",
+      "description": ""
+    },
+    {
+      "name": "password_resets",
+      "label": "Password Resets",
+      "description": ""
+    },
+    {
+      "name": "permissions",
+      "label": "Permissions",
+      "description": ""
+    },
+    {
+      "name": "personal_access_tokens",
+      "label": "Personal Access Tokens",
+      "description": ""
+    },
+    {
+      "name": "presences",
+      "label": "Presences",
+      "description": ""
+    },
+    {
+      "name": "provinces",
+      "label": "Provinces",
+      "description": ""
+    },
+    {
+      "name": "public_assets",
+      "label": "Public Assets",
+      "description": ""
+    },
+    {
+      "name": "questioner_items",
+      "label": "Questioner Items",
+      "description": ""
+    },
+    {
+      "name": "questioners",
+      "label": "Questioners",
+      "description": ""
+    },
+    {
+      "name": "raw_presences",
+      "label": "Raw Presences",
+      "description": ""
+    },
+    {
+      "name": "repair_types",
+      "label": "Repair Types",
+      "description": ""
+    },
+    {
+      "name": "report_groups",
+      "label": "Report Groups",
+      "description": ""
+    },
+    {
+      "name": "report_types",
+      "label": "Report Types",
+      "description": ""
+    },
+    {
+      "name": "role_groups",
+      "label": "Role Groups",
+      "description": ""
+    },
+    {
+      "name": "roles",
+      "label": "Roles",
+      "description": ""
+    },
+    {
+      "name": "rollpaper_mutation",
+      "label": "Rollpaper Mutation",
+      "description": ""
+    },
+    {
+      "name": "rollpaper_usages",
+      "label": "Rollpaper Usages",
+      "description": ""
+    },
+    {
+      "name": "routine_maintenance_attachments",
+      "label": "Routine Maintenance Attachments",
+      "description": ""
+    },
+    {
+      "name": "routine_maintenance_history",
+      "label": "Routine Maintenance History",
+      "description": ""
+    },
+    {
+      "name": "routine_maintenance_progress",
+      "label": "Routine Maintenance Progress",
+      "description": ""
+    },
+    {
+      "name": "routine_maintenances",
+      "label": "Routine Maintenances",
+      "description": ""
+    },
+    {
+      "name": "salary_components",
+      "label": "Salary Components",
+      "description": ""
+    },
+    {
+      "name": "section_broadcast_attachments",
+      "label": "Section Broadcast Attachments",
+      "description": ""
+    },
+    {
+      "name": "section_broadcast_job_positions",
+      "label": "Section Broadcast Job Positions",
+      "description": ""
+    },
+    {
+      "name": "section_broadcast_push_notifs",
+      "label": "Section Broadcast Push Notifs",
+      "description": ""
+    },
+    {
+      "name": "section_broadcasts",
+      "label": "Section Broadcasts",
+      "description": ""
+    },
+    {
+      "name": "section_payroll",
+      "label": "Section Payroll",
+      "description": ""
+    },
+    {
+      "name": "section_types",
+      "label": "Section Types",
+      "description": ""
+    },
+    {
+      "name": "shift_changes",
+      "label": "Shift Changes",
+      "description": ""
+    },
+    {
+      "name": "shift_routine_activity",
+      "label": "Shift Routine Activity",
+      "description": ""
+    },
+    {
+      "name": "shift_schedule_activity",
+      "label": "Shift Schedule Activity",
+      "description": ""
+    },
+    {
+      "name": "shift_schedule_personel",
+      "label": "Shift Schedule Personel",
+      "description": ""
+    },
+    {
+      "name": "shift_schedules",
+      "label": "Shift Schedules",
+      "description": ""
+    },
+    {
+      "name": "spm_manual_period_types",
+      "label": "Spm Manual Period Types",
+      "description": ""
+    },
+    {
+      "name": "spm_sla",
+      "label": "Spm Sla",
+      "description": ""
+    },
+    {
+      "name": "spm_sla_manual",
+      "label": "Spm Sla Manual",
+      "description": ""
+    },
+    {
+      "name": "tbl_attendance_execution",
+      "label": "Tbl Attendance Execution",
+      "description": ""
+    },
+    {
+      "name": "toll_gates",
+      "label": "Toll Gates",
+      "description": ""
+    },
+    {
+      "name": "toll_owners",
+      "label": "Toll Owners",
+      "description": ""
+    },
+    {
+      "name": "toll_rest_areas",
+      "label": "Toll Rest Areas",
+      "description": ""
+    },
+    {
+      "name": "toll_revenues",
+      "label": "Toll Revenues",
+      "description": ""
+    },
+    {
+      "name": "toll_sections",
+      "label": "Toll Sections",
+      "description": ""
+    },
+    {
+      "name": "toll_traffic_volumes",
+      "label": "Toll Traffic Volumes",
+      "description": ""
+    },
+    {
+      "name": "toll_traffic_weighted_volumes",
+      "label": "Toll Traffic Weighted Volumes",
+      "description": ""
+    },
+    {
+      "name": "toll_volume_revenue",
+      "label": "Toll Volume Revenue",
+      "description": ""
+    },
+    {
+      "name": "user_chat_ids",
+      "label": "User Chat Ids",
+      "description": ""
+    },
+    {
+      "name": "user_devices",
+      "label": "User Devices",
+      "description": ""
+    },
+    {
+      "name": "user_status_code",
+      "label": "User Status Code",
+      "description": ""
+    },
+    {
+      "name": "user_verify_emails",
+      "label": "User Verify Emails",
+      "description": ""
+    },
+    {
+      "name": "users",
+      "label": "Users",
+      "description": ""
+    },
+    {
+      "name": "vehicle_brands",
+      "label": "Vehicle Brands",
+      "description": ""
+    },
+    {
+      "name": "vehicle_categories",
+      "label": "Vehicle Categories",
+      "description": ""
+    },
+    {
+      "name": "vehicle_issue_attachments",
+      "label": "Vehicle Issue Attachments",
+      "description": ""
+    },
+    {
+      "name": "vehicle_issue_categories",
+      "label": "Vehicle Issue Categories",
+      "description": ""
+    },
+    {
+      "name": "vehicle_issues",
+      "label": "Vehicle Issues",
+      "description": ""
+    },
+    {
+      "name": "vehicle_types",
+      "label": "Vehicle Types",
+      "description": ""
+    },
+    {
+      "name": "vehicles",
+      "label": "Vehicles",
+      "description": ""
+    },
+    {
+      "name": "view_accident_covers",
+      "label": "View Accident Covers",
+      "description": ""
+    },
+    {
+      "name": "view_general_transaction_covers",
+      "label": "View General Transaction Covers",
+      "description": ""
+    },
+    {
+      "name": "view_highway_patrol_covers",
+      "label": "View Highway Patrol Covers",
+      "description": ""
+    },
+    {
+      "name": "view_hse_transaction_covers",
+      "label": "View Hse Transaction Covers",
+      "description": ""
+    },
+    {
+      "name": "view_incident_covers",
+      "label": "View Incident Covers",
+      "description": ""
+    },
+    {
+      "name": "view_reminder_actions",
+      "label": "View Reminder Actions",
+      "description": ""
+    },
+    {
+      "name": "view_section_active_activities",
+      "label": "View Section Active Activities",
+      "description": ""
+    },
+    {
+      "name": "view_section_active_contracts",
+      "label": "View Section Active Contracts",
+      "description": ""
+    },
+    {
+      "name": "view_section_activity_based_on_contracts",
+      "label": "View Section Activity Based On Contracts",
+      "description": ""
+    },
+    {
+      "name": "view_section_spm_sla",
+      "label": "View Section Spm Sla",
+      "description": ""
+    },
+    {
+      "name": "work_leaves",
+      "label": "Work Leaves",
+      "description": ""
+    }
+  ],
+  "descriptions": {
+    "monitoring_transactions": {
+      "name": "monitoring_transactions",
+      "label": "Monitoring Transactions",
+      "description": "",
+      "primary_key": [
+        "id"
+      ],
+      "fields": [
+        {
+          "name": "id",
+          "type": "bigint",
+          "nullable": false,
+          "description": ""
+        },
+        {
+          "name": "section_id",
+          "type": "bigint",
+          "nullable": false,
+          "description": ""
+        },
+        {
+          "name": "gate_id",
+          "type": "bigint",
+          "nullable": false,
+          "description": ""
+        },
+        {
+          "name": "date",
+          "type": "date",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "schedule_id",
+          "type": "bigint",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "activity_id",
+          "type": "bigint",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "description",
+          "type": "text",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "officer_id",
+          "type": "bigint",
+          "nullable": false,
+          "description": ""
+        },
+        {
+          "name": "total_booth",
+          "type": "integer",
+          "nullable": false,
+          "description": ""
+        },
+        {
+          "name": "total_longbooth",
+          "type": "integer",
+          "nullable": false,
+          "description": ""
+        },
+        {
+          "name": "status_code",
+          "type": "character varying(255)",
+          "nullable": true,
+          "description": "on_verification/verified"
+        },
+        {
+          "name": "verified_by",
+          "type": "bigint",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "verified_at",
+          "type": "timestamp(0) with time zone",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "verified_description",
+          "type": "text",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "created_by",
+          "type": "bigint",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "updated_by",
+          "type": "bigint",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "created_at",
+          "type": "timestamp(0) with time zone",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "updated_at",
+          "type": "timestamp(0) with time zone",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "ranting_id",
+          "type": "bigint",
+          "nullable": true,
+          "description": ""
+        }
+      ],
+      "relationships": [
+        {
+          "name": "monitoring_transactions_activity_id_foreign",
+          "fields": [
+            "activity_id"
+          ],
+          "referenced_entity": "m_activities",
+          "referenced_fields": [
+            "id"
+          ]
+        },
+        {
+          "name": "monitoring_transactions_created_by_foreign",
+          "fields": [
+            "created_by"
+          ],
+          "referenced_entity": "users",
+          "referenced_fields": [
+            "id"
+          ]
+        },
+        {
+          "name": "monitoring_transactions_gate_id_foreign",
+          "fields": [
+            "gate_id"
+          ],
+          "referenced_entity": "toll_gates",
+          "referenced_fields": [
+            "id"
+          ]
+        },
+        {
+          "name": "monitoring_transactions_officer_id_foreign",
+          "fields": [
+            "officer_id"
+          ],
+          "referenced_entity": "employees",
+          "referenced_fields": [
+            "id"
+          ]
+        },
+        {
+          "name": "monitoring_transactions_ranting_id_foreign",
+          "fields": [
+            "ranting_id"
+          ],
+          "referenced_entity": "m_section_rantings",
+          "referenced_fields": [
+            "id"
+          ]
+        },
+        {
+          "name": "monitoring_transactions_schedule_id_foreign",
+          "fields": [
+            "schedule_id"
+          ],
+          "referenced_entity": "shift_schedules",
+          "referenced_fields": [
+            "id"
+          ]
+        },
+        {
+          "name": "monitoring_transactions_section_id_foreign",
+          "fields": [
+            "section_id"
+          ],
+          "referenced_entity": "toll_sections",
+          "referenced_fields": [
+            "id"
+          ]
+        },
+        {
+          "name": "monitoring_transactions_updated_by_foreign",
+          "fields": [
+            "updated_by"
+          ],
+          "referenced_entity": "users",
+          "referenced_fields": [
+            "id"
+          ]
+        },
+        {
+          "name": "monitoring_transactions_verified_by_foreign",
+          "fields": [
+            "verified_by"
+          ],
+          "referenced_entity": "users",
+          "referenced_fields": [
+            "id"
+          ]
+        }
+      ],
+      "allowed_filters": {
+        "id": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "section_id": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "gate_id": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "date": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "schedule_id": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "activity_id": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "description": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "contains",
+          "starts_with",
+          "ends_with",
+          "is_null",
+          "is_not_null"
+        ],
+        "officer_id": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "total_booth": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "total_longbooth": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "status_code": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "contains",
+          "starts_with",
+          "ends_with",
+          "is_null",
+          "is_not_null"
+        ],
+        "verified_by": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "verified_at": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "verified_description": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "contains",
+          "starts_with",
+          "ends_with",
+          "is_null",
+          "is_not_null"
+        ],
+        "created_by": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "updated_by": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "created_at": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "updated_at": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "ranting_id": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ]
+      }
+    },
+    "monitoring_transaction_details": {
+      "name": "monitoring_transaction_details",
+      "label": "Monitoring Transaction Details",
+      "description": "",
+      "primary_key": [
+        "id"
+      ],
+      "fields": [
+        {
+          "name": "id",
+          "type": "bigint",
+          "nullable": false,
+          "description": ""
+        },
+        {
+          "name": "transaction_id",
+          "type": "bigint",
+          "nullable": false,
+          "description": ""
+        },
+        {
+          "name": "type",
+          "type": "character varying(255)",
+          "nullable": false,
+          "description": "booth/longbooth"
+        },
+        {
+          "name": "booth_number",
+          "type": "integer",
+          "nullable": false,
+          "description": ""
+        },
+        {
+          "name": "sample_number",
+          "type": "integer",
+          "nullable": false,
+          "description": ""
+        },
+        {
+          "name": "vehicle_queue",
+          "type": "integer",
+          "nullable": true,
+          "description": "antrian"
+        },
+        {
+          "name": "transaction_duration",
+          "type": "double precision",
+          "nullable": true,
+          "description": "lama transaksi, in second"
+        },
+        {
+          "name": "vehicle_type",
+          "type": "character varying(255)",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "vehicle_class_id",
+          "type": "bigint",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "payment_id",
+          "type": "bigint",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "description",
+          "type": "text",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "created_by",
+          "type": "bigint",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "updated_by",
+          "type": "bigint",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "created_at",
+          "type": "timestamp(0) with time zone",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "updated_at",
+          "type": "timestamp(0) with time zone",
+          "nullable": true,
+          "description": ""
+        }
+      ],
+      "relationships": [
+        {
+          "name": "monitoring_transaction_details_created_by_foreign",
+          "fields": [
+            "created_by"
+          ],
+          "referenced_entity": "users",
+          "referenced_fields": [
+            "id"
+          ]
+        },
+        {
+          "name": "monitoring_transaction_details_transaction_id_foreign",
+          "fields": [
+            "transaction_id"
+          ],
+          "referenced_entity": "monitoring_transactions",
+          "referenced_fields": [
+            "id"
+          ]
+        },
+        {
+          "name": "monitoring_transaction_details_updated_by_foreign",
+          "fields": [
+            "updated_by"
+          ],
+          "referenced_entity": "users",
+          "referenced_fields": [
+            "id"
+          ]
+        }
+      ],
+      "allowed_filters": {
+        "id": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "transaction_id": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "type": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "contains",
+          "starts_with",
+          "ends_with",
+          "is_null",
+          "is_not_null"
+        ],
+        "booth_number": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "sample_number": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "vehicle_queue": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "transaction_duration": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "vehicle_type": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "contains",
+          "starts_with",
+          "ends_with",
+          "is_null",
+          "is_not_null"
+        ],
+        "vehicle_class_id": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "payment_id": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "description": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "contains",
+          "starts_with",
+          "ends_with",
+          "is_null",
+          "is_not_null"
+        ],
+        "created_by": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "updated_by": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "created_at": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "updated_at": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ]
+      }
+    },
+    "toll_sections": {
+      "name": "toll_sections",
+      "label": "Toll Sections",
+      "description": "",
+      "primary_key": [
+        "id"
+      ],
+      "fields": [
+        {
+          "name": "id",
+          "type": "bigint",
+          "nullable": false,
+          "description": ""
+        },
+        {
+          "name": "section_code",
+          "type": "character varying(255)",
+          "nullable": false,
+          "description": ""
+        },
+        {
+          "name": "section_name",
+          "type": "character varying(255)",
+          "nullable": false,
+          "description": ""
+        },
+        {
+          "name": "owner_id",
+          "type": "bigint",
+          "nullable": false,
+          "description": ""
+        },
+        {
+          "name": "pic_contact",
+          "type": "character varying(255)",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "start_km",
+          "type": "double precision",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "end_km",
+          "type": "double precision",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "long_road",
+          "type": "double precision",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "img_section",
+          "type": "text",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "description",
+          "type": "text",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "active",
+          "type": "boolean",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "created_by",
+          "type": "bigint",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "updated_by",
+          "type": "bigint",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "created_at",
+          "type": "timestamp(0) with time zone",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "updated_at",
+          "type": "timestamp(0) with time zone",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "contract_id",
+          "type": "bigint",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "contract_start_date",
+          "type": "date",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "contract_end_date",
+          "type": "date",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "section_type_id",
+          "type": "bigint",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "short_name",
+          "type": "character varying(255)",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "avg_fuel_usage",
+          "type": "double precision",
+          "nullable": true,
+          "description": "Rata-rata penggunaan harian (rupiah)"
+        },
+        {
+          "name": "is_excluded_from_dashboard",
+          "type": "boolean",
+          "nullable": false,
+          "description": ""
+        }
+      ],
+      "relationships": [
+        {
+          "name": "toll_sections_created_by_foreign",
+          "fields": [
+            "created_by"
+          ],
+          "referenced_entity": "users",
+          "referenced_fields": [
+            "id"
+          ]
+        },
+        {
+          "name": "toll_sections_owner_id_foreign",
+          "fields": [
+            "owner_id"
+          ],
+          "referenced_entity": "toll_owners",
+          "referenced_fields": [
+            "id"
+          ]
+        },
+        {
+          "name": "toll_sections_section_type_id_foreign",
+          "fields": [
+            "section_type_id"
+          ],
+          "referenced_entity": "section_types",
+          "referenced_fields": [
+            "id"
+          ]
+        },
+        {
+          "name": "toll_sections_updated_by_foreign",
+          "fields": [
+            "updated_by"
+          ],
+          "referenced_entity": "users",
+          "referenced_fields": [
+            "id"
+          ]
+        }
+      ],
+      "allowed_filters": {
+        "id": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "section_code": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "contains",
+          "starts_with",
+          "ends_with",
+          "is_null",
+          "is_not_null"
+        ],
+        "section_name": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "contains",
+          "starts_with",
+          "ends_with",
+          "is_null",
+          "is_not_null"
+        ],
+        "owner_id": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "pic_contact": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "contains",
+          "starts_with",
+          "ends_with",
+          "is_null",
+          "is_not_null"
+        ],
+        "start_km": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "end_km": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "long_road": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "img_section": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "contains",
+          "starts_with",
+          "ends_with",
+          "is_null",
+          "is_not_null"
+        ],
+        "description": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "contains",
+          "starts_with",
+          "ends_with",
+          "is_null",
+          "is_not_null"
+        ],
+        "active": [
+          "eq",
+          "neq",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "created_by": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "updated_by": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "created_at": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "updated_at": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "contract_id": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "contract_start_date": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "contract_end_date": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "section_type_id": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "short_name": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "contains",
+          "starts_with",
+          "ends_with",
+          "is_null",
+          "is_not_null"
+        ],
+        "avg_fuel_usage": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "is_excluded_from_dashboard": [
+          "eq",
+          "neq",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ]
+      }
+    },
+    "toll_gates": {
+      "name": "toll_gates",
+      "label": "Toll Gates",
+      "description": "",
+      "primary_key": [
+        "id"
+      ],
+      "fields": [
+        {
+          "name": "id",
+          "type": "bigint",
+          "nullable": false,
+          "description": ""
+        },
+        {
+          "name": "gate_name",
+          "type": "character varying(255)",
+          "nullable": false,
+          "description": ""
+        },
+        {
+          "name": "section_id",
+          "type": "bigint",
+          "nullable": false,
+          "description": ""
+        },
+        {
+          "name": "total_booth",
+          "type": "integer",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "total_longbooth",
+          "type": "integer",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "description",
+          "type": "text",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "active",
+          "type": "boolean",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "created_by",
+          "type": "bigint",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "updated_by",
+          "type": "bigint",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "created_at",
+          "type": "timestamp(0) with time zone",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "updated_at",
+          "type": "timestamp(0) with time zone",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "ranting_id",
+          "type": "bigint",
+          "nullable": true,
+          "description": ""
+        }
+      ],
+      "relationships": [
+        {
+          "name": "toll_gates_created_by_foreign",
+          "fields": [
+            "created_by"
+          ],
+          "referenced_entity": "users",
+          "referenced_fields": [
+            "id"
+          ]
+        },
+        {
+          "name": "toll_gates_section_id_foreign",
+          "fields": [
+            "section_id"
+          ],
+          "referenced_entity": "toll_sections",
+          "referenced_fields": [
+            "id"
+          ]
+        },
+        {
+          "name": "toll_gates_updated_by_foreign",
+          "fields": [
+            "updated_by"
+          ],
+          "referenced_entity": "users",
+          "referenced_fields": [
+            "id"
+          ]
+        }
+      ],
+      "allowed_filters": {
+        "id": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "gate_name": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "contains",
+          "starts_with",
+          "ends_with",
+          "is_null",
+          "is_not_null"
+        ],
+        "section_id": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "total_booth": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "total_longbooth": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "description": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "contains",
+          "starts_with",
+          "ends_with",
+          "is_null",
+          "is_not_null"
+        ],
+        "active": [
+          "eq",
+          "neq",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "created_by": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "updated_by": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "created_at": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "updated_at": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "ranting_id": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ]
+      }
+    },
+    "shift_schedules": {
+      "name": "shift_schedules",
+      "label": "Shift Schedules",
+      "description": "",
+      "primary_key": [
+        "id"
+      ],
+      "fields": [
+        {
+          "name": "id",
+          "type": "bigint",
+          "nullable": false,
+          "description": ""
+        },
+        {
+          "name": "section_id",
+          "type": "bigint",
+          "nullable": false,
+          "description": ""
+        },
+        {
+          "name": "shift",
+          "type": "integer",
+          "nullable": false,
+          "description": ""
+        },
+        {
+          "name": "shift_id",
+          "type": "integer",
+          "nullable": true,
+          "description": "id m_section_shifts"
+        },
+        {
+          "name": "date",
+          "type": "date",
+          "nullable": false,
+          "description": ""
+        },
+        {
+          "name": "start_hour",
+          "type": "time(0) without time zone",
+          "nullable": false,
+          "description": ""
+        },
+        {
+          "name": "end_hour",
+          "type": "time(0) without time zone",
+          "nullable": false,
+          "description": ""
+        },
+        {
+          "name": "description",
+          "type": "text",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "created_by",
+          "type": "bigint",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "updated_by",
+          "type": "bigint",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "created_at",
+          "type": "timestamp(0) with time zone",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "updated_at",
+          "type": "timestamp(0) with time zone",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "do_routine_activity",
+          "type": "boolean",
+          "nullable": true,
+          "description": ""
+        }
+      ],
+      "relationships": [
+        {
+          "name": "shift_schedules_created_by_foreign",
+          "fields": [
+            "created_by"
+          ],
+          "referenced_entity": "users",
+          "referenced_fields": [
+            "id"
+          ]
+        },
+        {
+          "name": "shift_schedules_section_id_foreign",
+          "fields": [
+            "section_id"
+          ],
+          "referenced_entity": "toll_sections",
+          "referenced_fields": [
+            "id"
+          ]
+        },
+        {
+          "name": "shift_schedules_updated_by_foreign",
+          "fields": [
+            "updated_by"
+          ],
+          "referenced_entity": "users",
+          "referenced_fields": [
+            "id"
+          ]
+        }
+      ],
+      "allowed_filters": {
+        "id": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "section_id": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "shift": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "shift_id": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "date": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "start_hour": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "end_hour": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "description": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "contains",
+          "starts_with",
+          "ends_with",
+          "is_null",
+          "is_not_null"
+        ],
+        "created_by": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "updated_by": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "created_at": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "updated_at": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "do_routine_activity": [
+          "eq",
+          "neq",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ]
+      }
+    },
+    "m_section_shifts": {
+      "name": "m_section_shifts",
+      "label": "M Section Shifts",
+      "description": "",
+      "primary_key": [
+        "id"
+      ],
+      "fields": [
+        {
+          "name": "id",
+          "type": "bigint",
+          "nullable": false,
+          "description": ""
+        },
+        {
+          "name": "section_id",
+          "type": "bigint",
+          "nullable": false,
+          "description": ""
+        },
+        {
+          "name": "shift",
+          "type": "integer",
+          "nullable": false,
+          "description": ""
+        },
+        {
+          "name": "default_start_hour",
+          "type": "time(0) without time zone",
+          "nullable": false,
+          "description": ""
+        },
+        {
+          "name": "default_end_hour",
+          "type": "time(0) without time zone",
+          "nullable": false,
+          "description": ""
+        },
+        {
+          "name": "description",
+          "type": "text",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "active",
+          "type": "boolean",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "created_by",
+          "type": "bigint",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "updated_by",
+          "type": "bigint",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "created_at",
+          "type": "timestamp(0) with time zone",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "updated_at",
+          "type": "timestamp(0) with time zone",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "do_routine_activity",
+          "type": "boolean",
+          "nullable": true,
+          "description": ""
+        }
+      ],
+      "relationships": [
+        {
+          "name": "m_section_shifts_created_by_foreign",
+          "fields": [
+            "created_by"
+          ],
+          "referenced_entity": "users",
+          "referenced_fields": [
+            "id"
+          ]
+        },
+        {
+          "name": "m_section_shifts_section_id_foreign",
+          "fields": [
+            "section_id"
+          ],
+          "referenced_entity": "toll_sections",
+          "referenced_fields": [
+            "id"
+          ]
+        },
+        {
+          "name": "m_section_shifts_updated_by_foreign",
+          "fields": [
+            "updated_by"
+          ],
+          "referenced_entity": "users",
+          "referenced_fields": [
+            "id"
+          ]
+        }
+      ],
+      "allowed_filters": {
+        "id": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "section_id": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "shift": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "default_start_hour": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "default_end_hour": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "description": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "contains",
+          "starts_with",
+          "ends_with",
+          "is_null",
+          "is_not_null"
+        ],
+        "active": [
+          "eq",
+          "neq",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "created_by": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "updated_by": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "created_at": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "updated_at": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "do_routine_activity": [
+          "eq",
+          "neq",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ]
+      }
+    },
+    "toll_volume_revenue": {
+      "name": "toll_volume_revenue",
+      "label": "Toll Volume Revenue",
+      "description": "",
+      "primary_key": [
+        "id"
+      ],
+      "fields": [
+        {
+          "name": "id",
+          "type": "bigint",
+          "nullable": false,
+          "description": ""
+        },
+        {
+          "name": "section_id",
+          "type": "bigint",
+          "nullable": false,
+          "description": ""
+        },
+        {
+          "name": "gate_id",
+          "type": "bigint",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "date",
+          "type": "date",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "schedule_id",
+          "type": "bigint",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "activity_id",
+          "type": "bigint",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "description",
+          "type": "text",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "officer_id",
+          "type": "bigint",
+          "nullable": false,
+          "description": ""
+        },
+        {
+          "name": "status_code",
+          "type": "character varying(255)",
+          "nullable": true,
+          "description": "on_verification/verified"
+        },
+        {
+          "name": "verified_by",
+          "type": "bigint",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "verified_at",
+          "type": "timestamp(0) with time zone",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "verified_description",
+          "type": "text",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "created_by",
+          "type": "bigint",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "updated_by",
+          "type": "bigint",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "created_at",
+          "type": "timestamp(0) with time zone",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "updated_at",
+          "type": "timestamp(0) with time zone",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "ranting_id",
+          "type": "bigint",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "total_weighted_traffic",
+          "type": "bigint",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "total_traffic",
+          "type": "bigint",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "total_revenue",
+          "type": "double precision",
+          "nullable": true,
+          "description": ""
+        }
+      ],
+      "relationships": [
+        {
+          "name": "toll_volume_revenue_activity_id_foreign",
+          "fields": [
+            "activity_id"
+          ],
+          "referenced_entity": "m_activities",
+          "referenced_fields": [
+            "id"
+          ]
+        },
+        {
+          "name": "toll_volume_revenue_created_by_foreign",
+          "fields": [
+            "created_by"
+          ],
+          "referenced_entity": "users",
+          "referenced_fields": [
+            "id"
+          ]
+        },
+        {
+          "name": "toll_volume_revenue_gate_id_foreign",
+          "fields": [
+            "gate_id"
+          ],
+          "referenced_entity": "toll_gates",
+          "referenced_fields": [
+            "id"
+          ]
+        },
+        {
+          "name": "toll_volume_revenue_officer_id_foreign",
+          "fields": [
+            "officer_id"
+          ],
+          "referenced_entity": "employees",
+          "referenced_fields": [
+            "id"
+          ]
+        },
+        {
+          "name": "toll_volume_revenue_ranting_id_foreign",
+          "fields": [
+            "ranting_id"
+          ],
+          "referenced_entity": "m_section_rantings",
+          "referenced_fields": [
+            "id"
+          ]
+        },
+        {
+          "name": "toll_volume_revenue_schedule_id_foreign",
+          "fields": [
+            "schedule_id"
+          ],
+          "referenced_entity": "shift_schedules",
+          "referenced_fields": [
+            "id"
+          ]
+        },
+        {
+          "name": "toll_volume_revenue_section_id_foreign",
+          "fields": [
+            "section_id"
+          ],
+          "referenced_entity": "toll_sections",
+          "referenced_fields": [
+            "id"
+          ]
+        },
+        {
+          "name": "toll_volume_revenue_updated_by_foreign",
+          "fields": [
+            "updated_by"
+          ],
+          "referenced_entity": "users",
+          "referenced_fields": [
+            "id"
+          ]
+        },
+        {
+          "name": "toll_volume_revenue_verified_by_foreign",
+          "fields": [
+            "verified_by"
+          ],
+          "referenced_entity": "users",
+          "referenced_fields": [
+            "id"
+          ]
+        }
+      ],
+      "allowed_filters": {
+        "id": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "section_id": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "gate_id": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "date": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "schedule_id": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "activity_id": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "description": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "contains",
+          "starts_with",
+          "ends_with",
+          "is_null",
+          "is_not_null"
+        ],
+        "officer_id": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "status_code": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "contains",
+          "starts_with",
+          "ends_with",
+          "is_null",
+          "is_not_null"
+        ],
+        "verified_by": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "verified_at": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "verified_description": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "contains",
+          "starts_with",
+          "ends_with",
+          "is_null",
+          "is_not_null"
+        ],
+        "created_by": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "updated_by": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "created_at": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "updated_at": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "ranting_id": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "total_weighted_traffic": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "total_traffic": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "total_revenue": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ]
+      }
+    },
+    "toll_traffic_volumes": {
+      "name": "toll_traffic_volumes",
+      "label": "Toll Traffic Volumes",
+      "description": "",
+      "primary_key": [
+        "id"
+      ],
+      "fields": [
+        {
+          "name": "id",
+          "type": "bigint",
+          "nullable": false,
+          "description": ""
+        },
+        {
+          "name": "transaction_id",
+          "type": "bigint",
+          "nullable": false,
+          "description": ""
+        },
+        {
+          "name": "vehicle_class_id",
+          "type": "bigint",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "total",
+          "type": "bigint",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "created_by",
+          "type": "bigint",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "updated_by",
+          "type": "bigint",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "created_at",
+          "type": "timestamp(0) with time zone",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "updated_at",
+          "type": "timestamp(0) with time zone",
+          "nullable": true,
+          "description": ""
+        }
+      ],
+      "relationships": [
+        {
+          "name": "toll_traffic_volumes_created_by_foreign",
+          "fields": [
+            "created_by"
+          ],
+          "referenced_entity": "users",
+          "referenced_fields": [
+            "id"
+          ]
+        },
+        {
+          "name": "toll_traffic_volumes_transaction_id_foreign",
+          "fields": [
+            "transaction_id"
+          ],
+          "referenced_entity": "toll_volume_revenue",
+          "referenced_fields": [
+            "id"
+          ]
+        },
+        {
+          "name": "toll_traffic_volumes_updated_by_foreign",
+          "fields": [
+            "updated_by"
+          ],
+          "referenced_entity": "users",
+          "referenced_fields": [
+            "id"
+          ]
+        },
+        {
+          "name": "toll_traffic_volumes_vehicle_class_id_foreign",
+          "fields": [
+            "vehicle_class_id"
+          ],
+          "referenced_entity": "m_vehicle_class",
+          "referenced_fields": [
+            "id"
+          ]
+        }
+      ],
+      "allowed_filters": {
+        "id": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "transaction_id": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "vehicle_class_id": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "total": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "created_by": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "updated_by": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "created_at": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "updated_at": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ]
+      }
+    },
+    "m_vehicle_class": {
+      "name": "m_vehicle_class",
+      "label": "M Vehicle Class",
+      "description": "",
+      "primary_key": [
+        "id"
+      ],
+      "fields": [
+        {
+          "name": "id",
+          "type": "bigint",
+          "nullable": false,
+          "description": ""
+        },
+        {
+          "name": "name",
+          "type": "character varying(255)",
+          "nullable": false,
+          "description": ""
+        },
+        {
+          "name": "active",
+          "type": "boolean",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "created_by",
+          "type": "bigint",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "updated_by",
+          "type": "bigint",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "created_at",
+          "type": "timestamp(0) with time zone",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "updated_at",
+          "type": "timestamp(0) with time zone",
+          "nullable": true,
+          "description": ""
+        }
+      ],
+      "relationships": [
+        {
+          "name": "m_vehicle_class_created_by_foreign",
+          "fields": [
+            "created_by"
+          ],
+          "referenced_entity": "users",
+          "referenced_fields": [
+            "id"
+          ]
+        },
+        {
+          "name": "m_vehicle_class_updated_by_foreign",
+          "fields": [
+            "updated_by"
+          ],
+          "referenced_entity": "users",
+          "referenced_fields": [
+            "id"
+          ]
+        }
+      ],
+      "allowed_filters": {
+        "id": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "name": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "contains",
+          "starts_with",
+          "ends_with",
+          "is_null",
+          "is_not_null"
+        ],
+        "active": [
+          "eq",
+          "neq",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "created_by": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "updated_by": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "created_at": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "updated_at": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ]
+      }
+    },
+    "incidents": {
+      "name": "incidents",
+      "label": "Incidents",
+      "description": "",
+      "primary_key": [
+        "id"
+      ],
+      "fields": [
+        {
+          "name": "id",
+          "type": "bigint",
+          "nullable": false,
+          "description": ""
+        },
+        {
+          "name": "section_id",
+          "type": "bigint",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "report_number",
+          "type": "character varying(255)",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "incident_name",
+          "type": "character varying(255)",
+          "nullable": false,
+          "description": ""
+        },
+        {
+          "name": "accident_date",
+          "type": "date",
+          "nullable": false,
+          "description": ""
+        },
+        {
+          "name": "accident_time",
+          "type": "time(0) without time zone",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "shift",
+          "type": "integer",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "call_sign",
+          "type": "character varying(255)",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "source_id",
+          "type": "bigint",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "is_accident",
+          "type": "boolean",
+          "nullable": false,
+          "description": ""
+        },
+        {
+          "name": "description",
+          "type": "text",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "service_type_ids",
+          "type": "json",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "created_by",
+          "type": "bigint",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "updated_by",
+          "type": "bigint",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "created_at",
+          "type": "timestamp(0) with time zone",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "updated_at",
+          "type": "timestamp(0) with time zone",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "longitude",
+          "type": "character varying(255)",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "latitude",
+          "type": "character varying(255)",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "km_location",
+          "type": "character varying(255)",
+          "nullable": false,
+          "description": ""
+        },
+        {
+          "name": "track_a_to",
+          "type": "character varying(255)",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "track_b_to",
+          "type": "character varying(255)",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "track",
+          "type": "character varying(255)",
+          "nullable": false,
+          "description": "Track A/B"
+        },
+        {
+          "name": "is_shared",
+          "type": "boolean",
+          "nullable": true,
+          "description": "dibagikan ke owner?"
+        },
+        {
+          "name": "has_victim",
+          "type": "boolean",
+          "nullable": true,
+          "description": ""
+        }
+      ],
+      "relationships": [
+        {
+          "name": "incidents_created_by_foreign",
+          "fields": [
+            "created_by"
+          ],
+          "referenced_entity": "users",
+          "referenced_fields": [
+            "id"
+          ]
+        },
+        {
+          "name": "incidents_section_id_foreign",
+          "fields": [
+            "section_id"
+          ],
+          "referenced_entity": "toll_sections",
+          "referenced_fields": [
+            "id"
+          ]
+        },
+        {
+          "name": "incidents_source_id_foreign",
+          "fields": [
+            "source_id"
+          ],
+          "referenced_entity": "m_accident_attributes",
+          "referenced_fields": [
+            "id"
+          ]
+        },
+        {
+          "name": "incidents_updated_by_foreign",
+          "fields": [
+            "updated_by"
+          ],
+          "referenced_entity": "users",
+          "referenced_fields": [
+            "id"
+          ]
+        }
+      ],
+      "allowed_filters": {
+        "id": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "section_id": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "report_number": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "contains",
+          "starts_with",
+          "ends_with",
+          "is_null",
+          "is_not_null"
+        ],
+        "incident_name": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "contains",
+          "starts_with",
+          "ends_with",
+          "is_null",
+          "is_not_null"
+        ],
+        "accident_date": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "accident_time": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "shift": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "call_sign": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "contains",
+          "starts_with",
+          "ends_with",
+          "is_null",
+          "is_not_null"
+        ],
+        "source_id": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "is_accident": [
+          "eq",
+          "neq",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "description": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "contains",
+          "starts_with",
+          "ends_with",
+          "is_null",
+          "is_not_null"
+        ],
+        "service_type_ids": [
+          "is_null",
+          "is_not_null"
+        ],
+        "created_by": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "updated_by": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "created_at": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "updated_at": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "longitude": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "contains",
+          "starts_with",
+          "ends_with",
+          "is_null",
+          "is_not_null"
+        ],
+        "latitude": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "contains",
+          "starts_with",
+          "ends_with",
+          "is_null",
+          "is_not_null"
+        ],
+        "km_location": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "contains",
+          "starts_with",
+          "ends_with",
+          "is_null",
+          "is_not_null"
+        ],
+        "track_a_to": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "contains",
+          "starts_with",
+          "ends_with",
+          "is_null",
+          "is_not_null"
+        ],
+        "track_b_to": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "contains",
+          "starts_with",
+          "ends_with",
+          "is_null",
+          "is_not_null"
+        ],
+        "track": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "contains",
+          "starts_with",
+          "ends_with",
+          "is_null",
+          "is_not_null"
+        ],
+        "is_shared": [
+          "eq",
+          "neq",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "has_victim": [
+          "eq",
+          "neq",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ]
+      }
+    },
+    "incident_actions": {
+      "name": "incident_actions",
+      "label": "Incident Actions",
+      "description": "",
+      "primary_key": [
+        "id"
+      ],
+      "fields": [
+        {
+          "name": "id",
+          "type": "bigint",
+          "nullable": false,
+          "description": ""
+        },
+        {
+          "name": "incident_id",
+          "type": "bigint",
+          "nullable": false,
+          "description": ""
+        },
+        {
+          "name": "service_type_id",
+          "type": "bigint",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "vehicle_id",
+          "type": "bigint",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "officer_id",
+          "type": "bigint",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "stage",
+          "type": "integer",
+          "nullable": true,
+          "description": "0%, 50%, 100%"
+        },
+        {
+          "name": "created_by",
+          "type": "bigint",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "updated_by",
+          "type": "bigint",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "created_at",
+          "type": "timestamp(0) with time zone",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "updated_at",
+          "type": "timestamp(0) with time zone",
+          "nullable": true,
+          "description": ""
+        }
+      ],
+      "relationships": [
+        {
+          "name": "incident_actions_created_by_foreign",
+          "fields": [
+            "created_by"
+          ],
+          "referenced_entity": "users",
+          "referenced_fields": [
+            "id"
+          ]
+        },
+        {
+          "name": "incident_actions_incident_id_foreign",
+          "fields": [
+            "incident_id"
+          ],
+          "referenced_entity": "incidents",
+          "referenced_fields": [
+            "id"
+          ]
+        },
+        {
+          "name": "incident_actions_officer_id_foreign",
+          "fields": [
+            "officer_id"
+          ],
+          "referenced_entity": "employees",
+          "referenced_fields": [
+            "id"
+          ]
+        },
+        {
+          "name": "incident_actions_service_type_id_foreign",
+          "fields": [
+            "service_type_id"
+          ],
+          "referenced_entity": "m_service_vehicles",
+          "referenced_fields": [
+            "id"
+          ]
+        },
+        {
+          "name": "incident_actions_updated_by_foreign",
+          "fields": [
+            "updated_by"
+          ],
+          "referenced_entity": "users",
+          "referenced_fields": [
+            "id"
+          ]
+        },
+        {
+          "name": "incident_actions_vehicle_id_foreign",
+          "fields": [
+            "vehicle_id"
+          ],
+          "referenced_entity": "vehicles",
+          "referenced_fields": [
+            "id"
+          ]
+        }
+      ],
+      "allowed_filters": {
+        "id": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "incident_id": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "service_type_id": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "vehicle_id": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "officer_id": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "stage": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "created_by": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "updated_by": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "created_at": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "updated_at": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ]
+      }
+    },
+    "accident_reports": {
+      "name": "accident_reports",
+      "label": "Accident Reports",
+      "description": "",
+      "primary_key": [
+        "id"
+      ],
+      "fields": [
+        {
+          "name": "id",
+          "type": "bigint",
+          "nullable": false,
+          "description": ""
+        },
+        {
+          "name": "incident_id",
+          "type": "bigint",
+          "nullable": false,
+          "description": ""
+        },
+        {
+          "name": "report_number",
+          "type": "character varying(255)",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "arrived_time",
+          "type": "time(0) without time zone",
+          "nullable": true,
+          "description": "tiba di lokasi"
+        },
+        {
+          "name": "handle_completed_time",
+          "type": "time(0) without time zone",
+          "nullable": true,
+          "description": "penanganan selesai"
+        },
+        {
+          "name": "lane_open_time",
+          "type": "time(0) without time zone",
+          "nullable": true,
+          "description": "pembukaan jalur"
+        },
+        {
+          "name": "left_location_time",
+          "type": "time(0) without time zone",
+          "nullable": true,
+          "description": "meninggalkan tkp"
+        },
+        {
+          "name": "wind_id",
+          "type": "bigint",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "weather_id",
+          "type": "bigint",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "is_lighting_exist",
+          "type": "boolean",
+          "nullable": false,
+          "description": ""
+        },
+        {
+          "name": "road_surface_ids",
+          "type": "json",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "road_geometry_ids",
+          "type": "json",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "lane_closure_id",
+          "type": "bigint",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "damage_type_ids",
+          "type": "json",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "description",
+          "type": "text",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "status_code",
+          "type": "character varying(255)",
+          "nullable": false,
+          "description": "on_verification, verified"
+        },
+        {
+          "name": "verified_by",
+          "type": "bigint",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "verified_at",
+          "type": "timestamp(0) with time zone",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "verified_description",
+          "type": "text",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "created_by",
+          "type": "bigint",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "updated_by",
+          "type": "bigint",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "created_at",
+          "type": "timestamp(0) with time zone",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "updated_at",
+          "type": "timestamp(0) with time zone",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "accident_causes_ids",
+          "type": "json",
+          "nullable": true,
+          "description": ""
+        }
+      ],
+      "relationships": [
+        {
+          "name": "accident_reports_created_by_foreign",
+          "fields": [
+            "created_by"
+          ],
+          "referenced_entity": "users",
+          "referenced_fields": [
+            "id"
+          ]
+        },
+        {
+          "name": "accident_reports_incident_id_foreign",
+          "fields": [
+            "incident_id"
+          ],
+          "referenced_entity": "incidents",
+          "referenced_fields": [
+            "id"
+          ]
+        },
+        {
+          "name": "accident_reports_lane_closure_id_foreign",
+          "fields": [
+            "lane_closure_id"
+          ],
+          "referenced_entity": "m_accident_attributes",
+          "referenced_fields": [
+            "id"
+          ]
+        },
+        {
+          "name": "accident_reports_updated_by_foreign",
+          "fields": [
+            "updated_by"
+          ],
+          "referenced_entity": "users",
+          "referenced_fields": [
+            "id"
+          ]
+        },
+        {
+          "name": "accident_reports_verified_by_foreign",
+          "fields": [
+            "verified_by"
+          ],
+          "referenced_entity": "users",
+          "referenced_fields": [
+            "id"
+          ]
+        },
+        {
+          "name": "accident_reports_weather_id_foreign",
+          "fields": [
+            "weather_id"
+          ],
+          "referenced_entity": "m_accident_attributes",
+          "referenced_fields": [
+            "id"
+          ]
+        },
+        {
+          "name": "accident_reports_wind_id_foreign",
+          "fields": [
+            "wind_id"
+          ],
+          "referenced_entity": "m_accident_attributes",
+          "referenced_fields": [
+            "id"
+          ]
+        }
+      ],
+      "allowed_filters": {
+        "id": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "incident_id": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "report_number": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "contains",
+          "starts_with",
+          "ends_with",
+          "is_null",
+          "is_not_null"
+        ],
+        "arrived_time": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "handle_completed_time": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "lane_open_time": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "left_location_time": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "wind_id": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "weather_id": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "is_lighting_exist": [
+          "eq",
+          "neq",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "road_surface_ids": [
+          "is_null",
+          "is_not_null"
+        ],
+        "road_geometry_ids": [
+          "is_null",
+          "is_not_null"
+        ],
+        "lane_closure_id": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "damage_type_ids": [
+          "is_null",
+          "is_not_null"
+        ],
+        "description": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "contains",
+          "starts_with",
+          "ends_with",
+          "is_null",
+          "is_not_null"
+        ],
+        "status_code": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "contains",
+          "starts_with",
+          "ends_with",
+          "is_null",
+          "is_not_null"
+        ],
+        "verified_by": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "verified_at": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "verified_description": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "contains",
+          "starts_with",
+          "ends_with",
+          "is_null",
+          "is_not_null"
+        ],
+        "created_by": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "updated_by": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "created_at": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "updated_at": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "accident_causes_ids": [
+          "is_null",
+          "is_not_null"
+        ]
+      }
+    },
+    "m_accident_attributes": {
+      "name": "m_accident_attributes",
+      "label": "M Accident Attributes",
+      "description": "",
+      "primary_key": [
+        "id"
+      ],
+      "fields": [
+        {
+          "name": "id",
+          "type": "bigint",
+          "nullable": false,
+          "description": ""
+        },
+        {
+          "name": "category_code",
+          "type": "character varying(255)",
+          "nullable": false,
+          "description": ""
+        },
+        {
+          "name": "name",
+          "type": "character varying(255)",
+          "nullable": false,
+          "description": ""
+        },
+        {
+          "name": "description",
+          "type": "text",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "display_order",
+          "type": "integer",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "active",
+          "type": "boolean",
+          "nullable": false,
+          "description": ""
+        },
+        {
+          "name": "created_by",
+          "type": "bigint",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "updated_by",
+          "type": "bigint",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "created_at",
+          "type": "timestamp(0) with time zone",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "updated_at",
+          "type": "timestamp(0) with time zone",
+          "nullable": true,
+          "description": ""
+        }
+      ],
+      "relationships": [
+        {
+          "name": "m_accident_attributes_created_by_foreign",
+          "fields": [
+            "created_by"
+          ],
+          "referenced_entity": "users",
+          "referenced_fields": [
+            "id"
+          ]
+        },
+        {
+          "name": "m_accident_attributes_updated_by_foreign",
+          "fields": [
+            "updated_by"
+          ],
+          "referenced_entity": "users",
+          "referenced_fields": [
+            "id"
+          ]
+        }
+      ],
+      "allowed_filters": {
+        "id": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "category_code": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "contains",
+          "starts_with",
+          "ends_with",
+          "is_null",
+          "is_not_null"
+        ],
+        "name": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "contains",
+          "starts_with",
+          "ends_with",
+          "is_null",
+          "is_not_null"
+        ],
+        "description": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "contains",
+          "starts_with",
+          "ends_with",
+          "is_null",
+          "is_not_null"
+        ],
+        "display_order": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "active": [
+          "eq",
+          "neq",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "created_by": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "updated_by": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "created_at": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "updated_at": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ]
+      }
+    },
+    "inspections": {
+      "name": "inspections",
+      "label": "Inspections",
+      "description": "",
+      "primary_key": [
+        "id"
+      ],
+      "fields": [
+        {
+          "name": "id",
+          "type": "bigint",
+          "nullable": false,
+          "description": ""
+        },
+        {
+          "name": "section_id",
+          "type": "bigint",
+          "nullable": false,
+          "description": ""
+        },
+        {
+          "name": "inspection_form_id",
+          "type": "bigint",
+          "nullable": false,
+          "description": ""
+        },
+        {
+          "name": "inspection_number",
+          "type": "character varying(255)",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "schedule_id",
+          "type": "bigint",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "date",
+          "type": "date",
+          "nullable": false,
+          "description": ""
+        },
+        {
+          "name": "inspector_id",
+          "type": "bigint",
+          "nullable": false,
+          "description": ""
+        },
+        {
+          "name": "area_id",
+          "type": "bigint",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "detail_area_id",
+          "type": "bigint",
+          "nullable": true,
+          "description": "id dari rest area/gerbang"
+        },
+        {
+          "name": "form_name",
+          "type": "character varying(255)",
+          "nullable": false,
+          "description": ""
+        },
+        {
+          "name": "form_description",
+          "type": "text",
+          "nullable": true,
+          "description": "deskripsi form inspeksi"
+        },
+        {
+          "name": "all_good",
+          "type": "boolean",
+          "nullable": false,
+          "description": ""
+        },
+        {
+          "name": "status_code",
+          "type": "character varying(255)",
+          "nullable": true,
+          "description": "on_verification/verified"
+        },
+        {
+          "name": "verified_by",
+          "type": "bigint",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "verified_at",
+          "type": "timestamp(0) with time zone",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "verified_description",
+          "type": "text",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "submitted_by",
+          "type": "bigint",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "submitted_at",
+          "type": "timestamp(0) with time zone",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "created_by",
+          "type": "bigint",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "updated_by",
+          "type": "bigint",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "created_at",
+          "type": "timestamp(0) with time zone",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "updated_at",
+          "type": "timestamp(0) with time zone",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "detail_location",
+          "type": "character varying(255)",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "schedule_asset_id",
+          "type": "bigint",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "sta_start",
+          "type": "double precision",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "description",
+          "type": "text",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "sta_end",
+          "type": "double precision",
+          "nullable": true,
+          "description": ""
+        }
+      ],
+      "relationships": [
+        {
+          "name": "inspections_area_id_foreign",
+          "fields": [
+            "area_id"
+          ],
+          "referenced_entity": "area_types",
+          "referenced_fields": [
+            "id"
+          ]
+        },
+        {
+          "name": "inspections_created_by_foreign",
+          "fields": [
+            "created_by"
+          ],
+          "referenced_entity": "users",
+          "referenced_fields": [
+            "id"
+          ]
+        },
+        {
+          "name": "inspections_inspection_form_id_foreign",
+          "fields": [
+            "inspection_form_id"
+          ],
+          "referenced_entity": "config_inspection_forms",
+          "referenced_fields": [
+            "id"
+          ]
+        },
+        {
+          "name": "inspections_inspector_id_foreign",
+          "fields": [
+            "inspector_id"
+          ],
+          "referenced_entity": "employees",
+          "referenced_fields": [
+            "id"
+          ]
+        },
+        {
+          "name": "inspections_schedule_asset_id_foreign",
+          "fields": [
+            "schedule_asset_id"
+          ],
+          "referenced_entity": "inspection_schedule_assets",
+          "referenced_fields": [
+            "id"
+          ]
+        },
+        {
+          "name": "inspections_section_id_foreign",
+          "fields": [
+            "section_id"
+          ],
+          "referenced_entity": "toll_sections",
+          "referenced_fields": [
+            "id"
+          ]
+        },
+        {
+          "name": "inspections_submitted_by_foreign",
+          "fields": [
+            "submitted_by"
+          ],
+          "referenced_entity": "users",
+          "referenced_fields": [
+            "id"
+          ]
+        },
+        {
+          "name": "inspections_updated_by_foreign",
+          "fields": [
+            "updated_by"
+          ],
+          "referenced_entity": "users",
+          "referenced_fields": [
+            "id"
+          ]
+        },
+        {
+          "name": "inspections_verified_by_foreign",
+          "fields": [
+            "verified_by"
+          ],
+          "referenced_entity": "users",
+          "referenced_fields": [
+            "id"
+          ]
+        }
+      ],
+      "allowed_filters": {
+        "id": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "section_id": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "inspection_form_id": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "inspection_number": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "contains",
+          "starts_with",
+          "ends_with",
+          "is_null",
+          "is_not_null"
+        ],
+        "schedule_id": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "date": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "inspector_id": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "area_id": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "detail_area_id": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "form_name": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "contains",
+          "starts_with",
+          "ends_with",
+          "is_null",
+          "is_not_null"
+        ],
+        "form_description": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "contains",
+          "starts_with",
+          "ends_with",
+          "is_null",
+          "is_not_null"
+        ],
+        "all_good": [
+          "eq",
+          "neq",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "status_code": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "contains",
+          "starts_with",
+          "ends_with",
+          "is_null",
+          "is_not_null"
+        ],
+        "verified_by": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "verified_at": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "verified_description": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "contains",
+          "starts_with",
+          "ends_with",
+          "is_null",
+          "is_not_null"
+        ],
+        "submitted_by": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "submitted_at": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "created_by": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "updated_by": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "created_at": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "updated_at": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "detail_location": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "contains",
+          "starts_with",
+          "ends_with",
+          "is_null",
+          "is_not_null"
+        ],
+        "schedule_asset_id": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "sta_start": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "description": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "contains",
+          "starts_with",
+          "ends_with",
+          "is_null",
+          "is_not_null"
+        ],
+        "sta_end": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ]
+      }
+    },
+    "inspection_elements": {
+      "name": "inspection_elements",
+      "label": "Inspection Elements",
+      "description": "",
+      "primary_key": [
+        "id"
+      ],
+      "fields": [
+        {
+          "name": "id",
+          "type": "bigint",
+          "nullable": false,
+          "description": ""
+        },
+        {
+          "name": "inspection_id",
+          "type": "bigint",
+          "nullable": false,
+          "description": ""
+        },
+        {
+          "name": "element_name",
+          "type": "character varying(255)",
+          "nullable": false,
+          "description": ""
+        },
+        {
+          "name": "created_by",
+          "type": "bigint",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "updated_by",
+          "type": "bigint",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "created_at",
+          "type": "timestamp(0) with time zone",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "updated_at",
+          "type": "timestamp(0) with time zone",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "element_id",
+          "type": "bigint",
+          "nullable": true,
+          "description": ""
+        }
+      ],
+      "relationships": [
+        {
+          "name": "inspection_elements_created_by_foreign",
+          "fields": [
+            "created_by"
+          ],
+          "referenced_entity": "users",
+          "referenced_fields": [
+            "id"
+          ]
+        },
+        {
+          "name": "inspection_elements_inspection_id_foreign",
+          "fields": [
+            "inspection_id"
+          ],
+          "referenced_entity": "inspections",
+          "referenced_fields": [
+            "id"
+          ]
+        },
+        {
+          "name": "inspection_elements_updated_by_foreign",
+          "fields": [
+            "updated_by"
+          ],
+          "referenced_entity": "users",
+          "referenced_fields": [
+            "id"
+          ]
+        }
+      ],
+      "allowed_filters": {
+        "id": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "inspection_id": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "element_name": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "contains",
+          "starts_with",
+          "ends_with",
+          "is_null",
+          "is_not_null"
+        ],
+        "created_by": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "updated_by": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "created_at": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "updated_at": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "element_id": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ]
+      }
+    },
+    "inspection_items": {
+      "name": "inspection_items",
+      "label": "Inspection Items",
+      "description": "",
+      "primary_key": [
+        "id"
+      ],
+      "fields": [
+        {
+          "name": "id",
+          "type": "bigint",
+          "nullable": false,
+          "description": ""
+        },
+        {
+          "name": "inspection_element_id",
+          "type": "bigint",
+          "nullable": false,
+          "description": ""
+        },
+        {
+          "name": "damage_name",
+          "type": "character varying(255)",
+          "nullable": false,
+          "description": ""
+        },
+        {
+          "name": "maintenance",
+          "type": "text",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "description",
+          "type": "text",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "is_damage",
+          "type": "boolean",
+          "nullable": false,
+          "description": ""
+        },
+        {
+          "name": "damage_category",
+          "type": "character varying(255)",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "repair_priority",
+          "type": "character varying(255)",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "inspection_description",
+          "type": "text",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "created_by",
+          "type": "bigint",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "updated_by",
+          "type": "bigint",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "created_at",
+          "type": "timestamp(0) with time zone",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "updated_at",
+          "type": "timestamp(0) with time zone",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "item_id",
+          "type": "bigint",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "stage",
+          "type": "integer",
+          "nullable": true,
+          "description": "0%, 50%, 100%"
+        },
+        {
+          "name": "status_code",
+          "type": "character varying(255)",
+          "nullable": true,
+          "description": "open,on_investigation,close"
+        },
+        {
+          "name": "verified_by",
+          "type": "bigint",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "verified_at",
+          "type": "timestamp(0) with time zone",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "verified_description",
+          "type": "text",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "activity_type",
+          "type": "character varying(255)",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "maintenance_activity_id",
+          "type": "bigint",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "uom_type",
+          "type": "character varying(255)",
+          "nullable": true,
+          "description": "M/M2/M3"
+        },
+        {
+          "name": "length",
+          "type": "double precision",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "width",
+          "type": "double precision",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "height",
+          "type": "double precision",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "volume",
+          "type": "double precision",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "pic_id",
+          "type": "bigint",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "repair_length",
+          "type": "double precision",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "repair_width",
+          "type": "double precision",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "repair_height",
+          "type": "double precision",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "repair_volume",
+          "type": "double precision",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "realized_cost",
+          "type": "double precision",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "verify_code",
+          "type": "character varying(65)",
+          "nullable": true,
+          "description": "on_verification, approved, revised"
+        },
+        {
+          "name": "damage_source_code",
+          "type": "character varying(255)",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "img_inspection",
+          "type": "text",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "repair_recommendation_id",
+          "type": "bigint",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "asset_damage_id",
+          "type": "bigint",
+          "nullable": true,
+          "description": ""
+        }
+      ],
+      "relationships": [
+        {
+          "name": "inspection_items_asset_damage_id_foreign",
+          "fields": [
+            "asset_damage_id"
+          ],
+          "referenced_entity": "inspection_damages",
+          "referenced_fields": [
+            "id"
+          ]
+        },
+        {
+          "name": "inspection_items_created_by_foreign",
+          "fields": [
+            "created_by"
+          ],
+          "referenced_entity": "users",
+          "referenced_fields": [
+            "id"
+          ]
+        },
+        {
+          "name": "inspection_items_inspection_element_id_foreign",
+          "fields": [
+            "inspection_element_id"
+          ],
+          "referenced_entity": "inspection_elements",
+          "referenced_fields": [
+            "id"
+          ]
+        },
+        {
+          "name": "inspection_items_maintenance_activity_id_foreign",
+          "fields": [
+            "maintenance_activity_id"
+          ],
+          "referenced_entity": "maintenance_activities",
+          "referenced_fields": [
+            "id"
+          ]
+        },
+        {
+          "name": "inspection_items_pic_id_foreign",
+          "fields": [
+            "pic_id"
+          ],
+          "referenced_entity": "employees",
+          "referenced_fields": [
+            "id"
+          ]
+        },
+        {
+          "name": "inspection_items_repair_recommendation_id_foreign",
+          "fields": [
+            "repair_recommendation_id"
+          ],
+          "referenced_entity": "repair_types",
+          "referenced_fields": [
+            "id"
+          ]
+        },
+        {
+          "name": "inspection_items_updated_by_foreign",
+          "fields": [
+            "updated_by"
+          ],
+          "referenced_entity": "users",
+          "referenced_fields": [
+            "id"
+          ]
+        },
+        {
+          "name": "inspection_items_verified_by_foreign",
+          "fields": [
+            "verified_by"
+          ],
+          "referenced_entity": "users",
+          "referenced_fields": [
+            "id"
+          ]
+        }
+      ],
+      "allowed_filters": {
+        "id": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "inspection_element_id": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "damage_name": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "contains",
+          "starts_with",
+          "ends_with",
+          "is_null",
+          "is_not_null"
+        ],
+        "maintenance": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "contains",
+          "starts_with",
+          "ends_with",
+          "is_null",
+          "is_not_null"
+        ],
+        "description": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "contains",
+          "starts_with",
+          "ends_with",
+          "is_null",
+          "is_not_null"
+        ],
+        "is_damage": [
+          "eq",
+          "neq",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "damage_category": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "contains",
+          "starts_with",
+          "ends_with",
+          "is_null",
+          "is_not_null"
+        ],
+        "repair_priority": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "contains",
+          "starts_with",
+          "ends_with",
+          "is_null",
+          "is_not_null"
+        ],
+        "inspection_description": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "contains",
+          "starts_with",
+          "ends_with",
+          "is_null",
+          "is_not_null"
+        ],
+        "created_by": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "updated_by": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "created_at": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "updated_at": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "item_id": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "stage": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "status_code": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "contains",
+          "starts_with",
+          "ends_with",
+          "is_null",
+          "is_not_null"
+        ],
+        "verified_by": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "verified_at": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "verified_description": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "contains",
+          "starts_with",
+          "ends_with",
+          "is_null",
+          "is_not_null"
+        ],
+        "activity_type": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "contains",
+          "starts_with",
+          "ends_with",
+          "is_null",
+          "is_not_null"
+        ],
+        "maintenance_activity_id": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "uom_type": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "contains",
+          "starts_with",
+          "ends_with",
+          "is_null",
+          "is_not_null"
+        ],
+        "length": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "width": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "height": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "volume": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "pic_id": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "repair_length": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "repair_width": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "repair_height": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "repair_volume": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "realized_cost": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "verify_code": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "contains",
+          "starts_with",
+          "ends_with",
+          "is_null",
+          "is_not_null"
+        ],
+        "damage_source_code": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "contains",
+          "starts_with",
+          "ends_with",
+          "is_null",
+          "is_not_null"
+        ],
+        "img_inspection": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "contains",
+          "starts_with",
+          "ends_with",
+          "is_null",
+          "is_not_null"
+        ],
+        "repair_recommendation_id": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "asset_damage_id": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ]
+      }
+    },
+    "inspection_schedules": {
+      "name": "inspection_schedules",
+      "label": "Inspection Schedules",
+      "description": "",
+      "primary_key": [
+        "id"
+      ],
+      "fields": [
+        {
+          "name": "id",
+          "type": "bigint",
+          "nullable": false,
+          "description": ""
+        },
+        {
+          "name": "section_id",
+          "type": "bigint",
+          "nullable": false,
+          "description": ""
+        },
+        {
+          "name": "start_date",
+          "type": "date",
+          "nullable": false,
+          "description": ""
+        },
+        {
+          "name": "end_date",
+          "type": "date",
+          "nullable": false,
+          "description": ""
+        },
+        {
+          "name": "description",
+          "type": "text",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "created_by",
+          "type": "bigint",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "updated_by",
+          "type": "bigint",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "created_at",
+          "type": "timestamp(0) with time zone",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "updated_at",
+          "type": "timestamp(0) with time zone",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "ranting_id",
+          "type": "bigint",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "inspection_form_id",
+          "type": "bigint",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "schedule_type",
+          "type": "character varying(255)",
+          "nullable": false,
+          "description": "FORM,ASSET"
+        }
+      ],
+      "relationships": [
+        {
+          "name": "inspection_schedules_created_by_foreign",
+          "fields": [
+            "created_by"
+          ],
+          "referenced_entity": "users",
+          "referenced_fields": [
+            "id"
+          ]
+        },
+        {
+          "name": "inspection_schedules_inspection_form_id_foreign",
+          "fields": [
+            "inspection_form_id"
+          ],
+          "referenced_entity": "config_inspection_forms",
+          "referenced_fields": [
+            "id"
+          ]
+        },
+        {
+          "name": "inspection_schedules_ranting_id_foreign",
+          "fields": [
+            "ranting_id"
+          ],
+          "referenced_entity": "m_section_rantings",
+          "referenced_fields": [
+            "id"
+          ]
+        },
+        {
+          "name": "inspection_schedules_section_id_foreign",
+          "fields": [
+            "section_id"
+          ],
+          "referenced_entity": "toll_sections",
+          "referenced_fields": [
+            "id"
+          ]
+        },
+        {
+          "name": "inspection_schedules_updated_by_foreign",
+          "fields": [
+            "updated_by"
+          ],
+          "referenced_entity": "users",
+          "referenced_fields": [
+            "id"
+          ]
+        }
+      ],
+      "allowed_filters": {
+        "id": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "section_id": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "start_date": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "end_date": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "description": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "contains",
+          "starts_with",
+          "ends_with",
+          "is_null",
+          "is_not_null"
+        ],
+        "created_by": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "updated_by": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "created_at": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "updated_at": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "ranting_id": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "inspection_form_id": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "schedule_type": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "contains",
+          "starts_with",
+          "ends_with",
+          "is_null",
+          "is_not_null"
+        ]
+      }
+    },
+    "inspection_schedule_assets": {
+      "name": "inspection_schedule_assets",
+      "label": "Inspection Schedule Assets",
+      "description": "",
+      "primary_key": [
+        "id"
+      ],
+      "fields": [
+        {
+          "name": "id",
+          "type": "bigint",
+          "nullable": false,
+          "description": ""
+        },
+        {
+          "name": "schedule_id",
+          "type": "bigint",
+          "nullable": false,
+          "description": ""
+        },
+        {
+          "name": "asset_id",
+          "type": "bigint",
+          "nullable": false,
+          "description": ""
+        },
+        {
+          "name": "sta_start",
+          "type": "double precision",
+          "nullable": false,
+          "description": ""
+        },
+        {
+          "name": "sta_end",
+          "type": "double precision",
+          "nullable": false,
+          "description": ""
+        },
+        {
+          "name": "description",
+          "type": "text",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "created_by",
+          "type": "bigint",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "updated_by",
+          "type": "bigint",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "created_at",
+          "type": "timestamp(0) with time zone",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "updated_at",
+          "type": "timestamp(0) with time zone",
+          "nullable": true,
+          "description": ""
+        }
+      ],
+      "relationships": [
+        {
+          "name": "inspection_schedule_assets_asset_id_foreign",
+          "fields": [
+            "asset_id"
+          ],
+          "referenced_entity": "maintenance_asset_types",
+          "referenced_fields": [
+            "id"
+          ]
+        },
+        {
+          "name": "inspection_schedule_assets_created_by_foreign",
+          "fields": [
+            "created_by"
+          ],
+          "referenced_entity": "users",
+          "referenced_fields": [
+            "id"
+          ]
+        },
+        {
+          "name": "inspection_schedule_assets_schedule_id_foreign",
+          "fields": [
+            "schedule_id"
+          ],
+          "referenced_entity": "inspection_schedules",
+          "referenced_fields": [
+            "id"
+          ]
+        },
+        {
+          "name": "inspection_schedule_assets_updated_by_foreign",
+          "fields": [
+            "updated_by"
+          ],
+          "referenced_entity": "users",
+          "referenced_fields": [
+            "id"
+          ]
+        }
+      ],
+      "allowed_filters": {
+        "id": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "schedule_id": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "asset_id": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "sta_start": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "sta_end": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "description": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "contains",
+          "starts_with",
+          "ends_with",
+          "is_null",
+          "is_not_null"
+        ],
+        "created_by": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "updated_by": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "created_at": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "updated_at": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ]
+      }
+    },
+    "maintenance_asset_types": {
+      "name": "maintenance_asset_types",
+      "label": "Maintenance Asset Types",
+      "description": "",
+      "primary_key": [
+        "id"
+      ],
+      "fields": [
+        {
+          "name": "id",
+          "type": "bigint",
+          "nullable": false,
+          "description": ""
+        },
+        {
+          "name": "location_id",
+          "type": "bigint",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "name",
+          "type": "character varying(255)",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "active",
+          "type": "boolean",
+          "nullable": false,
+          "description": ""
+        },
+        {
+          "name": "description",
+          "type": "text",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "created_by",
+          "type": "bigint",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "updated_by",
+          "type": "bigint",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "created_at",
+          "type": "timestamp(0) with time zone",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "updated_at",
+          "type": "timestamp(0) with time zone",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "section_id",
+          "type": "bigint",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "asset_type_id",
+          "type": "bigint",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "sta_start",
+          "type": "double precision",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "sta_end",
+          "type": "double precision",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "lane",
+          "type": "character varying(255)",
+          "nullable": true,
+          "description": "OS,L1,L2,L3,IS"
+        },
+        {
+          "name": "track",
+          "type": "character varying(255)",
+          "nullable": true,
+          "description": "A,B"
+        },
+        {
+          "name": "length",
+          "type": "double precision",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "width",
+          "type": "double precision",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "height",
+          "type": "double precision",
+          "nullable": true,
+          "description": ""
+        }
+      ],
+      "relationships": [
+        {
+          "name": "assets_asset_type_id_foreign",
+          "fields": [
+            "asset_type_id"
+          ],
+          "referenced_entity": "asset_types",
+          "referenced_fields": [
+            "id"
+          ]
+        },
+        {
+          "name": "assets_created_by_foreign",
+          "fields": [
+            "created_by"
+          ],
+          "referenced_entity": "users",
+          "referenced_fields": [
+            "id"
+          ]
+        },
+        {
+          "name": "assets_location_id_foreign",
+          "fields": [
+            "location_id"
+          ],
+          "referenced_entity": "maintenance_locations",
+          "referenced_fields": [
+            "id"
+          ]
+        },
+        {
+          "name": "assets_section_id_foreign",
+          "fields": [
+            "section_id"
+          ],
+          "referenced_entity": "toll_sections",
+          "referenced_fields": [
+            "id"
+          ]
+        },
+        {
+          "name": "assets_updated_by_foreign",
+          "fields": [
+            "updated_by"
+          ],
+          "referenced_entity": "users",
+          "referenced_fields": [
+            "id"
+          ]
+        }
+      ],
+      "allowed_filters": {
+        "id": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "location_id": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "name": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "contains",
+          "starts_with",
+          "ends_with",
+          "is_null",
+          "is_not_null"
+        ],
+        "active": [
+          "eq",
+          "neq",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "description": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "contains",
+          "starts_with",
+          "ends_with",
+          "is_null",
+          "is_not_null"
+        ],
+        "created_by": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "updated_by": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "created_at": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "updated_at": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "section_id": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "asset_type_id": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "sta_start": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "sta_end": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "lane": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "contains",
+          "starts_with",
+          "ends_with",
+          "is_null",
+          "is_not_null"
+        ],
+        "track": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "contains",
+          "starts_with",
+          "ends_with",
+          "is_null",
+          "is_not_null"
+        ],
+        "length": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "width": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "height": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ]
+      }
+    },
+    "assets": {
+      "name": "assets",
+      "label": "Assets",
+      "description": "",
+      "primary_key": [
+        "id"
+      ],
+      "fields": [
+        {
+          "name": "id",
+          "type": "bigint",
+          "nullable": false,
+          "description": ""
+        },
+        {
+          "name": "location_id",
+          "type": "bigint",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "section_id",
+          "type": "bigint",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "asset_type_id",
+          "type": "bigint",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "sta_start",
+          "type": "double precision",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "sta_end",
+          "type": "double precision",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "lane",
+          "type": "character varying(255)",
+          "nullable": true,
+          "description": "OS,L1,L2,L3,IS"
+        },
+        {
+          "name": "track",
+          "type": "character varying(255)",
+          "nullable": true,
+          "description": "A,B"
+        },
+        {
+          "name": "length",
+          "type": "double precision",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "width",
+          "type": "double precision",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "height",
+          "type": "double precision",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "description",
+          "type": "text",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "active",
+          "type": "boolean",
+          "nullable": false,
+          "description": ""
+        },
+        {
+          "name": "created_by",
+          "type": "bigint",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "updated_by",
+          "type": "bigint",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "created_at",
+          "type": "timestamp(0) with time zone",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "updated_at",
+          "type": "timestamp(0) with time zone",
+          "nullable": true,
+          "description": ""
+        }
+      ],
+      "relationships": [
+        {
+          "name": "assets_asset_type_id_foreign",
+          "fields": [
+            "asset_type_id"
+          ],
+          "referenced_entity": "asset_types",
+          "referenced_fields": [
+            "id"
+          ]
+        },
+        {
+          "name": "assets_created_by_foreign",
+          "fields": [
+            "created_by"
+          ],
+          "referenced_entity": "users",
+          "referenced_fields": [
+            "id"
+          ]
+        },
+        {
+          "name": "assets_location_id_foreign",
+          "fields": [
+            "location_id"
+          ],
+          "referenced_entity": "asset_locations",
+          "referenced_fields": [
+            "id"
+          ]
+        },
+        {
+          "name": "assets_section_id_foreign",
+          "fields": [
+            "section_id"
+          ],
+          "referenced_entity": "toll_sections",
+          "referenced_fields": [
+            "id"
+          ]
+        },
+        {
+          "name": "assets_updated_by_foreign",
+          "fields": [
+            "updated_by"
+          ],
+          "referenced_entity": "users",
+          "referenced_fields": [
+            "id"
+          ]
+        }
+      ],
+      "allowed_filters": {
+        "id": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "location_id": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "section_id": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "asset_type_id": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "sta_start": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "sta_end": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "lane": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "contains",
+          "starts_with",
+          "ends_with",
+          "is_null",
+          "is_not_null"
+        ],
+        "track": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "contains",
+          "starts_with",
+          "ends_with",
+          "is_null",
+          "is_not_null"
+        ],
+        "length": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "width": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "height": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "description": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "contains",
+          "starts_with",
+          "ends_with",
+          "is_null",
+          "is_not_null"
+        ],
+        "active": [
+          "eq",
+          "neq",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "created_by": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "updated_by": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "created_at": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "updated_at": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ]
+      }
+    },
+    "view_section_spm_sla": {
+      "name": "view_section_spm_sla",
+      "label": "View Section Spm Sla",
+      "description": "",
+      "primary_key": [],
+      "fields": [
+        {
+          "name": "section_id",
+          "type": "bigint",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "spm_id",
+          "type": "bigint",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "service_substance_id",
+          "type": "bigint",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "code",
+          "type": "character varying(255)",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "indicator",
+          "type": "character varying(255)",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "sub_indicator",
+          "type": "character varying(255)",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "description",
+          "type": "text",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "is_static",
+          "type": "boolean",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "spm_specification",
+          "type": "text",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "sla_specification",
+          "type": "text",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "operator",
+          "type": "character varying(255)",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "spm_parameter",
+          "type": "integer",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "sla_parameter",
+          "type": "integer",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "unit",
+          "type": "character varying(255)",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "is_applicable",
+          "type": "boolean",
+          "nullable": true,
+          "description": ""
+        },
+        {
+          "name": "score_default",
+          "type": "boolean",
+          "nullable": true,
+          "description": ""
+        }
+      ],
+      "relationships": [],
+      "allowed_filters": {
+        "section_id": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "spm_id": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "service_substance_id": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "code": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "contains",
+          "starts_with",
+          "ends_with",
+          "is_null",
+          "is_not_null"
+        ],
+        "indicator": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "contains",
+          "starts_with",
+          "ends_with",
+          "is_null",
+          "is_not_null"
+        ],
+        "sub_indicator": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "contains",
+          "starts_with",
+          "ends_with",
+          "is_null",
+          "is_not_null"
+        ],
+        "description": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "contains",
+          "starts_with",
+          "ends_with",
+          "is_null",
+          "is_not_null"
+        ],
+        "is_static": [
+          "eq",
+          "neq",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "spm_specification": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "contains",
+          "starts_with",
+          "ends_with",
+          "is_null",
+          "is_not_null"
+        ],
+        "sla_specification": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "contains",
+          "starts_with",
+          "ends_with",
+          "is_null",
+          "is_not_null"
+        ],
+        "operator": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "contains",
+          "starts_with",
+          "ends_with",
+          "is_null",
+          "is_not_null"
+        ],
+        "spm_parameter": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "sla_parameter": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "unit": [
+          "eq",
+          "neq",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "not_in",
+          "contains",
+          "starts_with",
+          "ends_with",
+          "is_null",
+          "is_not_null"
+        ],
+        "is_applicable": [
+          "eq",
+          "neq",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ],
+        "score_default": [
+          "eq",
+          "neq",
+          "in",
+          "not_in",
+          "is_null",
+          "is_not_null"
+        ]
+      }
+    }
+  }
+}

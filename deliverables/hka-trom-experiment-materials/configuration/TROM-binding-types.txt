@@ -1,0 +1,174 @@
+export interface EntitySummary {
+  /** PostgreSQL relation name in the public schema. */
+  name: string;
+  /** Human-readable name derived from the relation name. */
+  label: string;
+  /** PostgreSQL relation comment, or an empty string when no comment exists. */
+  description: string;
+}
+
+/** A field exposed by a TROM entity. */
+export interface FieldDescription {
+  /** PostgreSQL column name. */
+  name: string;
+  /** PostgreSQL type formatted with modifiers such as varchar length. */
+  type: string;
+  /** Whether the column can contain SQL NULL. */
+  nullable: boolean;
+  /** PostgreSQL column comment, or an empty string when no comment exists. */
+  description: string;
+}
+
+/** A declared outbound PostgreSQL foreign key. */
+export interface Relationship {
+  /** PostgreSQL constraint name. */
+  name: string;
+  /** Source columns in constraint order. */
+  fields: string[];
+  /** Referenced relation in the public schema. */
+  referenced_entity: string;
+  /** Referenced columns paired by position with `fields`. */
+  referenced_fields: string[];
+}
+
+/** Operators supported by `read_records`. */
+export type FilterOperator =
+  | "eq"
+  | "neq"
+  | "gt"
+  | "gte"
+  | "lt"
+  | "lte"
+  | "in"
+  | "not_in"
+  | "contains"
+  | "starts_with"
+  | "ends_with"
+  | "is_null"
+  | "is_not_null";
+
+/** A scalar JSON value accepted by a value-bearing filter. */
+export type FilterScalar = string | number | boolean;
+
+/** A filter that checks whether a field is null. */
+export interface NullFilter {
+  /** Entity column name. */
+  field: string;
+  /** Match SQL NULL or non-NULL values. */
+  operator: "is_null" | "is_not_null";
+}
+
+/** A filter that compares a field with one scalar value. */
+export interface ScalarFilter {
+  /** Entity column name. */
+  field: string;
+  /** Comparison operator. The entity's `allowed_filters` lists valid choices. */
+  operator: "eq" | "neq" | "gt" | "gte" | "lt" | "lte" | "contains" | "starts_with" | "ends_with";
+  /** Scalar value matched against the column's PostgreSQL type. */
+  value: FilterScalar;
+}
+
+/** A filter that compares a field with a non-empty set of scalar values. */
+export interface SetFilter {
+  /** Entity column name. */
+  field: string;
+  /** Match a value in, or outside, the supplied set. */
+  operator: "in" | "not_in";
+  /** At least one scalar value compatible with the field's PostgreSQL type. */
+  value: [FilterScalar, ...FilterScalar[]];
+}
+
+/** One AND-combined field filter. */
+export type RecordFilter = NullFilter | ScalarFilter | SetFilter;
+
+/** A field and direction used to order records. */
+export interface RecordSort {
+  /** Entity column name. */
+  field: string;
+  /** Sort direction. */
+  direction: "asc" | "desc";
+}
+
+/** JSON-compatible record values returned by TROM. */
+export type JsonValue =
+  | null
+  | boolean
+  | number
+  | string
+  | JsonValue[]
+  | { [key: string]: JsonValue };
+
+/** Read-only schema metadata for a TROM entity. */
+export interface EntityDescription extends EntitySummary {
+  /** Primary-key columns in PostgreSQL constraint order. */
+  primary_key: string[];
+  /** Columns in PostgreSQL ordinal order. */
+  fields: FieldDescription[];
+  /** Declared outbound foreign keys to public-schema relations. */
+  relationships: Relationship[];
+  /** Allowed `read_records` filters for each field. */
+  allowed_filters: Record<string, FilterOperator[]>;
+}
+
+/** One page of projected records. */
+export interface RecordPage {
+  /** PostgreSQL relation name in the public schema. */
+  entity: string;
+  /** Records containing exactly the requested fields. */
+  records: Array<Record<string, JsonValue>>;
+  /** Opaque cursor for the next page, or null when no page remains. */
+  next_cursor: string | null;
+}
+
+/** Read-only metadata and record access through TROM. */
+export interface Trom {
+  /**
+   * List public-schema tables, partitioned-table parents, views, and materialized views.
+   *
+   * @returns The entities available through TROM.
+   */
+  list_entities(): Promise<EntitySummary[]>;
+
+  /**
+   * Describe a public TROM entity, including PostgreSQL fields, primary keys,
+   * declared foreign keys, and the filters available to `read_records`.
+   * Unknown entities fail with HTTP 404.
+   *
+   * @param entity Exact relation name returned by `list_entities()`.
+   * @returns The entity's schema and relationship metadata.
+   */
+  describe_entity(entity: string): Promise<EntityDescription>;
+
+  /**
+   * Read a projected page of records. Filters are combined with AND. The
+   * default filters and sort are empty, the default limit is 100, and limits
+   * must be from 1 through 500. Use `describe_entity` to see allowed filters.
+   * Fields accept column names only. SQL expressions and joins are not supported.
+   * Operators are `eq`, `neq`, `gt`, `gte`, `lt`, `lte`, `in`, `not_in`,
+   * `contains`, `starts_with`, `ends_with`, `is_null`, and `is_not_null`.
+   * Null operators omit `value`; set operators need a non-empty scalar array.
+   * The cursor belongs to the exact entity, fields, filters, sort, and limit.
+   * Bigint values beyond JavaScript's safe integer range and PostgreSQL numeric
+   * values are returned as strings. Non-finite floating-point values are also
+   * returned as strings. Invalid entities, fields, filters, sorts,
+   * limits, and cursors fail with an HTTP 4xx error. Keep the dataset unchanged
+   * between offset pages. Rows with identical sort values may repeat when an
+   * entity has no primary key.
+   *
+   * @param entity Exact relation name returned by `list_entities()`.
+   * @param fields Non-empty list of column names to return. No wildcard is supported.
+   * @param filters AND-combined filters. Omit to read without filters.
+   * @param sort Requested sort fields and directions. Omit for the entity's stable default order.
+   * @param limit Page size from 1 through 500. Defaults to 100.
+   * @param cursor Cursor from the previous page for the same query. Defaults to null.
+   * @returns One projected page and a cursor when another page remains.
+   */
+  read_records(
+    entity: string,
+    fields: string[],
+    filters?: RecordFilter[],
+    sort?: RecordSort[],
+    limit?: number,
+    cursor?: string | null,
+  ): Promise<RecordPage>;
+}

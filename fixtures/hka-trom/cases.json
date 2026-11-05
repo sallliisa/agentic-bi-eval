@@ -1,0 +1,2264 @@
+[
+  {
+    "name": "T1-C1",
+    "definition": {
+      "id": "T1-C1",
+      "task_id": "T1",
+      "section_alias": "PEKBANG",
+      "start": "2026-02-01",
+      "end": "2026-02-07",
+      "prompt": "Berapa rata-rata durasi transaksi di Ruas PEKBANG selama 1–7 Februari 2026? Kembalikan hasil sesuai format terstruktur yang diminta.",
+      "prompt_sha256": "eb8bf4a92ea04884a8709428c0c2fec86364d513ffd29ce50e87069641eaeb1b",
+      "semantic_branches": [
+        "multiple reports",
+        "multiple booths",
+        "unequal detail sample counts",
+        "null duration excluded from observation mean"
+      ]
+    },
+    "prompt": "Berapa rata-rata durasi transaksi di Ruas PEKBANG selama 1–7 Februari 2026? Kembalikan hasil sesuai format terstruktur yang diminta.\n\nFormat jawaban:\n- Kirim tepat satu objek JSON yang valid sebagai jawaban akhir, tanpa teks atau blok kode tambahan.\n- Patuhi skema JSON Schema 2020-12 berikut, termasuk larangan properti tambahan.\n- Tanggal memakai string tanggal kalender ISO; ID dan hitungan memakai integer JSON.\n- Gunakan ejaan label, nama, dan kategori persis seperti master yang tersedia; jangan menerjemahkan atau menormalkannya.\n\nKonvensi representasi publik tambahan:\n- average_transaction_duration adalah rata-rata aritmetika observasi detail yang cocok dan tidak null, dalam detik; tampilkan sebagai angka JSON dengan pembulatan dua desimal, nilai tepat di tengah dibulatkan menjauh dari nol. Gunakan nol numerik jika populasinya kosong.\n\nSkema JSON Schema 2020-12:\n```json\n{\n  \"$schema\": \"https://json-schema.org/draft/2020-12/schema\",\n  \"title\": \"T1 Average transaction duration\",\n  \"type\": \"object\",\n  \"properties\": {\n    \"section_id\": {\n      \"type\": \"integer\"\n    },\n    \"section_name\": {\n      \"type\": \"string\"\n    },\n    \"period\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"start\": {\n          \"type\": \"string\",\n          \"format\": \"date\"\n        },\n        \"end\": {\n          \"type\": \"string\",\n          \"format\": \"date\"\n        }\n      },\n      \"required\": [\n        \"start\",\n        \"end\"\n      ],\n      \"additionalProperties\": false\n    },\n    \"average_transaction_duration\": {\n      \"type\": \"number\",\n      \"description\": \"Arithmetic mean of matching non-null duration observations in seconds, rounded to two decimal places with ties away from zero; zero for an empty population.\"\n    },\n    \"unit\": {\n      \"const\": \"second\"\n    }\n  },\n  \"required\": [\n    \"section_id\",\n    \"section_name\",\n    \"period\",\n    \"average_transaction_duration\",\n    \"unit\"\n  ],\n  \"additionalProperties\": false\n}\n```\n\nGunakan tabel aktual: m_vehicle_class (golongan kendaraan), m_accident_attributes (atribut kecelakaan), maintenance_asset_types (master aset inspeksi), dan view_section_spm_sla (konfigurasi efektif; filter code kecepatan-transaksi-1 sampai kecepatan-transaksi-5). accident_causes_ids adalah array JSON; hitung setiap kemunculan termasuk duplikat. Gunakan konfigurasi yang tersedia saat ini. Bandingkan durasi sebelum pembulatan; bulatkan hasil durasi dua desimal dengan nilai tengah menjauh dari nol. Untuk T1 gunakan seluruh tipe detail tidak null; evaluasi SPM/SLA menggunakan detail type=booth per gardu. LHR dibulatkan ke integer terdekat dengan nilai tengah menjauh dari nol. Urutkan array: golongan berdasarkan ID; bulan kronologis; insiden berdasarkan tanggal lalu ID; penyebab/aset berdasarkan jumlah menurun lalu ID; evaluasi berdasarkan nomor gardu lalu kode; kegagalan berdasarkan tanggal, ID monitoring, nomor gardu, kode; indikator berdasarkan kode.",
+    "historicalExpected": {
+      "section_id": 1,
+      "section_name": "PEKANBARU -  BANGKINANG (PEKBANG)",
+      "period": {
+        "start": "2026-02-01",
+        "end": "2026-02-07"
+      },
+      "average_transaction_duration": 23.09,
+      "unit": "second"
+    },
+    "expectedResult": "{\"section_id\":1,\"section_name\":\"PEKANBARU -  BANGKINANG (PEKBANG)\",\"period\":{\"start\":\"2026-02-01\",\"end\":\"2026-02-07\"},\"average_transaction_duration\":23.09,\"unit\":\"second\"}"
+  },
+  {
+    "name": "T1-C2",
+    "definition": {
+      "id": "T1-C2",
+      "task_id": "T1",
+      "section": "BINSTA",
+      "start": "2030-01-25",
+      "end": "2030-01-30",
+      "schema": "docs/schemas/t1_transaction_duration.json",
+      "gate_name": "Stabat",
+      "semantic_branches": [
+        "matching booth and longbooth durations have equal observation weight"
+      ],
+      "wrong_alternatives": [
+        {
+          "id": "booth_only_filter",
+          "wrong_rule": "Average booth details and silently discard longbooth details.",
+          "evidence_basis": "Routine capture stores both booth and longbooth observations; the reviewed transaction business reference defines the population as matching non-null duration details without a booth-only filter.",
+          "construction": "Recompute the requested average using only details whose type is booth."
+        }
+      ],
+      "prompt_template": "Berapa rata-rata durasi transaksi di Ruas BINSTA selama 25–30 Januari 2030? Kembalikan hasil sesuai format terstruktur yang diminta.",
+      "section_alias": "BINSTA"
+    },
+    "prompt": "Berapa rata-rata durasi transaksi di Ruas BINSTA selama 25–30 Januari 2030? Kembalikan hasil sesuai format terstruktur yang diminta.\n\nKirim tepat satu objek JSON, tanpa Markdown. Ikuti skema berikut:\n{\"$schema\": \"https://json-schema.org/draft/2020-12/schema\", \"title\": \"T1 Average transaction duration\", \"type\": \"object\", \"properties\": {\"section_id\": {\"type\": \"integer\"}, \"section_name\": {\"type\": \"string\"}, \"period\": {\"type\": \"object\", \"properties\": {\"start\": {\"type\": \"string\", \"format\": \"date\"}, \"end\": {\"type\": \"string\", \"format\": \"date\"}}, \"required\": [\"start\", \"end\"], \"additionalProperties\": false}, \"average_transaction_duration\": {\"type\": \"number\", \"description\": \"Arithmetic mean of matching non-null duration observations in seconds, rounded to two decimal places with ties away from zero; zero for an empty population.\"}, \"unit\": {\"const\": \"second\"}}, \"required\": [\"section_id\", \"section_name\", \"period\", \"average_transaction_duration\", \"unit\"], \"additionalProperties\": false}\n\nGunakan tabel aktual: m_vehicle_class (golongan kendaraan), m_accident_attributes (atribut kecelakaan), maintenance_asset_types (master aset inspeksi), dan view_section_spm_sla (konfigurasi efektif; filter code kecepatan-transaksi-1 sampai kecepatan-transaksi-5). accident_causes_ids adalah array JSON; hitung setiap kemunculan termasuk duplikat. Gunakan konfigurasi yang tersedia saat ini. Bandingkan durasi sebelum pembulatan; bulatkan hasil durasi dua desimal dengan nilai tengah menjauh dari nol. Untuk T1 gunakan seluruh tipe detail tidak null; evaluasi SPM/SLA menggunakan detail type=booth per gardu. LHR dibulatkan ke integer terdekat dengan nilai tengah menjauh dari nol. Urutkan array: golongan berdasarkan ID; bulan kronologis; insiden berdasarkan tanggal lalu ID; penyebab/aset berdasarkan jumlah menurun lalu ID; evaluasi berdasarkan nomor gardu lalu kode; kegagalan berdasarkan tanggal, ID monitoring, nomor gardu, kode; indikator berdasarkan kode.",
+    "historicalExpected": {
+      "section_id": 10,
+      "section_name": "BINJAI STABAT (BINSTA)",
+      "period": {
+        "start": "2030-01-25",
+        "end": "2030-01-30"
+      },
+      "average_transaction_duration": 8.86,
+      "unit": "second"
+    },
+    "expectedResult": "{\"section_id\":10,\"section_name\":\"BINJAI STABAT (BINSTA)\",\"period\":{\"start\":\"2030-01-25\",\"end\":\"2030-01-30\"},\"average_transaction_duration\":8.86,\"unit\":\"second\"}"
+  },
+  {
+    "name": "T2-C1",
+    "definition": {
+      "id": "T2-C1",
+      "task_id": "T2",
+      "section_alias": "PEKBANG",
+      "start": "2030-03-01",
+      "end": "2030-03-07",
+      "prompt": "Berikan ringkasan lalu lintas Ruas PEKBANG untuk 1–7 Maret 2030: total volume, LHR, dan volume per golongan kendaraan. Kembalikan hasil sesuai format terstruktur yang diminta.",
+      "prompt_sha256": "522c89e876f41ad409c82414c479d20b6cc368663337cac828018eceb978f8e2",
+      "semantic_branches": [
+        "missing calendar day",
+        "zero-volume configured vehicle class",
+        "multiple active vehicle classes"
+      ]
+    },
+    "prompt": "Berikan ringkasan lalu lintas Ruas PEKBANG untuk 1–7 Maret 2030: total volume, LHR, dan volume per golongan kendaraan. Kembalikan hasil sesuai format terstruktur yang diminta.\n\nFormat jawaban:\n- Kirim tepat satu objek JSON yang valid sebagai jawaban akhir, tanpa teks atau blok kode tambahan.\n- Patuhi skema JSON Schema 2020-12 berikut, termasuk larangan properti tambahan.\n- Tanggal memakai string tanggal kalender ISO; ID dan hitungan memakai integer JSON.\n- Gunakan ejaan label, nama, dan kategori persis seperti master yang tersedia; jangan menerjemahkan atau menormalkannya.\n\nKonvensi representasi publik tambahan:\n- LHR adalah volume lalu lintas harian rata-rata sebagai bilangan bulat JSON, dibulatkan ke bilangan terdekat dengan tie ke atas untuk volume nonnegatif; gunakan jumlah hari kalender inklusif dalam permintaan.\n- Volume adalah jumlah kendaraan, bukan jumlah baris. Sertakan semua golongan kendaraan yang dikonfigurasi dan gunakan nol bila tidak ada volume yang cocok.\n\nSkema JSON Schema 2020-12:\n```json\n{\n  \"$schema\": \"https://json-schema.org/draft/2020-12/schema\",\n  \"title\": \"T2 Traffic summary\",\n  \"type\": \"object\",\n  \"properties\": {\n    \"section_id\": {\n      \"type\": \"integer\"\n    },\n    \"section_name\": {\n      \"type\": \"string\"\n    },\n    \"period\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"start\": {\n          \"type\": \"string\",\n          \"format\": \"date\"\n        },\n        \"end\": {\n          \"type\": \"string\",\n          \"format\": \"date\"\n        }\n      },\n      \"required\": [\n        \"start\",\n        \"end\"\n      ],\n      \"additionalProperties\": false\n    },\n    \"total_volume\": {\n      \"type\": \"integer\",\n      \"minimum\": 0,\n      \"description\": \"Sum of matching vehicle counts, in vehicles.\"\n    },\n    \"lhr\": {\n      \"type\": \"integer\",\n      \"minimum\": 0,\n      \"description\": \"Total volume divided by the inclusive calendar-day count, rounded to a whole number with half upward for nonnegative values.\"\n    },\n    \"by_vehicle_class\": {\n      \"type\": \"array\",\n      \"items\": {\n        \"type\": \"object\",\n        \"properties\": {\n          \"vehicle_class_id\": {\n            \"type\": \"integer\"\n          },\n          \"vehicle_class_name\": {\n            \"type\": \"string\"\n          },\n          \"volume\": {\n            \"type\": \"integer\",\n            \"minimum\": 0,\n            \"description\": \"Matching vehicle count for this configured class; zero when no count is recorded.\"\n          }\n        },\n        \"required\": [\n          \"vehicle_class_id\",\n          \"vehicle_class_name\",\n          \"volume\"\n        ],\n        \"additionalProperties\": false\n      }\n    }\n  },\n  \"required\": [\n    \"section_id\",\n    \"section_name\",\n    \"period\",\n    \"total_volume\",\n    \"lhr\",\n    \"by_vehicle_class\"\n  ],\n  \"additionalProperties\": false\n}\n```\n\nGunakan tabel aktual: m_vehicle_class (golongan kendaraan), m_accident_attributes (atribut kecelakaan), maintenance_asset_types (master aset inspeksi), dan view_section_spm_sla (konfigurasi efektif; filter code kecepatan-transaksi-1 sampai kecepatan-transaksi-5). accident_causes_ids adalah array JSON; hitung setiap kemunculan termasuk duplikat. Gunakan konfigurasi yang tersedia saat ini. Bandingkan durasi sebelum pembulatan; bulatkan hasil durasi dua desimal dengan nilai tengah menjauh dari nol. Untuk T1 gunakan seluruh tipe detail tidak null; evaluasi SPM/SLA menggunakan detail type=booth per gardu. LHR dibulatkan ke integer terdekat dengan nilai tengah menjauh dari nol. Urutkan array: golongan berdasarkan ID; bulan kronologis; insiden berdasarkan tanggal lalu ID; penyebab/aset berdasarkan jumlah menurun lalu ID; evaluasi berdasarkan nomor gardu lalu kode; kegagalan berdasarkan tanggal, ID monitoring, nomor gardu, kode; indikator berdasarkan kode.",
+    "historicalExpected": {
+      "section_id": 1,
+      "section_name": "PEKANBARU -  BANGKINANG (PEKBANG)",
+      "period": {
+        "start": "2030-03-01",
+        "end": "2030-03-07"
+      },
+      "total_volume": 67,
+      "lhr": 10,
+      "by_vehicle_class": [
+        {
+          "vehicle_class_id": 1,
+          "vehicle_class_name": "Gol. 1",
+          "volume": 45
+        },
+        {
+          "vehicle_class_id": 2,
+          "vehicle_class_name": "Gol. 2",
+          "volume": 18
+        },
+        {
+          "vehicle_class_id": 3,
+          "vehicle_class_name": "Gol. 3",
+          "volume": 3
+        },
+        {
+          "vehicle_class_id": 4,
+          "vehicle_class_name": "Gol. 4",
+          "volume": 0
+        },
+        {
+          "vehicle_class_id": 5,
+          "vehicle_class_name": "Gol. 5",
+          "volume": 1
+        }
+      ]
+    },
+    "expectedResult": "{\"section_id\":1,\"section_name\":\"PEKANBARU -  BANGKINANG (PEKBANG)\",\"period\":{\"start\":\"2030-03-01\",\"end\":\"2030-03-07\"},\"total_volume\":67,\"lhr\":10,\"by_vehicle_class\":[{\"vehicle_class_id\":1,\"vehicle_class_name\":\"Gol. 1\",\"volume\":45},{\"vehicle_class_id\":2,\"vehicle_class_name\":\"Gol. 2\",\"volume\":18},{\"vehicle_class_id\":3,\"vehicle_class_name\":\"Gol. 3\",\"volume\":3},{\"vehicle_class_id\":4,\"vehicle_class_name\":\"Gol. 4\",\"volume\":0},{\"vehicle_class_id\":5,\"vehicle_class_name\":\"Gol. 5\",\"volume\":1}]}"
+  },
+  {
+    "name": "T3-C1",
+    "definition": {
+      "id": "T3-C1",
+      "task_id": "T3",
+      "section_alias": "PEKBANG",
+      "start": "2026-01-01",
+      "end": "2026-04-30",
+      "prompt": "Tampilkan tren volume dan LHR bulanan Ruas PEKBANG dari Januari sampai April 2026 berdasarkan golongan kendaraan. Kembalikan hasil sesuai format terstruktur yang diminta.",
+      "prompt_sha256": "cafa79187eccc1fbb9814f9825349a7aac301884044353abe53bcba3ab842cd4",
+      "semantic_branches": [
+        "different month lengths",
+        "missing report days",
+        "non-monotonic trend",
+        "multiple vehicle classes"
+      ]
+    },
+    "prompt": "Tampilkan tren volume dan LHR bulanan Ruas PEKBANG dari Januari sampai April 2026 berdasarkan golongan kendaraan. Kembalikan hasil sesuai format terstruktur yang diminta.\n\nFormat jawaban:\n- Kirim tepat satu objek JSON yang valid sebagai jawaban akhir, tanpa teks atau blok kode tambahan.\n- Patuhi skema JSON Schema 2020-12 berikut, termasuk larangan properti tambahan.\n- Tanggal memakai string tanggal kalender ISO; ID dan hitungan memakai integer JSON.\n- Gunakan ejaan label, nama, dan kategori persis seperti master yang tersedia; jangan menerjemahkan atau menormalkannya.\n\nKonvensi representasi publik tambahan:\n- LHR adalah volume lalu lintas harian rata-rata sebagai bilangan bulat JSON, dibulatkan ke bilangan terdekat dengan tie ke atas untuk volume nonnegatif; gunakan setiap hari pada bulan kalender penuh yang diminta.\n- Volume adalah jumlah kendaraan, bukan jumlah baris. Sertakan setiap bulan dan golongan kendaraan yang diminta, serta gunakan nol bila tidak ada volume yang cocok.\n\nSkema JSON Schema 2020-12:\n```json\n{\n  \"$schema\": \"https://json-schema.org/draft/2020-12/schema\",\n  \"title\": \"T3 Monthly traffic/LHR trend\",\n  \"type\": \"object\",\n  \"properties\": {\n    \"section_id\": {\n      \"type\": \"integer\"\n    },\n    \"section_name\": {\n      \"type\": \"string\"\n    },\n    \"months\": {\n      \"type\": \"array\",\n      \"items\": {\n        \"type\": \"object\",\n        \"properties\": {\n          \"month\": {\n            \"type\": \"string\",\n            \"pattern\": \"^\\\\d{4}-\\\\d{2}$\",\n            \"description\": \"Complete calendar month represented as YYYY-MM.\"\n          },\n          \"by_vehicle_class\": {\n            \"type\": \"array\",\n            \"items\": {\n              \"type\": \"object\",\n              \"properties\": {\n                \"vehicle_class_id\": {\n                  \"type\": \"integer\"\n                },\n                \"vehicle_class_name\": {\n                  \"type\": \"string\"\n                },\n                \"volume\": {\n                  \"type\": \"integer\",\n                  \"minimum\": 0,\n                  \"description\": \"Sum of recorded vehicle counts for this class and complete month.\"\n                },\n                \"lhr\": {\n                  \"type\": \"integer\",\n                  \"minimum\": 0,\n                  \"description\": \"Monthly volume divided by every calendar day in the month, rounded to a whole number with half upward for nonnegative values.\"\n                }\n              },\n              \"required\": [\n                \"vehicle_class_id\",\n                \"vehicle_class_name\",\n                \"volume\",\n                \"lhr\"\n              ],\n              \"additionalProperties\": false\n            }\n          }\n        },\n        \"required\": [\n          \"month\",\n          \"by_vehicle_class\"\n        ],\n        \"additionalProperties\": false\n      }\n    }\n  },\n  \"required\": [\n    \"section_id\",\n    \"section_name\",\n    \"months\"\n  ],\n  \"additionalProperties\": false\n}\n```\n\nGunakan tabel aktual: m_vehicle_class (golongan kendaraan), m_accident_attributes (atribut kecelakaan), maintenance_asset_types (master aset inspeksi), dan view_section_spm_sla (konfigurasi efektif; filter code kecepatan-transaksi-1 sampai kecepatan-transaksi-5). accident_causes_ids adalah array JSON; hitung setiap kemunculan termasuk duplikat. Gunakan konfigurasi yang tersedia saat ini. Bandingkan durasi sebelum pembulatan; bulatkan hasil durasi dua desimal dengan nilai tengah menjauh dari nol. Untuk T1 gunakan seluruh tipe detail tidak null; evaluasi SPM/SLA menggunakan detail type=booth per gardu. LHR dibulatkan ke integer terdekat dengan nilai tengah menjauh dari nol. Urutkan array: golongan berdasarkan ID; bulan kronologis; insiden berdasarkan tanggal lalu ID; penyebab/aset berdasarkan jumlah menurun lalu ID; evaluasi berdasarkan nomor gardu lalu kode; kegagalan berdasarkan tanggal, ID monitoring, nomor gardu, kode; indikator berdasarkan kode.",
+    "historicalExpected": {
+      "section_id": 1,
+      "section_name": "PEKANBARU -  BANGKINANG (PEKBANG)",
+      "months": [
+        {
+          "month": "2026-01",
+          "by_vehicle_class": [
+            {
+              "vehicle_class_id": 1,
+              "vehicle_class_name": "Gol. 1",
+              "volume": 80,
+              "lhr": 3
+            },
+            {
+              "vehicle_class_id": 2,
+              "vehicle_class_name": "Gol. 2",
+              "volume": 20,
+              "lhr": 1
+            },
+            {
+              "vehicle_class_id": 3,
+              "vehicle_class_name": "Gol. 3",
+              "volume": 4,
+              "lhr": 0
+            },
+            {
+              "vehicle_class_id": 4,
+              "vehicle_class_name": "Gol. 4",
+              "volume": 0,
+              "lhr": 0
+            },
+            {
+              "vehicle_class_id": 5,
+              "vehicle_class_name": "Gol. 5",
+              "volume": 0,
+              "lhr": 0
+            }
+          ]
+        },
+        {
+          "month": "2026-02",
+          "by_vehicle_class": [
+            {
+              "vehicle_class_id": 1,
+              "vehicle_class_name": "Gol. 1",
+              "volume": 30,
+              "lhr": 1
+            },
+            {
+              "vehicle_class_id": 2,
+              "vehicle_class_name": "Gol. 2",
+              "volume": 15,
+              "lhr": 1
+            },
+            {
+              "vehicle_class_id": 3,
+              "vehicle_class_name": "Gol. 3",
+              "volume": 1,
+              "lhr": 0
+            },
+            {
+              "vehicle_class_id": 4,
+              "vehicle_class_name": "Gol. 4",
+              "volume": 0,
+              "lhr": 0
+            },
+            {
+              "vehicle_class_id": 5,
+              "vehicle_class_name": "Gol. 5",
+              "volume": 0,
+              "lhr": 0
+            }
+          ]
+        },
+        {
+          "month": "2026-03",
+          "by_vehicle_class": [
+            {
+              "vehicle_class_id": 1,
+              "vehicle_class_name": "Gol. 1",
+              "volume": 45,
+              "lhr": 1
+            },
+            {
+              "vehicle_class_id": 2,
+              "vehicle_class_name": "Gol. 2",
+              "volume": 18,
+              "lhr": 1
+            },
+            {
+              "vehicle_class_id": 3,
+              "vehicle_class_name": "Gol. 3",
+              "volume": 3,
+              "lhr": 0
+            },
+            {
+              "vehicle_class_id": 4,
+              "vehicle_class_name": "Gol. 4",
+              "volume": 0,
+              "lhr": 0
+            },
+            {
+              "vehicle_class_id": 5,
+              "vehicle_class_name": "Gol. 5",
+              "volume": 1,
+              "lhr": 0
+            }
+          ]
+        },
+        {
+          "month": "2026-04",
+          "by_vehicle_class": [
+            {
+              "vehicle_class_id": 1,
+              "vehicle_class_name": "Gol. 1",
+              "volume": 70,
+              "lhr": 2
+            },
+            {
+              "vehicle_class_id": 2,
+              "vehicle_class_name": "Gol. 2",
+              "volume": 10,
+              "lhr": 0
+            },
+            {
+              "vehicle_class_id": 3,
+              "vehicle_class_name": "Gol. 3",
+              "volume": 2,
+              "lhr": 0
+            },
+            {
+              "vehicle_class_id": 4,
+              "vehicle_class_name": "Gol. 4",
+              "volume": 0,
+              "lhr": 0
+            },
+            {
+              "vehicle_class_id": 5,
+              "vehicle_class_name": "Gol. 5",
+              "volume": 1,
+              "lhr": 0
+            }
+          ]
+        }
+      ]
+    },
+    "expectedResult": "{\"section_id\":1,\"section_name\":\"PEKANBARU -  BANGKINANG (PEKBANG)\",\"months\":[{\"month\":\"2026-01\",\"by_vehicle_class\":[{\"vehicle_class_id\":1,\"vehicle_class_name\":\"Gol. 1\",\"volume\":80,\"lhr\":3},{\"vehicle_class_id\":2,\"vehicle_class_name\":\"Gol. 2\",\"volume\":20,\"lhr\":1},{\"vehicle_class_id\":3,\"vehicle_class_name\":\"Gol. 3\",\"volume\":4,\"lhr\":0},{\"vehicle_class_id\":4,\"vehicle_class_name\":\"Gol. 4\",\"volume\":0,\"lhr\":0},{\"vehicle_class_id\":5,\"vehicle_class_name\":\"Gol. 5\",\"volume\":0,\"lhr\":0}]},{\"month\":\"2026-02\",\"by_vehicle_class\":[{\"vehicle_class_id\":1,\"vehicle_class_name\":\"Gol. 1\",\"volume\":30,\"lhr\":1},{\"vehicle_class_id\":2,\"vehicle_class_name\":\"Gol. 2\",\"volume\":15,\"lhr\":1},{\"vehicle_class_id\":3,\"vehicle_class_name\":\"Gol. 3\",\"volume\":1,\"lhr\":0},{\"vehicle_class_id\":4,\"vehicle_class_name\":\"Gol. 4\",\"volume\":0,\"lhr\":0},{\"vehicle_class_id\":5,\"vehicle_class_name\":\"Gol. 5\",\"volume\":0,\"lhr\":0}]},{\"month\":\"2026-03\",\"by_vehicle_class\":[{\"vehicle_class_id\":1,\"vehicle_class_name\":\"Gol. 1\",\"volume\":45,\"lhr\":1},{\"vehicle_class_id\":2,\"vehicle_class_name\":\"Gol. 2\",\"volume\":18,\"lhr\":1},{\"vehicle_class_id\":3,\"vehicle_class_name\":\"Gol. 3\",\"volume\":3,\"lhr\":0},{\"vehicle_class_id\":4,\"vehicle_class_name\":\"Gol. 4\",\"volume\":0,\"lhr\":0},{\"vehicle_class_id\":5,\"vehicle_class_name\":\"Gol. 5\",\"volume\":1,\"lhr\":0}]},{\"month\":\"2026-04\",\"by_vehicle_class\":[{\"vehicle_class_id\":1,\"vehicle_class_name\":\"Gol. 1\",\"volume\":70,\"lhr\":2},{\"vehicle_class_id\":2,\"vehicle_class_name\":\"Gol. 2\",\"volume\":10,\"lhr\":0},{\"vehicle_class_id\":3,\"vehicle_class_name\":\"Gol. 3\",\"volume\":2,\"lhr\":0},{\"vehicle_class_id\":4,\"vehicle_class_name\":\"Gol. 4\",\"volume\":0,\"lhr\":0},{\"vehicle_class_id\":5,\"vehicle_class_name\":\"Gol. 5\",\"volume\":1,\"lhr\":0}]}]}"
+  },
+  {
+    "name": "T4-C1",
+    "definition": {
+      "id": "T4-C1",
+      "task_id": "T4",
+      "section_alias": "PEKBANG",
+      "start": "2026-04-01",
+      "end": "2026-04-30",
+      "prompt": "Ringkas status insiden di Ruas PEKBANG selama April 2026 dan tampilkan insiden yang masih dalam penanganan. Kembalikan hasil sesuai format terstruktur yang diminta.",
+      "prompt_sha256": "be5524a15d0738bc8acb2b5154d2f83ec691c3cb7b355404a39943af0877cd8b",
+      "semantic_branches": [
+        "zero actions",
+        "unfinished action",
+        "all actions complete",
+        "mixed complete/unfinished actions",
+        "null action stage is incomplete"
+      ]
+    },
+    "prompt": "Ringkas status insiden di Ruas PEKBANG selama April 2026 dan tampilkan insiden yang masih dalam penanganan. Kembalikan hasil sesuai format terstruktur yang diminta.\n\nFormat jawaban:\n- Kirim tepat satu objek JSON yang valid sebagai jawaban akhir, tanpa teks atau blok kode tambahan.\n- Patuhi skema JSON Schema 2020-12 berikut, termasuk larangan properti tambahan.\n- Tanggal memakai string tanggal kalender ISO; ID dan hitungan memakai integer JSON.\n- Gunakan ejaan label, nama, dan kategori persis seperti master yang tersedia; jangan menerjemahkan atau menormalkannya.\n\nKonvensi representasi publik tambahan:\n- Status insiden yang belum selesai ditulis tepat sebagai under_investigation. Hitungan harus mempartisi identitas insiden; array insiden belum selesai harus berisi identitas rekaman tersebut.\n\nSkema JSON Schema 2020-12:\n```json\n{\n  \"$schema\": \"https://json-schema.org/draft/2020-12/schema\",\n  \"title\": \"T4 Incident status and unresolved incidents\",\n  \"type\": \"object\",\n  \"properties\": {\n    \"section_id\": {\n      \"type\": \"integer\"\n    },\n    \"section_name\": {\n      \"type\": \"string\"\n    },\n    \"period\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"start\": {\n          \"type\": \"string\",\n          \"format\": \"date\"\n        },\n        \"end\": {\n          \"type\": \"string\",\n          \"format\": \"date\"\n        }\n      },\n      \"required\": [\n        \"start\",\n        \"end\"\n      ],\n      \"additionalProperties\": false\n    },\n    \"total_incidents\": {\n      \"type\": \"integer\",\n      \"minimum\": 0\n    },\n    \"under_investigation_count\": {\n      \"type\": \"integer\",\n      \"minimum\": 0,\n      \"description\": \"Incident identities whose handling status is under investigation.\"\n    },\n    \"closed_count\": {\n      \"type\": \"integer\",\n      \"minimum\": 0\n    },\n    \"unresolved_incidents\": {\n      \"type\": \"array\",\n      \"items\": {\n        \"type\": \"object\",\n        \"properties\": {\n          \"incident_id\": {\n            \"type\": \"integer\"\n          },\n          \"incident_date\": {\n            \"type\": \"string\",\n            \"format\": \"date\"\n          },\n          \"status\": {\n            \"const\": \"under_investigation\",\n            \"description\": \"Exact public status label for an unresolved incident.\"\n          }\n        },\n        \"required\": [\n          \"incident_id\",\n          \"incident_date\",\n          \"status\"\n        ],\n        \"additionalProperties\": false\n      }\n    }\n  },\n  \"required\": [\n    \"section_id\",\n    \"section_name\",\n    \"period\",\n    \"total_incidents\",\n    \"under_investigation_count\",\n    \"closed_count\",\n    \"unresolved_incidents\"\n  ],\n  \"additionalProperties\": false\n}\n```\n\nGunakan tabel aktual: m_vehicle_class (golongan kendaraan), m_accident_attributes (atribut kecelakaan), maintenance_asset_types (master aset inspeksi), dan view_section_spm_sla (konfigurasi efektif; filter code kecepatan-transaksi-1 sampai kecepatan-transaksi-5). accident_causes_ids adalah array JSON; hitung setiap kemunculan termasuk duplikat. Gunakan konfigurasi yang tersedia saat ini. Bandingkan durasi sebelum pembulatan; bulatkan hasil durasi dua desimal dengan nilai tengah menjauh dari nol. Untuk T1 gunakan seluruh tipe detail tidak null; evaluasi SPM/SLA menggunakan detail type=booth per gardu. LHR dibulatkan ke integer terdekat dengan nilai tengah menjauh dari nol. Urutkan array: golongan berdasarkan ID; bulan kronologis; insiden berdasarkan tanggal lalu ID; penyebab/aset berdasarkan jumlah menurun lalu ID; evaluasi berdasarkan nomor gardu lalu kode; kegagalan berdasarkan tanggal, ID monitoring, nomor gardu, kode; indikator berdasarkan kode.",
+    "historicalExpected": {
+      "section_id": 1,
+      "section_name": "PEKANBARU -  BANGKINANG (PEKBANG)",
+      "period": {
+        "start": "2026-04-01",
+        "end": "2026-04-30"
+      },
+      "total_incidents": 4,
+      "under_investigation_count": 3,
+      "closed_count": 1,
+      "unresolved_incidents": [
+        {
+          "incident_id": 1600500001,
+          "incident_date": "2026-04-02",
+          "status": "under_investigation"
+        },
+        {
+          "incident_id": 1600500002,
+          "incident_date": "2026-04-08",
+          "status": "under_investigation"
+        },
+        {
+          "incident_id": 1600500004,
+          "incident_date": "2026-04-21",
+          "status": "under_investigation"
+        }
+      ]
+    },
+    "expectedResult": "{\"section_id\":1,\"section_name\":\"PEKANBARU -  BANGKINANG (PEKBANG)\",\"period\":{\"start\":\"2026-04-01\",\"end\":\"2026-04-30\"},\"total_incidents\":4,\"under_investigation_count\":3,\"closed_count\":1,\"unresolved_incidents\":[{\"incident_id\":1600500001,\"incident_date\":\"2026-04-02\",\"status\":\"under_investigation\"},{\"incident_id\":1600500002,\"incident_date\":\"2026-04-08\",\"status\":\"under_investigation\"},{\"incident_id\":1600500004,\"incident_date\":\"2026-04-21\",\"status\":\"under_investigation\"}]}"
+  },
+  {
+    "name": "T5-C1",
+    "definition": {
+      "id": "T5-C1",
+      "task_id": "T5",
+      "section_alias": "PEKBANG",
+      "start": "2030-04-01",
+      "end": "2030-04-30",
+      "prompt": "Bagaimana distribusi penyebab kecelakaan di Ruas PEKBANG selama April 2030? Tampilkan setiap penyebab dan jumlah pencatatannya. Kembalikan hasil sesuai format terstruktur yang diminta.",
+      "prompt_sha256": "db5370f4707d58e3f55dabf4e313d96cc90017b284bea2097fb04035116ae1ab",
+      "semantic_branches": [
+        "single cause",
+        "multiple causes",
+        "repeated cause across accidents",
+        "non-accident incident",
+        "cause assignments on non-accident incidents are excluded"
+      ]
+    },
+    "prompt": "Bagaimana distribusi penyebab kecelakaan di Ruas PEKBANG selama April 2030? Tampilkan setiap penyebab dan jumlah pencatatannya. Kembalikan hasil sesuai format terstruktur yang diminta.\n\nFormat jawaban:\n- Kirim tepat satu objek JSON yang valid sebagai jawaban akhir, tanpa teks atau blok kode tambahan.\n- Patuhi skema JSON Schema 2020-12 berikut, termasuk larangan properti tambahan.\n- Tanggal memakai string tanggal kalender ISO; ID dan hitungan memakai integer JSON.\n- Gunakan ejaan label, nama, dan kategori persis seperti master yang tersedia; jangan menerjemahkan atau menormalkannya.\n\nKonvensi representasi publik tambahan:\n- Gunakan ID dan nama penyebab yang persis dari master atribut kecelakaan. Hitungan adalah jumlah penugasan penyebab; laporan dapat memiliki beberapa atau penugasan berulang.\n\nSkema JSON Schema 2020-12:\n```json\n{\n  \"$schema\": \"https://json-schema.org/draft/2020-12/schema\",\n  \"title\": \"T5 Accident-cause distribution\",\n  \"type\": \"object\",\n  \"properties\": {\n    \"section_id\": {\n      \"type\": \"integer\"\n    },\n    \"section_name\": {\n      \"type\": \"string\"\n    },\n    \"period\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"start\": {\n          \"type\": \"string\",\n          \"format\": \"date\"\n        },\n        \"end\": {\n          \"type\": \"string\",\n          \"format\": \"date\"\n        }\n      },\n      \"required\": [\n        \"start\",\n        \"end\"\n      ],\n      \"additionalProperties\": false\n    },\n    \"total_cause_assignments\": {\n      \"type\": \"integer\",\n      \"minimum\": 0,\n      \"description\": \"Total recorded cause assignments on in-scope accident incidents.\"\n    },\n    \"causes\": {\n      \"type\": \"array\",\n      \"items\": {\n        \"type\": \"object\",\n        \"properties\": {\n          \"cause_id\": {\n            \"type\": \"integer\"\n          },\n          \"cause_name\": {\n            \"type\": \"string\",\n            \"description\": \"Exact name from the governed accident-attribute master.\"\n          },\n          \"assignment_count\": {\n            \"type\": \"integer\",\n            \"minimum\": 1,\n            \"description\": \"Number of recorded assignments, including repeated causes.\"\n          }\n        },\n        \"required\": [\n          \"cause_id\",\n          \"cause_name\",\n          \"assignment_count\"\n        ],\n        \"additionalProperties\": false\n      }\n    }\n  },\n  \"required\": [\n    \"section_id\",\n    \"section_name\",\n    \"period\",\n    \"total_cause_assignments\",\n    \"causes\"\n  ],\n  \"additionalProperties\": false\n}\n```\n\nGunakan tabel aktual: m_vehicle_class (golongan kendaraan), m_accident_attributes (atribut kecelakaan), maintenance_asset_types (master aset inspeksi), dan view_section_spm_sla (konfigurasi efektif; filter code kecepatan-transaksi-1 sampai kecepatan-transaksi-5). accident_causes_ids adalah array JSON; hitung setiap kemunculan termasuk duplikat. Gunakan konfigurasi yang tersedia saat ini. Bandingkan durasi sebelum pembulatan; bulatkan hasil durasi dua desimal dengan nilai tengah menjauh dari nol. Untuk T1 gunakan seluruh tipe detail tidak null; evaluasi SPM/SLA menggunakan detail type=booth per gardu. LHR dibulatkan ke integer terdekat dengan nilai tengah menjauh dari nol. Urutkan array: golongan berdasarkan ID; bulan kronologis; insiden berdasarkan tanggal lalu ID; penyebab/aset berdasarkan jumlah menurun lalu ID; evaluasi berdasarkan nomor gardu lalu kode; kegagalan berdasarkan tanggal, ID monitoring, nomor gardu, kode; indikator berdasarkan kode.",
+    "historicalExpected": {
+      "section_id": 1,
+      "section_name": "PEKANBARU -  BANGKINANG (PEKBANG)",
+      "period": {
+        "start": "2030-04-01",
+        "end": "2030-04-30"
+      },
+      "total_cause_assignments": 5,
+      "causes": [
+        {
+          "cause_id": 49,
+          "cause_name": "Mengantuk",
+          "assignment_count": 4
+        },
+        {
+          "cause_id": 50,
+          "cause_name": "Kelalaian Pengemudi",
+          "assignment_count": 1
+        }
+      ]
+    },
+    "expectedResult": "{\"section_id\":1,\"section_name\":\"PEKANBARU -  BANGKINANG (PEKBANG)\",\"period\":{\"start\":\"2030-04-01\",\"end\":\"2030-04-30\"},\"total_cause_assignments\":5,\"causes\":[{\"cause_id\":49,\"cause_name\":\"Mengantuk\",\"assignment_count\":4},{\"cause_id\":50,\"cause_name\":\"Kelalaian Pengemudi\",\"assignment_count\":1}]}"
+  },
+  {
+    "name": "T6-C1",
+    "definition": {
+      "id": "T6-C1",
+      "task_id": "T6",
+      "section_alias": "PEKBANG",
+      "start": "2026-05-01",
+      "end": "2026-05-31",
+      "prompt": "Berikan ringkasan kondisi hasil inspeksi Ruas PEKBANG selama Mei 2026: jumlah item rusak, distribusi kategori kerusakan, prioritas perbaikan, dan aset yang terdampak. Kembalikan hasil sesuai format terstruktur yang diminta.",
+      "prompt_sha256": "e0c749e44eb69211fdf7e7ac4689cb36b0888f12a1c3ad64edcbfd13d8131b90",
+      "semantic_branches": [
+        "undamaged items",
+        "r1/r2/r3",
+        "p1/p2/no-priority",
+        "multiple assets",
+        "unknown non-null damage category remains in total only"
+      ]
+    },
+    "prompt": "Berikan ringkasan kondisi hasil inspeksi Ruas PEKBANG selama Mei 2026: jumlah item rusak, distribusi kategori kerusakan, prioritas perbaikan, dan aset yang terdampak. Kembalikan hasil sesuai format terstruktur yang diminta.\n\nFormat jawaban:\n- Kirim tepat satu objek JSON yang valid sebagai jawaban akhir, tanpa teks atau blok kode tambahan.\n- Patuhi skema JSON Schema 2020-12 berikut, termasuk larangan properti tambahan.\n- Tanggal memakai string tanggal kalender ISO; ID dan hitungan memakai integer JSON.\n- Gunakan ejaan label, nama, dan kategori persis seperti master yang tersedia; jangan menerjemahkan atau menormalkannya.\n\nKonvensi representasi publik tambahan:\n- Kunci kategori tepat r1, r2, dan r3; kunci prioritas perbaikan tepat p1 dan p2. ID/nama aset harus mengidentifikasi entri master aset inspeksi/pemeliharaan legacy yang tersedia.\n\nSkema JSON Schema 2020-12:\n```json\n{\n  \"$schema\": \"https://json-schema.org/draft/2020-12/schema\",\n  \"title\": \"T6 Inspection condition summary\",\n  \"type\": \"object\",\n  \"properties\": {\n    \"section_id\": {\n      \"type\": \"integer\"\n    },\n    \"section_name\": {\n      \"type\": \"string\"\n    },\n    \"period\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"start\": {\n          \"type\": \"string\",\n          \"format\": \"date\"\n        },\n        \"end\": {\n          \"type\": \"string\",\n          \"format\": \"date\"\n        }\n      },\n      \"required\": [\n        \"start\",\n        \"end\"\n      ],\n      \"additionalProperties\": false\n    },\n    \"damaged_item_count\": {\n      \"type\": \"integer\",\n      \"minimum\": 0,\n      \"description\": \"Count of inspection-item observations whose damage_category is non-null.\"\n    },\n    \"by_damage_category\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"r1\": {\n          \"type\": \"integer\",\n          \"minimum\": 0\n        },\n        \"r2\": {\n          \"type\": \"integer\",\n          \"minimum\": 0\n        },\n        \"r3\": {\n          \"type\": \"integer\",\n          \"minimum\": 0\n        }\n      },\n      \"required\": [\n        \"r1\",\n        \"r2\",\n        \"r3\"\n      ],\n      \"additionalProperties\": false,\n      \"description\": \"Counts by the exact r1, r2, and r3 category codes.\"\n    },\n    \"by_repair_priority\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"p1\": {\n          \"type\": \"integer\",\n          \"minimum\": 0\n        },\n        \"p2\": {\n          \"type\": \"integer\",\n          \"minimum\": 0\n        }\n      },\n      \"required\": [\n        \"p1\",\n        \"p2\"\n      ],\n      \"additionalProperties\": false,\n      \"description\": \"Counts for p1 and p2; damaged items without these priorities remain in the total.\"\n    },\n    \"by_asset\": {\n      \"type\": \"array\",\n      \"items\": {\n        \"type\": \"object\",\n        \"properties\": {\n          \"asset_id\": {\n            \"type\": \"integer\",\n            \"description\": \"Legacy inspection/maintenance asset-master ID reached through the inspection schedule assignment.\"\n          },\n          \"asset_name\": {\n            \"type\": \"string\",\n            \"description\": \"Exact name from the governed assets catalogue entity.\"\n          },\n          \"damaged_item_count\": {\n            \"type\": \"integer\",\n            \"minimum\": 1\n          }\n        },\n        \"required\": [\n          \"asset_id\",\n          \"asset_name\",\n          \"damaged_item_count\"\n        ],\n        \"additionalProperties\": false\n      }\n    }\n  },\n  \"required\": [\n    \"section_id\",\n    \"section_name\",\n    \"period\",\n    \"damaged_item_count\",\n    \"by_damage_category\",\n    \"by_repair_priority\",\n    \"by_asset\"\n  ],\n  \"additionalProperties\": false\n}\n```\n\nGunakan tabel aktual: m_vehicle_class (golongan kendaraan), m_accident_attributes (atribut kecelakaan), maintenance_asset_types (master aset inspeksi), dan view_section_spm_sla (konfigurasi efektif; filter code kecepatan-transaksi-1 sampai kecepatan-transaksi-5). accident_causes_ids adalah array JSON; hitung setiap kemunculan termasuk duplikat. Gunakan konfigurasi yang tersedia saat ini. Bandingkan durasi sebelum pembulatan; bulatkan hasil durasi dua desimal dengan nilai tengah menjauh dari nol. Untuk T1 gunakan seluruh tipe detail tidak null; evaluasi SPM/SLA menggunakan detail type=booth per gardu. LHR dibulatkan ke integer terdekat dengan nilai tengah menjauh dari nol. Urutkan array: golongan berdasarkan ID; bulan kronologis; insiden berdasarkan tanggal lalu ID; penyebab/aset berdasarkan jumlah menurun lalu ID; evaluasi berdasarkan nomor gardu lalu kode; kegagalan berdasarkan tanggal, ID monitoring, nomor gardu, kode; indikator berdasarkan kode.",
+    "historicalExpected": {
+      "section_id": 1,
+      "section_name": "PEKANBARU -  BANGKINANG (PEKBANG)",
+      "period": {
+        "start": "2026-05-01",
+        "end": "2026-05-31"
+      },
+      "damaged_item_count": 4,
+      "by_damage_category": {
+        "r1": 1,
+        "r2": 1,
+        "r3": 1
+      },
+      "by_repair_priority": {
+        "p1": 1,
+        "p2": 2
+      },
+      "by_asset": [
+        {
+          "asset_id": 1,
+          "asset_name": "Bahu",
+          "damaged_item_count": 3
+        },
+        {
+          "asset_id": 2,
+          "asset_name": "Lajur 1",
+          "damaged_item_count": 1
+        }
+      ]
+    },
+    "expectedResult": "{\"section_id\":1,\"section_name\":\"PEKANBARU -  BANGKINANG (PEKBANG)\",\"period\":{\"start\":\"2026-05-01\",\"end\":\"2026-05-31\"},\"damaged_item_count\":4,\"by_damage_category\":{\"r1\":1,\"r2\":1,\"r3\":1},\"by_repair_priority\":{\"p1\":1,\"p2\":2},\"by_asset\":[{\"asset_id\":1,\"asset_name\":\"Bahu\",\"damaged_item_count\":3},{\"asset_id\":2,\"asset_name\":\"Lajur 1\",\"damaged_item_count\":1}]}"
+  },
+  {
+    "name": "T7-C1",
+    "definition": {
+      "id": "T7-C1",
+      "task_id": "T7",
+      "section_alias": "PEKBANG",
+      "date": "2026-06-01",
+      "prompt": "Evaluasi pemenuhan SPM/SLA kecepatan transaksi untuk monitoring di Ruas PEKBANG, Gerbang Bangkinang, shift 1, tanggal 1 Juni 2026. Tampilkan hasil per gardu dan indikator. Kembalikan hasil sesuai format terstruktur yang diminta.",
+      "prompt_sha256": "e24db79660a3c39004f27445e35bf299d01b36ec940377fb7df641892262bf78",
+      "semantic_branches": [
+        "all five SLA rules applicable",
+        "threshold equality",
+        "SPM/SLA failures"
+      ]
+    },
+    "prompt": "Evaluasi pemenuhan SPM/SLA kecepatan transaksi untuk monitoring di Ruas PEKBANG, Gerbang Bangkinang, shift 1, tanggal 1 Juni 2026. Tampilkan hasil per gardu dan indikator. Kembalikan hasil sesuai format terstruktur yang diminta.\n\nFormat jawaban:\n- Kirim tepat satu objek JSON yang valid sebagai jawaban akhir, tanpa teks atau blok kode tambahan.\n- Patuhi skema JSON Schema 2020-12 berikut, termasuk larangan properti tambahan.\n- Tanggal memakai string tanggal kalender ISO; ID dan hitungan memakai integer JSON.\n- Gunakan ejaan label, nama, dan kategori persis seperti master yang tersedia; jangan menerjemahkan atau menormalkannya.\n\nKonvensi representasi publik tambahan:\n- shift adalah nomor shift JSON integer dari jadwal pada tanggal yang diminta.\n- booth_number adalah nomor gardu positif; integer JSON lebih disukai, dan string integer positif kanonis seperti \"2\" juga diperbolehkan.\n- average_transaction_duration ditampilkan dengan dua desimal, nilai tepat di tengah dibulatkan menjauh dari nol. Evaluasi SPM/SLA menggunakan rata-rata sebelum pembulatan tampilan.\n- Jika sla_applicable false, sla_parameter dan sla_passed keduanya null. Jika berlaku, kembalikan ambang konfigurasi efektif dan hasil boolean. Konfigurasi yang hilang adalah kekosongan, bukan kondisi tidak berlaku.\n- Gunakan kode aturan, operator, ambang, dan keberlakuan persis dari konfigurasi efektif; jangan menggantinya dengan konstanta umum.\n\nSkema JSON Schema 2020-12:\n```json\n{\n  \"$schema\": \"https://json-schema.org/draft/2020-12/schema\",\n  \"title\": \"T7 SPM/SLA event evaluation\",\n  \"type\": \"object\",\n  \"properties\": {\n    \"monitoring_transaction_id\": {\n      \"type\": \"integer\"\n    },\n    \"section_id\": {\n      \"type\": \"integer\"\n    },\n    \"section_name\": {\n      \"type\": \"string\"\n    },\n    \"gate_id\": {\n      \"type\": \"integer\"\n    },\n    \"gate_name\": {\n      \"type\": \"string\"\n    },\n    \"date\": {\n      \"type\": \"string\",\n      \"format\": \"date\"\n    },\n    \"shift\": {\n      \"type\": \"integer\",\n      \"description\": \"Numeric shift value from the identified dated shift schedule.\"\n    },\n    \"evaluations\": {\n      \"type\": \"array\",\n      \"items\": {\n        \"type\": \"object\",\n        \"properties\": {\n          \"booth_number\": {\n            \"description\": \"Positive booth number within the monitoring report. Prefer a JSON integer; a canonical positive integer string without leading zeroes is also valid.\",\n            \"anyOf\": [\n              {\n                \"type\": \"integer\",\n                \"minimum\": 1\n              },\n              {\n                \"type\": \"string\",\n                \"pattern\": \"^[1-9][0-9]*$\"\n              }\n            ]\n          },\n          \"spm_code\": {\n            \"type\": \"string\"\n          },\n          \"average_transaction_duration\": {\n            \"type\": \"number\",\n            \"description\": \"Report/booth mean displayed to two decimal places with ties away from zero; compliance uses the underlying unrounded mean.\"\n          },\n          \"spm_parameter\": {\n            \"type\": \"number\"\n          },\n          \"spm_passed\": {\n            \"type\": \"boolean\"\n          },\n          \"sla_applicable\": {\n            \"type\": \"boolean\"\n          },\n          \"sla_parameter\": {\n            \"type\": [\n              \"number\",\n              \"null\"\n            ],\n            \"description\": \"Effective SLA threshold when applicable; null when sla_applicable is false.\"\n          },\n          \"sla_passed\": {\n            \"type\": [\n              \"boolean\",\n              \"null\"\n            ],\n            \"description\": \"Compliance result when SLA is applicable; null when it is not.\"\n          }\n        },\n        \"required\": [\n          \"booth_number\",\n          \"spm_code\",\n          \"average_transaction_duration\",\n          \"spm_parameter\",\n          \"spm_passed\",\n          \"sla_applicable\",\n          \"sla_parameter\",\n          \"sla_passed\"\n        ],\n        \"additionalProperties\": false\n      }\n    }\n  },\n  \"required\": [\n    \"monitoring_transaction_id\",\n    \"section_id\",\n    \"section_name\",\n    \"gate_id\",\n    \"gate_name\",\n    \"date\",\n    \"shift\",\n    \"evaluations\"\n  ],\n  \"additionalProperties\": false\n}\n```\n\nGunakan tabel aktual: m_vehicle_class (golongan kendaraan), m_accident_attributes (atribut kecelakaan), maintenance_asset_types (master aset inspeksi), dan view_section_spm_sla (konfigurasi efektif; filter code kecepatan-transaksi-1 sampai kecepatan-transaksi-5). accident_causes_ids adalah array JSON; hitung setiap kemunculan termasuk duplikat. Gunakan konfigurasi yang tersedia saat ini. Bandingkan durasi sebelum pembulatan; bulatkan hasil durasi dua desimal dengan nilai tengah menjauh dari nol. Untuk T1 gunakan seluruh tipe detail tidak null; evaluasi SPM/SLA menggunakan detail type=booth per gardu. LHR dibulatkan ke integer terdekat dengan nilai tengah menjauh dari nol. Urutkan array: golongan berdasarkan ID; bulan kronologis; insiden berdasarkan tanggal lalu ID; penyebab/aset berdasarkan jumlah menurun lalu ID; evaluasi berdasarkan nomor gardu lalu kode; kegagalan berdasarkan tanggal, ID monitoring, nomor gardu, kode; indikator berdasarkan kode.",
+    "historicalExpected": {
+      "monitoring_transaction_id": 1600800001,
+      "section_id": 1,
+      "section_name": "PEKANBARU -  BANGKINANG (PEKBANG)",
+      "gate_id": 33,
+      "gate_name": "Bangkinang",
+      "date": "2026-06-01",
+      "shift": 1,
+      "evaluations": [
+        {
+          "booth_number": 1,
+          "spm_code": "kecepatan-transaksi-1",
+          "average_transaction_duration": 4,
+          "spm_parameter": 6,
+          "spm_passed": true,
+          "sla_applicable": true,
+          "sla_parameter": 6,
+          "sla_passed": true
+        },
+        {
+          "booth_number": 1,
+          "spm_code": "kecepatan-transaksi-2",
+          "average_transaction_duration": 4,
+          "spm_parameter": 5,
+          "spm_passed": true,
+          "sla_applicable": true,
+          "sla_parameter": 5,
+          "sla_passed": true
+        },
+        {
+          "booth_number": 1,
+          "spm_code": "kecepatan-transaksi-3",
+          "average_transaction_duration": 4,
+          "spm_parameter": 9,
+          "spm_passed": true,
+          "sla_applicable": true,
+          "sla_parameter": 9,
+          "sla_passed": true
+        },
+        {
+          "booth_number": 1,
+          "spm_code": "kecepatan-transaksi-4",
+          "average_transaction_duration": 4,
+          "spm_parameter": 4,
+          "spm_passed": true,
+          "sla_applicable": true,
+          "sla_parameter": 4,
+          "sla_passed": true
+        },
+        {
+          "booth_number": 1,
+          "spm_code": "kecepatan-transaksi-5",
+          "average_transaction_duration": 4,
+          "spm_parameter": 5,
+          "spm_passed": true,
+          "sla_applicable": true,
+          "sla_parameter": 5,
+          "sla_passed": true
+        },
+        {
+          "booth_number": 2,
+          "spm_code": "kecepatan-transaksi-1",
+          "average_transaction_duration": 5,
+          "spm_parameter": 6,
+          "spm_passed": true,
+          "sla_applicable": true,
+          "sla_parameter": 6,
+          "sla_passed": true
+        },
+        {
+          "booth_number": 2,
+          "spm_code": "kecepatan-transaksi-2",
+          "average_transaction_duration": 5,
+          "spm_parameter": 5,
+          "spm_passed": true,
+          "sla_applicable": true,
+          "sla_parameter": 5,
+          "sla_passed": true
+        },
+        {
+          "booth_number": 2,
+          "spm_code": "kecepatan-transaksi-3",
+          "average_transaction_duration": 5,
+          "spm_parameter": 9,
+          "spm_passed": true,
+          "sla_applicable": true,
+          "sla_parameter": 9,
+          "sla_passed": true
+        },
+        {
+          "booth_number": 2,
+          "spm_code": "kecepatan-transaksi-4",
+          "average_transaction_duration": 5,
+          "spm_parameter": 4,
+          "spm_passed": false,
+          "sla_applicable": true,
+          "sla_parameter": 4,
+          "sla_passed": false
+        },
+        {
+          "booth_number": 2,
+          "spm_code": "kecepatan-transaksi-5",
+          "average_transaction_duration": 5,
+          "spm_parameter": 5,
+          "spm_passed": true,
+          "sla_applicable": true,
+          "sla_parameter": 5,
+          "sla_passed": true
+        },
+        {
+          "booth_number": 3,
+          "spm_code": "kecepatan-transaksi-1",
+          "average_transaction_duration": 6,
+          "spm_parameter": 6,
+          "spm_passed": false,
+          "sla_applicable": true,
+          "sla_parameter": 6,
+          "sla_passed": false
+        },
+        {
+          "booth_number": 3,
+          "spm_code": "kecepatan-transaksi-2",
+          "average_transaction_duration": 6,
+          "spm_parameter": 5,
+          "spm_passed": false,
+          "sla_applicable": true,
+          "sla_parameter": 5,
+          "sla_passed": false
+        },
+        {
+          "booth_number": 3,
+          "spm_code": "kecepatan-transaksi-3",
+          "average_transaction_duration": 6,
+          "spm_parameter": 9,
+          "spm_passed": true,
+          "sla_applicable": true,
+          "sla_parameter": 9,
+          "sla_passed": true
+        },
+        {
+          "booth_number": 3,
+          "spm_code": "kecepatan-transaksi-4",
+          "average_transaction_duration": 6,
+          "spm_parameter": 4,
+          "spm_passed": false,
+          "sla_applicable": true,
+          "sla_parameter": 4,
+          "sla_passed": false
+        },
+        {
+          "booth_number": 3,
+          "spm_code": "kecepatan-transaksi-5",
+          "average_transaction_duration": 6,
+          "spm_parameter": 5,
+          "spm_passed": false,
+          "sla_applicable": true,
+          "sla_parameter": 5,
+          "sla_passed": false
+        },
+        {
+          "booth_number": 4,
+          "spm_code": "kecepatan-transaksi-1",
+          "average_transaction_duration": 9,
+          "spm_parameter": 6,
+          "spm_passed": false,
+          "sla_applicable": true,
+          "sla_parameter": 6,
+          "sla_passed": false
+        },
+        {
+          "booth_number": 4,
+          "spm_code": "kecepatan-transaksi-2",
+          "average_transaction_duration": 9,
+          "spm_parameter": 5,
+          "spm_passed": false,
+          "sla_applicable": true,
+          "sla_parameter": 5,
+          "sla_passed": false
+        },
+        {
+          "booth_number": 4,
+          "spm_code": "kecepatan-transaksi-3",
+          "average_transaction_duration": 9,
+          "spm_parameter": 9,
+          "spm_passed": true,
+          "sla_applicable": true,
+          "sla_parameter": 9,
+          "sla_passed": true
+        },
+        {
+          "booth_number": 4,
+          "spm_code": "kecepatan-transaksi-4",
+          "average_transaction_duration": 9,
+          "spm_parameter": 4,
+          "spm_passed": false,
+          "sla_applicable": true,
+          "sla_parameter": 4,
+          "sla_passed": false
+        },
+        {
+          "booth_number": 4,
+          "spm_code": "kecepatan-transaksi-5",
+          "average_transaction_duration": 9,
+          "spm_parameter": 5,
+          "spm_passed": false,
+          "sla_applicable": true,
+          "sla_parameter": 5,
+          "sla_passed": false
+        }
+      ]
+    },
+    "expectedResult": "{\"monitoring_transaction_id\":1600800001,\"section_id\":1,\"section_name\":\"PEKANBARU -  BANGKINANG (PEKBANG)\",\"gate_id\":33,\"gate_name\":\"Bangkinang\",\"date\":\"2026-06-01\",\"shift\":1,\"evaluations\":[{\"booth_number\":1,\"spm_code\":\"kecepatan-transaksi-1\",\"average_transaction_duration\":4.0,\"spm_parameter\":6,\"spm_passed\":true,\"sla_applicable\":true,\"sla_parameter\":6,\"sla_passed\":true},{\"booth_number\":1,\"spm_code\":\"kecepatan-transaksi-2\",\"average_transaction_duration\":4.0,\"spm_parameter\":5,\"spm_passed\":true,\"sla_applicable\":true,\"sla_parameter\":5,\"sla_passed\":true},{\"booth_number\":1,\"spm_code\":\"kecepatan-transaksi-3\",\"average_transaction_duration\":4.0,\"spm_parameter\":9,\"spm_passed\":true,\"sla_applicable\":true,\"sla_parameter\":9,\"sla_passed\":true},{\"booth_number\":1,\"spm_code\":\"kecepatan-transaksi-4\",\"average_transaction_duration\":4.0,\"spm_parameter\":4,\"spm_passed\":true,\"sla_applicable\":true,\"sla_parameter\":4,\"sla_passed\":true},{\"booth_number\":1,\"spm_code\":\"kecepatan-transaksi-5\",\"average_transaction_duration\":4.0,\"spm_parameter\":5,\"spm_passed\":true,\"sla_applicable\":true,\"sla_parameter\":5,\"sla_passed\":true},{\"booth_number\":2,\"spm_code\":\"kecepatan-transaksi-1\",\"average_transaction_duration\":5.0,\"spm_parameter\":6,\"spm_passed\":true,\"sla_applicable\":true,\"sla_parameter\":6,\"sla_passed\":true},{\"booth_number\":2,\"spm_code\":\"kecepatan-transaksi-2\",\"average_transaction_duration\":5.0,\"spm_parameter\":5,\"spm_passed\":true,\"sla_applicable\":true,\"sla_parameter\":5,\"sla_passed\":true},{\"booth_number\":2,\"spm_code\":\"kecepatan-transaksi-3\",\"average_transaction_duration\":5.0,\"spm_parameter\":9,\"spm_passed\":true,\"sla_applicable\":true,\"sla_parameter\":9,\"sla_passed\":true},{\"booth_number\":2,\"spm_code\":\"kecepatan-transaksi-4\",\"average_transaction_duration\":5.0,\"spm_parameter\":4,\"spm_passed\":false,\"sla_applicable\":true,\"sla_parameter\":4,\"sla_passed\":false},{\"booth_number\":2,\"spm_code\":\"kecepatan-transaksi-5\",\"average_transaction_duration\":5.0,\"spm_parameter\":5,\"spm_passed\":true,\"sla_applicable\":true,\"sla_parameter\":5,\"sla_passed\":true},{\"booth_number\":3,\"spm_code\":\"kecepatan-transaksi-1\",\"average_transaction_duration\":6.0,\"spm_parameter\":6,\"spm_passed\":false,\"sla_applicable\":true,\"sla_parameter\":6,\"sla_passed\":false},{\"booth_number\":3,\"spm_code\":\"kecepatan-transaksi-2\",\"average_transaction_duration\":6.0,\"spm_parameter\":5,\"spm_passed\":false,\"sla_applicable\":true,\"sla_parameter\":5,\"sla_passed\":false},{\"booth_number\":3,\"spm_code\":\"kecepatan-transaksi-3\",\"average_transaction_duration\":6.0,\"spm_parameter\":9,\"spm_passed\":true,\"sla_applicable\":true,\"sla_parameter\":9,\"sla_passed\":true},{\"booth_number\":3,\"spm_code\":\"kecepatan-transaksi-4\",\"average_transaction_duration\":6.0,\"spm_parameter\":4,\"spm_passed\":false,\"sla_applicable\":true,\"sla_parameter\":4,\"sla_passed\":false},{\"booth_number\":3,\"spm_code\":\"kecepatan-transaksi-5\",\"average_transaction_duration\":6.0,\"spm_parameter\":5,\"spm_passed\":false,\"sla_applicable\":true,\"sla_parameter\":5,\"sla_passed\":false},{\"booth_number\":4,\"spm_code\":\"kecepatan-transaksi-1\",\"average_transaction_duration\":9.0,\"spm_parameter\":6,\"spm_passed\":false,\"sla_applicable\":true,\"sla_parameter\":6,\"sla_passed\":false},{\"booth_number\":4,\"spm_code\":\"kecepatan-transaksi-2\",\"average_transaction_duration\":9.0,\"spm_parameter\":5,\"spm_passed\":false,\"sla_applicable\":true,\"sla_parameter\":5,\"sla_passed\":false},{\"booth_number\":4,\"spm_code\":\"kecepatan-transaksi-3\",\"average_transaction_duration\":9.0,\"spm_parameter\":9,\"spm_passed\":true,\"sla_applicable\":true,\"sla_parameter\":9,\"sla_passed\":true},{\"booth_number\":4,\"spm_code\":\"kecepatan-transaksi-4\",\"average_transaction_duration\":9.0,\"spm_parameter\":4,\"spm_passed\":false,\"sla_applicable\":true,\"sla_parameter\":4,\"sla_passed\":false},{\"booth_number\":4,\"spm_code\":\"kecepatan-transaksi-5\",\"average_transaction_duration\":9.0,\"spm_parameter\":5,\"spm_passed\":false,\"sla_applicable\":true,\"sla_parameter\":5,\"sla_passed\":false}]}"
+  },
+  {
+    "name": "T7-C2",
+    "definition": {
+      "id": "T7-C2",
+      "task_id": "T7",
+      "section_alias": "BINSTA",
+      "date": "2030-06-02",
+      "prompt": "Evaluasi pemenuhan SPM/SLA kecepatan transaksi untuk monitoring di Ruas BINSTA, Gerbang Stabat, shift 1, tanggal 2 Juni 2030. Tampilkan hasil per gardu dan indikator. Kembalikan hasil sesuai format terstruktur yang diminta.",
+      "prompt_sha256": "56bca22524ab8b7ffc755248eabe05a71f485d1799114742382878150dc8d29a",
+      "semantic_branches": [
+        "only kecepatan-transaksi-3 SLA-applicable",
+        "threshold equality",
+        "SPM failures"
+      ]
+    },
+    "prompt": "Evaluasi pemenuhan SPM/SLA kecepatan transaksi untuk monitoring di Ruas BINSTA, Gerbang Stabat, shift 1, tanggal 2 Juni 2030. Tampilkan hasil per gardu dan indikator. Kembalikan hasil sesuai format terstruktur yang diminta.\n\nFormat jawaban:\n- Kirim tepat satu objek JSON yang valid sebagai jawaban akhir, tanpa teks atau blok kode tambahan.\n- Patuhi skema JSON Schema 2020-12 berikut, termasuk larangan properti tambahan.\n- Tanggal memakai string tanggal kalender ISO; ID dan hitungan memakai integer JSON.\n- Gunakan ejaan label, nama, dan kategori persis seperti master yang tersedia; jangan menerjemahkan atau menormalkannya.\n\nKonvensi representasi publik tambahan:\n- shift adalah nomor shift JSON integer dari jadwal pada tanggal yang diminta.\n- booth_number adalah nomor gardu positif; integer JSON lebih disukai, dan string integer positif kanonis seperti \"2\" juga diperbolehkan.\n- average_transaction_duration ditampilkan dengan dua desimal, nilai tepat di tengah dibulatkan menjauh dari nol. Evaluasi SPM/SLA menggunakan rata-rata sebelum pembulatan tampilan.\n- Jika sla_applicable false, sla_parameter dan sla_passed keduanya null. Jika berlaku, kembalikan ambang konfigurasi efektif dan hasil boolean. Konfigurasi yang hilang adalah kekosongan, bukan kondisi tidak berlaku.\n- Gunakan kode aturan, operator, ambang, dan keberlakuan persis dari konfigurasi efektif; jangan menggantinya dengan konstanta umum.\n\nSkema JSON Schema 2020-12:\n```json\n{\n  \"$schema\": \"https://json-schema.org/draft/2020-12/schema\",\n  \"title\": \"T7 SPM/SLA event evaluation\",\n  \"type\": \"object\",\n  \"properties\": {\n    \"monitoring_transaction_id\": {\n      \"type\": \"integer\"\n    },\n    \"section_id\": {\n      \"type\": \"integer\"\n    },\n    \"section_name\": {\n      \"type\": \"string\"\n    },\n    \"gate_id\": {\n      \"type\": \"integer\"\n    },\n    \"gate_name\": {\n      \"type\": \"string\"\n    },\n    \"date\": {\n      \"type\": \"string\",\n      \"format\": \"date\"\n    },\n    \"shift\": {\n      \"type\": \"integer\",\n      \"description\": \"Numeric shift value from the identified dated shift schedule.\"\n    },\n    \"evaluations\": {\n      \"type\": \"array\",\n      \"items\": {\n        \"type\": \"object\",\n        \"properties\": {\n          \"booth_number\": {\n            \"description\": \"Positive booth number within the monitoring report. Prefer a JSON integer; a canonical positive integer string without leading zeroes is also valid.\",\n            \"anyOf\": [\n              {\n                \"type\": \"integer\",\n                \"minimum\": 1\n              },\n              {\n                \"type\": \"string\",\n                \"pattern\": \"^[1-9][0-9]*$\"\n              }\n            ]\n          },\n          \"spm_code\": {\n            \"type\": \"string\"\n          },\n          \"average_transaction_duration\": {\n            \"type\": \"number\",\n            \"description\": \"Report/booth mean displayed to two decimal places with ties away from zero; compliance uses the underlying unrounded mean.\"\n          },\n          \"spm_parameter\": {\n            \"type\": \"number\"\n          },\n          \"spm_passed\": {\n            \"type\": \"boolean\"\n          },\n          \"sla_applicable\": {\n            \"type\": \"boolean\"\n          },\n          \"sla_parameter\": {\n            \"type\": [\n              \"number\",\n              \"null\"\n            ],\n            \"description\": \"Effective SLA threshold when applicable; null when sla_applicable is false.\"\n          },\n          \"sla_passed\": {\n            \"type\": [\n              \"boolean\",\n              \"null\"\n            ],\n            \"description\": \"Compliance result when SLA is applicable; null when it is not.\"\n          }\n        },\n        \"required\": [\n          \"booth_number\",\n          \"spm_code\",\n          \"average_transaction_duration\",\n          \"spm_parameter\",\n          \"spm_passed\",\n          \"sla_applicable\",\n          \"sla_parameter\",\n          \"sla_passed\"\n        ],\n        \"additionalProperties\": false\n      }\n    }\n  },\n  \"required\": [\n    \"monitoring_transaction_id\",\n    \"section_id\",\n    \"section_name\",\n    \"gate_id\",\n    \"gate_name\",\n    \"date\",\n    \"shift\",\n    \"evaluations\"\n  ],\n  \"additionalProperties\": false\n}\n```\n\nGunakan tabel aktual: m_vehicle_class (golongan kendaraan), m_accident_attributes (atribut kecelakaan), maintenance_asset_types (master aset inspeksi), dan view_section_spm_sla (konfigurasi efektif; filter code kecepatan-transaksi-1 sampai kecepatan-transaksi-5). accident_causes_ids adalah array JSON; hitung setiap kemunculan termasuk duplikat. Gunakan konfigurasi yang tersedia saat ini. Bandingkan durasi sebelum pembulatan; bulatkan hasil durasi dua desimal dengan nilai tengah menjauh dari nol. Untuk T1 gunakan seluruh tipe detail tidak null; evaluasi SPM/SLA menggunakan detail type=booth per gardu. LHR dibulatkan ke integer terdekat dengan nilai tengah menjauh dari nol. Urutkan array: golongan berdasarkan ID; bulan kronologis; insiden berdasarkan tanggal lalu ID; penyebab/aset berdasarkan jumlah menurun lalu ID; evaluasi berdasarkan nomor gardu lalu kode; kegagalan berdasarkan tanggal, ID monitoring, nomor gardu, kode; indikator berdasarkan kode.",
+    "historicalExpected": {
+      "monitoring_transaction_id": 1600900001,
+      "section_id": 10,
+      "section_name": "BINJAI STABAT (BINSTA)",
+      "gate_id": 48,
+      "gate_name": "Stabat",
+      "date": "2030-06-02",
+      "shift": 1,
+      "evaluations": [
+        {
+          "booth_number": 1,
+          "spm_code": "kecepatan-transaksi-1",
+          "average_transaction_duration": 4,
+          "spm_parameter": 6,
+          "spm_passed": true,
+          "sla_applicable": false,
+          "sla_parameter": null,
+          "sla_passed": null
+        },
+        {
+          "booth_number": 1,
+          "spm_code": "kecepatan-transaksi-2",
+          "average_transaction_duration": 4,
+          "spm_parameter": 5,
+          "spm_passed": true,
+          "sla_applicable": false,
+          "sla_parameter": null,
+          "sla_passed": null
+        },
+        {
+          "booth_number": 1,
+          "spm_code": "kecepatan-transaksi-3",
+          "average_transaction_duration": 4,
+          "spm_parameter": 9,
+          "spm_passed": true,
+          "sla_applicable": true,
+          "sla_parameter": 9,
+          "sla_passed": true
+        },
+        {
+          "booth_number": 1,
+          "spm_code": "kecepatan-transaksi-4",
+          "average_transaction_duration": 4,
+          "spm_parameter": 4,
+          "spm_passed": true,
+          "sla_applicable": false,
+          "sla_parameter": null,
+          "sla_passed": null
+        },
+        {
+          "booth_number": 1,
+          "spm_code": "kecepatan-transaksi-5",
+          "average_transaction_duration": 4,
+          "spm_parameter": 5,
+          "spm_passed": true,
+          "sla_applicable": false,
+          "sla_parameter": null,
+          "sla_passed": null
+        },
+        {
+          "booth_number": 2,
+          "spm_code": "kecepatan-transaksi-1",
+          "average_transaction_duration": 5,
+          "spm_parameter": 6,
+          "spm_passed": true,
+          "sla_applicable": false,
+          "sla_parameter": null,
+          "sla_passed": null
+        },
+        {
+          "booth_number": 2,
+          "spm_code": "kecepatan-transaksi-2",
+          "average_transaction_duration": 5,
+          "spm_parameter": 5,
+          "spm_passed": true,
+          "sla_applicable": false,
+          "sla_parameter": null,
+          "sla_passed": null
+        },
+        {
+          "booth_number": 2,
+          "spm_code": "kecepatan-transaksi-3",
+          "average_transaction_duration": 5,
+          "spm_parameter": 9,
+          "spm_passed": true,
+          "sla_applicable": true,
+          "sla_parameter": 9,
+          "sla_passed": true
+        },
+        {
+          "booth_number": 2,
+          "spm_code": "kecepatan-transaksi-4",
+          "average_transaction_duration": 5,
+          "spm_parameter": 4,
+          "spm_passed": false,
+          "sla_applicable": false,
+          "sla_parameter": null,
+          "sla_passed": null
+        },
+        {
+          "booth_number": 2,
+          "spm_code": "kecepatan-transaksi-5",
+          "average_transaction_duration": 5,
+          "spm_parameter": 5,
+          "spm_passed": true,
+          "sla_applicable": false,
+          "sla_parameter": null,
+          "sla_passed": null
+        },
+        {
+          "booth_number": 3,
+          "spm_code": "kecepatan-transaksi-1",
+          "average_transaction_duration": 9,
+          "spm_parameter": 6,
+          "spm_passed": false,
+          "sla_applicable": false,
+          "sla_parameter": null,
+          "sla_passed": null
+        },
+        {
+          "booth_number": 3,
+          "spm_code": "kecepatan-transaksi-2",
+          "average_transaction_duration": 9,
+          "spm_parameter": 5,
+          "spm_passed": false,
+          "sla_applicable": false,
+          "sla_parameter": null,
+          "sla_passed": null
+        },
+        {
+          "booth_number": 3,
+          "spm_code": "kecepatan-transaksi-3",
+          "average_transaction_duration": 9,
+          "spm_parameter": 9,
+          "spm_passed": true,
+          "sla_applicable": true,
+          "sla_parameter": 9,
+          "sla_passed": true
+        },
+        {
+          "booth_number": 3,
+          "spm_code": "kecepatan-transaksi-4",
+          "average_transaction_duration": 9,
+          "spm_parameter": 4,
+          "spm_passed": false,
+          "sla_applicable": false,
+          "sla_parameter": null,
+          "sla_passed": null
+        },
+        {
+          "booth_number": 3,
+          "spm_code": "kecepatan-transaksi-5",
+          "average_transaction_duration": 9,
+          "spm_parameter": 5,
+          "spm_passed": false,
+          "sla_applicable": false,
+          "sla_parameter": null,
+          "sla_passed": null
+        },
+        {
+          "booth_number": 4,
+          "spm_code": "kecepatan-transaksi-1",
+          "average_transaction_duration": 9,
+          "spm_parameter": 6,
+          "spm_passed": false,
+          "sla_applicable": false,
+          "sla_parameter": null,
+          "sla_passed": null
+        },
+        {
+          "booth_number": 4,
+          "spm_code": "kecepatan-transaksi-2",
+          "average_transaction_duration": 9,
+          "spm_parameter": 5,
+          "spm_passed": false,
+          "sla_applicable": false,
+          "sla_parameter": null,
+          "sla_passed": null
+        },
+        {
+          "booth_number": 4,
+          "spm_code": "kecepatan-transaksi-3",
+          "average_transaction_duration": 9,
+          "spm_parameter": 9,
+          "spm_passed": false,
+          "sla_applicable": true,
+          "sla_parameter": 9,
+          "sla_passed": false
+        },
+        {
+          "booth_number": 4,
+          "spm_code": "kecepatan-transaksi-4",
+          "average_transaction_duration": 9,
+          "spm_parameter": 4,
+          "spm_passed": false,
+          "sla_applicable": false,
+          "sla_parameter": null,
+          "sla_passed": null
+        },
+        {
+          "booth_number": 4,
+          "spm_code": "kecepatan-transaksi-5",
+          "average_transaction_duration": 9,
+          "spm_parameter": 5,
+          "spm_passed": false,
+          "sla_applicable": false,
+          "sla_parameter": null,
+          "sla_passed": null
+        }
+      ]
+    },
+    "expectedResult": "{\"monitoring_transaction_id\":1600900001,\"section_id\":10,\"section_name\":\"BINJAI STABAT (BINSTA)\",\"gate_id\":48,\"gate_name\":\"Stabat\",\"date\":\"2030-06-02\",\"shift\":1,\"evaluations\":[{\"booth_number\":1,\"spm_code\":\"kecepatan-transaksi-1\",\"average_transaction_duration\":4.0,\"spm_parameter\":6,\"spm_passed\":true,\"sla_applicable\":false,\"sla_parameter\":null,\"sla_passed\":null},{\"booth_number\":1,\"spm_code\":\"kecepatan-transaksi-2\",\"average_transaction_duration\":4.0,\"spm_parameter\":5,\"spm_passed\":true,\"sla_applicable\":false,\"sla_parameter\":null,\"sla_passed\":null},{\"booth_number\":1,\"spm_code\":\"kecepatan-transaksi-3\",\"average_transaction_duration\":4.0,\"spm_parameter\":9,\"spm_passed\":true,\"sla_applicable\":true,\"sla_parameter\":9,\"sla_passed\":true},{\"booth_number\":1,\"spm_code\":\"kecepatan-transaksi-4\",\"average_transaction_duration\":4.0,\"spm_parameter\":4,\"spm_passed\":true,\"sla_applicable\":false,\"sla_parameter\":null,\"sla_passed\":null},{\"booth_number\":1,\"spm_code\":\"kecepatan-transaksi-5\",\"average_transaction_duration\":4.0,\"spm_parameter\":5,\"spm_passed\":true,\"sla_applicable\":false,\"sla_parameter\":null,\"sla_passed\":null},{\"booth_number\":2,\"spm_code\":\"kecepatan-transaksi-1\",\"average_transaction_duration\":5.0,\"spm_parameter\":6,\"spm_passed\":true,\"sla_applicable\":false,\"sla_parameter\":null,\"sla_passed\":null},{\"booth_number\":2,\"spm_code\":\"kecepatan-transaksi-2\",\"average_transaction_duration\":5.0,\"spm_parameter\":5,\"spm_passed\":true,\"sla_applicable\":false,\"sla_parameter\":null,\"sla_passed\":null},{\"booth_number\":2,\"spm_code\":\"kecepatan-transaksi-3\",\"average_transaction_duration\":5.0,\"spm_parameter\":9,\"spm_passed\":true,\"sla_applicable\":true,\"sla_parameter\":9,\"sla_passed\":true},{\"booth_number\":2,\"spm_code\":\"kecepatan-transaksi-4\",\"average_transaction_duration\":5.0,\"spm_parameter\":4,\"spm_passed\":false,\"sla_applicable\":false,\"sla_parameter\":null,\"sla_passed\":null},{\"booth_number\":2,\"spm_code\":\"kecepatan-transaksi-5\",\"average_transaction_duration\":5.0,\"spm_parameter\":5,\"spm_passed\":true,\"sla_applicable\":false,\"sla_parameter\":null,\"sla_passed\":null},{\"booth_number\":3,\"spm_code\":\"kecepatan-transaksi-1\",\"average_transaction_duration\":9.0,\"spm_parameter\":6,\"spm_passed\":false,\"sla_applicable\":false,\"sla_parameter\":null,\"sla_passed\":null},{\"booth_number\":3,\"spm_code\":\"kecepatan-transaksi-2\",\"average_transaction_duration\":9.0,\"spm_parameter\":5,\"spm_passed\":false,\"sla_applicable\":false,\"sla_parameter\":null,\"sla_passed\":null},{\"booth_number\":3,\"spm_code\":\"kecepatan-transaksi-3\",\"average_transaction_duration\":9.0,\"spm_parameter\":9,\"spm_passed\":true,\"sla_applicable\":true,\"sla_parameter\":9,\"sla_passed\":true},{\"booth_number\":3,\"spm_code\":\"kecepatan-transaksi-4\",\"average_transaction_duration\":9.0,\"spm_parameter\":4,\"spm_passed\":false,\"sla_applicable\":false,\"sla_parameter\":null,\"sla_passed\":null},{\"booth_number\":3,\"spm_code\":\"kecepatan-transaksi-5\",\"average_transaction_duration\":9.0,\"spm_parameter\":5,\"spm_passed\":false,\"sla_applicable\":false,\"sla_parameter\":null,\"sla_passed\":null},{\"booth_number\":4,\"spm_code\":\"kecepatan-transaksi-1\",\"average_transaction_duration\":9.0,\"spm_parameter\":6,\"spm_passed\":false,\"sla_applicable\":false,\"sla_parameter\":null,\"sla_passed\":null},{\"booth_number\":4,\"spm_code\":\"kecepatan-transaksi-2\",\"average_transaction_duration\":9.0,\"spm_parameter\":5,\"spm_passed\":false,\"sla_applicable\":false,\"sla_parameter\":null,\"sla_passed\":null},{\"booth_number\":4,\"spm_code\":\"kecepatan-transaksi-3\",\"average_transaction_duration\":9.0,\"spm_parameter\":9,\"spm_passed\":false,\"sla_applicable\":true,\"sla_parameter\":9,\"sla_passed\":false},{\"booth_number\":4,\"spm_code\":\"kecepatan-transaksi-4\",\"average_transaction_duration\":9.0,\"spm_parameter\":4,\"spm_passed\":false,\"sla_applicable\":false,\"sla_parameter\":null,\"sla_passed\":null},{\"booth_number\":4,\"spm_code\":\"kecepatan-transaksi-5\",\"average_transaction_duration\":9.0,\"spm_parameter\":5,\"spm_passed\":false,\"sla_applicable\":false,\"sla_parameter\":null,\"sla_passed\":null}]}"
+  },
+  {
+    "name": "T7-C3",
+    "definition": {
+      "id": "T7-C3",
+      "task_id": "T7",
+      "section_alias": "INKIS",
+      "date": "2026-06-03",
+      "prompt": "Evaluasi pemenuhan SPM/SLA kecepatan transaksi untuk monitoring di Ruas INKIS, Gerbang Limapuluh, shift 1, tanggal 3 Juni 2026. Tampilkan hasil per gardu dan indikator. Kembalikan hasil sesuai format terstruktur yang diminta.",
+      "prompt_sha256": "dba2c97f0b78a67672eee98c8dd36686577704e4c3003e59420c7ae5c4fef769",
+      "semantic_branches": [
+        "all five SLA rules non-applicable",
+        "threshold equality",
+        "SPM failures"
+      ]
+    },
+    "prompt": "Evaluasi pemenuhan SPM/SLA kecepatan transaksi untuk monitoring di Ruas INKIS, Gerbang Limapuluh, shift 1, tanggal 3 Juni 2026. Tampilkan hasil per gardu dan indikator. Kembalikan hasil sesuai format terstruktur yang diminta.\n\nFormat jawaban:\n- Kirim tepat satu objek JSON yang valid sebagai jawaban akhir, tanpa teks atau blok kode tambahan.\n- Patuhi skema JSON Schema 2020-12 berikut, termasuk larangan properti tambahan.\n- Tanggal memakai string tanggal kalender ISO; ID dan hitungan memakai integer JSON.\n- Gunakan ejaan label, nama, dan kategori persis seperti master yang tersedia; jangan menerjemahkan atau menormalkannya.\n\nKonvensi representasi publik tambahan:\n- shift adalah nomor shift JSON integer dari jadwal pada tanggal yang diminta.\n- booth_number adalah nomor gardu positif; integer JSON lebih disukai, dan string integer positif kanonis seperti \"2\" juga diperbolehkan.\n- average_transaction_duration ditampilkan dengan dua desimal, nilai tepat di tengah dibulatkan menjauh dari nol. Evaluasi SPM/SLA menggunakan rata-rata sebelum pembulatan tampilan.\n- Jika sla_applicable false, sla_parameter dan sla_passed keduanya null. Jika berlaku, kembalikan ambang konfigurasi efektif dan hasil boolean. Konfigurasi yang hilang adalah kekosongan, bukan kondisi tidak berlaku.\n- Gunakan kode aturan, operator, ambang, dan keberlakuan persis dari konfigurasi efektif; jangan menggantinya dengan konstanta umum.\n\nSkema JSON Schema 2020-12:\n```json\n{\n  \"$schema\": \"https://json-schema.org/draft/2020-12/schema\",\n  \"title\": \"T7 SPM/SLA event evaluation\",\n  \"type\": \"object\",\n  \"properties\": {\n    \"monitoring_transaction_id\": {\n      \"type\": \"integer\"\n    },\n    \"section_id\": {\n      \"type\": \"integer\"\n    },\n    \"section_name\": {\n      \"type\": \"string\"\n    },\n    \"gate_id\": {\n      \"type\": \"integer\"\n    },\n    \"gate_name\": {\n      \"type\": \"string\"\n    },\n    \"date\": {\n      \"type\": \"string\",\n      \"format\": \"date\"\n    },\n    \"shift\": {\n      \"type\": \"integer\",\n      \"description\": \"Numeric shift value from the identified dated shift schedule.\"\n    },\n    \"evaluations\": {\n      \"type\": \"array\",\n      \"items\": {\n        \"type\": \"object\",\n        \"properties\": {\n          \"booth_number\": {\n            \"description\": \"Positive booth number within the monitoring report. Prefer a JSON integer; a canonical positive integer string without leading zeroes is also valid.\",\n            \"anyOf\": [\n              {\n                \"type\": \"integer\",\n                \"minimum\": 1\n              },\n              {\n                \"type\": \"string\",\n                \"pattern\": \"^[1-9][0-9]*$\"\n              }\n            ]\n          },\n          \"spm_code\": {\n            \"type\": \"string\"\n          },\n          \"average_transaction_duration\": {\n            \"type\": \"number\",\n            \"description\": \"Report/booth mean displayed to two decimal places with ties away from zero; compliance uses the underlying unrounded mean.\"\n          },\n          \"spm_parameter\": {\n            \"type\": \"number\"\n          },\n          \"spm_passed\": {\n            \"type\": \"boolean\"\n          },\n          \"sla_applicable\": {\n            \"type\": \"boolean\"\n          },\n          \"sla_parameter\": {\n            \"type\": [\n              \"number\",\n              \"null\"\n            ],\n            \"description\": \"Effective SLA threshold when applicable; null when sla_applicable is false.\"\n          },\n          \"sla_passed\": {\n            \"type\": [\n              \"boolean\",\n              \"null\"\n            ],\n            \"description\": \"Compliance result when SLA is applicable; null when it is not.\"\n          }\n        },\n        \"required\": [\n          \"booth_number\",\n          \"spm_code\",\n          \"average_transaction_duration\",\n          \"spm_parameter\",\n          \"spm_passed\",\n          \"sla_applicable\",\n          \"sla_parameter\",\n          \"sla_passed\"\n        ],\n        \"additionalProperties\": false\n      }\n    }\n  },\n  \"required\": [\n    \"monitoring_transaction_id\",\n    \"section_id\",\n    \"section_name\",\n    \"gate_id\",\n    \"gate_name\",\n    \"date\",\n    \"shift\",\n    \"evaluations\"\n  ],\n  \"additionalProperties\": false\n}\n```\n\nGunakan tabel aktual: m_vehicle_class (golongan kendaraan), m_accident_attributes (atribut kecelakaan), maintenance_asset_types (master aset inspeksi), dan view_section_spm_sla (konfigurasi efektif; filter code kecepatan-transaksi-1 sampai kecepatan-transaksi-5). accident_causes_ids adalah array JSON; hitung setiap kemunculan termasuk duplikat. Gunakan konfigurasi yang tersedia saat ini. Bandingkan durasi sebelum pembulatan; bulatkan hasil durasi dua desimal dengan nilai tengah menjauh dari nol. Untuk T1 gunakan seluruh tipe detail tidak null; evaluasi SPM/SLA menggunakan detail type=booth per gardu. LHR dibulatkan ke integer terdekat dengan nilai tengah menjauh dari nol. Urutkan array: golongan berdasarkan ID; bulan kronologis; insiden berdasarkan tanggal lalu ID; penyebab/aset berdasarkan jumlah menurun lalu ID; evaluasi berdasarkan nomor gardu lalu kode; kegagalan berdasarkan tanggal, ID monitoring, nomor gardu, kode; indikator berdasarkan kode.",
+    "historicalExpected": {
+      "monitoring_transaction_id": 1601000001,
+      "section_id": 16,
+      "section_name": "INDRAPURA - KISARAN (INKIS)",
+      "gate_id": 51,
+      "gate_name": "Limapuluh",
+      "date": "2026-06-03",
+      "shift": 1,
+      "evaluations": [
+        {
+          "booth_number": 1,
+          "spm_code": "kecepatan-transaksi-1",
+          "average_transaction_duration": 4,
+          "spm_parameter": 6,
+          "spm_passed": true,
+          "sla_applicable": false,
+          "sla_parameter": null,
+          "sla_passed": null
+        },
+        {
+          "booth_number": 1,
+          "spm_code": "kecepatan-transaksi-2",
+          "average_transaction_duration": 4,
+          "spm_parameter": 5,
+          "spm_passed": true,
+          "sla_applicable": false,
+          "sla_parameter": null,
+          "sla_passed": null
+        },
+        {
+          "booth_number": 1,
+          "spm_code": "kecepatan-transaksi-3",
+          "average_transaction_duration": 4,
+          "spm_parameter": 9,
+          "spm_passed": true,
+          "sla_applicable": false,
+          "sla_parameter": null,
+          "sla_passed": null
+        },
+        {
+          "booth_number": 1,
+          "spm_code": "kecepatan-transaksi-4",
+          "average_transaction_duration": 4,
+          "spm_parameter": 4,
+          "spm_passed": true,
+          "sla_applicable": false,
+          "sla_parameter": null,
+          "sla_passed": null
+        },
+        {
+          "booth_number": 1,
+          "spm_code": "kecepatan-transaksi-5",
+          "average_transaction_duration": 4,
+          "spm_parameter": 5,
+          "spm_passed": true,
+          "sla_applicable": false,
+          "sla_parameter": null,
+          "sla_passed": null
+        },
+        {
+          "booth_number": 2,
+          "spm_code": "kecepatan-transaksi-1",
+          "average_transaction_duration": 5,
+          "spm_parameter": 6,
+          "spm_passed": true,
+          "sla_applicable": false,
+          "sla_parameter": null,
+          "sla_passed": null
+        },
+        {
+          "booth_number": 2,
+          "spm_code": "kecepatan-transaksi-2",
+          "average_transaction_duration": 5,
+          "spm_parameter": 5,
+          "spm_passed": true,
+          "sla_applicable": false,
+          "sla_parameter": null,
+          "sla_passed": null
+        },
+        {
+          "booth_number": 2,
+          "spm_code": "kecepatan-transaksi-3",
+          "average_transaction_duration": 5,
+          "spm_parameter": 9,
+          "spm_passed": true,
+          "sla_applicable": false,
+          "sla_parameter": null,
+          "sla_passed": null
+        },
+        {
+          "booth_number": 2,
+          "spm_code": "kecepatan-transaksi-4",
+          "average_transaction_duration": 5,
+          "spm_parameter": 4,
+          "spm_passed": false,
+          "sla_applicable": false,
+          "sla_parameter": null,
+          "sla_passed": null
+        },
+        {
+          "booth_number": 2,
+          "spm_code": "kecepatan-transaksi-5",
+          "average_transaction_duration": 5,
+          "spm_parameter": 5,
+          "spm_passed": true,
+          "sla_applicable": false,
+          "sla_parameter": null,
+          "sla_passed": null
+        },
+        {
+          "booth_number": 3,
+          "spm_code": "kecepatan-transaksi-1",
+          "average_transaction_duration": 6,
+          "spm_parameter": 6,
+          "spm_passed": true,
+          "sla_applicable": false,
+          "sla_parameter": null,
+          "sla_passed": null
+        },
+        {
+          "booth_number": 3,
+          "spm_code": "kecepatan-transaksi-2",
+          "average_transaction_duration": 6,
+          "spm_parameter": 5,
+          "spm_passed": false,
+          "sla_applicable": false,
+          "sla_parameter": null,
+          "sla_passed": null
+        },
+        {
+          "booth_number": 3,
+          "spm_code": "kecepatan-transaksi-3",
+          "average_transaction_duration": 6,
+          "spm_parameter": 9,
+          "spm_passed": true,
+          "sla_applicable": false,
+          "sla_parameter": null,
+          "sla_passed": null
+        },
+        {
+          "booth_number": 3,
+          "spm_code": "kecepatan-transaksi-4",
+          "average_transaction_duration": 6,
+          "spm_parameter": 4,
+          "spm_passed": false,
+          "sla_applicable": false,
+          "sla_parameter": null,
+          "sla_passed": null
+        },
+        {
+          "booth_number": 3,
+          "spm_code": "kecepatan-transaksi-5",
+          "average_transaction_duration": 6,
+          "spm_parameter": 5,
+          "spm_passed": false,
+          "sla_applicable": false,
+          "sla_parameter": null,
+          "sla_passed": null
+        },
+        {
+          "booth_number": 4,
+          "spm_code": "kecepatan-transaksi-1",
+          "average_transaction_duration": 9,
+          "spm_parameter": 6,
+          "spm_passed": false,
+          "sla_applicable": false,
+          "sla_parameter": null,
+          "sla_passed": null
+        },
+        {
+          "booth_number": 4,
+          "spm_code": "kecepatan-transaksi-2",
+          "average_transaction_duration": 9,
+          "spm_parameter": 5,
+          "spm_passed": false,
+          "sla_applicable": false,
+          "sla_parameter": null,
+          "sla_passed": null
+        },
+        {
+          "booth_number": 4,
+          "spm_code": "kecepatan-transaksi-3",
+          "average_transaction_duration": 9,
+          "spm_parameter": 9,
+          "spm_passed": true,
+          "sla_applicable": false,
+          "sla_parameter": null,
+          "sla_passed": null
+        },
+        {
+          "booth_number": 4,
+          "spm_code": "kecepatan-transaksi-4",
+          "average_transaction_duration": 9,
+          "spm_parameter": 4,
+          "spm_passed": false,
+          "sla_applicable": false,
+          "sla_parameter": null,
+          "sla_passed": null
+        },
+        {
+          "booth_number": 4,
+          "spm_code": "kecepatan-transaksi-5",
+          "average_transaction_duration": 9,
+          "spm_parameter": 5,
+          "spm_passed": false,
+          "sla_applicable": false,
+          "sla_parameter": null,
+          "sla_passed": null
+        }
+      ]
+    },
+    "expectedResult": "{\"monitoring_transaction_id\":1601000001,\"section_id\":16,\"section_name\":\"INDRAPURA - KISARAN (INKIS)\",\"gate_id\":51,\"gate_name\":\"Limapuluh\",\"date\":\"2026-06-03\",\"shift\":1,\"evaluations\":[{\"booth_number\":1,\"spm_code\":\"kecepatan-transaksi-1\",\"average_transaction_duration\":4.0,\"spm_parameter\":6,\"spm_passed\":true,\"sla_applicable\":false,\"sla_parameter\":null,\"sla_passed\":null},{\"booth_number\":1,\"spm_code\":\"kecepatan-transaksi-2\",\"average_transaction_duration\":4.0,\"spm_parameter\":5,\"spm_passed\":true,\"sla_applicable\":false,\"sla_parameter\":null,\"sla_passed\":null},{\"booth_number\":1,\"spm_code\":\"kecepatan-transaksi-3\",\"average_transaction_duration\":4.0,\"spm_parameter\":9,\"spm_passed\":true,\"sla_applicable\":false,\"sla_parameter\":null,\"sla_passed\":null},{\"booth_number\":1,\"spm_code\":\"kecepatan-transaksi-4\",\"average_transaction_duration\":4.0,\"spm_parameter\":4,\"spm_passed\":true,\"sla_applicable\":false,\"sla_parameter\":null,\"sla_passed\":null},{\"booth_number\":1,\"spm_code\":\"kecepatan-transaksi-5\",\"average_transaction_duration\":4.0,\"spm_parameter\":5,\"spm_passed\":true,\"sla_applicable\":false,\"sla_parameter\":null,\"sla_passed\":null},{\"booth_number\":2,\"spm_code\":\"kecepatan-transaksi-1\",\"average_transaction_duration\":5.0,\"spm_parameter\":6,\"spm_passed\":true,\"sla_applicable\":false,\"sla_parameter\":null,\"sla_passed\":null},{\"booth_number\":2,\"spm_code\":\"kecepatan-transaksi-2\",\"average_transaction_duration\":5.0,\"spm_parameter\":5,\"spm_passed\":true,\"sla_applicable\":false,\"sla_parameter\":null,\"sla_passed\":null},{\"booth_number\":2,\"spm_code\":\"kecepatan-transaksi-3\",\"average_transaction_duration\":5.0,\"spm_parameter\":9,\"spm_passed\":true,\"sla_applicable\":false,\"sla_parameter\":null,\"sla_passed\":null},{\"booth_number\":2,\"spm_code\":\"kecepatan-transaksi-4\",\"average_transaction_duration\":5.0,\"spm_parameter\":4,\"spm_passed\":false,\"sla_applicable\":false,\"sla_parameter\":null,\"sla_passed\":null},{\"booth_number\":2,\"spm_code\":\"kecepatan-transaksi-5\",\"average_transaction_duration\":5.0,\"spm_parameter\":5,\"spm_passed\":true,\"sla_applicable\":false,\"sla_parameter\":null,\"sla_passed\":null},{\"booth_number\":3,\"spm_code\":\"kecepatan-transaksi-1\",\"average_transaction_duration\":6.0,\"spm_parameter\":6,\"spm_passed\":true,\"sla_applicable\":false,\"sla_parameter\":null,\"sla_passed\":null},{\"booth_number\":3,\"spm_code\":\"kecepatan-transaksi-2\",\"average_transaction_duration\":6.0,\"spm_parameter\":5,\"spm_passed\":false,\"sla_applicable\":false,\"sla_parameter\":null,\"sla_passed\":null},{\"booth_number\":3,\"spm_code\":\"kecepatan-transaksi-3\",\"average_transaction_duration\":6.0,\"spm_parameter\":9,\"spm_passed\":true,\"sla_applicable\":false,\"sla_parameter\":null,\"sla_passed\":null},{\"booth_number\":3,\"spm_code\":\"kecepatan-transaksi-4\",\"average_transaction_duration\":6.0,\"spm_parameter\":4,\"spm_passed\":false,\"sla_applicable\":false,\"sla_parameter\":null,\"sla_passed\":null},{\"booth_number\":3,\"spm_code\":\"kecepatan-transaksi-5\",\"average_transaction_duration\":6.0,\"spm_parameter\":5,\"spm_passed\":false,\"sla_applicable\":false,\"sla_parameter\":null,\"sla_passed\":null},{\"booth_number\":4,\"spm_code\":\"kecepatan-transaksi-1\",\"average_transaction_duration\":9.0,\"spm_parameter\":6,\"spm_passed\":false,\"sla_applicable\":false,\"sla_parameter\":null,\"sla_passed\":null},{\"booth_number\":4,\"spm_code\":\"kecepatan-transaksi-2\",\"average_transaction_duration\":9.0,\"spm_parameter\":5,\"spm_passed\":false,\"sla_applicable\":false,\"sla_parameter\":null,\"sla_passed\":null},{\"booth_number\":4,\"spm_code\":\"kecepatan-transaksi-3\",\"average_transaction_duration\":9.0,\"spm_parameter\":9,\"spm_passed\":true,\"sla_applicable\":false,\"sla_parameter\":null,\"sla_passed\":null},{\"booth_number\":4,\"spm_code\":\"kecepatan-transaksi-4\",\"average_transaction_duration\":9.0,\"spm_parameter\":4,\"spm_passed\":false,\"sla_applicable\":false,\"sla_parameter\":null,\"sla_passed\":null},{\"booth_number\":4,\"spm_code\":\"kecepatan-transaksi-5\",\"average_transaction_duration\":9.0,\"spm_parameter\":5,\"spm_passed\":false,\"sla_applicable\":false,\"sla_parameter\":null,\"sla_passed\":null}]}"
+  },
+  {
+    "name": "T7-C4",
+    "definition": {
+      "id": "T7-C4",
+      "task_id": "T7",
+      "section": "PEKBANG",
+      "date": "2026-01-26",
+      "schema": "docs/schemas/t7_spm_sla_event.json",
+      "gate_name": "Bangkinang",
+      "shift_number": 1,
+      "semantic_branches": [
+        "applicable SLA target is independently overridden from SPM",
+        "requested event is scoped by section, gate, operational date, and dated shift",
+        "same-date other-gate, other-date same-gate, and other-shift same-gate reports are valid competing events"
+      ],
+      "wrong_alternatives": [
+        {
+          "id": "sla_copied_from_spm",
+          "wrong_rule": "Copy the SPM threshold into an applicable SLA instead of using its independently configured section override.",
+          "evidence_basis": "The retained section SLA writer upserts m_sla by section_id and spm_id; the effective view uses those source rows independently from m_spm.",
+          "construction": "Set the event's applicable code-1 SLA threshold equal to its SPM threshold and recompute the full T7 output."
+        },
+        {
+          "id": "ignore_gate_scope",
+          "wrong_rule": "Select an event by section, date, and shift while ignoring the requested gate.",
+          "evidence_basis": "The routine writer permits one report per dated schedule and gate, so a different gate may report on the same section/date/shift.",
+          "construction": "Evaluate the same-date, same-shift Sungai Pinang report as the requested Bangkinang event."
+        },
+        {
+          "id": "ignore_date_scope",
+          "wrong_rule": "Select an event by section, gate, and shift while ignoring the requested date.",
+          "evidence_basis": "A separate dated schedule permits a distinct report for the same section/gate/shift on another contracted date.",
+          "construction": "Evaluate the next-date Bangkinang report as the requested January 26 event."
+        },
+        {
+          "id": "ignore_shift_scope",
+          "wrong_rule": "Select an event by section, gate, and date while ignoring the requested shift.",
+          "evidence_basis": "A separate dated schedule permits a distinct same-gate report in another active shift on the same contracted date.",
+          "construction": "Evaluate the same-date, shift-2 Bangkinang report as the requested shift-1 event."
+        }
+      ],
+      "prompt_template": "Evaluasi pemenuhan SPM/SLA kecepatan transaksi untuk monitoring di Ruas PEKBANG, Gerbang Bangkinang, shift 1, tanggal 26 Januari 2026. Tampilkan hasil per gardu dan indikator. Kembalikan hasil sesuai format terstruktur yang diminta.",
+      "section_alias": "PEKBANG"
+    },
+    "prompt": "Evaluasi pemenuhan SPM/SLA kecepatan transaksi untuk monitoring di Ruas PEKBANG, Gerbang Bangkinang, shift 1, tanggal 26 Januari 2026. Tampilkan hasil per gardu dan indikator. Kembalikan hasil sesuai format terstruktur yang diminta.\n\nKirim tepat satu objek JSON, tanpa Markdown. Ikuti skema berikut:\n{\"$schema\": \"https://json-schema.org/draft/2020-12/schema\", \"title\": \"T7 SPM/SLA event evaluation\", \"type\": \"object\", \"properties\": {\"monitoring_transaction_id\": {\"type\": \"integer\"}, \"section_id\": {\"type\": \"integer\"}, \"section_name\": {\"type\": \"string\"}, \"gate_id\": {\"type\": \"integer\"}, \"gate_name\": {\"type\": \"string\"}, \"date\": {\"type\": \"string\", \"format\": \"date\"}, \"shift\": {\"type\": \"integer\", \"description\": \"Numeric shift value from the identified dated shift schedule.\"}, \"evaluations\": {\"type\": \"array\", \"items\": {\"type\": \"object\", \"properties\": {\"booth_number\": {\"description\": \"Positive booth number within the monitoring report. Prefer a JSON integer; a canonical positive integer string without leading zeroes is also valid.\", \"anyOf\": [{\"type\": \"integer\", \"minimum\": 1}, {\"type\": \"string\", \"pattern\": \"^[1-9][0-9]*$\"}]}, \"spm_code\": {\"type\": \"string\"}, \"average_transaction_duration\": {\"type\": \"number\", \"description\": \"Report/booth mean displayed to two decimal places with ties away from zero; compliance uses the underlying unrounded mean.\"}, \"spm_parameter\": {\"type\": \"number\"}, \"spm_passed\": {\"type\": \"boolean\"}, \"sla_applicable\": {\"type\": \"boolean\"}, \"sla_parameter\": {\"type\": [\"number\", \"null\"], \"description\": \"Effective SLA threshold when applicable; null when sla_applicable is false.\"}, \"sla_passed\": {\"type\": [\"boolean\", \"null\"], \"description\": \"Compliance result when SLA is applicable; null when it is not.\"}}, \"required\": [\"booth_number\", \"spm_code\", \"average_transaction_duration\", \"spm_parameter\", \"spm_passed\", \"sla_applicable\", \"sla_parameter\", \"sla_passed\"], \"additionalProperties\": false}}}, \"required\": [\"monitoring_transaction_id\", \"section_id\", \"section_name\", \"gate_id\", \"gate_name\", \"date\", \"shift\", \"evaluations\"], \"additionalProperties\": false}\n\nGunakan tabel aktual: m_vehicle_class (golongan kendaraan), m_accident_attributes (atribut kecelakaan), maintenance_asset_types (master aset inspeksi), dan view_section_spm_sla (konfigurasi efektif; filter code kecepatan-transaksi-1 sampai kecepatan-transaksi-5). accident_causes_ids adalah array JSON; hitung setiap kemunculan termasuk duplikat. Gunakan konfigurasi yang tersedia saat ini. Bandingkan durasi sebelum pembulatan; bulatkan hasil durasi dua desimal dengan nilai tengah menjauh dari nol. Untuk T1 gunakan seluruh tipe detail tidak null; evaluasi SPM/SLA menggunakan detail type=booth per gardu. LHR dibulatkan ke integer terdekat dengan nilai tengah menjauh dari nol. Urutkan array: golongan berdasarkan ID; bulan kronologis; insiden berdasarkan tanggal lalu ID; penyebab/aset berdasarkan jumlah menurun lalu ID; evaluasi berdasarkan nomor gardu lalu kode; kegagalan berdasarkan tanggal, ID monitoring, nomor gardu, kode; indikator berdasarkan kode.",
+    "historicalExpected": {
+      "monitoring_transaction_id": 1601100001,
+      "section_id": 1,
+      "section_name": "PEKANBARU -  BANGKINANG (PEKBANG)",
+      "gate_id": 33,
+      "gate_name": "Bangkinang",
+      "date": "2026-01-26",
+      "shift": 1,
+      "evaluations": [
+        {
+          "booth_number": 1,
+          "spm_code": "kecepatan-transaksi-1",
+          "average_transaction_duration": 5.5,
+          "spm_parameter": 6,
+          "spm_passed": true,
+          "sla_applicable": true,
+          "sla_parameter": 5,
+          "sla_passed": false
+        },
+        {
+          "booth_number": 1,
+          "spm_code": "kecepatan-transaksi-2",
+          "average_transaction_duration": 5.5,
+          "spm_parameter": 5,
+          "spm_passed": false,
+          "sla_applicable": true,
+          "sla_parameter": 5,
+          "sla_passed": false
+        },
+        {
+          "booth_number": 1,
+          "spm_code": "kecepatan-transaksi-3",
+          "average_transaction_duration": 5.5,
+          "spm_parameter": 9,
+          "spm_passed": true,
+          "sla_applicable": true,
+          "sla_parameter": 9,
+          "sla_passed": true
+        },
+        {
+          "booth_number": 1,
+          "spm_code": "kecepatan-transaksi-4",
+          "average_transaction_duration": 5.5,
+          "spm_parameter": 4,
+          "spm_passed": false,
+          "sla_applicable": true,
+          "sla_parameter": 4,
+          "sla_passed": false
+        },
+        {
+          "booth_number": 1,
+          "spm_code": "kecepatan-transaksi-5",
+          "average_transaction_duration": 5.5,
+          "spm_parameter": 5,
+          "spm_passed": false,
+          "sla_applicable": true,
+          "sla_parameter": 5,
+          "sla_passed": false
+        },
+        {
+          "booth_number": 2,
+          "spm_code": "kecepatan-transaksi-1",
+          "average_transaction_duration": 5.5,
+          "spm_parameter": 6,
+          "spm_passed": true,
+          "sla_applicable": true,
+          "sla_parameter": 5,
+          "sla_passed": false
+        },
+        {
+          "booth_number": 2,
+          "spm_code": "kecepatan-transaksi-2",
+          "average_transaction_duration": 5.5,
+          "spm_parameter": 5,
+          "spm_passed": false,
+          "sla_applicable": true,
+          "sla_parameter": 5,
+          "sla_passed": false
+        },
+        {
+          "booth_number": 2,
+          "spm_code": "kecepatan-transaksi-3",
+          "average_transaction_duration": 5.5,
+          "spm_parameter": 9,
+          "spm_passed": true,
+          "sla_applicable": true,
+          "sla_parameter": 9,
+          "sla_passed": true
+        },
+        {
+          "booth_number": 2,
+          "spm_code": "kecepatan-transaksi-4",
+          "average_transaction_duration": 5.5,
+          "spm_parameter": 4,
+          "spm_passed": false,
+          "sla_applicable": true,
+          "sla_parameter": 4,
+          "sla_passed": false
+        },
+        {
+          "booth_number": 2,
+          "spm_code": "kecepatan-transaksi-5",
+          "average_transaction_duration": 5.5,
+          "spm_parameter": 5,
+          "spm_passed": false,
+          "sla_applicable": true,
+          "sla_parameter": 5,
+          "sla_passed": false
+        },
+        {
+          "booth_number": 3,
+          "spm_code": "kecepatan-transaksi-1",
+          "average_transaction_duration": 5.5,
+          "spm_parameter": 6,
+          "spm_passed": true,
+          "sla_applicable": true,
+          "sla_parameter": 5,
+          "sla_passed": false
+        },
+        {
+          "booth_number": 3,
+          "spm_code": "kecepatan-transaksi-2",
+          "average_transaction_duration": 5.5,
+          "spm_parameter": 5,
+          "spm_passed": false,
+          "sla_applicable": true,
+          "sla_parameter": 5,
+          "sla_passed": false
+        },
+        {
+          "booth_number": 3,
+          "spm_code": "kecepatan-transaksi-3",
+          "average_transaction_duration": 5.5,
+          "spm_parameter": 9,
+          "spm_passed": true,
+          "sla_applicable": true,
+          "sla_parameter": 9,
+          "sla_passed": true
+        },
+        {
+          "booth_number": 3,
+          "spm_code": "kecepatan-transaksi-4",
+          "average_transaction_duration": 5.5,
+          "spm_parameter": 4,
+          "spm_passed": false,
+          "sla_applicable": true,
+          "sla_parameter": 4,
+          "sla_passed": false
+        },
+        {
+          "booth_number": 3,
+          "spm_code": "kecepatan-transaksi-5",
+          "average_transaction_duration": 5.5,
+          "spm_parameter": 5,
+          "spm_passed": false,
+          "sla_applicable": true,
+          "sla_parameter": 5,
+          "sla_passed": false
+        },
+        {
+          "booth_number": 4,
+          "spm_code": "kecepatan-transaksi-1",
+          "average_transaction_duration": 5.5,
+          "spm_parameter": 6,
+          "spm_passed": true,
+          "sla_applicable": true,
+          "sla_parameter": 5,
+          "sla_passed": false
+        },
+        {
+          "booth_number": 4,
+          "spm_code": "kecepatan-transaksi-2",
+          "average_transaction_duration": 5.5,
+          "spm_parameter": 5,
+          "spm_passed": false,
+          "sla_applicable": true,
+          "sla_parameter": 5,
+          "sla_passed": false
+        },
+        {
+          "booth_number": 4,
+          "spm_code": "kecepatan-transaksi-3",
+          "average_transaction_duration": 5.5,
+          "spm_parameter": 9,
+          "spm_passed": true,
+          "sla_applicable": true,
+          "sla_parameter": 9,
+          "sla_passed": true
+        },
+        {
+          "booth_number": 4,
+          "spm_code": "kecepatan-transaksi-4",
+          "average_transaction_duration": 5.5,
+          "spm_parameter": 4,
+          "spm_passed": false,
+          "sla_applicable": true,
+          "sla_parameter": 4,
+          "sla_passed": false
+        },
+        {
+          "booth_number": 4,
+          "spm_code": "kecepatan-transaksi-5",
+          "average_transaction_duration": 5.5,
+          "spm_parameter": 5,
+          "spm_passed": false,
+          "sla_applicable": true,
+          "sla_parameter": 5,
+          "sla_passed": false
+        }
+      ]
+    },
+    "expectedResult": "{\"monitoring_transaction_id\":1601100001,\"section_id\":1,\"section_name\":\"PEKANBARU -  BANGKINANG (PEKBANG)\",\"gate_id\":33,\"gate_name\":\"Bangkinang\",\"date\":\"2026-01-26\",\"shift\":1,\"evaluations\":[{\"booth_number\":1,\"spm_code\":\"kecepatan-transaksi-1\",\"average_transaction_duration\":5.5,\"spm_parameter\":6,\"spm_passed\":true,\"sla_applicable\":true,\"sla_parameter\":6,\"sla_passed\":true},{\"booth_number\":1,\"spm_code\":\"kecepatan-transaksi-2\",\"average_transaction_duration\":5.5,\"spm_parameter\":5,\"spm_passed\":false,\"sla_applicable\":true,\"sla_parameter\":5,\"sla_passed\":false},{\"booth_number\":1,\"spm_code\":\"kecepatan-transaksi-3\",\"average_transaction_duration\":5.5,\"spm_parameter\":9,\"spm_passed\":true,\"sla_applicable\":true,\"sla_parameter\":9,\"sla_passed\":true},{\"booth_number\":1,\"spm_code\":\"kecepatan-transaksi-4\",\"average_transaction_duration\":5.5,\"spm_parameter\":4,\"spm_passed\":false,\"sla_applicable\":true,\"sla_parameter\":4,\"sla_passed\":false},{\"booth_number\":1,\"spm_code\":\"kecepatan-transaksi-5\",\"average_transaction_duration\":5.5,\"spm_parameter\":5,\"spm_passed\":false,\"sla_applicable\":true,\"sla_parameter\":5,\"sla_passed\":false},{\"booth_number\":2,\"spm_code\":\"kecepatan-transaksi-1\",\"average_transaction_duration\":5.5,\"spm_parameter\":6,\"spm_passed\":true,\"sla_applicable\":true,\"sla_parameter\":6,\"sla_passed\":true},{\"booth_number\":2,\"spm_code\":\"kecepatan-transaksi-2\",\"average_transaction_duration\":5.5,\"spm_parameter\":5,\"spm_passed\":false,\"sla_applicable\":true,\"sla_parameter\":5,\"sla_passed\":false},{\"booth_number\":2,\"spm_code\":\"kecepatan-transaksi-3\",\"average_transaction_duration\":5.5,\"spm_parameter\":9,\"spm_passed\":true,\"sla_applicable\":true,\"sla_parameter\":9,\"sla_passed\":true},{\"booth_number\":2,\"spm_code\":\"kecepatan-transaksi-4\",\"average_transaction_duration\":5.5,\"spm_parameter\":4,\"spm_passed\":false,\"sla_applicable\":true,\"sla_parameter\":4,\"sla_passed\":false},{\"booth_number\":2,\"spm_code\":\"kecepatan-transaksi-5\",\"average_transaction_duration\":5.5,\"spm_parameter\":5,\"spm_passed\":false,\"sla_applicable\":true,\"sla_parameter\":5,\"sla_passed\":false},{\"booth_number\":3,\"spm_code\":\"kecepatan-transaksi-1\",\"average_transaction_duration\":5.5,\"spm_parameter\":6,\"spm_passed\":true,\"sla_applicable\":true,\"sla_parameter\":6,\"sla_passed\":true},{\"booth_number\":3,\"spm_code\":\"kecepatan-transaksi-2\",\"average_transaction_duration\":5.5,\"spm_parameter\":5,\"spm_passed\":false,\"sla_applicable\":true,\"sla_parameter\":5,\"sla_passed\":false},{\"booth_number\":3,\"spm_code\":\"kecepatan-transaksi-3\",\"average_transaction_duration\":5.5,\"spm_parameter\":9,\"spm_passed\":true,\"sla_applicable\":true,\"sla_parameter\":9,\"sla_passed\":true},{\"booth_number\":3,\"spm_code\":\"kecepatan-transaksi-4\",\"average_transaction_duration\":5.5,\"spm_parameter\":4,\"spm_passed\":false,\"sla_applicable\":true,\"sla_parameter\":4,\"sla_passed\":false},{\"booth_number\":3,\"spm_code\":\"kecepatan-transaksi-5\",\"average_transaction_duration\":5.5,\"spm_parameter\":5,\"spm_passed\":false,\"sla_applicable\":true,\"sla_parameter\":5,\"sla_passed\":false},{\"booth_number\":4,\"spm_code\":\"kecepatan-transaksi-1\",\"average_transaction_duration\":5.5,\"spm_parameter\":6,\"spm_passed\":true,\"sla_applicable\":true,\"sla_parameter\":6,\"sla_passed\":true},{\"booth_number\":4,\"spm_code\":\"kecepatan-transaksi-2\",\"average_transaction_duration\":5.5,\"spm_parameter\":5,\"spm_passed\":false,\"sla_applicable\":true,\"sla_parameter\":5,\"sla_passed\":false},{\"booth_number\":4,\"spm_code\":\"kecepatan-transaksi-3\",\"average_transaction_duration\":5.5,\"spm_parameter\":9,\"spm_passed\":true,\"sla_applicable\":true,\"sla_parameter\":9,\"sla_passed\":true},{\"booth_number\":4,\"spm_code\":\"kecepatan-transaksi-4\",\"average_transaction_duration\":5.5,\"spm_parameter\":4,\"spm_passed\":false,\"sla_applicable\":true,\"sla_parameter\":4,\"sla_passed\":false},{\"booth_number\":4,\"spm_code\":\"kecepatan-transaksi-5\",\"average_transaction_duration\":5.5,\"spm_parameter\":5,\"spm_passed\":false,\"sla_applicable\":true,\"sla_parameter\":5,\"sla_passed\":false}]}"
+  },
+  {
+    "name": "T8-C1",
+    "definition": {
+      "id": "T8-C1",
+      "task_id": "T8",
+      "section_alias": "BINSTA",
+      "prompt": "Untuk Ruas BINSTA tanggal 1–7 Juni 2026, identifikasi evaluasi kecepatan transaksi yang gagal memenuhi SPM atau SLA dan ringkas status pemenuhan setiap indikator selama periode tersebut. Kembalikan hasil sesuai format terstruktur yang diminta.",
+      "prompt_sha256": "f682aab5de0c99d2ea8528a8dc6573cd0b67b22d2c9827809e7d3607629fa206",
+      "semantic_branches": [
+        "multiple monitoring events",
+        "mixed SPM period statuses",
+        "partial SLA applicability",
+        "individual failures"
+      ],
+      "start": "2026-06-01",
+      "end": "2026-06-07"
+    },
+    "prompt": "Untuk Ruas BINSTA tanggal 1–7 Juni 2026, identifikasi evaluasi kecepatan transaksi yang gagal memenuhi SPM atau SLA dan ringkas status pemenuhan setiap indikator selama periode tersebut. Kembalikan hasil sesuai format terstruktur yang diminta.\n\nFormat jawaban:\n- Kirim tepat satu objek JSON yang valid sebagai jawaban akhir, tanpa teks atau blok kode tambahan.\n- Patuhi skema JSON Schema 2020-12 berikut, termasuk larangan properti tambahan.\n- Tanggal memakai string tanggal kalender ISO; ID dan hitungan memakai integer JSON.\n- Gunakan ejaan label, nama, dan kategori persis seperti master yang tersedia; jangan menerjemahkan atau menormalkannya.\n\nKonvensi representasi publik tambahan:\n- booth_number adalah nomor gardu positif; integer JSON lebih disukai, dan string integer positif kanonis seperti \"2\" juga diperbolehkan.\n- average_transaction_duration ditampilkan dengan dua desimal, nilai tepat di tengah dibulatkan menjauh dari nol. Evaluasi SPM/SLA menggunakan rata-rata sebelum pembulatan tampilan.\n- Jika sla_applicable false, sla_parameter dan sla_passed keduanya null. Jika berlaku, kembalikan ambang konfigurasi efektif dan hasil boolean. Konfigurasi yang hilang adalah kekosongan, bukan kondisi tidak berlaku.\n- Gunakan kode aturan, operator, ambang, dan keberlakuan persis dari konfigurasi efektif; jangan menggantinya dengan konstanta umum.\n\nSkema JSON Schema 2020-12:\n```json\n{\n  \"$schema\": \"https://json-schema.org/draft/2020-12/schema\",\n  \"title\": \"T8 SPM/SLA period report\",\n  \"type\": \"object\",\n  \"properties\": {\n    \"section_id\": {\n      \"type\": \"integer\"\n    },\n    \"section_name\": {\n      \"type\": \"string\"\n    },\n    \"period\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"start\": {\n          \"type\": \"string\",\n          \"format\": \"date\"\n        },\n        \"end\": {\n          \"type\": \"string\",\n          \"format\": \"date\"\n        }\n      },\n      \"required\": [\n        \"start\",\n        \"end\"\n      ],\n      \"additionalProperties\": false\n    },\n    \"failures\": {\n      \"type\": \"array\",\n      \"items\": {\n        \"type\": \"object\",\n        \"properties\": {\n          \"monitoring_transaction_id\": {\n            \"type\": \"integer\"\n          },\n          \"date\": {\n            \"type\": \"string\",\n            \"format\": \"date\"\n          },\n          \"gate_id\": {\n            \"type\": \"integer\"\n          },\n          \"booth_number\": {\n            \"description\": \"Positive booth number within the monitoring report. Prefer a JSON integer; a canonical positive integer string without leading zeroes is also valid.\",\n            \"anyOf\": [\n              {\n                \"type\": \"integer\",\n                \"minimum\": 1\n              },\n              {\n                \"type\": \"string\",\n                \"pattern\": \"^[1-9][0-9]*$\"\n              }\n            ]\n          },\n          \"spm_code\": {\n            \"type\": \"string\"\n          },\n          \"average_transaction_duration\": {\n            \"type\": \"number\",\n            \"description\": \"Report/booth mean displayed to two decimal places with ties away from zero; compliance uses the underlying unrounded mean.\"\n          },\n          \"spm_parameter\": {\n            \"type\": \"number\"\n          },\n          \"spm_passed\": {\n            \"type\": \"boolean\"\n          },\n          \"sla_applicable\": {\n            \"type\": \"boolean\"\n          },\n          \"sla_parameter\": {\n            \"type\": [\n              \"number\",\n              \"null\"\n            ],\n            \"description\": \"Effective SLA threshold when applicable; null when sla_applicable is false.\"\n          },\n          \"sla_passed\": {\n            \"type\": [\n              \"boolean\",\n              \"null\"\n            ],\n            \"description\": \"Compliance result when SLA is applicable; null when it is not.\"\n          }\n        },\n        \"required\": [\n          \"monitoring_transaction_id\",\n          \"date\",\n          \"gate_id\",\n          \"booth_number\",\n          \"spm_code\",\n          \"average_transaction_duration\",\n          \"spm_parameter\",\n          \"spm_passed\",\n          \"sla_applicable\",\n          \"sla_parameter\",\n          \"sla_passed\"\n        ],\n        \"additionalProperties\": false\n      }\n    },\n    \"indicators\": {\n      \"type\": \"array\",\n      \"items\": {\n        \"type\": \"object\",\n        \"properties\": {\n          \"spm_code\": {\n            \"type\": \"string\"\n          },\n          \"spm_evaluation_count\": {\n            \"type\": \"integer\",\n            \"minimum\": 1\n          },\n          \"spm_failed_count\": {\n            \"type\": \"integer\",\n            \"minimum\": 0\n          },\n          \"spm_period_status\": {\n            \"enum\": [\n              \"pass\",\n              \"fail\"\n            ]\n          },\n          \"sla_applicable\": {\n            \"type\": \"boolean\"\n          },\n          \"sla_evaluation_count\": {\n            \"type\": \"integer\",\n            \"minimum\": 0\n          },\n          \"sla_failed_count\": {\n            \"type\": \"integer\",\n            \"minimum\": 0\n          },\n          \"sla_period_status\": {\n            \"enum\": [\n              \"pass\",\n              \"fail\",\n              \"not_applicable\"\n            ]\n          }\n        },\n        \"required\": [\n          \"spm_code\",\n          \"spm_evaluation_count\",\n          \"spm_failed_count\",\n          \"spm_period_status\",\n          \"sla_applicable\",\n          \"sla_evaluation_count\",\n          \"sla_failed_count\",\n          \"sla_period_status\"\n        ],\n        \"additionalProperties\": false\n      }\n    }\n  },\n  \"required\": [\n    \"section_id\",\n    \"section_name\",\n    \"period\",\n    \"failures\",\n    \"indicators\"\n  ],\n  \"additionalProperties\": false\n}\n```\n\nGunakan tabel aktual: m_vehicle_class (golongan kendaraan), m_accident_attributes (atribut kecelakaan), maintenance_asset_types (master aset inspeksi), dan view_section_spm_sla (konfigurasi efektif; filter code kecepatan-transaksi-1 sampai kecepatan-transaksi-5). accident_causes_ids adalah array JSON; hitung setiap kemunculan termasuk duplikat. Gunakan konfigurasi yang tersedia saat ini. Bandingkan durasi sebelum pembulatan; bulatkan hasil durasi dua desimal dengan nilai tengah menjauh dari nol. Untuk T1 gunakan seluruh tipe detail tidak null; evaluasi SPM/SLA menggunakan detail type=booth per gardu. LHR dibulatkan ke integer terdekat dengan nilai tengah menjauh dari nol. Urutkan array: golongan berdasarkan ID; bulan kronologis; insiden berdasarkan tanggal lalu ID; penyebab/aset berdasarkan jumlah menurun lalu ID; evaluasi berdasarkan nomor gardu lalu kode; kegagalan berdasarkan tanggal, ID monitoring, nomor gardu, kode; indikator berdasarkan kode.",
+    "historicalExpected": {
+      "section_id": 10,
+      "section_name": "BINJAI STABAT (BINSTA)",
+      "period": {
+        "start": "2026-06-01",
+        "end": "2026-06-07"
+      },
+      "failures": [
+        {
+          "monitoring_transaction_id": 1601200001,
+          "date": "2026-06-01",
+          "gate_id": 48,
+          "booth_number": 1,
+          "spm_code": "kecepatan-transaksi-4",
+          "average_transaction_duration": 4.5,
+          "spm_parameter": 4,
+          "spm_passed": false,
+          "sla_applicable": false,
+          "sla_parameter": null,
+          "sla_passed": null
+        },
+        {
+          "monitoring_transaction_id": 1601200001,
+          "date": "2026-06-01",
+          "gate_id": 48,
+          "booth_number": 2,
+          "spm_code": "kecepatan-transaksi-4",
+          "average_transaction_duration": 4.5,
+          "spm_parameter": 4,
+          "spm_passed": false,
+          "sla_applicable": false,
+          "sla_parameter": null,
+          "sla_passed": null
+        },
+        {
+          "monitoring_transaction_id": 1601200001,
+          "date": "2026-06-01",
+          "gate_id": 48,
+          "booth_number": 3,
+          "spm_code": "kecepatan-transaksi-4",
+          "average_transaction_duration": 4.5,
+          "spm_parameter": 4,
+          "spm_passed": false,
+          "sla_applicable": false,
+          "sla_parameter": null,
+          "sla_passed": null
+        },
+        {
+          "monitoring_transaction_id": 1601200001,
+          "date": "2026-06-01",
+          "gate_id": 48,
+          "booth_number": 4,
+          "spm_code": "kecepatan-transaksi-4",
+          "average_transaction_duration": 4.5,
+          "spm_parameter": 4,
+          "spm_passed": false,
+          "sla_applicable": false,
+          "sla_parameter": null,
+          "sla_passed": null
+        },
+        {
+          "monitoring_transaction_id": 1601200003,
+          "date": "2026-06-07",
+          "gate_id": 48,
+          "booth_number": 2,
+          "spm_code": "kecepatan-transaksi-2",
+          "average_transaction_duration": 5.5,
+          "spm_parameter": 5,
+          "spm_passed": false,
+          "sla_applicable": false,
+          "sla_parameter": null,
+          "sla_passed": null
+        },
+        {
+          "monitoring_transaction_id": 1601200003,
+          "date": "2026-06-07",
+          "gate_id": 48,
+          "booth_number": 2,
+          "spm_code": "kecepatan-transaksi-4",
+          "average_transaction_duration": 5.5,
+          "spm_parameter": 4,
+          "spm_passed": false,
+          "sla_applicable": false,
+          "sla_parameter": null,
+          "sla_passed": null
+        },
+        {
+          "monitoring_transaction_id": 1601200003,
+          "date": "2026-06-07",
+          "gate_id": 48,
+          "booth_number": 2,
+          "spm_code": "kecepatan-transaksi-5",
+          "average_transaction_duration": 5.5,
+          "spm_parameter": 5,
+          "spm_passed": false,
+          "sla_applicable": false,
+          "sla_parameter": null,
+          "sla_passed": null
+        },
+        {
+          "monitoring_transaction_id": 1601200003,
+          "date": "2026-06-07",
+          "gate_id": 48,
+          "booth_number": 4,
+          "spm_code": "kecepatan-transaksi-2",
+          "average_transaction_duration": 5.5,
+          "spm_parameter": 5,
+          "spm_passed": false,
+          "sla_applicable": false,
+          "sla_parameter": null,
+          "sla_passed": null
+        },
+        {
+          "monitoring_transaction_id": 1601200003,
+          "date": "2026-06-07",
+          "gate_id": 48,
+          "booth_number": 4,
+          "spm_code": "kecepatan-transaksi-4",
+          "average_transaction_duration": 5.5,
+          "spm_parameter": 4,
+          "spm_passed": false,
+          "sla_applicable": false,
+          "sla_parameter": null,
+          "sla_passed": null
+        },
+        {
+          "monitoring_transaction_id": 1601200003,
+          "date": "2026-06-07",
+          "gate_id": 48,
+          "booth_number": 4,
+          "spm_code": "kecepatan-transaksi-5",
+          "average_transaction_duration": 5.5,
+          "spm_parameter": 5,
+          "spm_passed": false,
+          "sla_applicable": false,
+          "sla_parameter": null,
+          "sla_passed": null
+        }
+      ],
+      "indicators": [
+        {
+          "spm_code": "kecepatan-transaksi-1",
+          "spm_evaluation_count": 12,
+          "spm_failed_count": 0,
+          "spm_period_status": "pass",
+          "sla_applicable": false,
+          "sla_evaluation_count": 0,
+          "sla_failed_count": 0,
+          "sla_period_status": "not_applicable"
+        },
+        {
+          "spm_code": "kecepatan-transaksi-2",
+          "spm_evaluation_count": 12,
+          "spm_failed_count": 2,
+          "spm_period_status": "fail",
+          "sla_applicable": false,
+          "sla_evaluation_count": 0,
+          "sla_failed_count": 0,
+          "sla_period_status": "not_applicable"
+        },
+        {
+          "spm_code": "kecepatan-transaksi-3",
+          "spm_evaluation_count": 12,
+          "spm_failed_count": 0,
+          "spm_period_status": "pass",
+          "sla_applicable": true,
+          "sla_evaluation_count": 12,
+          "sla_failed_count": 0,
+          "sla_period_status": "pass"
+        },
+        {
+          "spm_code": "kecepatan-transaksi-4",
+          "spm_evaluation_count": 12,
+          "spm_failed_count": 6,
+          "spm_period_status": "fail",
+          "sla_applicable": false,
+          "sla_evaluation_count": 0,
+          "sla_failed_count": 0,
+          "sla_period_status": "not_applicable"
+        },
+        {
+          "spm_code": "kecepatan-transaksi-5",
+          "spm_evaluation_count": 12,
+          "spm_failed_count": 2,
+          "spm_period_status": "fail",
+          "sla_applicable": false,
+          "sla_evaluation_count": 0,
+          "sla_failed_count": 0,
+          "sla_period_status": "not_applicable"
+        }
+      ]
+    },
+    "expectedResult": "{\"section_id\":10,\"section_name\":\"BINJAI STABAT (BINSTA)\",\"period\":{\"start\":\"2026-06-01\",\"end\":\"2026-06-07\"},\"failures\":[{\"monitoring_transaction_id\":1601200001,\"date\":\"2026-06-01\",\"gate_id\":48,\"booth_number\":1,\"spm_code\":\"kecepatan-transaksi-4\",\"average_transaction_duration\":4.5,\"spm_parameter\":4,\"spm_passed\":false,\"sla_applicable\":false,\"sla_parameter\":null,\"sla_passed\":null},{\"monitoring_transaction_id\":1601200001,\"date\":\"2026-06-01\",\"gate_id\":48,\"booth_number\":2,\"spm_code\":\"kecepatan-transaksi-4\",\"average_transaction_duration\":4.5,\"spm_parameter\":4,\"spm_passed\":false,\"sla_applicable\":false,\"sla_parameter\":null,\"sla_passed\":null},{\"monitoring_transaction_id\":1601200001,\"date\":\"2026-06-01\",\"gate_id\":48,\"booth_number\":3,\"spm_code\":\"kecepatan-transaksi-4\",\"average_transaction_duration\":4.5,\"spm_parameter\":4,\"spm_passed\":false,\"sla_applicable\":false,\"sla_parameter\":null,\"sla_passed\":null},{\"monitoring_transaction_id\":1601200001,\"date\":\"2026-06-01\",\"gate_id\":48,\"booth_number\":4,\"spm_code\":\"kecepatan-transaksi-4\",\"average_transaction_duration\":4.5,\"spm_parameter\":4,\"spm_passed\":false,\"sla_applicable\":false,\"sla_parameter\":null,\"sla_passed\":null},{\"monitoring_transaction_id\":1601200003,\"date\":\"2026-06-07\",\"gate_id\":48,\"booth_number\":2,\"spm_code\":\"kecepatan-transaksi-2\",\"average_transaction_duration\":5.5,\"spm_parameter\":5,\"spm_passed\":false,\"sla_applicable\":false,\"sla_parameter\":null,\"sla_passed\":null},{\"monitoring_transaction_id\":1601200003,\"date\":\"2026-06-07\",\"gate_id\":48,\"booth_number\":2,\"spm_code\":\"kecepatan-transaksi-4\",\"average_transaction_duration\":5.5,\"spm_parameter\":4,\"spm_passed\":false,\"sla_applicable\":false,\"sla_parameter\":null,\"sla_passed\":null},{\"monitoring_transaction_id\":1601200003,\"date\":\"2026-06-07\",\"gate_id\":48,\"booth_number\":2,\"spm_code\":\"kecepatan-transaksi-5\",\"average_transaction_duration\":5.5,\"spm_parameter\":5,\"spm_passed\":false,\"sla_applicable\":false,\"sla_parameter\":null,\"sla_passed\":null},{\"monitoring_transaction_id\":1601200003,\"date\":\"2026-06-07\",\"gate_id\":48,\"booth_number\":4,\"spm_code\":\"kecepatan-transaksi-2\",\"average_transaction_duration\":5.5,\"spm_parameter\":5,\"spm_passed\":false,\"sla_applicable\":false,\"sla_parameter\":null,\"sla_passed\":null},{\"monitoring_transaction_id\":1601200003,\"date\":\"2026-06-07\",\"gate_id\":48,\"booth_number\":4,\"spm_code\":\"kecepatan-transaksi-4\",\"average_transaction_duration\":5.5,\"spm_parameter\":4,\"spm_passed\":false,\"sla_applicable\":false,\"sla_parameter\":null,\"sla_passed\":null},{\"monitoring_transaction_id\":1601200003,\"date\":\"2026-06-07\",\"gate_id\":48,\"booth_number\":4,\"spm_code\":\"kecepatan-transaksi-5\",\"average_transaction_duration\":5.5,\"spm_parameter\":5,\"spm_passed\":false,\"sla_applicable\":false,\"sla_parameter\":null,\"sla_passed\":null}],\"indicators\":[{\"spm_code\":\"kecepatan-transaksi-1\",\"spm_evaluation_count\":12,\"spm_failed_count\":0,\"spm_period_status\":\"pass\",\"sla_applicable\":false,\"sla_evaluation_count\":0,\"sla_failed_count\":0,\"sla_period_status\":\"not_applicable\"},{\"spm_code\":\"kecepatan-transaksi-2\",\"spm_evaluation_count\":12,\"spm_failed_count\":2,\"spm_period_status\":\"fail\",\"sla_applicable\":false,\"sla_evaluation_count\":0,\"sla_failed_count\":0,\"sla_period_status\":\"not_applicable\"},{\"spm_code\":\"kecepatan-transaksi-3\",\"spm_evaluation_count\":12,\"spm_failed_count\":0,\"spm_period_status\":\"pass\",\"sla_applicable\":true,\"sla_evaluation_count\":12,\"sla_failed_count\":0,\"sla_period_status\":\"pass\"},{\"spm_code\":\"kecepatan-transaksi-4\",\"spm_evaluation_count\":12,\"spm_failed_count\":6,\"spm_period_status\":\"fail\",\"sla_applicable\":false,\"sla_evaluation_count\":0,\"sla_failed_count\":0,\"sla_period_status\":\"not_applicable\"},{\"spm_code\":\"kecepatan-transaksi-5\",\"spm_evaluation_count\":12,\"spm_failed_count\":2,\"spm_period_status\":\"fail\",\"sla_applicable\":false,\"sla_evaluation_count\":0,\"sla_failed_count\":0,\"sla_period_status\":\"not_applicable\"}]}"
+  },
+  {
+    "name": "T8-C2",
+    "definition": {
+      "id": "T8-C2",
+      "task_id": "T8",
+      "section": "BINSTA",
+      "start": "2026-01-20",
+      "end": "2026-01-30",
+      "schema": "docs/schemas/t8_spm_sla_period.json",
+      "gate_name": "Kuala Bingai",
+      "semantic_branches": [
+        "applicable SLA target is independently overridden from SPM",
+        "SLA applicability remains independent of its numeric threshold",
+        "SPM/SLA use booth observations while longbooth observations remain outside compliance"
+      ],
+      "wrong_alternatives": [
+        {
+          "id": "sla_copied_from_spm",
+          "wrong_rule": "Use the SPM threshold for the applicable SLA even when m_sla stores a separate target.",
+          "evidence_basis": "The retained section SLA writer updates m_sla independently and the effective view resolves the SLA fields from that row.",
+          "construction": "Copy code-3 SPM's 9-second threshold to the applicable SLA, then recompute all T8 rows."
+        },
+        {
+          "id": "infer_inapplicable_from_target_difference",
+          "wrong_rule": "Treat an SLA as not applicable because its numeric threshold differs from SPM.",
+          "evidence_basis": "The effective view exposes is_applicable independently from sla_parameter; the source SLA writer accepts both fields separately.",
+          "construction": "Set code-3 SLA applicability false while retaining the requested section's independently stored SLA threshold."
+        },
+        {
+          "id": "include_longbooth_as_booths",
+          "wrong_rule": "Treat longbooth rows as additional ordinary booth evaluations, numbered after the regular booths.",
+          "evidence_basis": "The transaction compliance source evaluates report/booth observations; routine capture retains booth type and separate booth numbers.",
+          "construction": "Relabel the two longbooth details as booth 5 and booth 6, assume six ordinary booths, then recompute all per-booth compliance results."
+        }
+      ],
+      "prompt_template": "Untuk Ruas BINSTA tanggal 20–30 Januari 2026, identifikasi evaluasi kecepatan transaksi yang gagal memenuhi SPM atau SLA dan ringkas status pemenuhan setiap indikator selama periode tersebut. Kembalikan hasil sesuai format terstruktur yang diminta.",
+      "section_alias": "BINSTA"
+    },
+    "prompt": "Untuk Ruas BINSTA tanggal 20–30 Januari 2026, identifikasi evaluasi kecepatan transaksi yang gagal memenuhi SPM atau SLA dan ringkas status pemenuhan setiap indikator selama periode tersebut. Kembalikan hasil sesuai format terstruktur yang diminta.\n\nKirim tepat satu objek JSON, tanpa Markdown. Ikuti skema berikut:\n{\"$schema\": \"https://json-schema.org/draft/2020-12/schema\", \"title\": \"T8 SPM/SLA period report\", \"type\": \"object\", \"properties\": {\"section_id\": {\"type\": \"integer\"}, \"section_name\": {\"type\": \"string\"}, \"period\": {\"type\": \"object\", \"properties\": {\"start\": {\"type\": \"string\", \"format\": \"date\"}, \"end\": {\"type\": \"string\", \"format\": \"date\"}}, \"required\": [\"start\", \"end\"], \"additionalProperties\": false}, \"failures\": {\"type\": \"array\", \"items\": {\"type\": \"object\", \"properties\": {\"monitoring_transaction_id\": {\"type\": \"integer\"}, \"date\": {\"type\": \"string\", \"format\": \"date\"}, \"gate_id\": {\"type\": \"integer\"}, \"booth_number\": {\"description\": \"Positive booth number within the monitoring report. Prefer a JSON integer; a canonical positive integer string without leading zeroes is also valid.\", \"anyOf\": [{\"type\": \"integer\", \"minimum\": 1}, {\"type\": \"string\", \"pattern\": \"^[1-9][0-9]*$\"}]}, \"spm_code\": {\"type\": \"string\"}, \"average_transaction_duration\": {\"type\": \"number\", \"description\": \"Report/booth mean displayed to two decimal places with ties away from zero; compliance uses the underlying unrounded mean.\"}, \"spm_parameter\": {\"type\": \"number\"}, \"spm_passed\": {\"type\": \"boolean\"}, \"sla_applicable\": {\"type\": \"boolean\"}, \"sla_parameter\": {\"type\": [\"number\", \"null\"], \"description\": \"Effective SLA threshold when applicable; null when sla_applicable is false.\"}, \"sla_passed\": {\"type\": [\"boolean\", \"null\"], \"description\": \"Compliance result when SLA is applicable; null when it is not.\"}}, \"required\": [\"monitoring_transaction_id\", \"date\", \"gate_id\", \"booth_number\", \"spm_code\", \"average_transaction_duration\", \"spm_parameter\", \"spm_passed\", \"sla_applicable\", \"sla_parameter\", \"sla_passed\"], \"additionalProperties\": false}}, \"indicators\": {\"type\": \"array\", \"items\": {\"type\": \"object\", \"properties\": {\"spm_code\": {\"type\": \"string\"}, \"spm_evaluation_count\": {\"type\": \"integer\", \"minimum\": 1}, \"spm_failed_count\": {\"type\": \"integer\", \"minimum\": 0}, \"spm_period_status\": {\"enum\": [\"pass\", \"fail\"]}, \"sla_applicable\": {\"type\": \"boolean\"}, \"sla_evaluation_count\": {\"type\": \"integer\", \"minimum\": 0}, \"sla_failed_count\": {\"type\": \"integer\", \"minimum\": 0}, \"sla_period_status\": {\"enum\": [\"pass\", \"fail\", \"not_applicable\"]}}, \"required\": [\"spm_code\", \"spm_evaluation_count\", \"spm_failed_count\", \"spm_period_status\", \"sla_applicable\", \"sla_evaluation_count\", \"sla_failed_count\", \"sla_period_status\"], \"additionalProperties\": false}}}, \"required\": [\"section_id\", \"section_name\", \"period\", \"failures\", \"indicators\"], \"additionalProperties\": false}\n\nGunakan tabel aktual: m_vehicle_class (golongan kendaraan), m_accident_attributes (atribut kecelakaan), maintenance_asset_types (master aset inspeksi), dan view_section_spm_sla (konfigurasi efektif; filter code kecepatan-transaksi-1 sampai kecepatan-transaksi-5). accident_causes_ids adalah array JSON; hitung setiap kemunculan termasuk duplikat. Gunakan konfigurasi yang tersedia saat ini. Bandingkan durasi sebelum pembulatan; bulatkan hasil durasi dua desimal dengan nilai tengah menjauh dari nol. Untuk T1 gunakan seluruh tipe detail tidak null; evaluasi SPM/SLA menggunakan detail type=booth per gardu. LHR dibulatkan ke integer terdekat dengan nilai tengah menjauh dari nol. Urutkan array: golongan berdasarkan ID; bulan kronologis; insiden berdasarkan tanggal lalu ID; penyebab/aset berdasarkan jumlah menurun lalu ID; evaluasi berdasarkan nomor gardu lalu kode; kegagalan berdasarkan tanggal, ID monitoring, nomor gardu, kode; indikator berdasarkan kode.",
+    "historicalExpected": {
+      "section_id": 10,
+      "section_name": "BINJAI STABAT (BINSTA)",
+      "period": {
+        "start": "2026-01-20",
+        "end": "2026-01-30"
+      },
+      "failures": [
+        {
+          "monitoring_transaction_id": 1601300001,
+          "date": "2026-01-25",
+          "gate_id": 49,
+          "booth_number": 1,
+          "spm_code": "kecepatan-transaksi-1",
+          "average_transaction_duration": 8.5,
+          "spm_parameter": 6,
+          "spm_passed": false,
+          "sla_applicable": false,
+          "sla_parameter": null,
+          "sla_passed": null
+        },
+        {
+          "monitoring_transaction_id": 1601300001,
+          "date": "2026-01-25",
+          "gate_id": 49,
+          "booth_number": 1,
+          "spm_code": "kecepatan-transaksi-2",
+          "average_transaction_duration": 8.5,
+          "spm_parameter": 5,
+          "spm_passed": false,
+          "sla_applicable": false,
+          "sla_parameter": null,
+          "sla_passed": null
+        },
+        {
+          "monitoring_transaction_id": 1601300001,
+          "date": "2026-01-25",
+          "gate_id": 49,
+          "booth_number": 1,
+          "spm_code": "kecepatan-transaksi-3",
+          "average_transaction_duration": 8.5,
+          "spm_parameter": 9,
+          "spm_passed": true,
+          "sla_applicable": true,
+          "sla_parameter": 8,
+          "sla_passed": false
+        },
+        {
+          "monitoring_transaction_id": 1601300001,
+          "date": "2026-01-25",
+          "gate_id": 49,
+          "booth_number": 1,
+          "spm_code": "kecepatan-transaksi-4",
+          "average_transaction_duration": 8.5,
+          "spm_parameter": 4,
+          "spm_passed": false,
+          "sla_applicable": false,
+          "sla_parameter": null,
+          "sla_passed": null
+        },
+        {
+          "monitoring_transaction_id": 1601300001,
+          "date": "2026-01-25",
+          "gate_id": 49,
+          "booth_number": 1,
+          "spm_code": "kecepatan-transaksi-5",
+          "average_transaction_duration": 8.5,
+          "spm_parameter": 5,
+          "spm_passed": false,
+          "sla_applicable": false,
+          "sla_parameter": null,
+          "sla_passed": null
+        },
+        {
+          "monitoring_transaction_id": 1601300001,
+          "date": "2026-01-25",
+          "gate_id": 49,
+          "booth_number": 2,
+          "spm_code": "kecepatan-transaksi-1",
+          "average_transaction_duration": 8.5,
+          "spm_parameter": 6,
+          "spm_passed": false,
+          "sla_applicable": false,
+          "sla_parameter": null,
+          "sla_passed": null
+        },
+        {
+          "monitoring_transaction_id": 1601300001,
+          "date": "2026-01-25",
+          "gate_id": 49,
+          "booth_number": 2,
+          "spm_code": "kecepatan-transaksi-2",
+          "average_transaction_duration": 8.5,
+          "spm_parameter": 5,
+          "spm_passed": false,
+          "sla_applicable": false,
+          "sla_parameter": null,
+          "sla_passed": null
+        },
+        {
+          "monitoring_transaction_id": 1601300001,
+          "date": "2026-01-25",
+          "gate_id": 49,
+          "booth_number": 2,
+          "spm_code": "kecepatan-transaksi-3",
+          "average_transaction_duration": 8.5,
+          "spm_parameter": 9,
+          "spm_passed": true,
+          "sla_applicable": true,
+          "sla_parameter": 8,
+          "sla_passed": false
+        },
+        {
+          "monitoring_transaction_id": 1601300001,
+          "date": "2026-01-25",
+          "gate_id": 49,
+          "booth_number": 2,
+          "spm_code": "kecepatan-transaksi-4",
+          "average_transaction_duration": 8.5,
+          "spm_parameter": 4,
+          "spm_passed": false,
+          "sla_applicable": false,
+          "sla_parameter": null,
+          "sla_passed": null
+        },
+        {
+          "monitoring_transaction_id": 1601300001,
+          "date": "2026-01-25",
+          "gate_id": 49,
+          "booth_number": 2,
+          "spm_code": "kecepatan-transaksi-5",
+          "average_transaction_duration": 8.5,
+          "spm_parameter": 5,
+          "spm_passed": false,
+          "sla_applicable": false,
+          "sla_parameter": null,
+          "sla_passed": null
+        },
+        {
+          "monitoring_transaction_id": 1601300001,
+          "date": "2026-01-25",
+          "gate_id": 49,
+          "booth_number": 3,
+          "spm_code": "kecepatan-transaksi-1",
+          "average_transaction_duration": 8.5,
+          "spm_parameter": 6,
+          "spm_passed": false,
+          "sla_applicable": false,
+          "sla_parameter": null,
+          "sla_passed": null
+        },
+        {
+          "monitoring_transaction_id": 1601300001,
+          "date": "2026-01-25",
+          "gate_id": 49,
+          "booth_number": 3,
+          "spm_code": "kecepatan-transaksi-2",
+          "average_transaction_duration": 8.5,
+          "spm_parameter": 5,
+          "spm_passed": false,
+          "sla_applicable": false,
+          "sla_parameter": null,
+          "sla_passed": null
+        },
+        {
+          "monitoring_transaction_id": 1601300001,
+          "date": "2026-01-25",
+          "gate_id": 49,
+          "booth_number": 3,
+          "spm_code": "kecepatan-transaksi-3",
+          "average_transaction_duration": 8.5,
+          "spm_parameter": 9,
+          "spm_passed": true,
+          "sla_applicable": true,
+          "sla_parameter": 8,
+          "sla_passed": false
+        },
+        {
+          "monitoring_transaction_id": 1601300001,
+          "date": "2026-01-25",
+          "gate_id": 49,
+          "booth_number": 3,
+          "spm_code": "kecepatan-transaksi-4",
+          "average_transaction_duration": 8.5,
+          "spm_parameter": 4,
+          "spm_passed": false,
+          "sla_applicable": false,
+          "sla_parameter": null,
+          "sla_passed": null
+        },
+        {
+          "monitoring_transaction_id": 1601300001,
+          "date": "2026-01-25",
+          "gate_id": 49,
+          "booth_number": 3,
+          "spm_code": "kecepatan-transaksi-5",
+          "average_transaction_duration": 8.5,
+          "spm_parameter": 5,
+          "spm_passed": false,
+          "sla_applicable": false,
+          "sla_parameter": null,
+          "sla_passed": null
+        },
+        {
+          "monitoring_transaction_id": 1601300001,
+          "date": "2026-01-25",
+          "gate_id": 49,
+          "booth_number": 4,
+          "spm_code": "kecepatan-transaksi-1",
+          "average_transaction_duration": 8.5,
+          "spm_parameter": 6,
+          "spm_passed": false,
+          "sla_applicable": false,
+          "sla_parameter": null,
+          "sla_passed": null
+        },
+        {
+          "monitoring_transaction_id": 1601300001,
+          "date": "2026-01-25",
+          "gate_id": 49,
+          "booth_number": 4,
+          "spm_code": "kecepatan-transaksi-2",
+          "average_transaction_duration": 8.5,
+          "spm_parameter": 5,
+          "spm_passed": false,
+          "sla_applicable": false,
+          "sla_parameter": null,
+          "sla_passed": null
+        },
+        {
+          "monitoring_transaction_id": 1601300001,
+          "date": "2026-01-25",
+          "gate_id": 49,
+          "booth_number": 4,
+          "spm_code": "kecepatan-transaksi-3",
+          "average_transaction_duration": 8.5,
+          "spm_parameter": 9,
+          "spm_passed": true,
+          "sla_applicable": true,
+          "sla_parameter": 8,
+          "sla_passed": false
+        },
+        {
+          "monitoring_transaction_id": 1601300001,
+          "date": "2026-01-25",
+          "gate_id": 49,
+          "booth_number": 4,
+          "spm_code": "kecepatan-transaksi-4",
+          "average_transaction_duration": 8.5,
+          "spm_parameter": 4,
+          "spm_passed": false,
+          "sla_applicable": false,
+          "sla_parameter": null,
+          "sla_passed": null
+        },
+        {
+          "monitoring_transaction_id": 1601300001,
+          "date": "2026-01-25",
+          "gate_id": 49,
+          "booth_number": 4,
+          "spm_code": "kecepatan-transaksi-5",
+          "average_transaction_duration": 8.5,
+          "spm_parameter": 5,
+          "spm_passed": false,
+          "sla_applicable": false,
+          "sla_parameter": null,
+          "sla_passed": null
+        }
+      ],
+      "indicators": [
+        {
+          "spm_code": "kecepatan-transaksi-1",
+          "spm_evaluation_count": 4,
+          "spm_failed_count": 4,
+          "spm_period_status": "fail",
+          "sla_applicable": false,
+          "sla_evaluation_count": 0,
+          "sla_failed_count": 0,
+          "sla_period_status": "not_applicable"
+        },
+        {
+          "spm_code": "kecepatan-transaksi-2",
+          "spm_evaluation_count": 4,
+          "spm_failed_count": 4,
+          "spm_period_status": "fail",
+          "sla_applicable": false,
+          "sla_evaluation_count": 0,
+          "sla_failed_count": 0,
+          "sla_period_status": "not_applicable"
+        },
+        {
+          "spm_code": "kecepatan-transaksi-3",
+          "spm_evaluation_count": 4,
+          "spm_failed_count": 0,
+          "spm_period_status": "pass",
+          "sla_applicable": true,
+          "sla_evaluation_count": 4,
+          "sla_failed_count": 4,
+          "sla_period_status": "fail"
+        },
+        {
+          "spm_code": "kecepatan-transaksi-4",
+          "spm_evaluation_count": 4,
+          "spm_failed_count": 4,
+          "spm_period_status": "fail",
+          "sla_applicable": false,
+          "sla_evaluation_count": 0,
+          "sla_failed_count": 0,
+          "sla_period_status": "not_applicable"
+        },
+        {
+          "spm_code": "kecepatan-transaksi-5",
+          "spm_evaluation_count": 4,
+          "spm_failed_count": 4,
+          "spm_period_status": "fail",
+          "sla_applicable": false,
+          "sla_evaluation_count": 0,
+          "sla_failed_count": 0,
+          "sla_period_status": "not_applicable"
+        }
+      ]
+    },
+    "expectedResult": "{\"section_id\":10,\"section_name\":\"BINJAI STABAT (BINSTA)\",\"period\":{\"start\":\"2026-01-20\",\"end\":\"2026-01-30\"},\"failures\":[{\"monitoring_transaction_id\":1601300001,\"date\":\"2026-01-25\",\"gate_id\":49,\"booth_number\":1,\"spm_code\":\"kecepatan-transaksi-1\",\"average_transaction_duration\":8.5,\"spm_parameter\":6,\"spm_passed\":false,\"sla_applicable\":false,\"sla_parameter\":null,\"sla_passed\":null},{\"monitoring_transaction_id\":1601300001,\"date\":\"2026-01-25\",\"gate_id\":49,\"booth_number\":1,\"spm_code\":\"kecepatan-transaksi-2\",\"average_transaction_duration\":8.5,\"spm_parameter\":5,\"spm_passed\":false,\"sla_applicable\":false,\"sla_parameter\":null,\"sla_passed\":null},{\"monitoring_transaction_id\":1601300001,\"date\":\"2026-01-25\",\"gate_id\":49,\"booth_number\":1,\"spm_code\":\"kecepatan-transaksi-4\",\"average_transaction_duration\":8.5,\"spm_parameter\":4,\"spm_passed\":false,\"sla_applicable\":false,\"sla_parameter\":null,\"sla_passed\":null},{\"monitoring_transaction_id\":1601300001,\"date\":\"2026-01-25\",\"gate_id\":49,\"booth_number\":1,\"spm_code\":\"kecepatan-transaksi-5\",\"average_transaction_duration\":8.5,\"spm_parameter\":5,\"spm_passed\":false,\"sla_applicable\":false,\"sla_parameter\":null,\"sla_passed\":null},{\"monitoring_transaction_id\":1601300001,\"date\":\"2026-01-25\",\"gate_id\":49,\"booth_number\":2,\"spm_code\":\"kecepatan-transaksi-1\",\"average_transaction_duration\":8.5,\"spm_parameter\":6,\"spm_passed\":false,\"sla_applicable\":false,\"sla_parameter\":null,\"sla_passed\":null},{\"monitoring_transaction_id\":1601300001,\"date\":\"2026-01-25\",\"gate_id\":49,\"booth_number\":2,\"spm_code\":\"kecepatan-transaksi-2\",\"average_transaction_duration\":8.5,\"spm_parameter\":5,\"spm_passed\":false,\"sla_applicable\":false,\"sla_parameter\":null,\"sla_passed\":null},{\"monitoring_transaction_id\":1601300001,\"date\":\"2026-01-25\",\"gate_id\":49,\"booth_number\":2,\"spm_code\":\"kecepatan-transaksi-4\",\"average_transaction_duration\":8.5,\"spm_parameter\":4,\"spm_passed\":false,\"sla_applicable\":false,\"sla_parameter\":null,\"sla_passed\":null},{\"monitoring_transaction_id\":1601300001,\"date\":\"2026-01-25\",\"gate_id\":49,\"booth_number\":2,\"spm_code\":\"kecepatan-transaksi-5\",\"average_transaction_duration\":8.5,\"spm_parameter\":5,\"spm_passed\":false,\"sla_applicable\":false,\"sla_parameter\":null,\"sla_passed\":null},{\"monitoring_transaction_id\":1601300001,\"date\":\"2026-01-25\",\"gate_id\":49,\"booth_number\":3,\"spm_code\":\"kecepatan-transaksi-1\",\"average_transaction_duration\":8.5,\"spm_parameter\":6,\"spm_passed\":false,\"sla_applicable\":false,\"sla_parameter\":null,\"sla_passed\":null},{\"monitoring_transaction_id\":1601300001,\"date\":\"2026-01-25\",\"gate_id\":49,\"booth_number\":3,\"spm_code\":\"kecepatan-transaksi-2\",\"average_transaction_duration\":8.5,\"spm_parameter\":5,\"spm_passed\":false,\"sla_applicable\":false,\"sla_parameter\":null,\"sla_passed\":null},{\"monitoring_transaction_id\":1601300001,\"date\":\"2026-01-25\",\"gate_id\":49,\"booth_number\":3,\"spm_code\":\"kecepatan-transaksi-4\",\"average_transaction_duration\":8.5,\"spm_parameter\":4,\"spm_passed\":false,\"sla_applicable\":false,\"sla_parameter\":null,\"sla_passed\":null},{\"monitoring_transaction_id\":1601300001,\"date\":\"2026-01-25\",\"gate_id\":49,\"booth_number\":3,\"spm_code\":\"kecepatan-transaksi-5\",\"average_transaction_duration\":8.5,\"spm_parameter\":5,\"spm_passed\":false,\"sla_applicable\":false,\"sla_parameter\":null,\"sla_passed\":null},{\"monitoring_transaction_id\":1601300001,\"date\":\"2026-01-25\",\"gate_id\":49,\"booth_number\":4,\"spm_code\":\"kecepatan-transaksi-1\",\"average_transaction_duration\":8.5,\"spm_parameter\":6,\"spm_passed\":false,\"sla_applicable\":false,\"sla_parameter\":null,\"sla_passed\":null},{\"monitoring_transaction_id\":1601300001,\"date\":\"2026-01-25\",\"gate_id\":49,\"booth_number\":4,\"spm_code\":\"kecepatan-transaksi-2\",\"average_transaction_duration\":8.5,\"spm_parameter\":5,\"spm_passed\":false,\"sla_applicable\":false,\"sla_parameter\":null,\"sla_passed\":null},{\"monitoring_transaction_id\":1601300001,\"date\":\"2026-01-25\",\"gate_id\":49,\"booth_number\":4,\"spm_code\":\"kecepatan-transaksi-4\",\"average_transaction_duration\":8.5,\"spm_parameter\":4,\"spm_passed\":false,\"sla_applicable\":false,\"sla_parameter\":null,\"sla_passed\":null},{\"monitoring_transaction_id\":1601300001,\"date\":\"2026-01-25\",\"gate_id\":49,\"booth_number\":4,\"spm_code\":\"kecepatan-transaksi-5\",\"average_transaction_duration\":8.5,\"spm_parameter\":5,\"spm_passed\":false,\"sla_applicable\":false,\"sla_parameter\":null,\"sla_passed\":null}],\"indicators\":[{\"spm_code\":\"kecepatan-transaksi-1\",\"spm_evaluation_count\":4,\"spm_failed_count\":4,\"spm_period_status\":\"fail\",\"sla_applicable\":false,\"sla_evaluation_count\":0,\"sla_failed_count\":0,\"sla_period_status\":\"not_applicable\"},{\"spm_code\":\"kecepatan-transaksi-2\",\"spm_evaluation_count\":4,\"spm_failed_count\":4,\"spm_period_status\":\"fail\",\"sla_applicable\":false,\"sla_evaluation_count\":0,\"sla_failed_count\":0,\"sla_period_status\":\"not_applicable\"},{\"spm_code\":\"kecepatan-transaksi-3\",\"spm_evaluation_count\":4,\"spm_failed_count\":0,\"spm_period_status\":\"pass\",\"sla_applicable\":true,\"sla_evaluation_count\":4,\"sla_failed_count\":0,\"sla_period_status\":\"pass\"},{\"spm_code\":\"kecepatan-transaksi-4\",\"spm_evaluation_count\":4,\"spm_failed_count\":4,\"spm_period_status\":\"fail\",\"sla_applicable\":false,\"sla_evaluation_count\":0,\"sla_failed_count\":0,\"sla_period_status\":\"not_applicable\"},{\"spm_code\":\"kecepatan-transaksi-5\",\"spm_evaluation_count\":4,\"spm_failed_count\":4,\"spm_period_status\":\"fail\",\"sla_applicable\":false,\"sla_evaluation_count\":0,\"sla_failed_count\":0,\"sla_period_status\":\"not_applicable\"}]}"
+  },
+  {
+    "name": "T9-C1",
+    "definition": {
+      "id": "T9-C1",
+      "task_id": "T9",
+      "section_alias": "PEKBANG",
+      "prompt": "Bandingkan status pemenuhan setiap indikator SPM/SLA kecepatan transaksi Ruas PEKBANG antara 1–7 Juli 2026 dan 8–14 Juli 2026. Kembalikan status kedua periode dan perubahannya sesuai format terstruktur yang diminta.",
+      "prompt_sha256": "aaaef5056b9ce22946406ba5ace231fc2ad69f722d711c948fb5741cac7479e3",
+      "semantic_branches": [
+        "unchanged pass",
+        "improved to pass",
+        "unchanged fail",
+        "all SLA applicable"
+      ],
+      "period_a": {
+        "start": "2026-07-01",
+        "end": "2026-07-07"
+      },
+      "period_b": {
+        "start": "2026-07-08",
+        "end": "2026-07-14"
+      }
+    },
+    "prompt": "Bandingkan status pemenuhan setiap indikator SPM/SLA kecepatan transaksi Ruas PEKBANG antara 1–7 Juli 2026 dan 8–14 Juli 2026. Kembalikan status kedua periode dan perubahannya sesuai format terstruktur yang diminta.\n\nFormat jawaban:\n- Kirim tepat satu objek JSON yang valid sebagai jawaban akhir, tanpa teks atau blok kode tambahan.\n- Patuhi skema JSON Schema 2020-12 berikut, termasuk larangan properti tambahan.\n- Tanggal memakai string tanggal kalender ISO; ID dan hitungan memakai integer JSON.\n- Gunakan ejaan label, nama, dan kategori persis seperti master yang tersedia; jangan menerjemahkan atau menormalkannya.\n\nKonvensi representasi publik tambahan:\n- Gunakan nilai enum transisi yang persis diizinkan skema. Transisi yang melibatkan not_applicable menunjukkan perubahan keberlakuan.\n\nSkema JSON Schema 2020-12:\n```json\n{\n  \"$schema\": \"https://json-schema.org/draft/2020-12/schema\",\n  \"title\": \"T9 SPM/SLA period comparison\",\n  \"type\": \"object\",\n  \"properties\": {\n    \"section_id\": {\n      \"type\": \"integer\"\n    },\n    \"section_name\": {\n      \"type\": \"string\"\n    },\n    \"period_a\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"start\": {\n          \"type\": \"string\",\n          \"format\": \"date\"\n        },\n        \"end\": {\n          \"type\": \"string\",\n          \"format\": \"date\"\n        }\n      },\n      \"required\": [\n        \"start\",\n        \"end\"\n      ],\n      \"additionalProperties\": false\n    },\n    \"period_b\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"start\": {\n          \"type\": \"string\",\n          \"format\": \"date\"\n        },\n        \"end\": {\n          \"type\": \"string\",\n          \"format\": \"date\"\n        }\n      },\n      \"required\": [\n        \"start\",\n        \"end\"\n      ],\n      \"additionalProperties\": false\n    },\n    \"indicators\": {\n      \"type\": \"array\",\n      \"items\": {\n        \"type\": \"object\",\n        \"properties\": {\n          \"spm_code\": {\n            \"type\": \"string\"\n          },\n          \"period_a\": {\n            \"type\": \"object\",\n            \"properties\": {\n              \"spm_evaluation_count\": {\n                \"type\": \"integer\",\n                \"minimum\": 1\n              },\n              \"spm_failed_count\": {\n                \"type\": \"integer\",\n                \"minimum\": 0\n              },\n              \"spm_status\": {\n                \"enum\": [\n                  \"pass\",\n                  \"fail\"\n                ]\n              },\n              \"sla_evaluation_count\": {\n                \"type\": \"integer\",\n                \"minimum\": 0\n              },\n              \"sla_failed_count\": {\n                \"type\": \"integer\",\n                \"minimum\": 0\n              },\n              \"sla_status\": {\n                \"enum\": [\n                  \"pass\",\n                  \"fail\",\n                  \"not_applicable\"\n                ]\n              }\n            },\n            \"required\": [\n              \"spm_evaluation_count\",\n              \"spm_failed_count\",\n              \"spm_status\",\n              \"sla_evaluation_count\",\n              \"sla_failed_count\",\n              \"sla_status\"\n            ],\n            \"additionalProperties\": false\n          },\n          \"period_b\": {\n            \"type\": \"object\",\n            \"properties\": {\n              \"spm_evaluation_count\": {\n                \"type\": \"integer\",\n                \"minimum\": 1\n              },\n              \"spm_failed_count\": {\n                \"type\": \"integer\",\n                \"minimum\": 0\n              },\n              \"spm_status\": {\n                \"enum\": [\n                  \"pass\",\n                  \"fail\"\n                ]\n              },\n              \"sla_evaluation_count\": {\n                \"type\": \"integer\",\n                \"minimum\": 0\n              },\n              \"sla_failed_count\": {\n                \"type\": \"integer\",\n                \"minimum\": 0\n              },\n              \"sla_status\": {\n                \"enum\": [\n                  \"pass\",\n                  \"fail\",\n                  \"not_applicable\"\n                ]\n              }\n            },\n            \"required\": [\n              \"spm_evaluation_count\",\n              \"spm_failed_count\",\n              \"spm_status\",\n              \"sla_evaluation_count\",\n              \"sla_failed_count\",\n              \"sla_status\"\n            ],\n            \"additionalProperties\": false\n          },\n          \"spm_transition\": {\n            \"enum\": [\n              \"pass_to_pass\",\n              \"pass_to_fail\",\n              \"fail_to_pass\",\n              \"fail_to_fail\"\n            ]\n          },\n          \"sla_transition\": {\n            \"enum\": [\n              \"pass_to_pass\",\n              \"pass_to_fail\",\n              \"fail_to_pass\",\n              \"fail_to_fail\",\n              \"not_applicable_to_not_applicable\",\n              \"not_applicable_to_pass\",\n              \"not_applicable_to_fail\",\n              \"pass_to_not_applicable\",\n              \"fail_to_not_applicable\"\n            ],\n            \"description\": \"A transition involving not_applicable represents an SLA-applicability change.\"\n          }\n        },\n        \"required\": [\n          \"spm_code\",\n          \"period_a\",\n          \"period_b\",\n          \"spm_transition\",\n          \"sla_transition\"\n        ],\n        \"additionalProperties\": false\n      }\n    }\n  },\n  \"required\": [\n    \"section_id\",\n    \"section_name\",\n    \"period_a\",\n    \"period_b\",\n    \"indicators\"\n  ],\n  \"additionalProperties\": false\n}\n```\n\nGunakan tabel aktual: m_vehicle_class (golongan kendaraan), m_accident_attributes (atribut kecelakaan), maintenance_asset_types (master aset inspeksi), dan view_section_spm_sla (konfigurasi efektif; filter code kecepatan-transaksi-1 sampai kecepatan-transaksi-5). accident_causes_ids adalah array JSON; hitung setiap kemunculan termasuk duplikat. Gunakan konfigurasi yang tersedia saat ini. Bandingkan durasi sebelum pembulatan; bulatkan hasil durasi dua desimal dengan nilai tengah menjauh dari nol. Untuk T1 gunakan seluruh tipe detail tidak null; evaluasi SPM/SLA menggunakan detail type=booth per gardu. LHR dibulatkan ke integer terdekat dengan nilai tengah menjauh dari nol. Urutkan array: golongan berdasarkan ID; bulan kronologis; insiden berdasarkan tanggal lalu ID; penyebab/aset berdasarkan jumlah menurun lalu ID; evaluasi berdasarkan nomor gardu lalu kode; kegagalan berdasarkan tanggal, ID monitoring, nomor gardu, kode; indikator berdasarkan kode.",
+    "historicalExpected": {
+      "section_id": 1,
+      "section_name": "PEKANBARU -  BANGKINANG (PEKBANG)",
+      "period_a": {
+        "start": "2026-07-01",
+        "end": "2026-07-07"
+      },
+      "period_b": {
+        "start": "2026-07-08",
+        "end": "2026-07-14"
+      },
+      "indicators": [
+        {
+          "spm_code": "kecepatan-transaksi-1",
+          "period_a": {
+            "spm_evaluation_count": 4,
+            "spm_failed_count": 0,
+            "spm_status": "pass",
+            "sla_evaluation_count": 4,
+            "sla_failed_count": 0,
+            "sla_status": "pass"
+          },
+          "period_b": {
+            "spm_evaluation_count": 4,
+            "spm_failed_count": 0,
+            "spm_status": "pass",
+            "sla_evaluation_count": 4,
+            "sla_failed_count": 0,
+            "sla_status": "pass"
+          },
+          "spm_transition": "pass_to_pass",
+          "sla_transition": "pass_to_pass"
+        },
+        {
+          "spm_code": "kecepatan-transaksi-2",
+          "period_a": {
+            "spm_evaluation_count": 4,
+            "spm_failed_count": 4,
+            "spm_status": "fail",
+            "sla_evaluation_count": 4,
+            "sla_failed_count": 4,
+            "sla_status": "fail"
+          },
+          "period_b": {
+            "spm_evaluation_count": 4,
+            "spm_failed_count": 0,
+            "spm_status": "pass",
+            "sla_evaluation_count": 4,
+            "sla_failed_count": 0,
+            "sla_status": "pass"
+          },
+          "spm_transition": "fail_to_pass",
+          "sla_transition": "fail_to_pass"
+        },
+        {
+          "spm_code": "kecepatan-transaksi-3",
+          "period_a": {
+            "spm_evaluation_count": 4,
+            "spm_failed_count": 0,
+            "spm_status": "pass",
+            "sla_evaluation_count": 4,
+            "sla_failed_count": 0,
+            "sla_status": "pass"
+          },
+          "period_b": {
+            "spm_evaluation_count": 4,
+            "spm_failed_count": 0,
+            "spm_status": "pass",
+            "sla_evaluation_count": 4,
+            "sla_failed_count": 0,
+            "sla_status": "pass"
+          },
+          "spm_transition": "pass_to_pass",
+          "sla_transition": "pass_to_pass"
+        },
+        {
+          "spm_code": "kecepatan-transaksi-4",
+          "period_a": {
+            "spm_evaluation_count": 4,
+            "spm_failed_count": 4,
+            "spm_status": "fail",
+            "sla_evaluation_count": 4,
+            "sla_failed_count": 4,
+            "sla_status": "fail"
+          },
+          "period_b": {
+            "spm_evaluation_count": 4,
+            "spm_failed_count": 4,
+            "spm_status": "fail",
+            "sla_evaluation_count": 4,
+            "sla_failed_count": 4,
+            "sla_status": "fail"
+          },
+          "spm_transition": "fail_to_fail",
+          "sla_transition": "fail_to_fail"
+        },
+        {
+          "spm_code": "kecepatan-transaksi-5",
+          "period_a": {
+            "spm_evaluation_count": 4,
+            "spm_failed_count": 4,
+            "spm_status": "fail",
+            "sla_evaluation_count": 4,
+            "sla_failed_count": 4,
+            "sla_status": "fail"
+          },
+          "period_b": {
+            "spm_evaluation_count": 4,
+            "spm_failed_count": 0,
+            "spm_status": "pass",
+            "sla_evaluation_count": 4,
+            "sla_failed_count": 0,
+            "sla_status": "pass"
+          },
+          "spm_transition": "fail_to_pass",
+          "sla_transition": "fail_to_pass"
+        }
+      ]
+    },
+    "expectedResult": "{\"section_id\":1,\"section_name\":\"PEKANBARU -  BANGKINANG (PEKBANG)\",\"period_a\":{\"start\":\"2026-07-01\",\"end\":\"2026-07-07\"},\"period_b\":{\"start\":\"2026-07-08\",\"end\":\"2026-07-14\"},\"indicators\":[{\"spm_code\":\"kecepatan-transaksi-1\",\"period_a\":{\"spm_evaluation_count\":4,\"spm_failed_count\":0,\"spm_status\":\"pass\",\"sla_evaluation_count\":4,\"sla_failed_count\":0,\"sla_status\":\"pass\"},\"period_b\":{\"spm_evaluation_count\":4,\"spm_failed_count\":0,\"spm_status\":\"pass\",\"sla_evaluation_count\":4,\"sla_failed_count\":0,\"sla_status\":\"pass\"},\"spm_transition\":\"pass_to_pass\",\"sla_transition\":\"pass_to_pass\"},{\"spm_code\":\"kecepatan-transaksi-2\",\"period_a\":{\"spm_evaluation_count\":4,\"spm_failed_count\":4,\"spm_status\":\"fail\",\"sla_evaluation_count\":4,\"sla_failed_count\":4,\"sla_status\":\"fail\"},\"period_b\":{\"spm_evaluation_count\":4,\"spm_failed_count\":0,\"spm_status\":\"pass\",\"sla_evaluation_count\":4,\"sla_failed_count\":0,\"sla_status\":\"pass\"},\"spm_transition\":\"fail_to_pass\",\"sla_transition\":\"fail_to_pass\"},{\"spm_code\":\"kecepatan-transaksi-3\",\"period_a\":{\"spm_evaluation_count\":4,\"spm_failed_count\":0,\"spm_status\":\"pass\",\"sla_evaluation_count\":4,\"sla_failed_count\":0,\"sla_status\":\"pass\"},\"period_b\":{\"spm_evaluation_count\":4,\"spm_failed_count\":0,\"spm_status\":\"pass\",\"sla_evaluation_count\":4,\"sla_failed_count\":0,\"sla_status\":\"pass\"},\"spm_transition\":\"pass_to_pass\",\"sla_transition\":\"pass_to_pass\"},{\"spm_code\":\"kecepatan-transaksi-4\",\"period_a\":{\"spm_evaluation_count\":4,\"spm_failed_count\":4,\"spm_status\":\"fail\",\"sla_evaluation_count\":4,\"sla_failed_count\":4,\"sla_status\":\"fail\"},\"period_b\":{\"spm_evaluation_count\":4,\"spm_failed_count\":4,\"spm_status\":\"fail\",\"sla_evaluation_count\":4,\"sla_failed_count\":4,\"sla_status\":\"fail\"},\"spm_transition\":\"fail_to_fail\",\"sla_transition\":\"fail_to_fail\"},{\"spm_code\":\"kecepatan-transaksi-5\",\"period_a\":{\"spm_evaluation_count\":4,\"spm_failed_count\":4,\"spm_status\":\"fail\",\"sla_evaluation_count\":4,\"sla_failed_count\":4,\"sla_status\":\"fail\"},\"period_b\":{\"spm_evaluation_count\":4,\"spm_failed_count\":0,\"spm_status\":\"pass\",\"sla_evaluation_count\":4,\"sla_failed_count\":0,\"sla_status\":\"pass\"},\"spm_transition\":\"fail_to_pass\",\"sla_transition\":\"fail_to_pass\"}]}"
+  },
+  {
+    "name": "T9-C2",
+    "definition": {
+      "id": "T9-C2",
+      "task_id": "T9",
+      "section": "PEKBANG",
+      "period_a": {
+        "start": "2026-01-05",
+        "end": "2026-01-10"
+      },
+      "period_b": {
+        "start": "2026-01-12",
+        "end": "2026-01-17"
+      },
+      "schema": "docs/schemas/t9_spm_sla_comparison.json",
+      "gate_name": "Bangkinang",
+      "semantic_branches": [
+        "two distinct routine reports contribute in each period",
+        "each period status fails when any report/booth evaluation fails",
+        "SPM and independently overridden SLA both deteriorate from pass to fail"
+      ],
+      "wrong_alternatives": [
+        {
+          "id": "one_report_per_period",
+          "wrong_rule": "Use only the first routine report in each requested period instead of aggregating every scoped report.",
+          "evidence_basis": "Routine capture permits reports on distinct dated schedules; the reviewed recap/trend semantics aggregate observations over the requested period.",
+          "construction": "Recompute each period from its earliest report only."
+        },
+        {
+          "id": "period_mean_replaces_any_failure",
+          "wrong_rule": "Aggregate the period-wide mean of rounded report/booth means, then apply it independently to SPM and applicable SLA across all period evaluations, allowing passing observations to offset failing observations.",
+          "evidence_basis": "The reviewed SPM/SLA business reference defines period status as fail when any report/booth evaluation fails.",
+          "construction": "For each requested period, average non-null ordinary-booth samples within each scoped report/booth and round each evaluation mean to hundredths; take an equally weighted mean of those evaluations and round it to hundredths. Compare that one period mean independently with each effective SPM threshold and each applicable effective SLA threshold, applying the result to every observed evaluation slot (failed count is zero or the evaluation count). Keep non-applicable SLA count/status at zero/not_applicable and recompute both transitions."
+        },
+        {
+          "id": "sla_copied_from_spm",
+          "wrong_rule": "Use the SPM threshold for the applicable SLA rather than the independent section override.",
+          "evidence_basis": "The retained section SLA writer persists the target in m_sla, independently of m_spm; the effective view derives the two values separately.",
+          "construction": "Copy code-1 SPM's 6-second threshold to SLA and recompute the full two-period output."
+        }
+      ],
+      "prompt_template": "Bandingkan status pemenuhan setiap indikator SPM/SLA kecepatan transaksi Ruas PEKBANG antara 5–10 Januari 2026 dan 12–17 Januari 2026. Kembalikan status kedua periode dan perubahannya sesuai format terstruktur yang diminta.",
+      "section_alias": "PEKBANG"
+    },
+    "prompt": "Bandingkan status pemenuhan setiap indikator SPM/SLA kecepatan transaksi Ruas PEKBANG antara 5–10 Januari 2026 dan 12–17 Januari 2026. Kembalikan status kedua periode dan perubahannya sesuai format terstruktur yang diminta.\n\nKirim tepat satu objek JSON, tanpa Markdown. Ikuti skema berikut:\n{\"$schema\": \"https://json-schema.org/draft/2020-12/schema\", \"title\": \"T9 SPM/SLA period comparison\", \"type\": \"object\", \"properties\": {\"section_id\": {\"type\": \"integer\"}, \"section_name\": {\"type\": \"string\"}, \"period_a\": {\"type\": \"object\", \"properties\": {\"start\": {\"type\": \"string\", \"format\": \"date\"}, \"end\": {\"type\": \"string\", \"format\": \"date\"}}, \"required\": [\"start\", \"end\"], \"additionalProperties\": false}, \"period_b\": {\"type\": \"object\", \"properties\": {\"start\": {\"type\": \"string\", \"format\": \"date\"}, \"end\": {\"type\": \"string\", \"format\": \"date\"}}, \"required\": [\"start\", \"end\"], \"additionalProperties\": false}, \"indicators\": {\"type\": \"array\", \"items\": {\"type\": \"object\", \"properties\": {\"spm_code\": {\"type\": \"string\"}, \"period_a\": {\"type\": \"object\", \"properties\": {\"spm_evaluation_count\": {\"type\": \"integer\", \"minimum\": 1}, \"spm_failed_count\": {\"type\": \"integer\", \"minimum\": 0}, \"spm_status\": {\"enum\": [\"pass\", \"fail\"]}, \"sla_evaluation_count\": {\"type\": \"integer\", \"minimum\": 0}, \"sla_failed_count\": {\"type\": \"integer\", \"minimum\": 0}, \"sla_status\": {\"enum\": [\"pass\", \"fail\", \"not_applicable\"]}}, \"required\": [\"spm_evaluation_count\", \"spm_failed_count\", \"spm_status\", \"sla_evaluation_count\", \"sla_failed_count\", \"sla_status\"], \"additionalProperties\": false}, \"period_b\": {\"type\": \"object\", \"properties\": {\"spm_evaluation_count\": {\"type\": \"integer\", \"minimum\": 1}, \"spm_failed_count\": {\"type\": \"integer\", \"minimum\": 0}, \"spm_status\": {\"enum\": [\"pass\", \"fail\"]}, \"sla_evaluation_count\": {\"type\": \"integer\", \"minimum\": 0}, \"sla_failed_count\": {\"type\": \"integer\", \"minimum\": 0}, \"sla_status\": {\"enum\": [\"pass\", \"fail\", \"not_applicable\"]}}, \"required\": [\"spm_evaluation_count\", \"spm_failed_count\", \"spm_status\", \"sla_evaluation_count\", \"sla_failed_count\", \"sla_status\"], \"additionalProperties\": false}, \"spm_transition\": {\"enum\": [\"pass_to_pass\", \"pass_to_fail\", \"fail_to_pass\", \"fail_to_fail\"]}, \"sla_transition\": {\"enum\": [\"pass_to_pass\", \"pass_to_fail\", \"fail_to_pass\", \"fail_to_fail\", \"not_applicable_to_not_applicable\", \"not_applicable_to_pass\", \"not_applicable_to_fail\", \"pass_to_not_applicable\", \"fail_to_not_applicable\"], \"description\": \"A transition involving not_applicable represents an SLA-applicability change.\"}}, \"required\": [\"spm_code\", \"period_a\", \"period_b\", \"spm_transition\", \"sla_transition\"], \"additionalProperties\": false}}}, \"required\": [\"section_id\", \"section_name\", \"period_a\", \"period_b\", \"indicators\"], \"additionalProperties\": false}\n\nGunakan tabel aktual: m_vehicle_class (golongan kendaraan), m_accident_attributes (atribut kecelakaan), maintenance_asset_types (master aset inspeksi), dan view_section_spm_sla (konfigurasi efektif; filter code kecepatan-transaksi-1 sampai kecepatan-transaksi-5). accident_causes_ids adalah array JSON; hitung setiap kemunculan termasuk duplikat. Gunakan konfigurasi yang tersedia saat ini. Bandingkan durasi sebelum pembulatan; bulatkan hasil durasi dua desimal dengan nilai tengah menjauh dari nol. Untuk T1 gunakan seluruh tipe detail tidak null; evaluasi SPM/SLA menggunakan detail type=booth per gardu. LHR dibulatkan ke integer terdekat dengan nilai tengah menjauh dari nol. Urutkan array: golongan berdasarkan ID; bulan kronologis; insiden berdasarkan tanggal lalu ID; penyebab/aset berdasarkan jumlah menurun lalu ID; evaluasi berdasarkan nomor gardu lalu kode; kegagalan berdasarkan tanggal, ID monitoring, nomor gardu, kode; indikator berdasarkan kode.",
+    "historicalExpected": {
+      "section_id": 1,
+      "section_name": "PEKANBARU -  BANGKINANG (PEKBANG)",
+      "period_a": {
+        "start": "2026-01-05",
+        "end": "2026-01-10"
+      },
+      "period_b": {
+        "start": "2026-01-12",
+        "end": "2026-01-17"
+      },
+      "indicators": [
+        {
+          "spm_code": "kecepatan-transaksi-1",
+          "period_a": {
+            "spm_evaluation_count": 8,
+            "spm_failed_count": 0,
+            "spm_status": "pass",
+            "sla_evaluation_count": 8,
+            "sla_failed_count": 0,
+            "sla_status": "pass"
+          },
+          "period_b": {
+            "spm_evaluation_count": 8,
+            "spm_failed_count": 4,
+            "spm_status": "fail",
+            "sla_evaluation_count": 8,
+            "sla_failed_count": 8,
+            "sla_status": "fail"
+          },
+          "spm_transition": "pass_to_fail",
+          "sla_transition": "pass_to_fail"
+        },
+        {
+          "spm_code": "kecepatan-transaksi-2",
+          "period_a": {
+            "spm_evaluation_count": 8,
+            "spm_failed_count": 0,
+            "spm_status": "pass",
+            "sla_evaluation_count": 8,
+            "sla_failed_count": 0,
+            "sla_status": "pass"
+          },
+          "period_b": {
+            "spm_evaluation_count": 8,
+            "spm_failed_count": 8,
+            "spm_status": "fail",
+            "sla_evaluation_count": 8,
+            "sla_failed_count": 8,
+            "sla_status": "fail"
+          },
+          "spm_transition": "pass_to_fail",
+          "sla_transition": "pass_to_fail"
+        },
+        {
+          "spm_code": "kecepatan-transaksi-3",
+          "period_a": {
+            "spm_evaluation_count": 8,
+            "spm_failed_count": 0,
+            "spm_status": "pass",
+            "sla_evaluation_count": 8,
+            "sla_failed_count": 0,
+            "sla_status": "pass"
+          },
+          "period_b": {
+            "spm_evaluation_count": 8,
+            "spm_failed_count": 0,
+            "spm_status": "pass",
+            "sla_evaluation_count": 8,
+            "sla_failed_count": 0,
+            "sla_status": "pass"
+          },
+          "spm_transition": "pass_to_pass",
+          "sla_transition": "pass_to_pass"
+        },
+        {
+          "spm_code": "kecepatan-transaksi-4",
+          "period_a": {
+            "spm_evaluation_count": 8,
+            "spm_failed_count": 4,
+            "spm_status": "fail",
+            "sla_evaluation_count": 8,
+            "sla_failed_count": 4,
+            "sla_status": "fail"
+          },
+          "period_b": {
+            "spm_evaluation_count": 8,
+            "spm_failed_count": 8,
+            "spm_status": "fail",
+            "sla_evaluation_count": 8,
+            "sla_failed_count": 8,
+            "sla_status": "fail"
+          },
+          "spm_transition": "fail_to_fail",
+          "sla_transition": "fail_to_fail"
+        },
+        {
+          "spm_code": "kecepatan-transaksi-5",
+          "period_a": {
+            "spm_evaluation_count": 8,
+            "spm_failed_count": 0,
+            "spm_status": "pass",
+            "sla_evaluation_count": 8,
+            "sla_failed_count": 0,
+            "sla_status": "pass"
+          },
+          "period_b": {
+            "spm_evaluation_count": 8,
+            "spm_failed_count": 8,
+            "spm_status": "fail",
+            "sla_evaluation_count": 8,
+            "sla_failed_count": 8,
+            "sla_status": "fail"
+          },
+          "spm_transition": "pass_to_fail",
+          "sla_transition": "pass_to_fail"
+        }
+      ]
+    },
+    "expectedResult": "{\"section_id\":1,\"section_name\":\"PEKANBARU -  BANGKINANG (PEKBANG)\",\"period_a\":{\"start\":\"2026-01-05\",\"end\":\"2026-01-10\"},\"period_b\":{\"start\":\"2026-01-12\",\"end\":\"2026-01-17\"},\"indicators\":[{\"spm_code\":\"kecepatan-transaksi-1\",\"period_a\":{\"spm_evaluation_count\":8,\"spm_failed_count\":0,\"spm_status\":\"pass\",\"sla_evaluation_count\":8,\"sla_failed_count\":0,\"sla_status\":\"pass\"},\"period_b\":{\"spm_evaluation_count\":8,\"spm_failed_count\":4,\"spm_status\":\"fail\",\"sla_evaluation_count\":8,\"sla_failed_count\":4,\"sla_status\":\"fail\"},\"spm_transition\":\"pass_to_fail\",\"sla_transition\":\"pass_to_fail\"},{\"spm_code\":\"kecepatan-transaksi-2\",\"period_a\":{\"spm_evaluation_count\":8,\"spm_failed_count\":0,\"spm_status\":\"pass\",\"sla_evaluation_count\":8,\"sla_failed_count\":0,\"sla_status\":\"pass\"},\"period_b\":{\"spm_evaluation_count\":8,\"spm_failed_count\":8,\"spm_status\":\"fail\",\"sla_evaluation_count\":8,\"sla_failed_count\":8,\"sla_status\":\"fail\"},\"spm_transition\":\"pass_to_fail\",\"sla_transition\":\"pass_to_fail\"},{\"spm_code\":\"kecepatan-transaksi-3\",\"period_a\":{\"spm_evaluation_count\":8,\"spm_failed_count\":0,\"spm_status\":\"pass\",\"sla_evaluation_count\":8,\"sla_failed_count\":0,\"sla_status\":\"pass\"},\"period_b\":{\"spm_evaluation_count\":8,\"spm_failed_count\":0,\"spm_status\":\"pass\",\"sla_evaluation_count\":8,\"sla_failed_count\":0,\"sla_status\":\"pass\"},\"spm_transition\":\"pass_to_pass\",\"sla_transition\":\"pass_to_pass\"},{\"spm_code\":\"kecepatan-transaksi-4\",\"period_a\":{\"spm_evaluation_count\":8,\"spm_failed_count\":4,\"spm_status\":\"fail\",\"sla_evaluation_count\":8,\"sla_failed_count\":4,\"sla_status\":\"fail\"},\"period_b\":{\"spm_evaluation_count\":8,\"spm_failed_count\":8,\"spm_status\":\"fail\",\"sla_evaluation_count\":8,\"sla_failed_count\":8,\"sla_status\":\"fail\"},\"spm_transition\":\"fail_to_fail\",\"sla_transition\":\"fail_to_fail\"},{\"spm_code\":\"kecepatan-transaksi-5\",\"period_a\":{\"spm_evaluation_count\":8,\"spm_failed_count\":0,\"spm_status\":\"pass\",\"sla_evaluation_count\":8,\"sla_failed_count\":0,\"sla_status\":\"pass\"},\"period_b\":{\"spm_evaluation_count\":8,\"spm_failed_count\":8,\"spm_status\":\"fail\",\"sla_evaluation_count\":8,\"sla_failed_count\":8,\"sla_status\":\"fail\"},\"spm_transition\":\"pass_to_fail\",\"sla_transition\":\"pass_to_fail\"}]}"
+  }
+]

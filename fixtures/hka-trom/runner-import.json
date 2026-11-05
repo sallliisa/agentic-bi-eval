@@ -1,0 +1,22 @@
+{
+  "setId": "33286160-5a84-5e7a-99e7-cda9e8ca1edc",
+  "name": "HKA TROM \u2014 combined fixture v1",
+  "caseCount": 15,
+  "caseIds": {
+    "T1-C1": "5349de63-d35d-5da5-b1db-caf2ed2b4039",
+    "T1-C2": "6c3934dd-0423-550b-849e-fa654de69b8f",
+    "T2-C1": "ce31f431-c00d-58f3-a3ae-e2a44622d3aa",
+    "T3-C1": "cd68f48b-c8d9-528e-a19f-0599ac37a3db",
+    "T4-C1": "2e3330d8-4984-5788-970f-4efa898ed8ac",
+    "T5-C1": "42880e0c-7390-54fd-a622-6eecca4d3e73",
+    "T6-C1": "3cde624e-138a-53ef-8368-ea29f1b5500c",
+    "T7-C1": "cc879ed3-f852-5b40-ac5a-3c8e97748d9a",
+    "T7-C2": "4b0f43f1-498e-57d5-b88e-f302e18fb98b",
+    "T7-C3": "5e2450e8-b833-5fb5-bde7-6bf7da409d43",
+    "T7-C4": "02f654e3-e402-52a5-8142-e3747c8c36b8",
+    "T8-C1": "efe382ec-8dcc-5daf-894b-248c57ae9ed6",
+    "T8-C2": "5146f69a-1892-598f-aedd-d5196b5bdbf0",
+    "T9-C1": "311a9691-7df2-59b0-8b01-651a050338dd",
+    "T9-C2": "0efc6ab5-44bd-5c50-98ef-654e6f142edc"
+  }
+}

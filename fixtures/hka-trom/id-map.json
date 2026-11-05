@@ -1,0 +1,569 @@
+{
+  "T1-C1": {
+    "employees": {
+      "900000001": 1600000001
+    },
+    "shift_schedules": {},
+    "shift_schedule_personel": {},
+    "monitoring_transactions": {
+      "910001001": 1600100001,
+      "910001002": 1600100002,
+      "910001003": 1600100003,
+      "910001004": 1600100004,
+      "910001005": 1600100005
+    },
+    "monitoring_transaction_details": {
+      "910002001": 1600100001,
+      "910002002": 1600100002,
+      "910002003": 1600100003,
+      "910002004": 1600100004,
+      "910002005": 1600100005,
+      "910002006": 1600100006,
+      "910002007": 1600100007,
+      "910002008": 1600100008,
+      "910002009": 1600100009,
+      "910002010": 1600100010,
+      "910002011": 1600100011,
+      "910002012": 1600100012,
+      "910002013": 1600100013,
+      "910002014": 1600100014
+    },
+    "toll_volume_revenue": {},
+    "toll_traffic_volumes": {},
+    "incidents": {},
+    "incident_actions": {},
+    "accident_reports": {},
+    "inspection_schedules": {},
+    "inspection_schedule_assets": {},
+    "inspections": {},
+    "inspection_elements": {},
+    "inspection_items": {}
+  },
+  "T1-C2": {
+    "employees": {
+      "900000001": 1600000001
+    },
+    "shift_schedules": {
+      "970201001": 1600200001
+    },
+    "shift_schedule_personel": {
+      "970204001": 1600200001
+    },
+    "monitoring_transactions": {
+      "970202001": 1600200001
+    },
+    "monitoring_transaction_details": {
+      "970203001": 1600200001,
+      "970203002": 1600200002,
+      "970203003": 1600200003,
+      "970203004": 1600200004,
+      "970203005": 1600200005,
+      "970203006": 1600200006,
+      "970203007": 1600200007
+    },
+    "toll_volume_revenue": {},
+    "toll_traffic_volumes": {},
+    "incidents": {},
+    "incident_actions": {},
+    "accident_reports": {},
+    "inspection_schedules": {},
+    "inspection_schedule_assets": {},
+    "inspections": {},
+    "inspection_elements": {},
+    "inspection_items": {}
+  },
+  "T2-C1": {
+    "employees": {
+      "900000001": 1600000001
+    },
+    "shift_schedules": {},
+    "shift_schedule_personel": {},
+    "monitoring_transactions": {},
+    "monitoring_transaction_details": {},
+    "toll_volume_revenue": {
+      "930201001": 1600300001,
+      "930201002": 1600300002,
+      "930201003": 1600300003,
+      "930201004": 1600300004
+    },
+    "toll_traffic_volumes": {
+      "930202001": 1600300001,
+      "930202002": 1600300002,
+      "930202003": 1600300003,
+      "930202004": 1600300004,
+      "930202005": 1600300005,
+      "930202006": 1600300006,
+      "930202007": 1600300007,
+      "930202008": 1600300008,
+      "930202009": 1600300009,
+      "930202010": 1600300010,
+      "930202011": 1600300011,
+      "930202012": 1600300012,
+      "930202013": 1600300013,
+      "930202014": 1600300014,
+      "930202015": 1600300015
+    },
+    "incidents": {},
+    "incident_actions": {},
+    "accident_reports": {},
+    "inspection_schedules": {},
+    "inspection_schedule_assets": {},
+    "inspections": {},
+    "inspection_elements": {},
+    "inspection_items": {}
+  },
+  "T3-C1": {
+    "employees": {
+      "900000001": 1600000001
+    },
+    "shift_schedules": {},
+    "shift_schedule_personel": {},
+    "monitoring_transactions": {},
+    "monitoring_transaction_details": {},
+    "toll_volume_revenue": {
+      "930301001": 1600400001,
+      "930301002": 1600400002,
+      "930301003": 1600400003,
+      "930301004": 1600400004,
+      "930301005": 1600400005,
+      "930301006": 1600400006,
+      "930301007": 1600400007,
+      "930301008": 1600400008
+    },
+    "toll_traffic_volumes": {
+      "930302001": 1600400001,
+      "930302002": 1600400002,
+      "930302003": 1600400003,
+      "930302004": 1600400004,
+      "930302005": 1600400005,
+      "930302006": 1600400006,
+      "930302007": 1600400007,
+      "930302008": 1600400008,
+      "930302009": 1600400009,
+      "930302010": 1600400010,
+      "930302011": 1600400011,
+      "930302012": 1600400012,
+      "930302013": 1600400013,
+      "930302014": 1600400014,
+      "930302015": 1600400015,
+      "930302016": 1600400016,
+      "930302017": 1600400017,
+      "930302018": 1600400018,
+      "930302019": 1600400019,
+      "930302020": 1600400020,
+      "930302021": 1600400021,
+      "930302022": 1600400022
+    },
+    "incidents": {},
+    "incident_actions": {},
+    "accident_reports": {},
+    "inspection_schedules": {},
+    "inspection_schedule_assets": {},
+    "inspections": {},
+    "inspection_elements": {},
+    "inspection_items": {}
+  },
+  "T4-C1": {
+    "employees": {
+      "900000001": 1600000001
+    },
+    "shift_schedules": {},
+    "shift_schedule_personel": {},
+    "monitoring_transactions": {},
+    "monitoring_transaction_details": {},
+    "toll_volume_revenue": {},
+    "toll_traffic_volumes": {},
+    "incidents": {
+      "930401001": 1600500001,
+      "930401002": 1600500002,
+      "930401003": 1600500003,
+      "930401004": 1600500004,
+      "930401005": 1600500005,
+      "930401006": 1600500006
+    },
+    "incident_actions": {
+      "930402001": 1600500001,
+      "930402002": 1600500002,
+      "930402003": 1600500003,
+      "930402004": 1600500004,
+      "930402005": 1600500005,
+      "930402006": 1600500006,
+      "930402007": 1600500007
+    },
+    "accident_reports": {},
+    "inspection_schedules": {},
+    "inspection_schedule_assets": {},
+    "inspections": {},
+    "inspection_elements": {},
+    "inspection_items": {}
+  },
+  "T5-C1": {
+    "employees": {
+      "900000001": 1600000001
+    },
+    "shift_schedules": {},
+    "shift_schedule_personel": {},
+    "monitoring_transactions": {},
+    "monitoring_transaction_details": {},
+    "toll_volume_revenue": {},
+    "toll_traffic_volumes": {},
+    "incidents": {
+      "930501001": 1600600001,
+      "930501002": 1600600002,
+      "930501003": 1600600003,
+      "930501004": 1600600004,
+      "930501005": 1600600005
+    },
+    "incident_actions": {},
+    "accident_reports": {
+      "930502001": 1600600001,
+      "930502002": 1600600002,
+      "930502003": 1600600003,
+      "930502004": 1600600004,
+      "930502005": 1600600005
+    },
+    "inspection_schedules": {},
+    "inspection_schedule_assets": {},
+    "inspections": {},
+    "inspection_elements": {},
+    "inspection_items": {}
+  },
+  "T6-C1": {
+    "employees": {
+      "900000001": 1600000001
+    },
+    "shift_schedules": {},
+    "shift_schedule_personel": {},
+    "monitoring_transactions": {},
+    "monitoring_transaction_details": {},
+    "toll_volume_revenue": {},
+    "toll_traffic_volumes": {},
+    "incidents": {},
+    "incident_actions": {},
+    "accident_reports": {},
+    "inspection_schedules": {
+      "930601001": 1600700001,
+      "930601002": 1600700002,
+      "930601003": 1600700003
+    },
+    "inspection_schedule_assets": {
+      "930602001": 1600700001,
+      "930602002": 1600700002,
+      "930602011": 1600700003,
+      "930602021": 1600700004
+    },
+    "inspections": {
+      "930603001": 1600700001,
+      "930603002": 1600700002,
+      "930603003": 1600700003,
+      "930603004": 1600700004
+    },
+    "inspection_elements": {
+      "930604001": 1600700001,
+      "930604002": 1600700002,
+      "930604003": 1600700003,
+      "930604004": 1600700004
+    },
+    "inspection_items": {
+      "930605001": 1600700001,
+      "930605002": 1600700002,
+      "930605003": 1600700003,
+      "930605004": 1600700004,
+      "930605005": 1600700005,
+      "930605006": 1600700006,
+      "930605007": 1600700007
+    }
+  },
+  "T7-C1": {
+    "employees": {
+      "900000001": 1600000001
+    },
+    "shift_schedules": {
+      "940101001": 1600800001
+    },
+    "shift_schedule_personel": {},
+    "monitoring_transactions": {
+      "940102001": 1600800001
+    },
+    "monitoring_transaction_details": {
+      "940103001": 1600800001,
+      "940103002": 1600800002,
+      "940103003": 1600800003,
+      "940103004": 1600800004,
+      "940103005": 1600800005
+    },
+    "toll_volume_revenue": {},
+    "toll_traffic_volumes": {},
+    "incidents": {},
+    "incident_actions": {},
+    "accident_reports": {},
+    "inspection_schedules": {},
+    "inspection_schedule_assets": {},
+    "inspections": {},
+    "inspection_elements": {},
+    "inspection_items": {}
+  },
+  "T7-C2": {
+    "employees": {
+      "900000001": 1600000001
+    },
+    "shift_schedules": {
+      "940201001": 1600900001
+    },
+    "shift_schedule_personel": {},
+    "monitoring_transactions": {
+      "940202001": 1600900001
+    },
+    "monitoring_transaction_details": {
+      "940203001": 1600900001,
+      "940203002": 1600900002,
+      "940203003": 1600900003,
+      "940203004": 1600900004,
+      "940203005": 1600900005
+    },
+    "toll_volume_revenue": {},
+    "toll_traffic_volumes": {},
+    "incidents": {},
+    "incident_actions": {},
+    "accident_reports": {},
+    "inspection_schedules": {},
+    "inspection_schedule_assets": {},
+    "inspections": {},
+    "inspection_elements": {},
+    "inspection_items": {}
+  },
+  "T7-C3": {
+    "employees": {
+      "900000001": 1600000001
+    },
+    "shift_schedules": {
+      "940301001": 1601000001
+    },
+    "shift_schedule_personel": {},
+    "monitoring_transactions": {
+      "940302001": 1601000001
+    },
+    "monitoring_transaction_details": {
+      "940303001": 1601000001,
+      "940303002": 1601000002,
+      "940303003": 1601000003,
+      "940303004": 1601000004
+    },
+    "toll_volume_revenue": {},
+    "toll_traffic_volumes": {},
+    "incidents": {},
+    "incident_actions": {},
+    "accident_reports": {},
+    "inspection_schedules": {},
+    "inspection_schedule_assets": {},
+    "inspections": {},
+    "inspection_elements": {},
+    "inspection_items": {}
+  },
+  "T7-C4": {
+    "employees": {
+      "900000001": 1600000001
+    },
+    "shift_schedules": {
+      "1030401001": 1601100001,
+      "1030401002": 1601100002,
+      "1030401003": 1601100003
+    },
+    "shift_schedule_personel": {
+      "1030404001": 1601100001,
+      "1030404002": 1601100002,
+      "1030404003": 1601100003
+    },
+    "monitoring_transactions": {
+      "1030402001": 1601100001,
+      "1030402002": 1601100002,
+      "1030402003": 1601100003,
+      "1030402004": 1601100004
+    },
+    "monitoring_transaction_details": {
+      "1030403001": 1601100001,
+      "1030403002": 1601100002,
+      "1030403003": 1601100003,
+      "1030403004": 1601100004,
+      "1030403005": 1601100005,
+      "1030403006": 1601100006,
+      "1030403007": 1601100007,
+      "1030403008": 1601100008,
+      "1030403009": 1601100009,
+      "1030403010": 1601100010,
+      "1030403011": 1601100011,
+      "1030403012": 1601100012,
+      "1030403013": 1601100013,
+      "1030403014": 1601100014,
+      "1030403015": 1601100015,
+      "1030403016": 1601100016
+    },
+    "toll_volume_revenue": {},
+    "toll_traffic_volumes": {},
+    "incidents": {},
+    "incident_actions": {},
+    "accident_reports": {},
+    "inspection_schedules": {},
+    "inspection_schedule_assets": {},
+    "inspections": {},
+    "inspection_elements": {},
+    "inspection_items": {}
+  },
+  "T8-C1": {
+    "employees": {
+      "900000001": 1600000001
+    },
+    "shift_schedules": {
+      "940101001": 1601200001,
+      "940101002": 1601200002,
+      "940101003": 1601200003
+    },
+    "shift_schedule_personel": {},
+    "monitoring_transactions": {
+      "940102001": 1601200001,
+      "940102002": 1601200002,
+      "940102003": 1601200003
+    },
+    "monitoring_transaction_details": {
+      "940103001": 1601200001,
+      "940103002": 1601200002,
+      "940103003": 1601200003,
+      "940103004": 1601200004,
+      "940103005": 1601200005,
+      "940103006": 1601200006,
+      "940103007": 1601200007,
+      "940103008": 1601200008,
+      "940103009": 1601200009,
+      "940103010": 1601200010,
+      "940103011": 1601200011,
+      "940103012": 1601200012
+    },
+    "toll_volume_revenue": {},
+    "toll_traffic_volumes": {},
+    "incidents": {},
+    "incident_actions": {},
+    "accident_reports": {},
+    "inspection_schedules": {},
+    "inspection_schedule_assets": {},
+    "inspections": {},
+    "inspection_elements": {},
+    "inspection_items": {}
+  },
+  "T8-C2": {
+    "employees": {
+      "900000001": 1600000001
+    },
+    "shift_schedules": {
+      "1040201001": 1601300001
+    },
+    "shift_schedule_personel": {
+      "1040204001": 1601300001
+    },
+    "monitoring_transactions": {
+      "1040202001": 1601300001
+    },
+    "monitoring_transaction_details": {
+      "1040203001": 1601300001,
+      "1040203002": 1601300002,
+      "1040203003": 1601300003,
+      "1040203004": 1601300004,
+      "1040203005": 1601300005,
+      "1040203006": 1601300006
+    },
+    "toll_volume_revenue": {},
+    "toll_traffic_volumes": {},
+    "incidents": {},
+    "incident_actions": {},
+    "accident_reports": {},
+    "inspection_schedules": {},
+    "inspection_schedule_assets": {},
+    "inspections": {},
+    "inspection_elements": {},
+    "inspection_items": {}
+  },
+  "T9-C1": {
+    "employees": {
+      "900000001": 1600000001
+    },
+    "shift_schedules": {
+      "940101001": 1601400001,
+      "940101002": 1601400002
+    },
+    "shift_schedule_personel": {},
+    "monitoring_transactions": {
+      "940102001": 1601400001,
+      "940102002": 1601400002
+    },
+    "monitoring_transaction_details": {
+      "940103001": 1601400001,
+      "940103002": 1601400002,
+      "940103003": 1601400003,
+      "940103004": 1601400004,
+      "940103005": 1601400005,
+      "940103006": 1601400006,
+      "940103007": 1601400007,
+      "940103008": 1601400008
+    },
+    "toll_volume_revenue": {},
+    "toll_traffic_volumes": {},
+    "incidents": {},
+    "incident_actions": {},
+    "accident_reports": {},
+    "inspection_schedules": {},
+    "inspection_schedule_assets": {},
+    "inspections": {},
+    "inspection_elements": {},
+    "inspection_items": {}
+  },
+  "T9-C2": {
+    "employees": {
+      "900000001": 1600000001
+    },
+    "shift_schedules": {
+      "1050201001": 1601500001,
+      "1050201002": 1601500002,
+      "1050201003": 1601500003,
+      "1050201004": 1601500004
+    },
+    "shift_schedule_personel": {
+      "1050204001": 1601500001,
+      "1050204002": 1601500002,
+      "1050204003": 1601500003,
+      "1050204004": 1601500004
+    },
+    "monitoring_transactions": {
+      "1050202001": 1601500001,
+      "1050202002": 1601500002,
+      "1050202003": 1601500003,
+      "1050202004": 1601500004
+    },
+    "monitoring_transaction_details": {
+      "1050203001": 1601500001,
+      "1050203002": 1601500002,
+      "1050203003": 1601500003,
+      "1050203004": 1601500004,
+      "1050203005": 1601500005,
+      "1050203006": 1601500006,
+      "1050203007": 1601500007,
+      "1050203008": 1601500008,
+      "1050203009": 1601500009,
+      "1050203010": 1601500010,
+      "1050203011": 1601500011,
+      "1050203012": 1601500012,
+      "1050203013": 1601500013,
+      "1050203014": 1601500014,
+      "1050203015": 1601500015,
+      "1050203016": 1601500016
+    },
+    "toll_volume_revenue": {},
+    "toll_traffic_volumes": {},
+    "incidents": {},
+    "incident_actions": {},
+    "accident_reports": {},
+    "inspection_schedules": {},
+    "inspection_schedule_assets": {},
+    "inspections": {},
+    "inspection_elements": {},
+    "inspection_items": {}
+  }
+}

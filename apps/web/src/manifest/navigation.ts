@@ -4,6 +4,25 @@ export const navigation = defineNavigation([
   { kind: 'standalone', name: 'dashboard', title: 'Dashboard', icon: 'home', description: 'Dashboard', routes: [{ to: { name: 'dashboard' }, permission: null, title: 'Dashboard', icon: 'home' }] },
   {
     kind: 'module',
+    name: 'test-runner',
+    title: 'Test Runner',
+    icon: 'folder',
+    description: 'Test Runner',
+    routes: [
+      { to: { name: 'test-runner-test-sets' }, permission: 'view-test-sets', title: 'Test Sets', icon: 'folder' },
+      { to: { name: 'test-runner-test-runs' }, permission: 'view-test-runs', title: 'Test Runs', icon: 'folder' },
+    ],
+  },
+  {
+    kind: 'standalone',
+    name: 'skills-context',
+    title: 'Skills and Context',
+    icon: 'folder',
+    description: 'Skills and Context',
+    routes: [{ to: { name: 'skills-context' }, permission: 'view-skills-context', title: 'Skills and Context', icon: 'folder' }],
+  },
+  {
+    kind: 'module',
     name: 'settings',
     title: 'Settings',
     icon: 'settings',
@@ -12,6 +31,8 @@ export const navigation = defineNavigation([
       { to: { name: 'settings-users' }, permission: 'view-users', title: 'Users', icon: 'folder' },
       { to: { name: 'settings-roles' }, permission: 'view-roles', title: 'Roles', icon: 'folder' },
       { to: { name: 'settings-permissions' }, permission: 'view-permissions', title: 'Permissions', icon: 'folder' },
+      { to: { name: 'settings-agent-instructions' }, permission: 'view-agent-instructions', title: 'Agent Instructions', icon: 'folder' },
+      { to: { name: 'settings-model-providers' }, permission: 'view-model-providers', title: 'Model Providers', icon: 'folder' },
     ],
   },
 ] as const satisfies readonly NavigationModule[])

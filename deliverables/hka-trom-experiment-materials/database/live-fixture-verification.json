@@ -1,0 +1,23 @@
+{
+  "cases_verified": [
+    "T1-C1",
+    "T1-C2",
+    "T2-C1",
+    "T3-C1",
+    "T4-C1",
+    "T5-C1",
+    "T6-C1",
+    "T7-C1",
+    "T7-C2",
+    "T7-C3",
+    "T7-C4",
+    "T8-C1",
+    "T8-C2",
+    "T9-C1",
+    "T9-C2"
+  ],
+  "fixture_rows_verified": 237,
+  "checked_at": "2026-11-01T16:33:41.652186+00:00",
+  "scope": "The verifier used BEGIN READ ONLY SELECTs against hkatrom_bi.public. It checked the 237 controlled fixture rows and recalculated all 15 saved expected answers.",
+  "consoleOutput": "Live verification passed: 237 fixture rows and all 15 expected answers."
+}

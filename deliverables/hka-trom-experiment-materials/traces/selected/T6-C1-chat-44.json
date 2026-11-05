@@ -1,0 +1,911 @@
+{
+  "case": "T6-C1",
+  "chatId": 44,
+  "metadata": {
+    "id": 44,
+    "title": "New Chat",
+    "started": "2026-10-29T14:35:33.283Z",
+    "lastActive": "2026-10-29T14:37:38.458Z",
+    "totalTokens": 30084,
+    "promptTokens": 245211,
+    "cacheReadTokens": 217051,
+    "cacheWriteTokens": 0
+  },
+  "pages": 1,
+  "messages": [
+    {
+      "chatId": 44,
+      "sequence": 0,
+      "timestamp": "2026-10-29T14:35:33.283Z",
+      "author": {
+        "type": "user",
+        "name": "admin",
+        "id": "admin"
+      },
+      "type": "message",
+      "message": "Berikan ringkasan kondisi hasil inspeksi Ruas PEKBANG selama Mei 2026: jumlah item rusak, distribusi kategori kerusakan, prioritas perbaikan, dan aset yang terdampak. Kembalikan hasil sesuai format terstruktur yang diminta.\n\nFormat jawaban:\n- Kirim tepat satu objek JSON yang valid sebagai jawaban akhir, tanpa teks atau blok kode tambahan.\n- Patuhi skema JSON Schema 2020-12 berikut, termasuk larangan properti tambahan.\n- Tanggal memakai string tanggal kalender ISO; ID dan hitungan memakai integer JSON.\n- Gunakan ejaan label, nama, dan kategori persis seperti master yang tersedia; jangan menerjemahkan atau menormalkannya.\n\nKonvensi representasi publik tambahan:\n- Kunci kategori tepat r1, r2, dan r3; kunci prioritas perbaikan tepat p1 dan p2. ID/nama aset harus mengidentifikasi entri master aset inspeksi/pemeliharaan legacy yang tersedia.\n\nSkema JSON Schema 2020-12:\n```json\n{\n  \"$schema\": \"https://json-schema.org/draft/2020-12/schema\",\n  \"title\": \"T6 Inspection condition summary\",\n  \"type\": \"object\",\n  \"properties\": {\n    \"section_id\": {\n      \"type\": \"integer\"\n    },\n    \"section_name\": {\n      \"type\": \"string\"\n    },\n    \"period\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"start\": {\n          \"type\": \"string\",\n          \"format\": \"date\"\n        },\n        \"end\": {\n          \"type\": \"string\",\n          \"format\": \"date\"\n        }\n      },\n      \"required\": [\n        \"start\",\n        \"end\"\n      ],\n      \"additionalProperties\": false\n    },\n    \"damaged_item_count\": {\n      \"type\": \"integer\",\n      \"minimum\": 0,\n      \"description\": \"Count of inspection-item observations whose damage_category is non-null.\"\n    },\n    \"by_damage_category\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"r1\": {\n          \"type\": \"integer\",\n          \"minimum\": 0\n        },\n        \"r2\": {\n          \"type\": \"integer\",\n          \"minimum\": 0\n        },\n        \"r3\": {\n          \"type\": \"integer\",\n          \"minimum\": 0\n        }\n      },\n      \"required\": [\n        \"r1\",\n        \"r2\",\n        \"r3\"\n      ],\n      \"additionalProperties\": false,\n      \"description\": \"Counts by the exact r1, r2, and r3 category codes.\"\n    },\n    \"by_repair_priority\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"p1\": {\n          \"type\": \"integer\",\n          \"minimum\": 0\n        },\n        \"p2\": {\n          \"type\": \"integer\",\n          \"minimum\": 0\n        }\n      },\n      \"required\": [\n        \"p1\",\n        \"p2\"\n      ],\n      \"additionalProperties\": false,\n      \"description\": \"Counts for p1 and p2; damaged items without these priorities remain in the total.\"\n    },\n    \"by_asset\": {\n      \"type\": \"array\",\n      \"items\": {\n        \"type\": \"object\",\n        \"properties\": {\n          \"asset_id\": {\n            \"type\": \"integer\",\n            \"description\": \"Legacy inspection/maintenance asset-master ID reached through the inspection schedule assignment.\"\n          },\n          \"asset_name\": {\n            \"type\": \"string\",\n            \"description\": \"Exact name from the governed assets catalogue entity.\"\n          },\n          \"damaged_item_count\": {\n            \"type\": \"integer\",\n            \"minimum\": 1\n          }\n        },\n        \"required\": [\n          \"asset_id\",\n          \"asset_name\",\n          \"damaged_item_count\"\n        ],\n        \"additionalProperties\": false\n      }\n    }\n  },\n  \"required\": [\n    \"section_id\",\n    \"section_name\",\n    \"period\",\n    \"damaged_item_count\",\n    \"by_damage_category\",\n    \"by_repair_priority\",\n    \"by_asset\"\n  ],\n  \"additionalProperties\": false\n}\n```\n\nGunakan tabel aktual: m_vehicle_class (golongan kendaraan), m_accident_attributes (atribut kecelakaan), maintenance_asset_types (master aset inspeksi), dan view_section_spm_sla (konfigurasi efektif; filter code kecepatan-transaksi-1 sampai kecepatan-transaksi-5). accident_causes_ids adalah array JSON; hitung setiap kemunculan termasuk duplikat. Gunakan konfigurasi yang tersedia saat ini. Bandingkan durasi sebelum pembulatan; bulatkan hasil durasi dua desimal dengan nilai tengah menjauh dari nol. Untuk T1 gunakan seluruh tipe detail tidak null; evaluasi SPM/SLA menggunakan detail type=booth per gardu. LHR dibulatkan ke integer terdekat dengan nilai tengah menjauh dari nol. Urutkan array: golongan berdasarkan ID; bulan kronologis; insiden berdasarkan tanggal lalu ID; penyebab/aset berdasarkan jumlah menurun lalu ID; evaluasi berdasarkan nomor gardu lalu kode; kegagalan berdasarkan tanggal, ID monitoring, nomor gardu, kode; indikator berdasarkan kode."
+    },
+    {
+      "chatId": 44,
+      "sequence": 1,
+      "timestamp": "2026-10-29T14:35:35.714Z",
+      "author": {
+        "type": "agent",
+        "id": "muse-spark-1.3-contributor-variant-4ddfa039f9b7",
+        "name": "Muse Spark 1.3"
+      },
+      "type": "message",
+      "message": "",
+      "toolCalls": [
+        {
+          "toolCallId": "call_0b6861ca-4a54-4c69-a11b-a1c37219889b",
+          "toolName": "describeBinding",
+          "input": {
+            "name": "TROM"
+          },
+          "output": "Binding: env.TROM\nTitle: TROM BI\nTypeScript type: Trom\n\nThe binding comes with the following bundle of TypeScript type definitions:\n\n```\nexport interface EntitySummary {\n  /** PostgreSQL relation name in the public schema. */\n  name: string;\n  /** Human-readable name derived from the relation name. */\n  label: string;\n  /** PostgreSQL relation comment, or an empty string when no comment exists. */\n  description: string;\n}\n\n/** A field exposed by a TROM entity. */\nexport interface FieldDescription {\n  /** PostgreSQL column name. */\n  name: string;\n  /** PostgreSQL type formatted with modifiers such as varchar length. */\n  type: string;\n  /** Whether the column can contain SQL NULL. */\n  nullable: boolean;\n  /** PostgreSQL column comment, or an empty string when no comment exists. */\n  description: string;\n}\n\n/** A declared outbound PostgreSQL foreign key. */\nexport interface Relationship {\n  /** PostgreSQL constraint name. */\n  name: string;\n  /** Source columns in constraint order. */\n  fields: string[];\n  /** Referenced relation in the public schema. */\n  referenced_entity: string;\n  /** Referenced columns paired by position with `fields`. */\n  referenced_fields: string[];\n}\n\n/** Operators supported by `read_records`. */\nexport type FilterOperator =\n  | \"eq\"\n  | \"neq\"\n  | \"gt\"\n  | \"gte\"\n  | \"lt\"\n  | \"lte\"\n  | \"in\"\n  | \"not_in\"\n  | \"contains\"\n  | \"starts_with\"\n  | \"ends_with\"\n  | \"is_null\"\n  | \"is_not_null\";\n\n/** A scalar JSON value accepted by a value-bearing filter. */\nexport type FilterScalar = string | number | boolean;\n\n/** A filter that checks whether a field is null. */\nexport interface NullFilter {\n  /** Entity column name. */\n  field: string;\n  /** Match SQL NULL or non-NULL values. */\n  operator: \"is_null\" | \"is_not_null\";\n}\n\n/** A filter that compares a field with one scalar value. */\nexport interface ScalarFilter {\n  /** Entity column name. */\n  field: string;\n  /** Comparison operator. The entity's `allowed_filters` lists valid choices. */\n  operator: \"eq\" | \"neq\" | \"gt\" | \"gte\" | \"lt\" | \"lte\" | \"contains\" | \"starts_with\" | \"ends_with\";\n  /** Scalar value matched against the column's PostgreSQL type. */\n  value: FilterScalar;\n}\n\n/** A filter that compares a field with a non-empty set of scalar values. */\nexport interface SetFilter {\n  /** Entity column name. */\n  field: string;\n  /** Match a value in, or outside, the supplied set. */\n  operator: \"in\" | \"not_in\";\n  /** At least one scalar value compatible with the field's PostgreSQL type. */\n  value: [FilterScalar, ...FilterScalar[]];\n}\n\n/** One AND-combined field filter. */\nexport type RecordFilter = NullFilter | ScalarFilter | SetFilter;\n\n/** A field and direction used to order records. */\nexport interface RecordSort {\n  /** Entity column name. */\n  field: string;\n  /** Sort direction. */\n  direction: \"asc\" | \"desc\";\n}\n\n/** JSON-compatible record values returned by TROM. */\nexport type JsonValue =\n  | null\n  | boolean\n  | number\n  | string\n  | JsonValue[]\n  | { [key: string]: JsonValue };\n\n/** Read-only schema metadata for a TROM entity. */\nexport interface EntityDescription extends EntitySummary {\n  /** Primary-key columns in PostgreSQL constraint order. */\n  primary_key: string[];\n  /** Columns in PostgreSQL ordinal order. */\n  fields: FieldDescription[];\n  /** Declared outbound foreign keys to public-schema relations. */\n  relationships: Relationship[];\n  /** Allowed `read_records` filters for each field. */\n  allowed_filters: Record<string, FilterOperator[]>;\n}\n\n/** One page of projected records. */\nexport interface RecordPage {\n  /** PostgreSQL relation name in the public schema. */\n  entity: string;\n  /** Records containing exactly the requested fields. */\n  records: Array<Record<string, JsonValue>>;\n  /** Opaque cursor for the next page, or null when no page remains. */\n  next_cursor: string | null;\n}\n\n/** Read-only metadata and record access through TROM. */\nexport interface Trom {\n  /**\n   * List public-schema tables, partitioned-table parents, views, and materialized views.\n   *\n   * @returns The entities available through TROM.\n   */\n  list_entities(): Promise<EntitySummary[]>;\n\n  /**\n   * Describe a public TROM entity, including PostgreSQL fields, primary keys,\n   * declared foreign keys, and the filters available to `read_records`.\n   * Unknown entities fail with HTTP 404.\n   *\n   * @param entity Exact relation name returned by `list_entities()`.\n   * @returns The entity's schema and relationship metadata.\n   */\n  describe_entity(entity: string): Promise<EntityDescription>;\n\n  /**\n   * Read a projected page of records. Filters are combined with AND. The\n   * default filters and sort are empty, the default limit is 100, and limits\n   * must be from 1 through 500. Use `describe_entity` to see allowed filters.\n   * Fields accept column names only. SQL expressions and joins are not supported.\n   * Operators are `eq`, `neq`, `gt`, `gte`, `lt`, `lte`, `in`, `not_in`,\n   * `contains`, `starts_with`, `ends_with`, `is_null`, and `is_not_null`.\n   * Null operators omit `value`; set operators need a non-empty scalar array.\n   * The cursor belongs to the exact entity, fields, filters, sort, and limit.\n   * Bigint values beyond JavaScript's safe integer range and PostgreSQL numeric\n   * values are returned as strings. Non-finite floating-point values are also\n   * returned as strings. Invalid entities, fields, filters, sorts,\n   * limits, and cursors fail with an HTTP 4xx error. Keep the dataset unchanged\n   * between offset pages. Rows with identical sort values may repeat when an\n   * entity has no primary key.\n   *\n   * @param entity Exact relation name returned by `list_entities()`.\n   * @param fields Non-empty list of column names to return. No wildcard is supported.\n   * @param filters AND-combined filters. Omit to read without filters.\n   * @param sort Requested sort fields and directions. Omit for the entity's stable default order.\n   * @param limit Page size from 1 through 500. Defaults to 100.\n   * @param cursor Cursor from the previous page for the same query. Defaults to null.\n   * @returns One projected page and a cursor when another page remains.\n   */\n  read_records(\n    entity: string,\n    fields: string[],\n    filters?: RecordFilter[],\n    sort?: RecordSort[],\n    limit?: number,\n    cursor?: string | null,\n  ): Promise<RecordPage>;\n}\n\n```\n"
+        }
+      ]
+    },
+    {
+      "chatId": 44,
+      "sequence": 2,
+      "timestamp": "2026-10-29T14:35:39.936Z",
+      "author": {
+        "type": "agent",
+        "id": "muse-spark-1.3-contributor-variant-4ddfa039f9b7",
+        "name": "Muse Spark 1.3"
+      },
+      "type": "message",
+      "message": "",
+      "toolCalls": [
+        {
+          "toolCallId": "call_ba005e39-bfaf-4af5-8a4c-49ca35f61879",
+          "toolName": "executeCode",
+          "input": {
+            "code": "export default async function(self, env, ctx) {\n  const ents = await env.TROM.list_entities();\n  console.log(JSON.stringify(ents.map(e=>e.name)));\n}\n"
+          },
+          "output": "[\"absence_attachments\",\"absence_categories\",\"absence_evidence_categories\",\"absences\",\"accident_asset_damage_attachments\",\"accident_asset_damages\",\"accident_attachments\",\"accident_reports\",\"accident_service_vehicle_arrived\",\"accident_teams\",\"accident_towings\",\"accident_vehicle_involved\",\"accident_victims\",\"activity_period_types\",\"annual_leaves\",\"app_configs\",\"app_versions\",\"applicant_status_codes\",\"area_types\",\"asset_inspection_attachments\",\"asset_inspections\",\"asset_lane\",\"asset_locations\",\"asset_types\",\"assets\",\"attandance_recap\",\"attendance_recap\",\"backup_raw_presences\",\"bank\",\"banners\",\"bbm_types\",\"broadcast_categories\",\"cities\",\"config_annual_leave\",\"config_handover_forms\",\"config_handover_item_categories\",\"config_inspection_elements\",\"config_inspection_forms\",\"config_inspection_items\",\"config_lattol_handover\",\"config_presence\",\"config_questioner_choice_label\",\"config_questioner_items\",\"config_questioners\",\"config_radius_presence\",\"config_spm_manual_forms\",\"config_spm_manual_items\",\"config_verificators\",\"configs\",\"contracts\",\"cost_plans\",\"damage_categories\",\"damage_sources\",\"default_employee_salary\",\"employee_certifications\",\"employee_diseases\",\"employee_documents\",\"employee_educations\",\"employee_emergency_contacts\",\"employee_salary\",\"employee_salary_components\",\"employee_skills\",\"employees\",\"employment_status\",\"equipment_availability\",\"expense_categories\",\"expenses\",\"face_registrations\",\"failed_jobs\",\"fuel_distributors\",\"fuel_types\",\"fuel_voucher_attachments\",\"fuel_voucher_status_codes\",\"fuel_vouchers\",\"gas_station_deposits\",\"gas_station_fuel_types\",\"gas_station_owners\",\"gas_stations\",\"general_transaction_attachments\",\"general_transaction_progress\",\"general_transactions\",\"handover_categories\",\"handover_items\",\"handover_transactions\",\"highway_patrol_attachments\",\"highway_patrol_personel\",\"highway_patrols\",\"history_employee_section\",\"history_verifications\",\"hse_permit_attachments\",\"hse_permit_attribute_categories\",\"hse_permit_attributes\",\"hse_permits\",\"hse_transaction_attachments\",\"hse_transaction_progress\",\"hse_transactions\",\"incident_action_attachments\",\"incident_action_progress\",\"incident_actions\",\"incident_attachments\",\"incidents\",\"index_performance_adjustments\",\"inspection_categories\",\"inspection_damages\",\"inspection_elements\",\"inspection_form_areas\",\"inspection_item_progress\",\"inspection_item_progress_attachments\",\"inspection_item_progress_history\",\"inspection_item_repair_history\",\"inspection_items\",\"inspection_repair_progress\",\"inspection_repair_progress_attachments\",\"inspection_schedule_assets\",\"inspection_schedule_forms\",\"inspection_schedule_personel\",\"inspection_schedules\",\"inspections\",\"issue_categories\",\"job_application_additional_questions\",\"job_application_documents\",\"job_applications\",\"job_positions\",\"job_vacancies\",\"job_vacancy_additional_question_options\",\"job_vacancy_additional_questions\",\"job_vacancy_documents\",\"job_vacancy_positions\",\"jobs\",\"lattol_handover_items\",\"lattol_handovers\",\"leaderboard_parameters\",\"leave_categories\",\"leave_evidence_categories\",\"library\",\"log_activity\",\"log_deposits\",\"log_failed_login\",\"log_fuel_vouchers\",\"log_inspection_damage_repair\",\"log_login\",\"log_reports\",\"log_routine_maintenances\",\"log_verifications\",\"m_accident_attribute_categories\",\"m_accident_attributes\",\"m_accident_victim_attribute_categories\",\"m_accident_victim_attributes\",\"m_activities\",\"m_diseases\",\"m_educations\",\"m_employee_documents\",\"m_form_groups\",\"m_inventories\",\"m_payment_methods\",\"m_poc\",\"m_section_groups\",\"m_section_rantings\",\"m_section_shifts\",\"m_service_substances\",\"m_service_vehicles\",\"m_skills\",\"m_sla\",\"m_spm\",\"m_spm_operators\",\"m_spm_units\",\"m_uoms\",\"m_vehicle_class\",\"m_vehicle_ownership_types\",\"maintenance_activities\",\"maintenance_asset_types\",\"maintenance_locations\",\"maintenance_schedule_assets\",\"maintenance_schedule_personel\",\"maintenance_schedules\",\"mapping_activity_area\",\"mapping_asset_maintenance_activity\",\"mapping_asset_type_damage_category\",\"mapping_asset_type_repair_type\",\"mapping_contract_activity\",\"mapping_contract_poc\",\"mapping_job_positions_activities\",\"mapping_library_job_positions\",\"mapping_roles_permissions\",\"mapping_section_salary_components\",\"mapping_section_vehicle\",\"mapping_sections_maintenance_assets\",\"mapping_users_roles\",\"migrations\",\"minor_asset_damages\",\"monitoring_transaction_details\",\"monitoring_transactions\",\"notification_types\",\"notifications\",\"notifications2\",\"officer_types\",\"overtimes\",\"owner_categories\",\"password_histories\",\"password_resets\",\"permissions\",\"personal_access_tokens\",\"presences\",\"provinces\",\"public_assets\",\"questioner_items\",\"questioners\",\"raw_presences\",\"repair_types\",\"report_groups\",\"report_types\",\"role_groups\",\"roles\",\"rollpaper_mutation\",\"rollpaper_usages\",\"routine_maintenance_attachments\",\"routine_maintenance_history\",\"routine_maintenance_progress\",\"routine_maintenances\",\"salary_components\",\"section_broadcast_attachments\",\"section_broadcast_job_positions\",\"section_broadcast_push_notifs\",\"section_broadcasts\",\"section_payroll\",\"section_types\",\"shift_changes\",\"shift_routine_activity\",\"shift_schedule_activity\",\"shift_schedule_personel\",\"shift_schedules\",\"spm_manual_period_types\",\"spm_sla\",\"spm_sla_manual\",\"tbl_attendance_execution\",\"toll_gates\",\"toll_owners\",\"toll_rest_areas\",\"toll_revenues\",\"toll_sections\",\"toll_traffic_volumes\",\"toll_traffic_weighted_volumes\",\"toll_volume_revenue\",\"user_chat_ids\",\"user_devices\",\"user_status_code\",\"user_verify_emails\",\"users\",\"vehicle_brands\",\"vehicle_categories\",\"vehicle_issue_attachments\",\"vehicle_issue_categories\",\"vehicle_issues\",\"vehicle_types\",\"vehicles\",\"view_accident_covers\",\"view_general_transaction_covers\",\"view_highway_patrol_covers\",\"view_hse_transaction_covers\",\"view_incident_covers\",\"view_reminder_actions\",\"view_section_active_activities\",\"view_section_active_contracts\",\"view_section_activity_based_on_contracts\",\"view_section_spm_sla\",\"work_leaves\"]"
+        }
+      ]
+    },
+    {
+      "chatId": 44,
+      "sequence": 3,
+      "timestamp": "2026-10-29T14:35:39.937Z",
+      "author": {
+        "type": "agent",
+        "id": "muse-spark-1.3-contributor-variant-4ddfa039f9b7",
+        "name": "Muse Spark 1.3"
+      },
+      "type": "action",
+      "actionId": 1161,
+      "actionLog": {
+        "id": 1161,
+        "gatekeeperId": 3,
+        "resourceTitle": "TROM BI",
+        "resourceUrl": "http://127.0.0.1:8091/api/agentic-bi/entities",
+        "createdAt": "2026-10-29T14:35:39.628Z",
+        "state": "approved",
+        "type": "observation",
+        "description": {
+          "title": "List TROM entities",
+          "description": "Read the public BI entity catalog from TROM."
+        }
+      }
+    },
+    {
+      "chatId": 44,
+      "sequence": 4,
+      "timestamp": "2026-10-29T14:35:52.138Z",
+      "author": {
+        "type": "agent",
+        "id": "muse-spark-1.3-contributor-variant-4ddfa039f9b7",
+        "name": "Muse Spark 1.3"
+      },
+      "type": "message",
+      "message": "",
+      "toolCalls": [
+        {
+          "toolCallId": "call_da6ec536-7924-4067-9798-fc2b61d3c59f",
+          "toolName": "executeCode",
+          "input": {
+            "code": "export default async function(self, env, ctx) {\n  const ds = [\"toll_sections\",\"inspections\",\"inspection_schedules\",\"inspection_schedule_assets\",\"inspection_items\",\"inspection_damages\",\"damage_categories\",\"maintenance_asset_types\",\"assets\",\"asset_types\",\"inspection_categories\",\"inspection_elements\",\"config_inspection_items\",\"config_inspection_forms\",\"config_inspection_elements\",\"repair_types\"];\n  for (const e of ds) {\n    try {\n      const d = await env.TROM.describe_entity(e);\n      console.log(\"=== \"+e+\" ===\");\n      console.log(JSON.stringify(d.fields.map(f=>({n:f.name,t:f.type,nullable:f.nullable,desc:f.description})), null, 1));\n      console.log(\"PK:\"+JSON.stringify(d.primary_key));\n      console.log(\"REL:\"+JSON.stringify(d.relationships));\n    } catch(err){ console.log(\"ERR \"+e+\": \"+err.message); }\n  }\n}\n"
+          },
+          "output": "=== toll_sections ===\n[\n {\n  \"n\": \"id\",\n  \"t\": \"bigint\",\n  \"nullable\": false,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"section_code\",\n  \"t\": \"character varying(255)\",\n  \"nullable\": false,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"section_name\",\n  \"t\": \"character varying(255)\",\n  \"nullable\": false,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"owner_id\",\n  \"t\": \"bigint\",\n  \"nullable\": false,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"pic_contact\",\n  \"t\": \"character varying(255)\",\n  \"nullable\": true,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"start_km\",\n  \"t\": \"double precision\",\n  \"nullable\": true,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"end_km\",\n  \"t\": \"double precision\",\n  \"nullable\": true,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"long_road\",\n  \"t\": \"double precision\",\n  \"nullable\": true,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"img_section\",\n  \"t\": \"text\",\n  \"nullable\": true,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"description\",\n  \"t\": \"text\",\n  \"nullable\": true,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"active\",\n  \"t\": \"boolean\",\n  \"nullable\": true,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"created_by\",\n  \"t\": \"bigint\",\n  \"nullable\": true,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"updated_by\",\n  \"t\": \"bigint\",\n  \"nullable\": true,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"created_at\",\n  \"t\": \"timestamp(0) with time zone\",\n  \"nullable\": true,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"updated_at\",\n  \"t\": \"timestamp(0) with time zone\",\n  \"nullable\": true,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"contract_id\",\n  \"t\": \"bigint\",\n  \"nullable\": true,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"contract_start_date\",\n  \"t\": \"date\",\n  \"nullable\": true,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"contract_end_date\",\n  \"t\": \"date\",\n  \"nullable\": true,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"section_type_id\",\n  \"t\": \"bigint\",\n  \"nullable\": true,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"short_name\",\n  \"t\": \"character varying(255)\",\n  \"nullable\": true,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"avg_fuel_usage\",\n  \"t\": \"double precision\",\n  \"nullable\": true,\n  \"desc\": \"Rata-rata penggunaan harian (rupiah)\"\n },\n {\n  \"n\": \"is_excluded_from_dashboard\",\n  \"t\": \"boolean\",\n  \"nullable\": false,\n  \"desc\": \"\"\n }\n]\nPK:[\"id\"]\nREL:[{\"name\":\"toll_sections_created_by_foreign\",\"fields\":[\"created_by\"],\"referenced_entity\":\"users\",\"referenced_fields\":[\"id\"]},{\"name\":\"toll_sections_owner_id_foreign\",\"fields\":[\"owner_id\"],\"referenced_entity\":\"toll_owners\",\"referenced_fields\":[\"id\"]},{\"name\":\"toll_sections_section_type_id_foreign\",\"fields\":[\"section_type_id\"],\"referenced_entity\":\"section_types\",\"referenced_fields\":[\"id\"]},{\"name\":\"toll_sections_updated_by_foreign\",\"fields\":[\"updated_by\"],\"referenced_entity\":\"users\",\"referenced_fields\":[\"id\"]}]\n=== inspections ===\n[\n {\n  \"n\": \"id\",\n  \"t\": \"bigint\",\n  \"nullable\": false,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"section_id\",\n  \"t\": \"bigint\",\n  \"nullable\": false,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"inspection_form_id\",\n  \"t\": \"bigint\",\n  \"nullable\": false,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"inspection_number\",\n  \"t\": \"character varying(255)\",\n  \"nullable\": true,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"schedule_id\",\n  \"t\": \"bigint\",\n  \"nullable\": true,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"date\",\n  \"t\": \"date\",\n  \"nullable\": false,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"inspector_id\",\n  \"t\": \"bigint\",\n  \"nullable\": false,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"area_id\",\n  \"t\": \"bigint\",\n  \"nullable\": true,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"detail_area_id\",\n  \"t\": \"bigint\",\n  \"nullable\": true,\n  \"desc\": \"id dari rest area/gerbang\"\n },\n {\n  \"n\": \"form_name\",\n  \"t\": \"character varying(255)\",\n  \"nullable\": false,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"form_description\",\n  \"t\": \"text\",\n  \"nullable\": true,\n  \"desc\": \"deskripsi form inspeksi\"\n },\n {\n  \"n\": \"all_good\",\n  \"t\": \"boolean\",\n  \"nullable\": false,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"status_code\",\n  \"t\": \"character varying(255)\",\n  \"nullable\": true,\n  \"desc\": \"on_verification/verified\"\n },\n {\n  \"n\": \"verified_by\",\n  \"t\": \"bigint\",\n  \"nullable\": true,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"verified_at\",\n  \"t\": \"timestamp(0) with time zone\",\n  \"nullable\": true,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"verified_description\",\n  \"t\": \"text\",\n  \"nullable\": true,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"submitted_by\",\n  \"t\": \"bigint\",\n  \"nullable\": true,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"submitted_at\",\n  \"t\": \"timestamp(0) with time zone\",\n  \"nullable\": true,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"created_by\",\n  \"t\": \"bigint\",\n  \"nullable\": true,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"updated_by\",\n  \"t\": \"bigint\",\n  \"nullable\": true,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"created_at\",\n  \"t\": \"timestamp(0) with time zone\",\n  \"nullable\": true,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"updated_at\",\n  \"t\": \"timestamp(0) with time zone\",\n  \"nullable\": true,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"detail_location\",\n  \"t\": \"character varying(255)\",\n  \"nullable\": true,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"schedule_asset_id\",\n  \"t\": \"bigint\",\n  \"nullable\": true,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"sta_start\",\n  \"t\": \"double precision\",\n  \"nullable\": true,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"description\",\n  \"t\": \"text\",\n  \"nullable\": true,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"sta_end\",\n  \"t\": \"double precision\",\n  \"nullable\": true,\n  \"desc\": \"\"\n }\n]\nPK:[\"id\"]\nREL:[{\"name\":\"inspections_area_id_foreign\",\"fields\":[\"area_id\"],\"referenced_entity\":\"area_types\",\"referenced_fields\":[\"id\"]},{\"name\":\"inspections_created_by_foreign\",\"fields\":[\"created_by\"],\"referenced_entity\":\"users\",\"referenced_fields\":[\"id\"]},{\"name\":\"inspections_inspection_form_id_foreign\",\"fields\":[\"inspection_form_id\"],\"referenced_entity\":\"config_inspection_forms\",\"referenced_fields\":[\"id\"]},{\"name\":\"inspections_inspector_id_foreign\",\"fields\":[\"inspector_id\"],\"referenced_entity\":\"employees\",\"referenced_fields\":[\"id\"]},{\"name\":\"inspections_schedule_asset_id_foreign\",\"fields\":[\"schedule_asset_id\"],\"referenced_entity\":\"inspection_schedule_assets\",\"referenced_fields\":[\"id\"]},{\"name\":\"inspections_section_id_foreign\",\"fields\":[\"section_id\"],\"referenced_entity\":\"toll_sections\",\"referenced_fields\":[\"id\"]},{\"name\":\"inspections_submitted_by_foreign\",\"fields\":[\"submitted_by\"],\"referenced_entity\":\"users\",\"referenced_fields\":[\"id\"]},{\"name\":\"inspections_updated_by_foreign\",\"fields\":[\"updated_by\"],\"referenced_entity\":\"users\",\"referenced_fields\":[\"id\"]},{\"name\":\"inspections_verified_by_foreign\",\"fields\":[\"verified_by\"],\"referenced_entity\":\"users\",\"referenced_fields\":[\"id\"]}]\n=== inspection_schedules ===\n[\n {\n  \"n\": \"id\",\n  \"t\": \"bigint\",\n  \"nullable\": false,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"section_id\",\n  \"t\": \"bigint\",\n  \"nullable\": false,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"start_date\",\n  \"t\": \"date\",\n  \"nullable\": false,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"end_date\",\n  \"t\": \"date\",\n  \"nullable\": false,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"description\",\n  \"t\": \"text\",\n  \"nullable\": true,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"created_by\",\n  \"t\": \"bigint\",\n  \"nullable\": true,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"updated_by\",\n  \"t\": \"bigint\",\n  \"nullable\": true,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"created_at\",\n  \"t\": \"timestamp(0) with time zone\",\n  \"nullable\": true,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"updated_at\",\n  \"t\": \"timestamp(0) with time zone\",\n  \"nullable\": true,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"ranting_id\",\n  \"t\": \"bigint\",\n  \"nullable\": true,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"inspection_form_id\",\n  \"t\": \"bigint\",\n  \"nullable\": true,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"schedule_type\",\n  \"t\": \"character varying(255)\",\n  \"nullable\": false,\n  \"desc\": \"FORM,ASSET\"\n }\n]\nPK:[\"id\"]\nREL:[{\"name\":\"inspection_schedules_created_by_foreign\",\"fields\":[\"created_by\"],\"referenced_entity\":\"users\",\"referenced_fields\":[\"id\"]},{\"name\":\"inspection_schedules_inspection_form_id_foreign\",\"fields\":[\"inspection_form_id\"],\"referenced_entity\":\"config_inspection_forms\",\"referenced_fields\":[\"id\"]},{\"name\":\"inspection_schedules_ranting_id_foreign\",\"fields\":[\"ranting_id\"],\"referenced_entity\":\"m_section_rantings\",\"referenced_fields\":[\"id\"]},{\"name\":\"inspection_schedules_section_id_foreign\",\"fields\":[\"section_id\"],\"referenced_entity\":\"toll_sections\",\"referenced_fields\":[\"id\"]},{\"name\":\"inspection_schedules_updated_by_foreign\",\"fields\":[\"updated_by\"],\"referenced_entity\":\"users\",\"referenced_fields\":[\"id\"]}]\n=== inspection_schedule_assets ===\n[\n {\n  \"n\": \"id\",\n  \"t\": \"bigint\",\n  \"nullable\": false,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"schedule_id\",\n  \"t\": \"bigint\",\n  \"nullable\": false,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"asset_id\",\n  \"t\": \"bigint\",\n  \"nullable\": false,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"sta_start\",\n  \"t\": \"double precision\",\n  \"nullable\": false,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"sta_end\",\n  \"t\": \"double precision\",\n  \"nullable\": false,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"description\",\n  \"t\": \"text\",\n  \"nullable\": true,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"created_by\",\n  \"t\": \"bigint\",\n  \"nullable\": true,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"updated_by\",\n  \"t\": \"bigint\",\n  \"nullable\": true,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"created_at\",\n  \"t\": \"timestamp(0) with time zone\",\n  \"nullable\": true,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"updated_at\",\n  \"t\": \"timestamp(0) with time zone\",\n  \"nullable\": true,\n  \"desc\": \"\"\n }\n]\nPK:[\"id\"]\nREL:[{\"name\":\"inspection_schedule_assets_asset_id_foreign\",\"fields\":[\"asset_id\"],\"referenced_entity\":\"maintenance_asset_types\",\"referenced_fields\":[\"id\"]},{\"name\":\"inspection_schedule_assets_created_by_foreign\",\"fields\":[\"created_by\"],\"referenced_entity\":\"users\",\"referenced_fields\":[\"id\"]},{\"name\":\"inspection_schedule_assets_schedule_id_foreign\",\"fields\":[\"schedule_id\"],\"referenced_entity\":\"inspection_schedules\",\"referenced_fields\":[\"id\"]},{\"name\":\"inspection_schedule_assets_updated_by_foreign\",\"fields\":[\"updated_by\"],\"referenced_entity\":\"users\",\"referenced_fields\":[\"id\"]}]\n=== inspection_items ===\n[\n {\n  \"n\": \"id\",\n  \"t\": \"bigint\",\n  \"nullable\": false,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"inspection_element_id\",\n  \"t\": \"bigint\",\n  \"nullable\": false,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"damage_name\",\n  \"t\": \"character varying(255)\",\n  \"nullable\": false,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"maintenance\",\n  \"t\": \"text\",\n  \"nullable\": true,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"description\",\n  \"t\": \"text\",\n  \"nullable\": true,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"is_damage\",\n  \"t\": \"boolean\",\n  \"nullable\": false,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"damage_category\",\n  \"t\": \"character varying(255)\",\n  \"nullable\": true,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"repair_priority\",\n  \"t\": \"character varying(255)\",\n  \"nullable\": true,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"inspection_description\",\n  \"t\": \"text\",\n  \"nullable\": true,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"created_by\",\n  \"t\": \"bigint\",\n  \"nullable\": true,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"updated_by\",\n  \"t\": \"bigint\",\n  \"nullable\": true,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"created_at\",\n  \"t\": \"timestamp(0) with time zone\",\n  \"nullable\": true,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"updated_at\",\n  \"t\": \"timestamp(0) with time zone\",\n  \"nullable\": true,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"item_id\",\n  \"t\": \"bigint\",\n  \"nullable\": true,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"stage\",\n  \"t\": \"integer\",\n  \"nullable\": true,\n  \"desc\": \"0%, 50%, 100%\"\n },\n {\n  \"n\": \"status_code\",\n  \"t\": \"character varying(255)\",\n  \"nullable\": true,\n  \"desc\": \"open,on_investigation,close\"\n },\n {\n  \"n\": \"verified_by\",\n  \"t\": \"bigint\",\n  \"nullable\": true,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"verified_at\",\n  \"t\": \"timestamp(0) with time zone\",\n  \"nullable\": true,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"verified_description\",\n  \"t\": \"text\",\n  \"nullable\": true,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"activity_type\",\n  \"t\": \"character varying(255)\",\n  \"nullable\": true,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"maintenance_activity_id\",\n  \"t\": \"bigint\",\n  \"nullable\": true,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"uom_type\",\n  \"t\": \"character varying(255)\",\n  \"nullable\": true,\n  \"desc\": \"M/M2/M3\"\n },\n {\n  \"n\": \"length\",\n  \"t\": \"double precision\",\n  \"nullable\": true,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"width\",\n  \"t\": \"double precision\",\n  \"nullable\": true,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"height\",\n  \"t\": \"double precision\",\n  \"nullable\": true,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"volume\",\n  \"t\": \"double precision\",\n  \"nullable\": true,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"pic_id\",\n  \"t\": \"bigint\",\n  \"nullable\": true,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"repair_length\",\n  \"t\": \"double precision\",\n  \"nullable\": true,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"repair_width\",\n  \"t\": \"double precision\",\n  \"nullable\": true,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"repair_height\",\n  \"t\": \"double precision\",\n  \"nullable\": true,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"repair_volume\",\n  \"t\": \"double precision\",\n  \"nullable\": true,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"realized_cost\",\n  \"t\": \"double precision\",\n  \"nullable\": true,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"verify_code\",\n  \"t\": \"character varying(65)\",\n  \"nullable\": true,\n  \"desc\": \"on_verification, approved, revised\"\n },\n {\n  \"n\": \"damage_source_code\",\n  \"t\": \"character varying(255)\",\n  \"nullable\": true,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"img_inspection\",\n  \"t\": \"text\",\n  \"nullable\": true,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"repair_recommendation_id\",\n  \"t\": \"bigint\",\n  \"nullable\": true,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"asset_damage_id\",\n  \"t\": \"bigint\",\n  \"nullable\": true,\n  \"desc\": \"\"\n }\n]\nPK:[\"id\"]\nREL:[{\"name\":\"inspection_items_asset_damage_id_foreign\",\"fields\":[\"asset_damage_id\"],\"referenced_entity\":\"inspection_damages\",\"referenced_fields\":[\"id\"]},{\"name\":\"inspection_items_created_by_foreign\",\"fields\":[\"created_by\"],\"referenced_entity\":\"users\",\"referenced_fields\":[\"id\"]},{\"name\":\"inspection_items_inspection_element_id_foreign\",\"fields\":[\"inspection_element_id\"],\"referenced_entity\":\"inspection_elements\",\"referenced_fields\":[\"id\"]},{\"name\":\"inspection_items_maintenance_activity_id_foreign\",\"fields\":[\"maintenance_activity_id\"],\"referenced_entity\":\"maintenance_activities\",\"referenced_fields\":[\"id\"]},{\"name\":\"inspection_items_pic_id_foreign\",\"fields\":[\"pic_id\"],\"referenced_entity\":\"employees\",\"referenced_fields\":[\"id\"]},{\"name\":\"inspection_items_repair_recommendation_id_foreign\",\"fields\":[\"repair_recommendation_id\"],\"referenced_entity\":\"repair_types\",\"referenced_fields\":[\"id\"]},{\"name\":\"inspection_items_updated_by_foreign\",\"fields\":[\"updated_by\"],\"referenced_entity\":\"users\",\"referenced_fields\":[\"id\"]},{\"name\":\"inspection_items_verified_by_foreign\",\"fields\":[\"verified_by\"],\"referenced_entity\":\"users\",\"referenced_fields\":[\"id\"]}]\n=== inspection_damages ===\n[\n {\n  \"n\": \"id\",\n  \"t\": \"bigint\",\n  \"nullable\": false,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"section_id\",\n  \"t\": \"bigint\",\n  \"nullable\": false,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"source\",\n  \"t\": \"character varying(255)\",\n  \"nullable\": false,\n  \"desc\": \"INSPECTION, INSPECTION_V2, MWT,INCIDENT,GENERAL_TRANSACTION\"\n },\n {\n  \"n\": \"ref_id\",\n  \"t\": \"bigint\",\n  \"nullable\": false,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"date\",\n  \"t\": \"date\",\n  \"nullable\": false,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"asset_id\",\n  \"t\": \"bigint\",\n  \"nullable\": false,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"sta_start\",\n  \"t\": \"double precision\",\n  \"nullable\": true,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"sta_end\",\n  \"t\": \"double precision\",\n  \"nullable\": true,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"finding_type\",\n  \"t\": \"character varying(255)\",\n  \"nullable\": true,\n  \"desc\": \"MINOR, MAJOR\"\n },\n {\n  \"n\": \"damage_category_id\",\n  \"t\": \"bigint\",\n  \"nullable\": true,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"damage_criteria\",\n  \"t\": \"character varying(255)\",\n  \"nullable\": true,\n  \"desc\": \"R1,R2,R3\"\n },\n {\n  \"n\": \"repair_priority\",\n  \"t\": \"character varying(255)\",\n  \"nullable\": true,\n  \"desc\": \"P1,P2\"\n },\n {\n  \"n\": \"repair_recommendation_id\",\n  \"t\": \"bigint\",\n  \"nullable\": true,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"damage_description\",\n  \"t\": \"text\",\n  \"nullable\": true,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"img_damage\",\n  \"t\": \"text\",\n  \"nullable\": true,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"damage_length\",\n  \"t\": \"double precision\",\n  \"nullable\": true,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"damage_width\",\n  \"t\": \"double precision\",\n  \"nullable\": true,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"damage_height\",\n  \"t\": \"double precision\",\n  \"nullable\": true,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"damage_volume\",\n  \"t\": \"double precision\",\n  \"nullable\": true,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"latitude\",\n  \"t\": \"text\",\n  \"nullable\": true,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"longitude\",\n  \"t\": \"text\",\n  \"nullable\": true,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"map_address\",\n  \"t\": \"text\",\n  \"nullable\": true,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"inspection_schedule_id\",\n  \"t\": \"bigint\",\n  \"nullable\": true,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"damage_status_code\",\n  \"t\": \"character varying(255)\",\n  \"nullable\": true,\n  \"desc\": \"PENDING,ACCEPT,REJECT\"\n },\n {\n  \"n\": \"damage_followed_up_by\",\n  \"t\": \"bigint\",\n  \"nullable\": true,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"damage_followed_up_at\",\n  \"t\": \"timestamp(0) with time zone\",\n  \"nullable\": true,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"damage_reject_description\",\n  \"t\": \"text\",\n  \"nullable\": true,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"objection_status_code\",\n  \"t\": \"character varying(255)\",\n  \"nullable\": true,\n  \"desc\": \"PENDING,ACCEPT,REJECT (status sanggahan)\"\n },\n {\n  \"n\": \"objection_followed_up_by\",\n  \"t\": \"bigint\",\n  \"nullable\": true,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"objection_followed_up_at\",\n  \"t\": \"timestamp(0) with time zone\",\n  \"nullable\": true,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"objection_verification_description\",\n  \"t\": \"text\",\n  \"nullable\": true,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"spm_id\",\n  \"t\": \"bigint\",\n  \"nullable\": true,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"spm_operator\",\n  \"t\": \"character varying(255)\",\n  \"nullable\": true,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"spm_parameter\",\n  \"t\": \"integer\",\n  \"nullable\": true,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"spm_unit\",\n  \"t\": \"character varying(255)\",\n  \"nullable\": true,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"open_at\",\n  \"t\": \"timestamp(0) with time zone\",\n  \"nullable\": true,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"close_at\",\n  \"t\": \"timestamp(0) with time zone\",\n  \"nullable\": true,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"spm_status_code\",\n  \"t\": \"character varying(255)\",\n  \"nullable\": true,\n  \"desc\": \"PASS,NOT_PASS\"\n },\n {\n  \"n\": \"major_repair_type\",\n  \"t\": \"character varying(255)\",\n  \"nullable\": true,\n  \"desc\": \"jenis perbaikan major (OWNER_RECOMMENDATION, INTERNAL_REPAIR)\"\n },\n {\n  \"n\": \"stage\",\n  \"t\": \"integer\",\n  \"nullable\": true,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"repair_type_id\",\n  \"t\": \"bigint\",\n  \"nullable\": true,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"repair_description\",\n  \"t\": \"text\",\n  \"nullable\": true,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"repair_length\",\n  \"t\": \"double precision\",\n  \"nullable\": true,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"repair_width\",\n  \"t\": \"double precision\",\n  \"nullable\": true,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"repair_height\",\n  \"t\": \"double precision\",\n  \"nullable\": true,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"repair_volume\",\n  \"t\": \"double precision\",\n  \"nullable\": true,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"repair_duration\",\n  \"t\": \"character varying(255)\",\n  \"nullable\": true,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"repaired_by\",\n  \"t\": \"bigint\",\n  \"nullable\": true,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"repaired_at\",\n  \"t\": \"timestamp(0) with time zone\",\n  \"nullable\": true,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"status_code\",\n  \"t\": \"character varying(255)\",\n  \"nullable\": true,\n  \"desc\": \"status verifikasi perbaikan (ON_VERIFICATION, VERIFIED)\"\n },\n {\n  \"n\": \"verified_by\",\n  \"t\": \"bigint\",\n  \"nullable\": true,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"verified_at\",\n  \"t\": \"timestamp(0) with time zone\",\n  \"nullable\": true,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"verified_description\",\n  \"t\": \"text\",\n  \"nullable\": true,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"created_by\",\n  \"t\": \"bigint\",\n  \"nullable\": true,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"updated_by\",\n  \"t\": \"bigint\",\n  \"nullable\": true,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"created_at\",\n  \"t\": \"timestamp(0) with time zone\",\n  \"nullable\": true,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"updated_at\",\n  \"t\": \"timestamp(0) with time zone\",\n  \"nullable\": true,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"is_sla_applicable\",\n  \"t\": \"boolean\",\n  \"nullable\": true,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"sla_parameter\",\n  \"t\": \"integer\",\n  \"nullable\": true,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"sla_status_code\",\n  \"t\": \"character varying(255)\",\n  \"nullable\": true,\n  \"desc\": \"PASS,NOT_PASS\"\n }\n]\nPK:[\"id\"]\nREL:[{\"name\":\"inspection_damages_asset_id_foreign\",\"fields\":[\"asset_id\"],\"referenced_entity\":\"maintenance_asset_types\",\"referenced_fields\":[\"id\"]},{\"name\":\"inspection_damages_created_by_foreign\",\"fields\":[\"created_by\"],\"referenced_entity\":\"users\",\"referenced_fields\":[\"id\"]},{\"name\":\"inspection_damages_damage_category_id_foreign\",\"fields\":[\"damage_category_id\"],\"referenced_entity\":\"damage_categories\",\"referenced_fields\":[\"id\"]},{\"name\":\"inspection_damages_damage_followed_up_by_foreign\",\"fields\":[\"damage_followed_up_by\"],\"referenced_entity\":\"users\",\"referenced_fields\":[\"id\"]},{\"name\":\"inspection_damages_objection_followed_up_by_foreign\",\"fields\":[\"objection_followed_up_by\"],\"referenced_entity\":\"users\",\"referenced_fields\":[\"id\"]},{\"name\":\"inspection_damages_repair_recommendation_id_foreign\",\"fields\":[\"repair_recommendation_id\"],\"referenced_entity\":\"repair_types\",\"referenced_fields\":[\"id\"]},{\"name\":\"inspection_damages_repair_type_id_foreign\",\"fields\":[\"repair_type_id\"],\"referenced_entity\":\"repair_types\",\"referenced_fields\":[\"id\"]},{\"name\":\"inspection_damages_repaired_by_foreign\",\"fields\":[\"repaired_by\"],\"referenced_entity\":\"users\",\"referenced_fields\":[\"id\"]},{\"name\":\"inspection_damages_section_id_foreign\",\"fields\":[\"section_id\"],\"referenced_entity\":\"toll_sections\",\"referenced_fields\":[\"id\"]},{\"name\":\"inspection_damages_spm_id_foreign\",\"fields\":[\"spm_id\"],\"referenced_entity\":\"m_spm\",\"referenced_fields\":[\"id\"]},{\"name\":\"inspection_damages_updated_by_foreign\",\"fields\":[\"updated_by\"],\"referenced_entity\":\"users\",\"referenced_fields\":[\"id\"]},{\"name\":\"inspection_damages_verified_by_foreign\",\"fields\":[\"verified_by\"],\"referenced_entity\":\"users\",\"referenced_fields\":[\"id\"]}]\n=== damage_categories ===\n[\n {\n  \"n\": \"id\",\n  \"t\": \"bigint\",\n  \"nullable\": false,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"name\",\n  \"t\": \"character varying(255)\",\n  \"nullable\": false,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"uom_id\",\n  \"t\": \"bigint\",\n  \"nullable\": false,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"spm_id\",\n  \"t\": \"bigint\",\n  \"nullable\": true,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"description\",\n  \"t\": \"text\",\n  \"nullable\": true,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"created_by\",\n  \"t\": \"bigint\",\n  \"nullable\": true,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"updated_by\",\n  \"t\": \"bigint\",\n  \"nullable\": true,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"created_at\",\n  \"t\": \"timestamp(0) with time zone\",\n  \"nullable\": true,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"updated_at\",\n  \"t\": \"timestamp(0) with time zone\",\n  \"nullable\": true,\n  \"desc\": \"\"\n }\n]\nPK:[\"id\"]\nREL:[{\"name\":\"damage_categories_created_by_foreign\",\"fields\":[\"created_by\"],\"referenced_entity\":\"users\",\"referenced_fields\":[\"id\"]},{\"name\":\"damage_categories_spm_id_foreign\",\"fields\":[\"spm_id\"],\"referenced_entity\":\"m_spm\",\"referenced_fields\":[\"id\"]},{\"name\":\"damage_categories_uom_id_foreign\",\"fields\":[\"uom_id\"],\"referenced_entity\":\"m_uoms\",\"referenced_fields\":[\"id\"]},{\"name\":\"damage_categories_updated_by_foreign\",\"fields\":[\"updated_by\"],\"referenced_entity\":\"users\",\"referenced_fields\":[\"id\"]}]\n=== maintenance_asset_types ===\n[\n {\n  \"n\": \"id\",\n  \"t\": \"bigint\",\n  \"nullable\": false,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"location_id\",\n  \"t\": \"bigint\",\n  \"nullable\": true,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"name\",\n  \"t\": \"character varying(255)\",\n  \"nullable\": true,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"active\",\n  \"t\": \"boolean\",\n  \"nullable\": false,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"description\",\n  \"t\": \"text\",\n  \"nullable\": true,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"created_by\",\n  \"t\": \"bigint\",\n  \"nullable\": true,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"updated_by\",\n  \"t\": \"bigint\",\n  \"nullable\": true,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"created_at\",\n  \"t\": \"timestamp(0) with time zone\",\n  \"nullable\": true,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"updated_at\",\n  \"t\": \"timestamp(0) with time zone\",\n  \"nullable\": true,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"section_id\",\n  \"t\": \"bigint\",\n  \"nullable\": true,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"asset_type_id\",\n  \"t\": \"bigint\",\n  \"nullable\": true,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"sta_start\",\n  \"t\": \"double precision\",\n  \"nullable\": true,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"sta_end\",\n  \"t\": \"double precision\",\n  \"nullable\": true,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"lane\",\n  \"t\": \"character varying(255)\",\n  \"nullable\": true,\n  \"desc\": \"OS,L1,L2,L3,IS\"\n },\n {\n  \"n\": \"track\",\n  \"t\": \"character varying(255)\",\n  \"nullable\": true,\n  \"desc\": \"A,B\"\n },\n {\n  \"n\": \"length\",\n  \"t\": \"double precision\",\n  \"nullable\": true,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"width\",\n  \"t\": \"double precision\",\n  \"nullable\": true,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"height\",\n  \"t\": \"double precision\",\n  \"nullable\": true,\n  \"desc\": \"\"\n }\n]\nPK:[\"id\"]\nREL:[{\"name\":\"assets_asset_type_id_foreign\",\"fields\":[\"asset_type_id\"],\"referenced_entity\":\"asset_types\",\"referenced_fields\":[\"id\"]},{\"name\":\"assets_created_by_foreign\",\"fields\":[\"created_by\"],\"referenced_entity\":\"users\",\"referenced_fields\":[\"id\"]},{\"name\":\"assets_location_id_foreign\",\"fields\":[\"location_id\"],\"referenced_entity\":\"maintenance_locations\",\"referenced_fields\":[\"id\"]},{\"name\":\"assets_section_id_foreign\",\"fields\":[\"section_id\"],\"referenced_entity\":\"toll_sections\",\"referenced_fields\":[\"id\"]},{\"name\":\"assets_updated_by_foreign\",\"fields\":[\"updated_by\"],\"referenced_entity\":\"users\",\"referenced_fields\":[\"id\"]}]\n=== assets ===\n[\n {\n  \"n\": \"id\",\n  \"t\": \"bigint\",\n  \"nullable\": false,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"location_id\",\n  \"t\": \"bigint\",\n  \"nullable\": true,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"section_id\",\n  \"t\": \"bigint\",\n  \"nullable\": true,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"asset_type_id\",\n  \"t\": \"bigint\",\n  \"nullable\": true,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"sta_start\",\n  \"t\": \"double precision\",\n  \"nullable\": true,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"sta_end\",\n  \"t\": \"double precision\",\n  \"nullable\": true,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"lane\",\n  \"t\": \"character varying(255)\",\n  \"nullable\": true,\n  \"desc\": \"OS,L1,L2,L3,IS\"\n },\n {\n  \"n\": \"track\",\n  \"t\": \"character varying(255)\",\n  \"nullable\": true,\n  \"desc\": \"A,B\"\n },\n {\n  \"n\": \"length\",\n  \"t\": \"double precision\",\n  \"nullable\": true,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"width\",\n  \"t\": \"double precision\",\n  \"nullable\": true,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"height\",\n  \"t\": \"double precision\",\n  \"nullable\": true,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"description\",\n  \"t\": \"text\",\n  \"nullable\": true,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"active\",\n  \"t\": \"boolean\",\n  \"nullable\": false,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"created_by\",\n  \"t\": \"bigint\",\n  \"nullable\": true,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"updated_by\",\n  \"t\": \"bigint\",\n  \"nullable\": true,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"created_at\",\n  \"t\": \"timestamp(0) with time zone\",\n  \"nullable\": true,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"updated_at\",\n  \"t\": \"timestamp(0) with time zone\",\n  \"nullable\": true,\n  \"desc\": \"\"\n }\n]\nPK:[\"id\"]\nREL:[{\"name\":\"assets_asset_type_id_foreign\",\"fields\":[\"asset_type_id\"],\"referenced_entity\":\"asset_types\",\"referenced_fields\":[\"id\"]},{\"name\":\"assets_created_by_foreign\",\"fields\":[\"created_by\"],\"referenced_entity\":\"users\",\"referenced_fields\":[\"id\"]},{\"name\":\"assets_location_id_foreign\",\"fields\":[\"location_id\"],\"referenced_entity\":\"asset_locations\",\"referenced_fields\":[\"id\"]},{\"name\":\"assets_section_id_foreign\",\"fields\":[\"section_id\"],\"referenced_entity\":\"toll_sections\",\"referenced_fields\":[\"id\"]},{\"name\":\"assets_updated_by_foreign\",\"fields\":[\"updated_by\"],\"referenced_entity\":\"users\",\"referenced_fields\":[\"id\"]}]\n=== asset_types ===\n[\n {\n  \"n\": \"id\",\n  \"t\": \"bigint\",\n  \"nullable\": false,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"code\",\n  \"t\": \"character varying(255)\",\n  \"nullable\": true,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"name\",\n  \"t\": \"character varying(255)\",\n  \"nullable\": false,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"description\",\n  \"t\": \"text\",\n  \"nullable\": true,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"active\",\n  \"t\": \"boolean\",\n  \"nullable\": true,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"created_by\",\n  \"t\": \"bigint\",\n  \"nullable\": true,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"updated_by\",\n  \"t\": \"bigint\",\n  \"nullable\": true,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"created_at\",\n  \"t\": \"timestamp(0) with time zone\",\n  \"nullable\": true,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"updated_at\",\n  \"t\": \"timestamp(0) with time zone\",\n  \"nullable\": true,\n  \"desc\": \"\"\n }\n]\nPK:[\"id\"]\nREL:[{\"name\":\"asset_types_created_by_foreign\",\"fields\":[\"created_by\"],\"referenced_entity\":\"users\",\"referenced_fields\":[\"id\"]},{\"name\":\"asset_types_updated_by_foreign\",\"fields\":[\"updated_by\"],\"referenced_entity\":\"users\",\"referenced_fields\":[\"id\"]}]\n=== inspection_categories ===\n[\n {\n  \"n\": \"id\",\n  \"t\": \"bigint\",\n  \"nullable\": false,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"category_name\",\n  \"t\": \"character varying(255)\",\n  \"nullable\": false,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"active\",\n  \"t\": \"boolean\",\n  \"nullable\": true,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"created_by\",\n  \"t\": \"bigint\",\n  \"nullable\": true,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"updated_by\",\n  \"t\": \"bigint\",\n  \"nullable\": true,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"created_at\",\n  \"t\": \"timestamp(0) with time zone\",\n  \"nullable\": true,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"updated_at\",\n  \"t\": \"timestamp(0) with time zone\",\n  \"nullable\": true,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"inspection_categories_id\",\n  \"t\": \"bigint\",\n  \"nullable\": true,\n  \"desc\": \"\"\n }\n]\nPK:[\"id\"]\nREL:[{\"name\":\"inspection_categories_created_by_foreign\",\"fields\":[\"created_by\"],\"referenced_entity\":\"users\",\"referenced_fields\":[\"id\"]},{\"name\":\"inspection_categories_inspection_categories_id_foreign\",\"fields\":[\"inspection_categories_id\"],\"referenced_entity\":\"inspection_categories\",\"referenced_fields\":[\"id\"]},{\"name\":\"inspection_categories_updated_by_foreign\",\"fields\":[\"updated_by\"],\"referenced_entity\":\"users\",\"referenced_fields\":[\"id\"]}]\n=== inspection_elements ===\n[\n {\n  \"n\": \"id\",\n  \"t\": \"bigint\",\n  \"nullable\": false,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"inspection_id\",\n  \"t\": \"bigint\",\n  \"nullable\": false,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"element_name\",\n  \"t\": \"character varying(255)\",\n  \"nullable\": false,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"created_by\",\n  \"t\": \"bigint\",\n  \"nullable\": true,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"updated_by\",\n  \"t\": \"bigint\",\n  \"nullable\": true,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"created_at\",\n  \"t\": \"timestamp(0) with time zone\",\n  \"nullable\": true,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"updated_at\",\n  \"t\": \"timestamp(0) with time zone\",\n  \"nullable\": true,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"element_id\",\n  \"t\": \"bigint\",\n  \"nullable\": true,\n  \"desc\": \"\"\n }\n]\nPK:[\"id\"]\nREL:[{\"name\":\"inspection_elements_created_by_foreign\",\"fields\":[\"created_by\"],\"referenced_entity\":\"users\",\"referenced_fields\":[\"id\"]},{\"name\":\"inspection_elements_inspection_id_foreign\",\"fields\":[\"inspection_id\"],\"referenced_entity\":\"inspections\",\"referenced_fields\":[\"id\"]},{\"name\":\"inspection_elements_updated_by_foreign\",\"fields\":[\"updated_by\"],\"referenced_entity\":\"users\",\"referenced_fields\":[\"id\"]}]\n=== config_inspection_items ===\n[\n {\n  \"n\": \"id\",\n  \"t\": \"bigint\",\n  \"nullable\": false,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"element_id\",\n  \"t\": \"bigint\",\n  \"nullable\": false,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"damage_name\",\n  \"t\": \"character varying(255)\",\n  \"nullable\": false,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"maintenance\",\n  \"t\": \"text\",\n  \"nullable\": true,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"description\",\n  \"t\": \"text\",\n  \"nullable\": true,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"created_by\",\n  \"t\": \"bigint\",\n  \"nullable\": true,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"updated_by\",\n  \"t\": \"bigint\",\n  \"nullable\": true,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"created_at\",\n  \"t\": \"timestamp(0) with time zone\",\n  \"nullable\": true,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"updated_at\",\n  \"t\": \"timestamp(0) with time zone\",\n  \"nullable\": true,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"spm_id\",\n  \"t\": \"bigint\",\n  \"nullable\": true,\n  \"desc\": \"\"\n }\n]\nPK:[\"id\"]\nREL:[{\"name\":\"config_inspection_items_created_by_foreign\",\"fields\":[\"created_by\"],\"referenced_entity\":\"users\",\"referenced_fields\":[\"id\"]},{\"name\":\"config_inspection_items_element_id_foreign\",\"fields\":[\"element_id\"],\"referenced_entity\":\"config_inspection_elements\",\"referenced_fields\":[\"id\"]},{\"name\":\"config_inspection_items_spm_id_foreign\",\"fields\":[\"spm_id\"],\"referenced_entity\":\"m_spm\",\"referenced_fields\":[\"id\"]},{\"name\":\"config_inspection_items_updated_by_foreign\",\"fields\":[\"updated_by\"],\"referenced_entity\":\"users\",\"referenced_fields\":[\"id\"]}]\n=== config_inspection_forms ===\n[\n {\n  \"n\": \"id\",\n  \"t\": \"bigint\",\n  \"nullable\": false,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"category_id\",\n  \"t\": \"bigint\",\n  \"nullable\": false,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"name\",\n  \"t\": \"character varying(255)\",\n  \"nullable\": false,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"description\",\n  \"t\": \"text\",\n  \"nullable\": true,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"active\",\n  \"t\": \"boolean\",\n  \"nullable\": true,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"created_by\",\n  \"t\": \"bigint\",\n  \"nullable\": true,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"updated_by\",\n  \"t\": \"bigint\",\n  \"nullable\": true,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"created_at\",\n  \"t\": \"timestamp(0) with time zone\",\n  \"nullable\": true,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"updated_at\",\n  \"t\": \"timestamp(0) with time zone\",\n  \"nullable\": true,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"config_inspection_forms_id\",\n  \"t\": \"bigint\",\n  \"nullable\": true,\n  \"desc\": \"\"\n }\n]\nPK:[\"id\"]\nREL:[{\"name\":\"config_inspection_forms_category_id_foreign\",\"fields\":[\"category_id\"],\"referenced_entity\":\"inspection_categories\",\"referenced_fields\":[\"id\"]},{\"name\":\"config_inspection_forms_config_inspection_forms_id_foreign\",\"fields\":[\"config_inspection_forms_id\"],\"referenced_entity\":\"config_inspection_forms\",\"referenced_fields\":[\"id\"]},{\"name\":\"config_inspection_forms_created_by_foreign\",\"fields\":[\"created_by\"],\"referenced_entity\":\"users\",\"referenced_fields\":[\"id\"]},{\"name\":\"config_inspection_forms_updated_by_foreign\",\"fields\":[\"updated_by\"],\"referenced_entity\":\"users\",\"referenced_fields\":[\"id\"]}]\n=== config_inspection_elements ===\n[\n {\n  \"n\": \"id\",\n  \"t\": \"bigint\",\n  \"nullable\": false,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"inspection_form_id\",\n  \"t\": \"bigint\",\n  \"nullable\": false,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"element_name\",\n  \"t\": \"character varying(255)\",\n  \"nullable\": false,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"created_by\",\n  \"t\": \"bigint\",\n  \"nullable\": true,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"updated_by\",\n  \"t\": \"bigint\",\n  \"nullable\": true,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"created_at\",\n  \"t\": \"timestamp(0) with time zone\",\n  \"nullable\": true,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"updated_at\",\n  \"t\": \"timestamp(0) with time zone\",\n  \"nullable\": true,\n  \"desc\": \"\"\n }\n]\nPK:[\"id\"]\nREL:[{\"name\":\"config_inspection_elements_created_by_foreign\",\"fields\":[\"created_by\"],\"referenced_entity\":\"users\",\"referenced_fields\":[\"id\"]},{\"name\":\"config_inspection_elements_inspection_form_id_foreign\",\"fields\":[\"inspection_form_id\"],\"referenced_entity\":\"config_inspection_forms\",\"referenced_fields\":[\"id\"]},{\"name\":\"config_inspection_elements_updated_by_foreign\",\"fields\":[\"updated_by\"],\"referenced_entity\":\"users\",\"referenced_fields\":[\"id\"]}]\n=== repair_types ===\n[\n {\n  \"n\": \"id\",\n  \"t\": \"bigint\",\n  \"nullable\": false,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"name\",\n  \"t\": \"character varying(255)\",\n  \"nullable\": false,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"description\",\n  \"t\": \"text\",\n  \"nullable\": true,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"created_by\",\n  \"t\": \"bigint\",\n  \"nullable\": true,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"updated_by\",\n  \"t\": \"bigint\",\n  \"nullable\": true,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"created_at\",\n  \"t\": \"timestamp(0) with time zone\",\n  \"nullable\": true,\n  \"desc\": \"\"\n },\n {\n  \"n\": \"updated_at\",\n  \"t\": \"timestamp(0) with time zone\",\n  \"nullable\": true,\n  \"desc\": \"\"\n }\n]\nPK:[\"id\"]\nREL:[{\"name\":\"repair_types_created_by_foreign\",\"fields\":[\"created_by\"],\"referenced_entity\":\"users\",\"referenced_fields\":[\"id\"]},{\"name\":\"repair_types_updated_by_foreign\",\"fields\":[\"updated_by\"],\"referenced_entity\":\"users\",\"referenced_fields\":[\"id\"]}]"
+        }
+      ]
+    },
+    {
+      "chatId": 44,
+      "sequence": 5,
+      "timestamp": "2026-10-29T14:35:52.139Z",
+      "author": {
+        "type": "agent",
+        "id": "muse-spark-1.3-contributor-variant-4ddfa039f9b7",
+        "name": "Muse Spark 1.3"
+      },
+      "type": "action",
+      "actionId": 1162,
+      "actionLog": {
+        "id": 1162,
+        "gatekeeperId": 3,
+        "resourceTitle": "TROM BI",
+        "resourceUrl": "http://127.0.0.1:8091/api/agentic-bi/entities",
+        "createdAt": "2026-10-29T14:35:45.109Z",
+        "state": "approved",
+        "type": "observation",
+        "description": {
+          "title": "Describe a TROM entity",
+          "description": "Read schema metadata for the public TROM entity toll_sections."
+        }
+      }
+    },
+    {
+      "chatId": 44,
+      "sequence": 6,
+      "timestamp": "2026-10-29T14:35:52.140Z",
+      "author": {
+        "type": "agent",
+        "id": "muse-spark-1.3-contributor-variant-4ddfa039f9b7",
+        "name": "Muse Spark 1.3"
+      },
+      "type": "action",
+      "actionId": 1163,
+      "actionLog": {
+        "id": 1163,
+        "gatekeeperId": 3,
+        "resourceTitle": "TROM BI",
+        "resourceUrl": "http://127.0.0.1:8091/api/agentic-bi/entities",
+        "createdAt": "2026-10-29T14:35:45.558Z",
+        "state": "approved",
+        "type": "observation",
+        "description": {
+          "title": "Describe a TROM entity",
+          "description": "Read schema metadata for the public TROM entity inspections."
+        }
+      }
+    },
+    {
+      "chatId": 44,
+      "sequence": 7,
+      "timestamp": "2026-10-29T14:35:52.141Z",
+      "author": {
+        "type": "agent",
+        "id": "muse-spark-1.3-contributor-variant-4ddfa039f9b7",
+        "name": "Muse Spark 1.3"
+      },
+      "type": "action",
+      "actionId": 1164,
+      "actionLog": {
+        "id": 1164,
+        "gatekeeperId": 3,
+        "resourceTitle": "TROM BI",
+        "resourceUrl": "http://127.0.0.1:8091/api/agentic-bi/entities",
+        "createdAt": "2026-10-29T14:35:45.983Z",
+        "state": "approved",
+        "type": "observation",
+        "description": {
+          "title": "Describe a TROM entity",
+          "description": "Read schema metadata for the public TROM entity inspection_schedules."
+        }
+      }
+    },
+    {
+      "chatId": 44,
+      "sequence": 8,
+      "timestamp": "2026-10-29T14:35:52.142Z",
+      "author": {
+        "type": "agent",
+        "id": "muse-spark-1.3-contributor-variant-4ddfa039f9b7",
+        "name": "Muse Spark 1.3"
+      },
+      "type": "action",
+      "actionId": 1165,
+      "actionLog": {
+        "id": 1165,
+        "gatekeeperId": 3,
+        "resourceTitle": "TROM BI",
+        "resourceUrl": "http://127.0.0.1:8091/api/agentic-bi/entities",
+        "createdAt": "2026-10-29T14:35:46.407Z",
+        "state": "approved",
+        "type": "observation",
+        "description": {
+          "title": "Describe a TROM entity",
+          "description": "Read schema metadata for the public TROM entity inspection_schedule_assets."
+        }
+      }
+    },
+    {
+      "chatId": 44,
+      "sequence": 9,
+      "timestamp": "2026-10-29T14:35:52.143Z",
+      "author": {
+        "type": "agent",
+        "id": "muse-spark-1.3-contributor-variant-4ddfa039f9b7",
+        "name": "Muse Spark 1.3"
+      },
+      "type": "action",
+      "actionId": 1166,
+      "actionLog": {
+        "id": 1166,
+        "gatekeeperId": 3,
+        "resourceTitle": "TROM BI",
+        "resourceUrl": "http://127.0.0.1:8091/api/agentic-bi/entities",
+        "createdAt": "2026-10-29T14:35:46.839Z",
+        "state": "approved",
+        "type": "observation",
+        "description": {
+          "title": "Describe a TROM entity",
+          "description": "Read schema metadata for the public TROM entity inspection_items."
+        }
+      }
+    },
+    {
+      "chatId": 44,
+      "sequence": 10,
+      "timestamp": "2026-10-29T14:35:52.144Z",
+      "author": {
+        "type": "agent",
+        "id": "muse-spark-1.3-contributor-variant-4ddfa039f9b7",
+        "name": "Muse Spark 1.3"
+      },
+      "type": "action",
+      "actionId": 1167,
+      "actionLog": {
+        "id": 1167,
+        "gatekeeperId": 3,
+        "resourceTitle": "TROM BI",
+        "resourceUrl": "http://127.0.0.1:8091/api/agentic-bi/entities",
+        "createdAt": "2026-10-29T14:35:47.301Z",
+        "state": "approved",
+        "type": "observation",
+        "description": {
+          "title": "Describe a TROM entity",
+          "description": "Read schema metadata for the public TROM entity inspection_damages."
+        }
+      }
+    },
+    {
+      "chatId": 44,
+      "sequence": 11,
+      "timestamp": "2026-10-29T14:35:52.145Z",
+      "author": {
+        "type": "agent",
+        "id": "muse-spark-1.3-contributor-variant-4ddfa039f9b7",
+        "name": "Muse Spark 1.3"
+      },
+      "type": "action",
+      "actionId": 1168,
+      "actionLog": {
+        "id": 1168,
+        "gatekeeperId": 3,
+        "resourceTitle": "TROM BI",
+        "resourceUrl": "http://127.0.0.1:8091/api/agentic-bi/entities",
+        "createdAt": "2026-10-29T14:35:47.761Z",
+        "state": "approved",
+        "type": "observation",
+        "description": {
+          "title": "Describe a TROM entity",
+          "description": "Read schema metadata for the public TROM entity damage_categories."
+        }
+      }
+    },
+    {
+      "chatId": 44,
+      "sequence": 12,
+      "timestamp": "2026-10-29T14:35:52.146Z",
+      "author": {
+        "type": "agent",
+        "id": "muse-spark-1.3-contributor-variant-4ddfa039f9b7",
+        "name": "Muse Spark 1.3"
+      },
+      "type": "action",
+      "actionId": 1169,
+      "actionLog": {
+        "id": 1169,
+        "gatekeeperId": 3,
+        "resourceTitle": "TROM BI",
+        "resourceUrl": "http://127.0.0.1:8091/api/agentic-bi/entities",
+        "createdAt": "2026-10-29T14:35:48.160Z",
+        "state": "approved",
+        "type": "observation",
+        "description": {
+          "title": "Describe a TROM entity",
+          "description": "Read schema metadata for the public TROM entity maintenance_asset_types."
+        }
+      }
+    },
+    {
+      "chatId": 44,
+      "sequence": 13,
+      "timestamp": "2026-10-29T14:35:52.147Z",
+      "author": {
+        "type": "agent",
+        "id": "muse-spark-1.3-contributor-variant-4ddfa039f9b7",
+        "name": "Muse Spark 1.3"
+      },
+      "type": "action",
+      "actionId": 1170,
+      "actionLog": {
+        "id": 1170,
+        "gatekeeperId": 3,
+        "resourceTitle": "TROM BI",
+        "resourceUrl": "http://127.0.0.1:8091/api/agentic-bi/entities",
+        "createdAt": "2026-10-29T14:35:48.571Z",
+        "state": "approved",
+        "type": "observation",
+        "description": {
+          "title": "Describe a TROM entity",
+          "description": "Read schema metadata for the public TROM entity assets."
+        }
+      }
+    },
+    {
+      "chatId": 44,
+      "sequence": 14,
+      "timestamp": "2026-10-29T14:35:52.148Z",
+      "author": {
+        "type": "agent",
+        "id": "muse-spark-1.3-contributor-variant-4ddfa039f9b7",
+        "name": "Muse Spark 1.3"
+      },
+      "type": "action",
+      "actionId": 1171,
+      "actionLog": {
+        "id": 1171,
+        "gatekeeperId": 3,
+        "resourceTitle": "TROM BI",
+        "resourceUrl": "http://127.0.0.1:8091/api/agentic-bi/entities",
+        "createdAt": "2026-10-29T14:35:49.003Z",
+        "state": "approved",
+        "type": "observation",
+        "description": {
+          "title": "Describe a TROM entity",
+          "description": "Read schema metadata for the public TROM entity asset_types."
+        }
+      }
+    },
+    {
+      "chatId": 44,
+      "sequence": 15,
+      "timestamp": "2026-10-29T14:35:52.149Z",
+      "author": {
+        "type": "agent",
+        "id": "muse-spark-1.3-contributor-variant-4ddfa039f9b7",
+        "name": "Muse Spark 1.3"
+      },
+      "type": "action",
+      "actionId": 1172,
+      "actionLog": {
+        "id": 1172,
+        "gatekeeperId": 3,
+        "resourceTitle": "TROM BI",
+        "resourceUrl": "http://127.0.0.1:8091/api/agentic-bi/entities",
+        "createdAt": "2026-10-29T14:35:49.424Z",
+        "state": "approved",
+        "type": "observation",
+        "description": {
+          "title": "Describe a TROM entity",
+          "description": "Read schema metadata for the public TROM entity inspection_categories."
+        }
+      }
+    },
+    {
+      "chatId": 44,
+      "sequence": 16,
+      "timestamp": "2026-10-29T14:35:52.150Z",
+      "author": {
+        "type": "agent",
+        "id": "muse-spark-1.3-contributor-variant-4ddfa039f9b7",
+        "name": "Muse Spark 1.3"
+      },
+      "type": "action",
+      "actionId": 1173,
+      "actionLog": {
+        "id": 1173,
+        "gatekeeperId": 3,
+        "resourceTitle": "TROM BI",
+        "resourceUrl": "http://127.0.0.1:8091/api/agentic-bi/entities",
+        "createdAt": "2026-10-29T14:35:49.848Z",
+        "state": "approved",
+        "type": "observation",
+        "description": {
+          "title": "Describe a TROM entity",
+          "description": "Read schema metadata for the public TROM entity inspection_elements."
+        }
+      }
+    },
+    {
+      "chatId": 44,
+      "sequence": 17,
+      "timestamp": "2026-10-29T14:35:52.151Z",
+      "author": {
+        "type": "agent",
+        "id": "muse-spark-1.3-contributor-variant-4ddfa039f9b7",
+        "name": "Muse Spark 1.3"
+      },
+      "type": "action",
+      "actionId": 1174,
+      "actionLog": {
+        "id": 1174,
+        "gatekeeperId": 3,
+        "resourceTitle": "TROM BI",
+        "resourceUrl": "http://127.0.0.1:8091/api/agentic-bi/entities",
+        "createdAt": "2026-10-29T14:35:50.404Z",
+        "state": "approved",
+        "type": "observation",
+        "description": {
+          "title": "Describe a TROM entity",
+          "description": "Read schema metadata for the public TROM entity config_inspection_items."
+        }
+      }
+    },
+    {
+      "chatId": 44,
+      "sequence": 18,
+      "timestamp": "2026-10-29T14:35:52.152Z",
+      "author": {
+        "type": "agent",
+        "id": "muse-spark-1.3-contributor-variant-4ddfa039f9b7",
+        "name": "Muse Spark 1.3"
+      },
+      "type": "action",
+      "actionId": 1175,
+      "actionLog": {
+        "id": 1175,
+        "gatekeeperId": 3,
+        "resourceTitle": "TROM BI",
+        "resourceUrl": "http://127.0.0.1:8091/api/agentic-bi/entities",
+        "createdAt": "2026-10-29T14:35:50.847Z",
+        "state": "approved",
+        "type": "observation",
+        "description": {
+          "title": "Describe a TROM entity",
+          "description": "Read schema metadata for the public TROM entity config_inspection_forms."
+        }
+      }
+    },
+    {
+      "chatId": 44,
+      "sequence": 19,
+      "timestamp": "2026-10-29T14:35:52.153Z",
+      "author": {
+        "type": "agent",
+        "id": "muse-spark-1.3-contributor-variant-4ddfa039f9b7",
+        "name": "Muse Spark 1.3"
+      },
+      "type": "action",
+      "actionId": 1176,
+      "actionLog": {
+        "id": 1176,
+        "gatekeeperId": 3,
+        "resourceTitle": "TROM BI",
+        "resourceUrl": "http://127.0.0.1:8091/api/agentic-bi/entities",
+        "createdAt": "2026-10-29T14:35:51.267Z",
+        "state": "approved",
+        "type": "observation",
+        "description": {
+          "title": "Describe a TROM entity",
+          "description": "Read schema metadata for the public TROM entity config_inspection_elements."
+        }
+      }
+    },
+    {
+      "chatId": 44,
+      "sequence": 20,
+      "timestamp": "2026-10-29T14:35:52.154Z",
+      "author": {
+        "type": "agent",
+        "id": "muse-spark-1.3-contributor-variant-4ddfa039f9b7",
+        "name": "Muse Spark 1.3"
+      },
+      "type": "action",
+      "actionId": 1177,
+      "actionLog": {
+        "id": 1177,
+        "gatekeeperId": 3,
+        "resourceTitle": "TROM BI",
+        "resourceUrl": "http://127.0.0.1:8091/api/agentic-bi/entities",
+        "createdAt": "2026-10-29T14:35:51.684Z",
+        "state": "approved",
+        "type": "observation",
+        "description": {
+          "title": "Describe a TROM entity",
+          "description": "Read schema metadata for the public TROM entity repair_types."
+        }
+      }
+    },
+    {
+      "chatId": 44,
+      "sequence": 21,
+      "timestamp": "2026-10-29T14:36:02.389Z",
+      "author": {
+        "type": "agent",
+        "id": "muse-spark-1.3-contributor-variant-4ddfa039f9b7",
+        "name": "Muse Spark 1.3"
+      },
+      "type": "message",
+      "message": "",
+      "toolCalls": [
+        {
+          "toolCallId": "call_037ccd65-4fb4-4a56-b7fb-9e15fb58da60",
+          "toolName": "executeCode",
+          "input": {
+            "code": "export default async function(self, env, ctx) {\n  // find PEKBANG\n  const secs = await env.TROM.read_records(\"toll_sections\", [\"id\",\"section_code\",\"section_name\",\"short_name\"], [], null, 100);\n  console.log(JSON.stringify(secs.records, null, 2));\n}\n"
+          },
+          "output": "\n\nUncaught exception: TypeError: capnweb-validate: at TromSession.read_records[3]: expected union, got null\n    at async default (agent.js:3:16)\n    at async default.run (harness.js:27:18)"
+        }
+      ]
+    },
+    {
+      "chatId": 44,
+      "sequence": 22,
+      "timestamp": "2026-10-29T14:36:07.406Z",
+      "author": {
+        "type": "agent",
+        "id": "muse-spark-1.3-contributor-variant-4ddfa039f9b7",
+        "name": "Muse Spark 1.3"
+      },
+      "type": "message",
+      "message": "",
+      "toolCalls": [
+        {
+          "toolCallId": "call_77565235-fb39-4620-a4b5-eff9301f89a7",
+          "toolName": "executeCode",
+          "input": {
+            "code": "export default async function(self, env, ctx) {\n  const secs = await env.TROM.read_records(\"toll_sections\", [\"id\",\"section_code\",\"section_name\",\"short_name\"]);\n  console.log(JSON.stringify(secs.records, null, 2));\n}\n"
+          },
+          "output": "[\n  {\n    \"id\": 1,\n    \"section_code\": \"3901\",\n    \"section_name\": \"PEKANBARU -  BANGKINANG (PEKBANG)\",\n    \"short_name\": \"PEKBANG\"\n  },\n  {\n    \"id\": 2,\n    \"section_code\": \"3902\",\n    \"section_name\": \"BENGKULU - TABA PENANJUNG (BENGTABA)\",\n    \"short_name\": \"BENGTABA\"\n  },\n  {\n    \"id\": 5,\n    \"section_code\": \"3905\",\n    \"section_name\": \"PEKANBARU - DUMAI (PERMAI)\",\n    \"short_name\": \"PERMAI\"\n  },\n  {\n    \"id\": 6,\n    \"section_code\": \"3906\",\n    \"section_name\": \"SIGLI - BANDA ACEH (SIBANCEH)\",\n    \"short_name\": \"SIBANCEH\"\n  },\n  {\n    \"id\": 7,\n    \"section_code\": \"3907\",\n    \"section_name\": \"BAKAUHENI - TERBANGGI BESAR (BAKTER)\",\n    \"short_name\": \"BAKTER\"\n  },\n  {\n    \"id\": 8,\n    \"section_code\": \"3908\",\n    \"section_name\": \"TERBANGGI BESAR - PEMATANG PANGGANG - KAYU AGUNG (TBPPKA)\",\n    \"short_name\": \"TBPPKA\"\n  },\n  {\n    \"id\": 9,\n    \"section_code\": \"3909\",\n    \"section_name\": \"MEDAN - BINJAI (MEDBIN)\",\n    \"short_name\": \"MEDBIN\"\n  },\n  {\n    \"id\": 10,\n    \"section_code\": \"3910\",\n    \"section_name\": \"BINJAI STABAT (BINSTA)\",\n    \"short_name\": \"BINSTA\"\n  },\n  {\n    \"id\": 11,\n    \"section_code\": \"3911\",\n    \"section_name\": \"AKSES TANJUNG PRIOK (ATP)\",\n    \"short_name\": \"ATP\"\n  },\n  {\n    \"id\": 13,\n    \"section_code\": \"3917\",\n    \"section_name\": \"JAKARTA OUTER RING ROAD \\\"SEKSI S\\\" (JORR'S)\",\n    \"short_name\": \"JORRS\"\n  },\n  {\n    \"id\": 14,\n    \"section_code\": \"3915\",\n    \"section_name\": \"PALEMBANG - INDRALAYA (PALINDRA)\",\n    \"short_name\": \"PALINDRA\"\n  },\n  {\n    \"id\": 15,\n    \"section_code\": \"3915 - PIP\",\n    \"section_name\": \"INDRALAYA - PRABUMULIH (INDPRAB)\",\n    \"short_name\": \"INDRAB\"\n  },\n  {\n    \"id\": 16,\n    \"section_code\": \"3913\",\n    \"section_name\": \"INDRAPURA - KISARAN (INKIS)\",\n    \"short_name\": \"INKIS\"\n  },\n  {\n    \"id\": 17,\n    \"section_code\": \"3912\",\n    \"section_name\": \"KUALA TANJUNG - TEBING TINGGI - PARAPAT (KUTEPAT)\",\n    \"short_name\": \"KUTEPAT\"\n  },\n  {\n    \"id\": 18,\n    \"section_code\": \"3918\",\n    \"section_name\": \"BETUNG - TEMPINO - JAMBI (BETJAM)\",\n    \"short_name\": \"BETJAM\"\n  },\n  {\n    \"id\": 20,\n    \"section_code\": \"16\",\n    \"section_name\": \"PADANG - SICINCIN (SICIPA)\",\n    \"short_name\": \"SICIPA\"\n  }\n]"
+        }
+      ]
+    },
+    {
+      "chatId": 44,
+      "sequence": 23,
+      "timestamp": "2026-10-29T14:36:07.407Z",
+      "author": {
+        "type": "agent",
+        "id": "muse-spark-1.3-contributor-variant-4ddfa039f9b7",
+        "name": "Muse Spark 1.3"
+      },
+      "type": "action",
+      "actionId": 1178,
+      "actionLog": {
+        "id": 1178,
+        "gatekeeperId": 3,
+        "resourceTitle": "TROM BI",
+        "resourceUrl": "http://127.0.0.1:8091/api/agentic-bi/entities",
+        "createdAt": "2026-10-29T14:36:06.973Z",
+        "state": "approved",
+        "type": "observation",
+        "description": {
+          "title": "Read TROM records",
+          "description": "Read a projected page from the public TROM entity toll_sections."
+        }
+      }
+    },
+    {
+      "chatId": 44,
+      "sequence": 24,
+      "timestamp": "2026-10-29T14:36:17.849Z",
+      "author": {
+        "type": "agent",
+        "id": "muse-spark-1.3-contributor-variant-4ddfa039f9b7",
+        "name": "Muse Spark 1.3"
+      },
+      "type": "message",
+      "message": "",
+      "toolCalls": [
+        {
+          "toolCallId": "call_68e37dec-b8ae-4671-b905-9659d6a00b23",
+          "toolName": "executeCode",
+          "input": {
+            "code": "export default async function(self, env, ctx) {\n  // inspections for section 1 in May 2026\n  let cursor=null; let all=[];\n  do {\n    const page = await env.TROM.read_records(\"inspections\",\n      [\"id\",\"section_id\",\"date\",\"schedule_id\",\"schedule_asset_id\",\"inspection_form_id\",\"form_name\"],\n      [{field:\"section_id\", operator:\"eq\", value:1}],\n      [{field:\"date\", direction:\"asc\"}], 500, cursor);\n    all.push(...page.records);\n    cursor=page.next_cursor;\n  } while(cursor);\n  console.log(\"total inspections section1: \"+all.length);\n  const may = all.filter(r=>r.date>=\"2026-05-01\" && r.date<=\"2026-05-31\");\n  console.log(\"may2026 count: \"+may.length);\n  console.log(JSON.stringify(may.slice(0,50), null, 2));\n}\n"
+          },
+          "output": "total inspections section1: 69\nmay2026 count: 2\n[\n  {\n    \"id\": 1600700001,\n    \"section_id\": 1,\n    \"date\": \"2026-05-05\",\n    \"schedule_id\": 1600700001,\n    \"schedule_asset_id\": 1600700001,\n    \"inspection_form_id\": 1,\n    \"form_name\": \"Jalan Aspal\"\n  },\n  {\n    \"id\": 1600700002,\n    \"section_id\": 1,\n    \"date\": \"2026-05-20\",\n    \"schedule_id\": 1600700001,\n    \"schedule_asset_id\": 1600700002,\n    \"inspection_form_id\": 1,\n    \"form_name\": \"Jalan Aspal\"\n  }\n]"
+        }
+      ]
+    },
+    {
+      "chatId": 44,
+      "sequence": 25,
+      "timestamp": "2026-10-29T14:36:17.850Z",
+      "author": {
+        "type": "agent",
+        "id": "muse-spark-1.3-contributor-variant-4ddfa039f9b7",
+        "name": "Muse Spark 1.3"
+      },
+      "type": "action",
+      "actionId": 1179,
+      "actionLog": {
+        "id": 1179,
+        "gatekeeperId": 3,
+        "resourceTitle": "TROM BI",
+        "resourceUrl": "http://127.0.0.1:8091/api/agentic-bi/entities",
+        "createdAt": "2026-10-29T14:36:17.427Z",
+        "state": "approved",
+        "type": "observation",
+        "description": {
+          "title": "Read TROM records",
+          "description": "Read a projected page from the public TROM entity inspections."
+        }
+      }
+    },
+    {
+      "chatId": 44,
+      "sequence": 26,
+      "timestamp": "2026-10-29T14:36:25.699Z",
+      "author": {
+        "type": "agent",
+        "id": "muse-spark-1.3-contributor-variant-4ddfa039f9b7",
+        "name": "Muse Spark 1.3"
+      },
+      "type": "message",
+      "message": "",
+      "toolCalls": [
+        {
+          "toolCallId": "call_a63789e4-a346-47aa-bf65-37da8ba56722",
+          "toolName": "executeCode",
+          "input": {
+            "code": "export default async function(self, env, ctx) {\n  const sa1 = await env.TROM.read_records(\"inspection_schedule_assets\", [\"id\",\"schedule_id\",\"asset_id\",\"sta_start\",\"sta_end\"], [{field:\"id\", operator:\"in\", value:[1600700001,1600700002]}]);\n  console.log(JSON.stringify(sa1.records,null,2));\n  const sch = await env.TROM.read_records(\"inspection_schedules\", [\"id\",\"section_id\",\"start_date\",\"end_date\",\"inspection_form_id\",\"schedule_type\"], [{field:\"id\", operator:\"eq\", value:1600700001}]);\n  console.log(JSON.stringify(sch.records,null,2));\n  const mat = await env.TROM.read_records(\"maintenance_asset_types\", [\"id\",\"name\",\"location_id\",\"section_id\",\"asset_type_id\"], [{field:\"id\", operator:\"in\", value:[1,2,3,4,5,6,7,8,9,10]}]);\n  console.log(\"mat sample:\"+JSON.stringify(mat.records,null,2));\n}\n"
+          },
+          "output": "[REDACTED: This tool output included a broad maintenance-asset master listing. The relevant asset rows are in database/current-effective-configuration.json.]"
+        }
+      ]
+    },
+    {
+      "chatId": 44,
+      "sequence": 27,
+      "timestamp": "2026-10-29T14:36:25.700Z",
+      "author": {
+        "type": "agent",
+        "id": "muse-spark-1.3-contributor-variant-4ddfa039f9b7",
+        "name": "Muse Spark 1.3"
+      },
+      "type": "action",
+      "actionId": 1180,
+      "actionLog": {
+        "id": 1180,
+        "gatekeeperId": 3,
+        "resourceTitle": "TROM BI",
+        "resourceUrl": "http://127.0.0.1:8091/api/agentic-bi/entities",
+        "createdAt": "2026-10-29T14:36:24.445Z",
+        "state": "approved",
+        "type": "observation",
+        "description": {
+          "title": "Read TROM records",
+          "description": "Read a projected page from the public TROM entity inspection_schedule_assets."
+        }
+      }
+    },
+    {
+      "chatId": 44,
+      "sequence": 28,
+      "timestamp": "2026-10-29T14:36:25.701Z",
+      "author": {
+        "type": "agent",
+        "id": "muse-spark-1.3-contributor-variant-4ddfa039f9b7",
+        "name": "Muse Spark 1.3"
+      },
+      "type": "action",
+      "actionId": 1181,
+      "actionLog": {
+        "id": 1181,
+        "gatekeeperId": 3,
+        "resourceTitle": "TROM BI",
+        "resourceUrl": "http://127.0.0.1:8091/api/agentic-bi/entities",
+        "createdAt": "2026-10-29T14:36:24.860Z",
+        "state": "approved",
+        "type": "observation",
+        "description": {
+          "title": "Read TROM records",
+          "description": "Read a projected page from the public TROM entity inspection_schedules."
+        }
+      }
+    },
+    {
+      "chatId": 44,
+      "sequence": 29,
+      "timestamp": "2026-10-29T14:36:25.702Z",
+      "author": {
+        "type": "agent",
+        "id": "muse-spark-1.3-contributor-variant-4ddfa039f9b7",
+        "name": "Muse Spark 1.3"
+      },
+      "type": "action",
+      "actionId": 1182,
+      "actionLog": {
+        "id": 1182,
+        "gatekeeperId": 3,
+        "resourceTitle": "TROM BI",
+        "resourceUrl": "http://127.0.0.1:8091/api/agentic-bi/entities",
+        "createdAt": "2026-10-29T14:36:25.277Z",
+        "state": "approved",
+        "type": "observation",
+        "description": {
+          "title": "Read TROM records",
+          "description": "Read a projected page from the public TROM entity maintenance_asset_types."
+        }
+      }
+    },
+    {
+      "chatId": 44,
+      "sequence": 30,
+      "timestamp": "2026-10-29T14:36:31.231Z",
+      "author": {
+        "type": "agent",
+        "id": "muse-spark-1.3-contributor-variant-4ddfa039f9b7",
+        "name": "Muse Spark 1.3"
+      },
+      "type": "message",
+      "message": "",
+      "toolCalls": [
+        {
+          "toolCallId": "call_737d4777-6457-40c7-8ea6-cd22f20df592",
+          "toolName": "executeCode",
+          "input": {
+            "code": "export default async function(self, env, ctx) {\n  // elements for the 2 may inspections\n  const els = await env.TROM.read_records(\"inspection_elements\", [\"id\",\"inspection_id\",\"element_name\",\"element_id\"], [{field:\"inspection_id\", operator:\"in\", value:[1600700001,1600700002]}]);\n  console.log(JSON.stringify(els,null,2));\n}\n"
+          },
+          "output": "{\n  \"entity\": \"inspection_elements\",\n  \"records\": [\n    {\n      \"id\": 1600700001,\n      \"inspection_id\": 1600700001,\n      \"element_name\": \"Fixture inspection element\",\n      \"element_id\": null\n    },\n    {\n      \"id\": 1600700002,\n      \"inspection_id\": 1600700002,\n      \"element_name\": \"Fixture inspection element\",\n      \"element_id\": null\n    }\n  ],\n  \"next_cursor\": null\n}"
+        }
+      ]
+    },
+    {
+      "chatId": 44,
+      "sequence": 31,
+      "timestamp": "2026-10-29T14:36:31.232Z",
+      "author": {
+        "type": "agent",
+        "id": "muse-spark-1.3-contributor-variant-4ddfa039f9b7",
+        "name": "Muse Spark 1.3"
+      },
+      "type": "action",
+      "actionId": 1183,
+      "actionLog": {
+        "id": 1183,
+        "gatekeeperId": 3,
+        "resourceTitle": "TROM BI",
+        "resourceUrl": "http://127.0.0.1:8091/api/agentic-bi/entities",
+        "createdAt": "2026-10-29T14:36:30.816Z",
+        "state": "approved",
+        "type": "observation",
+        "description": {
+          "title": "Read TROM records",
+          "description": "Read a projected page from the public TROM entity inspection_elements."
+        }
+      }
+    },
+    {
+      "chatId": 44,
+      "sequence": 32,
+      "timestamp": "2026-10-29T14:36:35.265Z",
+      "author": {
+        "type": "agent",
+        "id": "muse-spark-1.3-contributor-variant-4ddfa039f9b7",
+        "name": "Muse Spark 1.3"
+      },
+      "type": "message",
+      "message": "",
+      "toolCalls": [
+        {
+          "toolCallId": "call_0bb120ce-db64-49c4-80a4-a9aa02ebc170",
+          "toolName": "executeCode",
+          "input": {
+            "code": "export default async function(self, env, ctx) {\n  const items = await env.TROM.read_records(\"inspection_items\", [\"id\",\"inspection_element_id\",\"damage_name\",\"is_damage\",\"damage_category\",\"repair_priority\",\"asset_damage_id\",\"description\",\"inspection_description\"], [{field:\"inspection_element_id\", operator:\"in\", value:[1600700001,1600700002]}]);\n  console.log(JSON.stringify(items,null,2));\n}\n"
+          },
+          "output": "{\n  \"entity\": \"inspection_items\",\n  \"records\": [\n    {\n      \"id\": 1600700001,\n      \"inspection_element_id\": 1600700001,\n      \"damage_name\": \"undamaged\",\n      \"is_damage\": false,\n      \"damage_category\": null,\n      \"repair_priority\": null,\n      \"asset_damage_id\": null,\n      \"description\": null,\n      \"inspection_description\": null\n    },\n    {\n      \"id\": 1600700002,\n      \"inspection_element_id\": 1600700001,\n      \"damage_name\": \"r1-p1\",\n      \"is_damage\": true,\n      \"damage_category\": \"r1\",\n      \"repair_priority\": \"p1\",\n      \"asset_damage_id\": null,\n      \"description\": null,\n      \"inspection_description\": null\n    },\n    {\n      \"id\": 1600700003,\n      \"inspection_element_id\": 1600700001,\n      \"damage_name\": \"r2-p2\",\n      \"is_damage\": true,\n      \"damage_category\": \"r2\",\n      \"repair_priority\": \"p2\",\n      \"asset_damage_id\": null,\n      \"description\": null,\n      \"inspection_description\": null\n    },\n    {\n      \"id\": 1600700004,\n      \"inspection_element_id\": 1600700001,\n      \"damage_name\": \"r3-no-priority\",\n      \"is_damage\": true,\n      \"damage_category\": \"r3\",\n      \"repair_priority\": null,\n      \"asset_damage_id\": null,\n      \"description\": null,\n      \"inspection_description\": null\n    },\n    {\n      \"id\": 1600700005,\n      \"inspection_element_id\": 1600700002,\n      \"damage_name\": \"unknown-category-p2\",\n      \"is_damage\": true,\n      \"damage_category\": \"legacy-other\",\n      \"repair_priority\": \"p2\",\n      \"asset_damage_id\": null,\n      \"description\": null,\n      \"inspection_description\": null\n    }\n  ],\n  \"next_cursor\": null\n}"
+        }
+      ]
+    },
+    {
+      "chatId": 44,
+      "sequence": 33,
+      "timestamp": "2026-10-29T14:36:35.266Z",
+      "author": {
+        "type": "agent",
+        "id": "muse-spark-1.3-contributor-variant-4ddfa039f9b7",
+        "name": "Muse Spark 1.3"
+      },
+      "type": "action",
+      "actionId": 1184,
+      "actionLog": {
+        "id": 1184,
+        "gatekeeperId": 3,
+        "resourceTitle": "TROM BI",
+        "resourceUrl": "http://127.0.0.1:8091/api/agentic-bi/entities",
+        "createdAt": "2026-10-29T14:36:34.846Z",
+        "state": "approved",
+        "type": "observation",
+        "description": {
+          "title": "Read TROM records",
+          "description": "Read a projected page from the public TROM entity inspection_items."
+        }
+      }
+    },
+    {
+      "chatId": 44,
+      "sequence": 34,
+      "timestamp": "2026-10-29T14:37:10.021Z",
+      "author": {
+        "type": "agent",
+        "id": "muse-spark-1.3-contributor-variant-4ddfa039f9b7",
+        "name": "Muse Spark 1.3"
+      },
+      "type": "message",
+      "message": "",
+      "toolCalls": [
+        {
+          "toolCallId": "call_52592303-68d6-4d5b-b24d-64e544d164c9",
+          "toolName": "executeCode",
+          "input": {
+            "code": "export default async function(self, env, ctx) {\n  const sec = await env.TROM.read_records(\"toll_sections\", [\"id\",\"section_name\"], [{field:\"id\", operator:\"eq\", value:1}]);\n  console.log(JSON.stringify(sec.records));\n  const assets = await env.TROM.read_records(\"maintenance_asset_types\", [\"id\",\"name\"], [{field:\"id\", operator:\"in\", value:[1,2]}]);\n  console.log(JSON.stringify(assets.records));\n  // dump raw bytes lengths\n  for (const r of sec.records) console.log(\"section_name len=\"+r.section_name.length+\" repr=\"+JSON.stringify(r.section_name));\n}\n"
+          },
+          "output": "[{\"id\":1,\"section_name\":\"PEKANBARU -  BANGKINANG (PEKBANG)\"}]\n[{\"id\":1,\"name\":\"Bahu\"},{\"id\":2,\"name\":\"Lajur 1\"}]\nsection_name len=33 repr=\"PEKANBARU -  BANGKINANG (PEKBANG)\""
+        }
+      ]
+    },
+    {
+      "chatId": 44,
+      "sequence": 35,
+      "timestamp": "2026-10-29T14:37:10.022Z",
+      "author": {
+        "type": "agent",
+        "id": "muse-spark-1.3-contributor-variant-4ddfa039f9b7",
+        "name": "Muse Spark 1.3"
+      },
+      "type": "action",
+      "actionId": 1185,
+      "actionLog": {
+        "id": 1185,
+        "gatekeeperId": 3,
+        "resourceTitle": "TROM BI",
+        "resourceUrl": "http://127.0.0.1:8091/api/agentic-bi/entities",
+        "createdAt": "2026-10-29T14:37:09.115Z",
+        "state": "approved",
+        "type": "observation",
+        "description": {
+          "title": "Read TROM records",
+          "description": "Read a projected page from the public TROM entity toll_sections."
+        }
+      }
+    },
+    {
+      "chatId": 44,
+      "sequence": 36,
+      "timestamp": "2026-10-29T14:37:10.023Z",
+      "author": {
+        "type": "agent",
+        "id": "muse-spark-1.3-contributor-variant-4ddfa039f9b7",
+        "name": "Muse Spark 1.3"
+      },
+      "type": "action",
+      "actionId": 1186,
+      "actionLog": {
+        "id": 1186,
+        "gatekeeperId": 3,
+        "resourceTitle": "TROM BI",
+        "resourceUrl": "http://127.0.0.1:8091/api/agentic-bi/entities",
+        "createdAt": "2026-10-29T14:37:09.615Z",
+        "state": "approved",
+        "type": "observation",
+        "description": {
+          "title": "Read TROM records",
+          "description": "Read a projected page from the public TROM entity maintenance_asset_types."
+        }
+      }
+    },
+    {
+      "chatId": 44,
+      "sequence": 37,
+      "timestamp": "2026-10-29T14:37:38.456Z",
+      "author": {
+        "type": "agent",
+        "id": "muse-spark-1.3-contributor-variant-4ddfa039f9b7",
+        "name": "Muse Spark 1.3"
+      },
+      "type": "message",
+      "message": "{\"section_id\":1,\"section_name\":\"PEKANBARU -  BANGKINANG (PEKBANG)\",\"period\":{\"start\":\"2026-05-01\",\"end\":\"2026-05-31\"},\"damaged_item_count\":4,\"by_damage_category\":{\"r1\":1,\"r2\":1,\"r3\":1},\"by_repair_priority\":{\"p1\":1,\"p2\":2},\"by_asset\":[{\"asset_id\":1,\"asset_name\":\"Bahu\",\"damaged_item_count\":3},{\"asset_id\":2,\"asset_name\":\"Lajur 1\",\"damaged_item_count\":1}]}"
+    }
+  ]
+}

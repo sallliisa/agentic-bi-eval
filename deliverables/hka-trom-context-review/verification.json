@@ -1,0 +1,17 @@
+{
+  "original_snapshot_hashes": "passed for all 7 files",
+  "relative_links": "passed",
+  "documented_entities_in_live_catalogue": "passed",
+  "case_identifiers_fixture_ids_and_selected_answer_values": "not found",
+  "files": {
+    "SKILL.md": "fbbb18aac305104a85c4fe891188563a1b5b96c92a169f39811885cfbdc9b187",
+    "references/incidents.md": "15ea4e32bc8b11e10b314a01f0b7918f5e01e0d3c09af6557c61721b1fa399a1",
+    "references/inspections.md": "fd6e2680fedb61f9052ce06c20af4321794b8dbb5de486c72e5989d3054b5edb",
+    "references/spm-sla.md": "3610a0ed90b4aa503f2086adafca1dc49c778d8bf1919e1fbb0d45c6f694c0d8",
+    "references/terminology.md": "3f424cc7197afc82be80f4ebe1159a641692896fc95b69d7e5091a8ebd336bc5",
+    "references/traffic.md": "afb4d808ff92e2f70c2e6763093b2b3d2b04861882cc2a0cf6e9eea683e1702c",
+    "references/transactions.md": "7c964c0f350c33120061192fc11c6e95e900ffe108e8eaf390483ec4c54a727d"
+  },
+  "evaluation_runs_started": 0,
+  "uploaded_or_enabled": false
+}

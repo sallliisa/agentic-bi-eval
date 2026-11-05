@@ -1,0 +1,84 @@
+HKA TROM context review
+
+Decision
+
+The saved package contains useful business definitions and no identified test answers or case-specific solution recipes. It should not be restored unchanged: three catalogue names do not exist in the live endpoint, and the inspection asset reference identifies the wrong master. The corrected seven-document package is in package/. It is not uploaded or enabled.
+
+Scope and evidence
+
+Reviewed all seven documents in the snapshot named by the user. Checked their original SHA-256 hashes against its manifest. Compared the definitions with the accepted natural-business questions and output contracts, without changing those cases or their expected answers.
+
+Read the live catalogue through http://127.0.0.1:8091/api/agentic-bi/entities and describe-entity. This is the default endpoint in the local TROM connector source. Read the hkatrom_bi database on gamingmachine in a read-only transaction to check the effective-rule view and asset foreign key. Read current Cloudflare OS management settings: TROM and context connectors are optional, no collections are enabled, and shared instructions contain general tool-use and output requirements. These management reads do not prove that a collection or TROM binding is attached to a particular future run workspace.
+
+The review did not create a chat, run an evaluation, change operational records, alter the accepted test set, or activate a context collection. A fresh agent-session check of skill discovery and resource attachment remains unverified.
+
+Business knowledge versus answer leakage
+
+The package defines terms, units, record grain, operational dates, relationships, population selection, counting rules, and compliance states. These definitions apply across sections and periods. It contains no case labels, fixture IDs, requested case dates, prepared answer objects, exact result totals, SQL recipes, or per-question tool-call sequences. It directs the agent to read relevant domain references, rather than to follow a path for a named case.
+
+The five transaction-indicator codes and the all-five-per-booth rule are business configuration semantics. AutoSpmSlaCalculate.php independently lists the five codes and applies each configured rule to each observed booth. Removing that rule would remove necessary interpretation knowledge. The same distinction applies to repeated cause assignments, calendar-day LHR denominators, and the non-null damage-category population. Coverage that overlaps the evaluation domains is not itself an answer leak.
+
+This content review cannot establish that no author ever used test outcomes to develop the package. It establishes that no direct answer leak or case-specific solving instruction was found in the reviewed text. Keep this review, expected answers, fixture exports, and evaluator details outside the agent collection. Upload only package/.
+
+Confirmed corrections
+
+1. traffic.md and terminology.md: vehicle_classes becomes m_vehicle_class. The former is absent from the live catalogue. Preserve the all-configured-class and calendar-day definitions.
+2. incidents.md: accident_attributes becomes m_accident_attributes. The former is absent from the live catalogue. Preserve counting each recorded cause assignment.
+3. spm-sla.md: effective_spm_sla_config becomes view_section_spm_sla. The former is absent. Document actual fields, including is_applicable, spm_parameter, sla_parameter, operator, and unit.
+4. inspections.md: inspection_schedule_assets.asset_id references maintenance_asset_types.id. The live catalogue and database foreign key agree. The separate assets entity exists and is not interchangeable with that master. The local application checkout still contains older assets joins, so the live foreign key is stronger evidence for this environment.
+5. terminology.md: make monitoring_transactions.schedule_id to shift_schedules.id explicit. shift_schedules.shift is the operational shift number. shift_id to m_section_shifts.id is a logical link, not a declared foreign key.
+6. spm-sla.md: state that the effective view supplies current configuration for the requested observation period. It has no rule validity dates or historical versions. Historical-as-of compliance requires another source. This clarification preserves the accepted setup, which uses current configuration, without exposing a case date or threshold value.
+7. transactions.md: remove the fixed two-decimal display instruction. The output contract owns display precision. Preserve the established empty-summary-zero convention.
+
+Rules checked against independent implementation or live metadata
+
+- Overall duration: SummaryMonitoringTransaction.php uses AVG over matching detail observations, without a booth-type restriction, and coalesces an empty result to zero.
+- Traffic: StatisticVolumeByVehicleClass.php reads m_vehicle_class and sums recorded counts. DataTrendLhrByVehicleClass.php generates calendar days, crosses configured classes, fills missing counts with zero, and rounds the average daily count. It does not filter classes by active status.
+- Inspection damage: SummaryInspection.php and RecapInspectionBySection.php select non-null damage categories. The live hierarchy links inspection items to elements, inspections, scheduled asset assignments, and maintenance_asset_types.
+- Transaction compliance: AutoSpmSlaCalculate.php uses booth samples within report and booth, all five configured indicators, unrounded averages, and separate SPM/SLA comparisons. Live transaction-speed rules use operator <= and unit second.
+- SLA defaults: the live view cross joins active m_spm rules and sections, then left joins m_sla. Missing overrides use the SPM parameter and specification and make SLA applicable. Explicit overrides supply their own parameter and applicability.
+- Period compliance: DataTrendSpmSla.php and RecapSpmSlaBySectionDashboard.php count failed evaluations and treat observed periods with any failures as failed. Their no-observation scoring policy is a separate issue below.
+
+Application inconsistencies and reporting-policy limits
+
+These differences do not justify silently changing the accepted questions, expected answers, or business definitions.
+
+Incident with no actions: the context classifies it as under investigation. RecapIncidentBySection.php explicitly includes no-action incidents as under investigation. StatisticIncidentByStatus.php instead returns closed when no incomplete action exists, including when there are no actions. Thus the context has implementation support, but the application is internally inconsistent. Retain the context definition for this reporting environment; do not claim that every dashboard implements it.
+
+Null booth durations: the context calls them data-quality gaps. AutoSpmSlaCalculate.php casts a null duration to float, which can include it as zero. The reviewed package keeps the explicit data-quality policy instead of presenting zero as an observed duration. This policy should remain distinct from an assertion about legacy job behavior.
+
+No-observation compliance: the context makes no measured-pass claim. Legacy dashboard scoring can instead use score_default. This is a distinction between evidence from observations and a configured dashboard score. The package retains the observation-based interpretation. A request for dashboard scores needs that separate definition.
+
+Accident-only cause population: the context restricts cause counts to incidents marked is_accident=true. StatisticIncidentByAccidentCauses.php joins accident reports to incidents but does not explicitly check that flag. Repeated-assignment counting is supported by its unnest and COUNT. The accident-only population is a stated reporting rule, not a guarantee that the legacy query enforces it when contradictory records exist.
+
+Date scope: raw catalogue reads honor the requested operational-date filters. Some application dashboard methods cap their date range to the present. The agent is using the raw catalogue and the accepted requests retain explicit dates. Do not infer a dashboard date cap for these catalogue-based requests.
+
+These points mean the package can describe the accepted reporting contract, but it cannot be certified as a description of every legacy application path. The review has not established independent business-owner approval for those policy differences. Resolve them before extending claims beyond this reporting contract or assessing contradictory-data cases.
+
+Verification
+
+All seven snapshot hashes match the original manifest. Every relative reference in the corrected package resolves. All documented operational entities exist in the live catalogue. The asset reference matches the live declared foreign key. The preserved transaction-indicator operator and unit match the live effective view. Manual review found no prepared answers or case-specific solving recipe. A scan also found no case labels, fixture IDs, or selected answer values; this scan supplements the manual review and is not a proof of absence by itself.
+
+The corrected package has no output JSON schema, fixed array-order requirement, grader instruction, or expected-result file. Accepted test cases and current shared instructions are unchanged by this review. No evaluation runs were started.
+
+Evidence files
+
+evidence/live-catalogue.json: live entity inventory and relevant entity descriptions.
+evidence/live-rule-configuration.json: read-only effective-view definition, asset constraints, and distinct transaction-speed units and operators.
+verification.json: archive integrity, link checks, entity existence checks, and corrected package hashes.
+
+Independent local source paths
+
+/Users/gamer/Documents/projects/hka-trom/backend/app/Services/AgenticBi/EntityCatalog.php
+/Users/gamer/Documents/projects/hka-trom/backend/app/Services/Custom/Dashboard/DashboardMonitoringTransaction/SummaryMonitoringTransaction.php
+/Users/gamer/Documents/projects/hka-trom/backend/app/Services/Custom/Dashboard/DashboardVLL/StatisticVolumeByVehicleClass.php
+/Users/gamer/Documents/projects/hka-trom/backend/app/Services/Custom/Dashboard/DashboardVLL/DataTrendLhrByVehicleClass.php
+/Users/gamer/Documents/projects/hka-trom/backend/app/Services/Custom/Dashboard/DashboardInspection/SummaryInspection.php
+/Users/gamer/Documents/projects/hka-trom/backend/app/Services/Custom/Dashboard/DashboardInspection/RecapInspectionBySection.php
+/Users/gamer/Documents/projects/hka-trom/backend/app/Services/Custom/Dashboard/DashboardIncident/RecapIncidentBySection.php
+/Users/gamer/Documents/projects/hka-trom/backend/app/Services/Custom/Dashboard/DashboardIncident/StatisticIncidentByStatus.php
+/Users/gamer/Documents/projects/hka-trom/backend/app/Services/Custom/Dashboard/DashboardIncident/StatisticIncidentByAccidentCauses.php
+/Users/gamer/Documents/projects/hka-trom/backend/app/Services/Custom/Dashboard/DataTrendSpmSla.php
+/Users/gamer/Documents/projects/hka-trom/backend/app/Services/Custom/Dashboard/RecapSpmSlaBySectionDashboard.php
+/Users/gamer/Documents/projects/hka-trom/backend/app/Jobs/AutoSpmSlaCalculate.php
+/Users/gamer/Documents/projects/cloudflare-os-trom-poc/packages/gatekeeper-trom/src/trom.ts

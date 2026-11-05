@@ -1,0 +1,501 @@
+{
+  "createdAt": "2026-11-01",
+  "package": "Latest HKA TROM Agentic BI experiment materials",
+  "evidenceMode": "Read-only retrieval; derived calculation files are identified as derived.",
+  "fileCount": 52,
+  "files": [
+    {
+      "path": "README.md",
+      "sizeBytes": 3210,
+      "sha256": "e899b4541250c7bbbe2607d4102abbce0613dfabc2fe2170297e30bc8982f9b6",
+      "source": "Written for this package.",
+      "contents": "Package guide, verified run summary, contents, calculation instructions, and handling notes.",
+      "classification": "documentation",
+      "redactions": []
+    },
+    {
+      "path": "calculations/README.md",
+      "sizeBytes": 800,
+      "sha256": "454162abfee0b53e2d5ea1994189f9a199d7ad41770b37db25dd663a8adbef27",
+      "source": "Written for this package.",
+      "contents": "Explains the original calculator and portable calculation path.",
+      "classification": "calculation-guide",
+      "redactions": []
+    },
+    {
+      "path": "calculations/calculate-original.py",
+      "sizeBytes": 8818,
+      "sha256": "8098aa3b8fe34df5014628f7e9aeb5a7e5f9645e2f7b49352eb687f14c2baf3a",
+      "source": "Copied unchanged from fixtures/hka-trom/calculate.py.",
+      "contents": "Original calculator source; see reproduce.py for the portable current-case calculation.",
+      "classification": "calculation-source",
+      "redactions": []
+    },
+    {
+      "path": "calculations/calculated-results.json",
+      "sizeBytes": 58040,
+      "sha256": "ebc79d673fad771504ef25eb5d5cc9f3ae24f24449d9a2f95e06b50ff7a46a4f",
+      "source": "Output of calculations/reproduce.py.",
+      "contents": "Calculated results for all 15 current cases.",
+      "classification": "derived-calculation-output",
+      "redactions": []
+    },
+    {
+      "path": "calculations/calculation-inputs.json",
+      "sizeBytes": 121162,
+      "sha256": "aacf201a259bbf0c30455f0155f16f49849d5e45935f90315cc2d002708b5598",
+      "source": "Controlled fixture rows plus filtered current configuration from read-only hkatrom_bi.public queries.",
+      "contents": "Standalone inputs for reproduce.py; no saved expected answers.",
+      "classification": "calculation-inputs",
+      "redactions": [
+        "Unrelated operational rows and direct contact fields are omitted."
+      ]
+    },
+    {
+      "path": "calculations/calculation-verification.json",
+      "sizeBytes": 2785,
+      "sha256": "574222fdf794ef98a66af06a882b7704affc07a4842903bd212a72694bd8f3b5",
+      "source": "Comparison of calculated outputs, saved expectations, and saved actual responses.",
+      "contents": "Per-case calculation and result comparison.",
+      "classification": "verification-summary",
+      "redactions": []
+    },
+    {
+      "path": "calculations/case-definitions.json",
+      "sizeBytes": 84180,
+      "sha256": "4758d8553ebf47fcab20147e2dade4315a5f1fd0c051be5866243cc42e31a34c",
+      "source": "fixtures/hka-trom/cases.json.",
+      "contents": "Current condition definitions and prompts used by reproduce.py; prior expected answers excluded.",
+      "classification": "calculation-inputs",
+      "redactions": []
+    },
+    {
+      "path": "calculations/reproduce.py",
+      "sizeBytes": 10556,
+      "sha256": "12281a448595505dca1f1cd107c4b5602124a38227f834cfa236f1cd379db3e9",
+      "source": "Adapted from fixtures/hka-trom/calculate.py; T7 selectors use prompt and current master values.",
+      "contents": "Portable calculator for all 15 cases. It does not read expected outputs.",
+      "classification": "calculation-source",
+      "redactions": []
+    },
+    {
+      "path": "calculations/worked-calculations.md",
+      "sizeBytes": 4386,
+      "sha256": "42ba5a9e4486a2590b33511a166b85d0cfee97fa849e4a4b3d20ab80fe3f59da",
+      "source": "Derived from controlled data and current business configuration.",
+      "contents": "Worked calculation notes for the six priority cases.",
+      "classification": "calculation-method",
+      "redactions": []
+    },
+    {
+      "path": "case-design/fixture-design-metadata.json",
+      "sizeBytes": 19253,
+      "sha256": "81f674452e6e27f52c4d3dc68e6c70d1d697406c52609e9149cba952dd74b440",
+      "source": "fixtures/hka-trom/cases.json.",
+      "contents": "Case construction metadata and semantic branches; prior expected-answer values are excluded.",
+      "classification": "case-design-metadata",
+      "redactions": []
+    },
+    {
+      "path": "cases/case-scopes.json",
+      "sizeBytes": 7076,
+      "sha256": "f25d06bde125a30c7ffadf40a03769beaaf94b99886871f837a75ad4e060f2c5",
+      "source": "Carta test_cases rows read in a read-only transaction, joined with fixtures/hka-trom/cases.json.",
+      "contents": "Current saved prompts, embedded schemas, expected JSON, conditions, and scopes.",
+      "classification": "current-test-case-evidence",
+      "redactions": []
+    },
+    {
+      "path": "cases/current-test-set.json",
+      "sizeBytes": 187030,
+      "sha256": "9ea9dfcf9c50df5b3d9c7756e960349adbf123268f86388518590d40065bcb39",
+      "source": "Carta test_cases rows read in a read-only transaction, joined with fixtures/hka-trom/cases.json.",
+      "contents": "Current saved prompts, embedded schemas, expected JSON, conditions, and scopes.",
+      "classification": "current-test-case-evidence",
+      "redactions": []
+    },
+    {
+      "path": "configuration/TROM-access-contract.md",
+      "sizeBytes": 1752,
+      "sha256": "2a1d940baafda450cb7b291a0aa80abcbb5a89e9c91b5f369cd7cba41403455d",
+      "source": "Cloudflare OS connector source/configuration and HKA TROM Agentic BI source.",
+      "contents": "Read-only tool contract, runner method, and configuration limits.",
+      "classification": "method-description",
+      "redactions": []
+    },
+    {
+      "path": "configuration/TROM-binding-types.txt",
+      "sizeBytes": 6198,
+      "sha256": "a1fe47c860064dfe186af96713b92375fa54be3d248d175acab2a76add67b4bb",
+      "source": "Cloudflare OS source packages/gatekeeper-trom/src/types.txt.",
+      "contents": "Type definitions for the TROM binding methods.",
+      "classification": "tool-contract",
+      "redactions": []
+    },
+    {
+      "path": "configuration/agent-instructions.txt",
+      "sizeBytes": 1139,
+      "sha256": "f209ee531bb961eeaafa3bbeb7f731a7b8f33c3cff8b8e0af7d643c5da8d5390",
+      "source": "Cloudflare OS read-only admin API, retrieved 2026-11-01.",
+      "contents": "Global Agent instructions at retrieval time; not a per-run snapshot.",
+      "classification": "retrieval-time-configuration",
+      "redactions": []
+    },
+    {
+      "path": "configuration/configuration-limitations.md",
+      "sizeBytes": 1344,
+      "sha256": "f7b0d5f03226aa7b930e87c1daad4bd5783c054d57217783e66d77939bf589fa",
+      "source": "Cloudflare OS connector source/configuration and HKA TROM Agentic BI source.",
+      "contents": "Read-only tool contract, runner method, and configuration limits.",
+      "classification": "method-description",
+      "redactions": []
+    },
+    {
+      "path": "configuration/context/SKILL.md",
+      "sizeBytes": 3155,
+      "sha256": "fbbb18aac305104a85c4fe891188563a1b5b96c92a169f39811885cfbdc9b187",
+      "source": "Cloudflare OS read-only Context collection API, retrieved 2026-11-01.",
+      "contents": "Current context document body.",
+      "classification": "retrieval-time-configuration",
+      "redactions": []
+    },
+    {
+      "path": "configuration/context/references/incidents.md",
+      "sizeBytes": 2507,
+      "sha256": "a86a4056353b42df6a100ce0f7d82a084d7e3d76194bf6f49b969598692a9297",
+      "source": "Cloudflare OS read-only Context collection API, retrieved 2026-11-01.",
+      "contents": "Current context document body.",
+      "classification": "retrieval-time-configuration",
+      "redactions": []
+    },
+    {
+      "path": "configuration/context/references/inspections.md",
+      "sizeBytes": 2800,
+      "sha256": "0b8fe3214c4c128b401d9022610bf3970b41f2067bfdb0bd093132e0bf1424fb",
+      "source": "Cloudflare OS read-only Context collection API, retrieved 2026-11-01.",
+      "contents": "Current context document body.",
+      "classification": "retrieval-time-configuration",
+      "redactions": []
+    },
+    {
+      "path": "configuration/context/references/spm-sla.md",
+      "sizeBytes": 4513,
+      "sha256": "9fb49273b1350e2cea6a2237871e2dc3c67d1d070b711d7ab8337b2338ebf409",
+      "source": "Cloudflare OS read-only Context collection API, retrieved 2026-11-01.",
+      "contents": "Current context document body.",
+      "classification": "retrieval-time-configuration",
+      "redactions": []
+    },
+    {
+      "path": "configuration/context/references/terminology.md",
+      "sizeBytes": 3156,
+      "sha256": "59ab11bff0871962d8a5f99c29acfbb58a985ed4299a2afb580d51ef7acef456",
+      "source": "Cloudflare OS read-only Context collection API, retrieved 2026-11-01.",
+      "contents": "Current context document body.",
+      "classification": "retrieval-time-configuration",
+      "redactions": []
+    },
+    {
+      "path": "configuration/context/references/traffic.md",
+      "sizeBytes": 2192,
+      "sha256": "fd2d6a633f15919cb80cb7edd08ad172bc231f9bf8aa5e316dea37fb8cdbd455",
+      "source": "Cloudflare OS read-only Context collection API, retrieved 2026-11-01.",
+      "contents": "Current context document body.",
+      "classification": "retrieval-time-configuration",
+      "redactions": []
+    },
+    {
+      "path": "configuration/context/references/transactions.md",
+      "sizeBytes": 1975,
+      "sha256": "e18ed1a2c030c7be43a80e21bb30c787156746486cd3af4da37a82e06e463157",
+      "source": "Cloudflare OS read-only Context collection API, retrieved 2026-11-01.",
+      "contents": "Current context document body.",
+      "classification": "retrieval-time-configuration",
+      "redactions": []
+    },
+    {
+      "path": "configuration/context-index.json",
+      "sizeBytes": 2241,
+      "sha256": "7aa97049d5d2ac91b8a33a8385c0dbf7ce8d4abc30daf8ad13d6ae56801550b7",
+      "source": "Cloudflare OS read-only Context API, retrieved 2026-11-01.",
+      "contents": "Context collection metadata and document inventory.",
+      "classification": "retrieval-time-configuration",
+      "redactions": []
+    },
+    {
+      "path": "configuration/current-cloudflare-config.json",
+      "sizeBytes": 1108,
+      "sha256": "1e2dd3364732b2d643e4256e1c581fee34d3911c2f927844e8b34a0b72b02ffd",
+      "source": "Cloudflare OS read-only admin/model APIs, retrieved 2026-11-01.",
+      "contents": "Sanitized model, provider, Agent instruction, and Context metadata.",
+      "classification": "retrieval-time-configuration",
+      "redactions": [
+        "Endpoint address, credential values, and workspace ID are withheld."
+      ]
+    },
+    {
+      "path": "configuration/runner-method.md",
+      "sizeBytes": 1481,
+      "sha256": "444298c85147da70f5e6317d06da782fa18ce4c014e3ff5b9622a5fb313a3a8f",
+      "source": "Cloudflare OS connector source/configuration and HKA TROM Agentic BI source.",
+      "contents": "Read-only tool contract, runner method, and configuration limits.",
+      "classification": "method-description",
+      "redactions": []
+    },
+    {
+      "path": "database/ERD.mmd",
+      "sizeBytes": 3313,
+      "sha256": "7870779ce71bcbfaafb373485bac7a69f900d4b1b345c3e3f91b6922002490e9",
+      "source": "Derived from database/public-schema-relevant.json.",
+      "contents": "Focused relation diagram; declared and logical relationships are labeled separately.",
+      "classification": "schema-diagram",
+      "redactions": []
+    },
+    {
+      "path": "database/controlled-data-provenance.md",
+      "sizeBytes": 923,
+      "sha256": "d94941c167f1c1bf384bce534e260ac10a1b689c3e08651ad4c1913509d61f72",
+      "source": "Derived from read-only hkatrom_bi.public metadata, fixture rows, and current case definitions.",
+      "contents": "Database scope, fixture provenance, and table relationships.",
+      "classification": "method-description",
+      "redactions": []
+    },
+    {
+      "path": "database/controlled-fixture-rows.json",
+      "sizeBytes": 111515,
+      "sha256": "78621456c0ab5a2fceac5f5e4f05cdb21e91985ba700ea4ec1df03a853a567f5",
+      "source": "fixtures/hka-trom/rows.json.",
+      "contents": "237 controlled synthetic source rows across 15 tables.",
+      "classification": "synthetic-controlled-fixture",
+      "redactions": []
+    },
+    {
+      "path": "database/current-effective-configuration.json",
+      "sizeBytes": 9486,
+      "sha256": "2664ea980e5a925ae9488874cb33a15815a5e0716bd72793aa671fedce7d9efc",
+      "source": "Read-only SELECTs from hkatrom_bi.public on 2026-11-01, filtered to tested entities and codes.",
+      "contents": "Current sections, gates, shifts, vehicle classes, causes, assets, and speed SPM/SLA rules.",
+      "classification": "filtered-business-configuration",
+      "redactions": [
+        "Unrelated master rows and contact fields are omitted."
+      ]
+    },
+    {
+      "path": "database/live-fixture-verification.json",
+      "sizeBytes": 576,
+      "sha256": "ec601c73d9ed0116e5bd17309625b63d7f12000dc24feda61ac128c623aed02d",
+      "source": "Read-only run of fixtures/hka-trom/migrate.py verify in a temporary copy on 2026-11-01.",
+      "contents": "Checks for 237 fixture rows and all 15 recalculated expected answers.",
+      "classification": "live-verification",
+      "redactions": []
+    },
+    {
+      "path": "database/public-schema-relevant.json",
+      "sizeBytes": 111828,
+      "sha256": "fa32e141f736597baa01a7ca53c9dee4a82e01e9f2b5085f4ae5d2a5018e17f7",
+      "source": "Read-only public schema catalog, primary key, and foreign key queries on 2026-11-01.",
+      "contents": "Focused schema for the 22 relations used by the cases.",
+      "classification": "schema-metadata",
+      "redactions": []
+    },
+    {
+      "path": "database/relationships-and-scopes.md",
+      "sizeBytes": 3288,
+      "sha256": "4950b3fcf1d5a0b784332c776334cc11d555c4711907a88c220759f13d9e8f05",
+      "source": "Derived from read-only hkatrom_bi.public metadata, fixture rows, and current case definitions.",
+      "contents": "Database scope, fixture provenance, and table relationships.",
+      "classification": "method-description",
+      "redactions": []
+    },
+    {
+      "path": "legacy/04_SYSTEM_ARCHITECTURE.md",
+      "sizeBytes": 2228,
+      "sha256": "48a9fd2e9ecf7910333b5850a06241509a51f9913cd2738235f8f32cb188f253",
+      "source": "Copied from /Users/gamer/Documents/school/thesis/04_SYSTEM_ARCHITECTURE.md",
+      "contents": "Older thesis-context material, not current test or run evidence.",
+      "classification": "historical-thesis-context",
+      "redactions": []
+    },
+    {
+      "path": "legacy/06_TROM_CASE_STUDY.md",
+      "sizeBytes": 3554,
+      "sha256": "181faa8cb91316cffffd4ffb0cf4de90cb0a168fb5a6f9dcd8ccf4382ce0f5af",
+      "source": "Copied from /Users/gamer/Documents/school/thesis/06_TROM_CASE_STUDY.md",
+      "contents": "Older thesis-context material, not current test or run evidence.",
+      "classification": "historical-thesis-context",
+      "redactions": []
+    },
+    {
+      "path": "legacy/14_RESULT_SCHEMAS.md",
+      "sizeBytes": 5633,
+      "sha256": "0a0d8034669e461dd8013f1bb0e8e97603a990d796faf9a520b32437ac4af4da",
+      "source": "Copied from /Users/gamer/Documents/school/thesis/14_RESULT_SCHEMAS.md",
+      "contents": "Older thesis-context material, not current test or run evidence.",
+      "classification": "historical-thesis-context",
+      "redactions": []
+    },
+    {
+      "path": "legacy/README.md",
+      "sizeBytes": 584,
+      "sha256": "e6630e5188c7d338871a386867cb7347c3c6c3881215c133ba3ed30f7a7ca1e5",
+      "source": "Written for this package.",
+      "contents": "Labels older thesis notes and notes the missing friend-thesis file.",
+      "classification": "historical-context-note",
+      "redactions": []
+    },
+    {
+      "path": "missing-evidence.md",
+      "sizeBytes": 2264,
+      "sha256": "c6c4b0776aa9758c49d2ea421643469d3b035c16753652005c321916dd43409b",
+      "source": "Read-only inventory of Carta records, Cloudflare OS configuration observations, and available files.",
+      "contents": "Unrecorded runs, retry limits, configuration gaps, and unavailable source documents.",
+      "classification": "documentation",
+      "redactions": []
+    },
+    {
+      "path": "runs/24afb5a8-d776-4e96-b4ca-111f2ffc0646.json",
+      "sizeBytes": 1224,
+      "sha256": "a93c881b15e96996da0edce47f23b5df91e1bfd3c366038fd4b2a45b676fe0e8",
+      "source": "Carta test_runs and test_run_results read in a read-only transaction.",
+      "contents": "Run metadata and saved result rows with responses, expectations, verdicts, errors, times, and chat references.",
+      "classification": "execution-record",
+      "redactions": []
+    },
+    {
+      "path": "runs/e3353347-8ac0-4ca0-b5d6-b46ac78dac13.json",
+      "sizeBytes": 277732,
+      "sha256": "ad6063057f3ded6ed7b9f0bc4faba4cf34df4d765f25e61b24b1d9b13b95bc4c",
+      "source": "Carta test_runs and test_run_results read in a read-only transaction.",
+      "contents": "Run metadata and saved result rows with responses, expectations, verdicts, errors, times, and chat references.",
+      "classification": "execution-record",
+      "redactions": []
+    },
+    {
+      "path": "runs/ec5191cf-a2a2-439e-8e26-f40ade7bd3c4.json",
+      "sizeBytes": 121482,
+      "sha256": "db7a07c13486a1cd39219c151456306e22e0c4948250f4a0a54cf23394fabcd5",
+      "source": "Carta test_runs and test_run_results read in a read-only transaction.",
+      "contents": "Run metadata and saved result rows with responses, expectations, verdicts, errors, times, and chat references.",
+      "classification": "execution-record",
+      "redactions": []
+    },
+    {
+      "path": "runs/fa5bb126-55d8-4413-aa07-7d43b6d50852.json",
+      "sizeBytes": 130976,
+      "sha256": "a810bb301cac9a4321df62d343600a05968733eee1498db591a790aaa62857dc",
+      "source": "Carta test_runs and test_run_results read in a read-only transaction.",
+      "contents": "Run metadata and saved result rows with responses, expectations, verdicts, errors, times, and chat references.",
+      "classification": "execution-record",
+      "redactions": []
+    },
+    {
+      "path": "runs/run-inventory.json",
+      "sizeBytes": 2314,
+      "sha256": "617e7bc7f5b36206a5e2a2d9a397200507893cbb35137df6f663aad4800abc30",
+      "source": "Carta test_runs and test_run_results read in a read-only transaction.",
+      "contents": "Run metadata and saved result rows with responses, expectations, verdicts, errors, times, and chat references.",
+      "classification": "execution-record",
+      "redactions": []
+    },
+    {
+      "path": "traces/selected/T1-C2-chat-39.json",
+      "sizeBytes": 59145,
+      "sha256": "c1d72661f2e2d177cd3e612a124a5a00dccd5ad5102de531045e3dfafc448ba8",
+      "source": "Cloudflare OS read-only chat-history API.",
+      "contents": "Selected chat histories and TROM/context tool calls and outputs.",
+      "classification": "execution-trace",
+      "redactions": [
+        "Unrelated broad operational rows or SPM/SLA values are replaced with redaction notes listed in traces/trace-index.json."
+      ]
+    },
+    {
+      "path": "traces/selected/T2-C1-chat-40.json",
+      "sizeBytes": 56188,
+      "sha256": "eb5cb8489cc1e752062a665efa1813ddd608ec0f512f03ee7e5c22f0c04ffbef",
+      "source": "Cloudflare OS read-only chat-history API.",
+      "contents": "Selected chat histories and TROM/context tool calls and outputs.",
+      "classification": "execution-trace",
+      "redactions": [
+        "Unrelated broad operational rows or SPM/SLA values are replaced with redaction notes listed in traces/trace-index.json."
+      ]
+    },
+    {
+      "path": "traces/selected/T4-C1-chat-42.json",
+      "sizeBytes": 102501,
+      "sha256": "27bed50e4156d2880a76175ccba8dab32c028d82ab8418ba7c2e41318c4e861a",
+      "source": "Cloudflare OS read-only chat-history API.",
+      "contents": "Selected chat histories and TROM/context tool calls and outputs.",
+      "classification": "execution-trace",
+      "redactions": [
+        "Unrelated broad operational rows or SPM/SLA values are replaced with redaction notes listed in traces/trace-index.json."
+      ]
+    },
+    {
+      "path": "traces/selected/T6-C1-chat-44.json",
+      "sizeBytes": 96289,
+      "sha256": "db55ee372d3c805a594742845d347e972132bf0a8584a499ef840f44f13df921",
+      "source": "Cloudflare OS read-only chat-history API.",
+      "contents": "Selected chat histories and TROM/context tool calls and outputs.",
+      "classification": "execution-trace",
+      "redactions": [
+        "Unrelated broad operational rows or SPM/SLA values are replaced with redaction notes listed in traces/trace-index.json."
+      ]
+    },
+    {
+      "path": "traces/selected/T7-C1-chat-45.json",
+      "sizeBytes": 74255,
+      "sha256": "509f7ff747690bf34ada7b342015d78c34ae0d89d42fc1b28b520bf8cf2a489b",
+      "source": "Cloudflare OS read-only chat-history API.",
+      "contents": "Selected chat histories and TROM/context tool calls and outputs.",
+      "classification": "execution-trace",
+      "redactions": [
+        "Unrelated broad operational rows or SPM/SLA values are replaced with redaction notes listed in traces/trace-index.json."
+      ]
+    },
+    {
+      "path": "traces/selected/T9-C2-chat-62.json",
+      "sizeBytes": 93795,
+      "sha256": "dbc7d42c7e6bce1343b664b2501e9d4fcf892e780ea35d992c4dfdee45655400",
+      "source": "Cloudflare OS read-only chat-history API.",
+      "contents": "Selected chat histories and TROM/context tool calls and outputs.",
+      "classification": "execution-trace",
+      "redactions": [
+        "Unrelated broad operational rows or SPM/SLA values are replaced with redaction notes listed in traces/trace-index.json."
+      ]
+    },
+    {
+      "path": "traces/trace-index.json",
+      "sizeBytes": 7428,
+      "sha256": "5a26c3275044598d477d08f0ab3357cad5d6d9df0a90cdf2dbc20b7d7d3d9643",
+      "source": "Cloudflare OS read-only chat-history API.",
+      "contents": "Selected chat histories and TROM/context tool calls and outputs.",
+      "classification": "execution-trace",
+      "redactions": [
+        "Unrelated broad operational rows or SPM/SLA values are replaced with redaction notes listed in traces/trace-index.json."
+      ]
+    },
+    {
+      "path": "traces/unlinked-matching-chats/UNLINKED-T8-C1-chat-49.json",
+      "sizeBytes": 92808,
+      "sha256": "5871e489ad99c1677d80876d6314e428f11006021261ef17a32cc045547decde",
+      "source": "Cloudflare OS read-only chat-history API.",
+      "contents": "Selected chat histories and TROM/context tool calls and outputs.",
+      "classification": "execution-trace",
+      "redactions": [
+        "Unrelated broad operational rows or SPM/SLA values are replaced with redaction notes listed in traces/trace-index.json."
+      ]
+    },
+    {
+      "path": "traces/unlinked-matching-chats/UNLINKED-T9-C2-chat-61.json",
+      "sizeBytes": 117015,
+      "sha256": "154e6146898f795c5cad9f536806ac8e84de447749dba696140d8ebe29687457",
+      "source": "Cloudflare OS read-only chat-history API.",
+      "contents": "Selected chat histories and TROM/context tool calls and outputs.",
+      "classification": "execution-trace",
+      "redactions": [
+        "Unrelated broad operational rows or SPM/SLA values are replaced with redaction notes listed in traces/trace-index.json."
+      ]
+    }
+  ],
+  "note": "The manifest lists every package file except itself. It contains no credentials or workspace ID."
+}

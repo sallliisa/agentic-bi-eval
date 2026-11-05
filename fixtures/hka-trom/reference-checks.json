@@ -1,0 +1,54 @@
+[
+  {
+    "name": "incidents.section_id",
+    "ok": true
+  },
+  {
+    "name": "inspection_schedule_assets.asset_id",
+    "ok": true
+  },
+  {
+    "name": "inspection_schedules.inspection_form_id",
+    "ok": true
+  },
+  {
+    "name": "inspection_schedules.section_id",
+    "ok": true
+  },
+  {
+    "name": "inspections.inspection_form_id",
+    "ok": true
+  },
+  {
+    "name": "inspections.section_id",
+    "ok": true
+  },
+  {
+    "name": "monitoring_transactions.activity_id",
+    "ok": true
+  },
+  {
+    "name": "monitoring_transactions.gate_id",
+    "ok": true
+  },
+  {
+    "name": "monitoring_transactions.section_id",
+    "ok": true
+  },
+  {
+    "name": "shift_schedules.section_id",
+    "ok": true
+  },
+  {
+    "name": "toll_traffic_volumes.vehicle_class_id",
+    "ok": true
+  },
+  {
+    "name": "toll_volume_revenue.gate_id",
+    "ok": true
+  },
+  {
+    "name": "toll_volume_revenue.section_id",
+    "ok": true
+  }
+]

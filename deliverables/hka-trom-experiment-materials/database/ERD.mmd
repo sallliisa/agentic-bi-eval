@@ -1,0 +1,61 @@
+flowchart LR
+  employees["employees"]
+  shift_schedules["shift_schedules"]
+  shift_schedule_personel["shift_schedule_personel"]
+  monitoring_transactions["monitoring_transactions"]
+  monitoring_transaction_details["monitoring_transaction_details"]
+  toll_volume_revenue["toll_volume_revenue"]
+  toll_traffic_volumes["toll_traffic_volumes"]
+  incidents["incidents"]
+  incident_actions["incident_actions"]
+  accident_reports["accident_reports"]
+  inspection_schedules["inspection_schedules"]
+  inspection_schedule_assets["inspection_schedule_assets"]
+  inspections["inspections"]
+  inspection_elements["inspection_elements"]
+  inspection_items["inspection_items"]
+  toll_sections["toll_sections"]
+  toll_gates["toll_gates"]
+  m_section_shifts["m_section_shifts"]
+  m_vehicle_class["m_vehicle_class"]
+  m_accident_attributes["m_accident_attributes"]
+  maintenance_asset_types["maintenance_asset_types"]
+  view_section_spm_sla["view_section_spm_sla"]
+  accident_reports -->|"incident_id → id"| incidents
+  accident_reports -->|"lane_closure_id → id"| m_accident_attributes
+  accident_reports -->|"weather_id → id"| m_accident_attributes
+  accident_reports -->|"wind_id → id"| m_accident_attributes
+  employees -->|"section_id → id"| toll_sections
+  incident_actions -->|"officer_id → id"| employees
+  incident_actions -->|"incident_id → id"| incidents
+  incidents -->|"source_id → id"| m_accident_attributes
+  incidents -->|"section_id → id"| toll_sections
+  inspection_elements -->|"inspection_id → id"| inspections
+  inspection_items -->|"pic_id → id"| employees
+  inspection_items -->|"inspection_element_id → id"| inspection_elements
+  inspection_schedule_assets -->|"schedule_id → id"| inspection_schedules
+  inspection_schedule_assets -->|"asset_id → id"| maintenance_asset_types
+  inspection_schedules -->|"section_id → id"| toll_sections
+  inspections -->|"inspector_id → id"| employees
+  inspections -->|"schedule_asset_id → id"| inspection_schedule_assets
+  inspections -->|"section_id → id"| toll_sections
+  m_section_shifts -->|"section_id → id"| toll_sections
+  maintenance_asset_types -->|"section_id → id"| toll_sections
+  monitoring_transaction_details -->|"transaction_id → id"| monitoring_transactions
+  monitoring_transactions -->|"officer_id → id"| employees
+  monitoring_transactions -->|"schedule_id → id"| shift_schedules
+  monitoring_transactions -->|"gate_id → id"| toll_gates
+  monitoring_transactions -->|"section_id → id"| toll_sections
+  shift_schedule_personel -->|"employee_id → id"| employees
+  shift_schedule_personel -->|"schedule_id → id"| shift_schedules
+  shift_schedules -->|"section_id → id"| toll_sections
+  toll_gates -->|"section_id → id"| toll_sections
+  toll_traffic_volumes -->|"vehicle_class_id → id"| m_vehicle_class
+  toll_traffic_volumes -->|"transaction_id → id"| toll_volume_revenue
+  toll_volume_revenue -->|"officer_id → id"| employees
+  toll_volume_revenue -->|"schedule_id → id"| shift_schedules
+  toll_volume_revenue -->|"gate_id → id"| toll_gates
+  toll_volume_revenue -->|"section_id → id"| toll_sections
+  inspections -.->|"schedule_id → id"| inspection_schedules
+  shift_schedules -.->|"shift_id → id"| m_section_shifts
+  view_section_spm_sla -.->|"section_id → id"| toll_sections

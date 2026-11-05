@@ -8,6 +8,8 @@
   },
   "scripts": {
     "dev": "turbo run dev --filter=@southneuhof/api --filter=@southneuhof/framework-web",
+    "dev:stack": "node scripts/dev-stack.mjs",
+    "dev:full": "node scripts/dev-stack.mjs --include-cloudflare-os-ui",
     "dev:web": "pnpm --filter @southneuhof/framework-web dev",
     "dev:api": "pnpm --filter @southneuhof/api dev",
     "build": "turbo run build --output-logs=errors-only --filter=@southneuhof/sprindle --filter=@southneuhof/sdk --filter=@southneuhof/utilities --filter=@southneuhof/loom --filter=@southneuhof/api --filter=@southneuhof/framework-web",

@@ -1,0 +1,353 @@
+{
+  "sourceDatabase": "hkatrom_bi",
+  "schema": "public",
+  "capturedAt": "2026-11-01T16:39:35.615458+00:00",
+  "sectionAliases": [
+    "BINSTA",
+    "INKIS",
+    "PEKBANG"
+  ],
+  "configuration": {
+    "toll_sections": [
+      {
+        "id": 1,
+        "short_name": "PEKBANG",
+        "section_name": "PEKANBARU -  BANGKINANG (PEKBANG)"
+      },
+      {
+        "id": 10,
+        "short_name": "BINSTA",
+        "section_name": "BINJAI STABAT (BINSTA)"
+      },
+      {
+        "id": 16,
+        "short_name": "INKIS",
+        "section_name": "INDRAPURA - KISARAN (INKIS)"
+      }
+    ],
+    "toll_gates": [
+      {
+        "id": 51,
+        "section_id": 16,
+        "gate_name": "Limapuluh",
+        "total_booth": 5,
+        "total_longbooth": 0
+      },
+      {
+        "id": 33,
+        "section_id": 1,
+        "gate_name": "Bangkinang",
+        "total_booth": 4,
+        "total_longbooth": 0
+      },
+      {
+        "id": 48,
+        "section_id": 10,
+        "gate_name": "Stabat",
+        "total_booth": 6,
+        "total_longbooth": 1
+      }
+    ],
+    "m_section_shifts": [
+      {
+        "id": 1,
+        "section_id": 1,
+        "shift": 1,
+        "active": true,
+        "default_start_hour": "07:00:00",
+        "default_end_hour": "15:00:00",
+        "do_routine_activity": true
+      },
+      {
+        "id": 64,
+        "section_id": 16,
+        "shift": 1,
+        "active": true,
+        "default_start_hour": "07:00:00",
+        "default_end_hour": "14:00:00",
+        "do_routine_activity": true
+      },
+      {
+        "id": 2,
+        "section_id": 1,
+        "shift": 2,
+        "active": true,
+        "default_start_hour": "15:00:00",
+        "default_end_hour": "23:00:00",
+        "do_routine_activity": true
+      },
+      {
+        "id": 28,
+        "section_id": 10,
+        "shift": 1,
+        "active": true,
+        "default_start_hour": "07:00:00",
+        "default_end_hour": "14:00:00",
+        "do_routine_activity": true
+      }
+    ],
+    "m_vehicle_class": [
+      {
+        "id": 1,
+        "name": "Gol. 1",
+        "active": true
+      },
+      {
+        "id": 2,
+        "name": "Gol. 2",
+        "active": true
+      },
+      {
+        "id": 3,
+        "name": "Gol. 3",
+        "active": true
+      },
+      {
+        "id": 4,
+        "name": "Gol. 4",
+        "active": true
+      },
+      {
+        "id": 5,
+        "name": "Gol. 5",
+        "active": true
+      }
+    ],
+    "m_accident_attributes": [
+      {
+        "id": 49,
+        "name": "Mengantuk"
+      },
+      {
+        "id": 50,
+        "name": "Kelalaian Pengemudi"
+      },
+      {
+        "id": 51,
+        "name": "Kondisi Jalan"
+      }
+    ],
+    "maintenance_asset_types": [
+      {
+        "id": 1,
+        "name": "Bahu"
+      },
+      {
+        "id": 2,
+        "name": "Lajur 1"
+      }
+    ],
+    "view_section_spm_sla": [
+      {
+        "section_id": 1,
+        "spm_id": 18,
+        "code": "kecepatan-transaksi-1",
+        "indicator": "Kecepatan transaksi rata-rata",
+        "sub_indicator": "Gerbang tol sistem terbuka",
+        "operator": "<=",
+        "spm_parameter": 6,
+        "sla_parameter": 6,
+        "is_applicable": true,
+        "unit": "second",
+        "spm_specification": "<= 6 Detik",
+        "sla_specification": "<= 6 Detik"
+      },
+      {
+        "section_id": 1,
+        "spm_id": 19,
+        "code": "kecepatan-transaksi-2",
+        "indicator": "Kecepatan transaksi rata-rata",
+        "sub_indicator": "Gerbang tol sistem tertutup (Gardu Masuk)",
+        "operator": "<=",
+        "spm_parameter": 5,
+        "sla_parameter": 5,
+        "is_applicable": true,
+        "unit": "second",
+        "spm_specification": "<= 5 Detik",
+        "sla_specification": "<= 5 Detik"
+      },
+      {
+        "section_id": 1,
+        "spm_id": 20,
+        "code": "kecepatan-transaksi-3",
+        "indicator": "Kecepatan transaksi rata-rata",
+        "sub_indicator": "Gerbang tol sistem tertutup (Gardu Keluar)",
+        "operator": "<=",
+        "spm_parameter": 9,
+        "sla_parameter": 9,
+        "is_applicable": true,
+        "unit": "second",
+        "spm_specification": "<= 9 Detik",
+        "sla_specification": "<= 9 Detik"
+      },
+      {
+        "section_id": 1,
+        "spm_id": 21,
+        "code": "kecepatan-transaksi-4",
+        "indicator": "Kecepatan transaksi rata-rata",
+        "sub_indicator": "GTO (Gardu Tol Ambil Kartu)",
+        "operator": "<=",
+        "spm_parameter": 4,
+        "sla_parameter": 4,
+        "is_applicable": true,
+        "unit": "second",
+        "spm_specification": "<= 4 Detik",
+        "sla_specification": "<= 4 Detik"
+      },
+      {
+        "section_id": 1,
+        "spm_id": 22,
+        "code": "kecepatan-transaksi-5",
+        "indicator": "Kecepatan transaksi rata-rata",
+        "sub_indicator": "Gardu Tol Transaksi",
+        "operator": "<=",
+        "spm_parameter": 5,
+        "sla_parameter": 5,
+        "is_applicable": true,
+        "unit": "second",
+        "spm_specification": "<= 5 Detik",
+        "sla_specification": "<= 5 Detik"
+      },
+      {
+        "section_id": 10,
+        "spm_id": 18,
+        "code": "kecepatan-transaksi-1",
+        "indicator": "Kecepatan transaksi rata-rata",
+        "sub_indicator": "Gerbang tol sistem terbuka",
+        "operator": "<=",
+        "spm_parameter": 6,
+        "sla_parameter": null,
+        "is_applicable": false,
+        "unit": "second",
+        "spm_specification": "<= 6 Detik",
+        "sla_specification": null
+      },
+      {
+        "section_id": 10,
+        "spm_id": 19,
+        "code": "kecepatan-transaksi-2",
+        "indicator": "Kecepatan transaksi rata-rata",
+        "sub_indicator": "Gerbang tol sistem tertutup (Gardu Masuk)",
+        "operator": "<=",
+        "spm_parameter": 5,
+        "sla_parameter": null,
+        "is_applicable": false,
+        "unit": "second",
+        "spm_specification": "<= 5 Detik",
+        "sla_specification": null
+      },
+      {
+        "section_id": 10,
+        "spm_id": 20,
+        "code": "kecepatan-transaksi-3",
+        "indicator": "Kecepatan transaksi rata-rata",
+        "sub_indicator": "Gerbang tol sistem tertutup (Gardu Keluar)",
+        "operator": "<=",
+        "spm_parameter": 9,
+        "sla_parameter": 9,
+        "is_applicable": true,
+        "unit": "second",
+        "spm_specification": "<= 9 Detik",
+        "sla_specification": "<= 9 Detik"
+      },
+      {
+        "section_id": 10,
+        "spm_id": 21,
+        "code": "kecepatan-transaksi-4",
+        "indicator": "Kecepatan transaksi rata-rata",
+        "sub_indicator": "GTO (Gardu Tol Ambil Kartu)",
+        "operator": "<=",
+        "spm_parameter": 4,
+        "sla_parameter": null,
+        "is_applicable": false,
+        "unit": "second",
+        "spm_specification": "<= 4 Detik",
+        "sla_specification": null
+      },
+      {
+        "section_id": 10,
+        "spm_id": 22,
+        "code": "kecepatan-transaksi-5",
+        "indicator": "Kecepatan transaksi rata-rata",
+        "sub_indicator": "Gardu Tol Transaksi",
+        "operator": "<=",
+        "spm_parameter": 5,
+        "sla_parameter": null,
+        "is_applicable": false,
+        "unit": "second",
+        "spm_specification": "<= 5 Detik",
+        "sla_specification": null
+      },
+      {
+        "section_id": 16,
+        "spm_id": 18,
+        "code": "kecepatan-transaksi-1",
+        "indicator": "Kecepatan transaksi rata-rata",
+        "sub_indicator": "Gerbang tol sistem terbuka",
+        "operator": "<=",
+        "spm_parameter": 6,
+        "sla_parameter": null,
+        "is_applicable": false,
+        "unit": "second",
+        "spm_specification": "<= 6 Detik",
+        "sla_specification": null
+      },
+      {
+        "section_id": 16,
+        "spm_id": 19,
+        "code": "kecepatan-transaksi-2",
+        "indicator": "Kecepatan transaksi rata-rata",
+        "sub_indicator": "Gerbang tol sistem tertutup (Gardu Masuk)",
+        "operator": "<=",
+        "spm_parameter": 5,
+        "sla_parameter": null,
+        "is_applicable": false,
+        "unit": "second",
+        "spm_specification": "<= 5 Detik",
+        "sla_specification": null
+      },
+      {
+        "section_id": 16,
+        "spm_id": 20,
+        "code": "kecepatan-transaksi-3",
+        "indicator": "Kecepatan transaksi rata-rata",
+        "sub_indicator": "Gerbang tol sistem tertutup (Gardu Keluar)",
+        "operator": "<=",
+        "spm_parameter": 9,
+        "sla_parameter": null,
+        "is_applicable": false,
+        "unit": "second",
+        "spm_specification": "<= 9 Detik",
+        "sla_specification": null
+      },
+      {
+        "section_id": 16,
+        "spm_id": 21,
+        "code": "kecepatan-transaksi-4",
+        "indicator": "Kecepatan transaksi rata-rata",
+        "sub_indicator": "GTO (Gardu Tol Ambil Kartu)",
+        "operator": "<=",
+        "spm_parameter": 4,
+        "sla_parameter": null,
+        "is_applicable": false,
+        "unit": "second",
+        "spm_specification": "<= 4 Detik",
+        "sla_specification": null
+      },
+      {
+        "section_id": 16,
+        "spm_id": 22,
+        "code": "kecepatan-transaksi-5",
+        "indicator": "Kecepatan transaksi rata-rata",
+        "sub_indicator": "Gardu Tol Transaksi",
+        "operator": "<=",
+        "spm_parameter": 5,
+        "sla_parameter": null,
+        "is_applicable": false,
+        "unit": "second",
+        "spm_specification": "<= 5 Detik",
+        "sla_specification": null
+      }
+    ]
+  }
+}

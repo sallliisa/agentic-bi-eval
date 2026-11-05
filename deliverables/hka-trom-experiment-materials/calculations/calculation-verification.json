@@ -1,0 +1,99 @@
+{
+  "checkedAt": "2026-11-01T16:40:56.250618+00:00",
+  "method": "The packaged reproduce.py used only case definitions, controlled fixture rows, and filtered current master/configuration data. It did not read the saved expected outputs. Its calculated JSON results were then compared with the Carta expected and actual results.",
+  "caseCount": 15,
+  "allCalculationsMatchSavedExpected": true,
+  "allSavedActualResponsesMatchExpected": true,
+  "cases": [
+    {
+      "caseId": "T1-C1",
+      "calculatorMatchesSavedExpected": true,
+      "savedActualMatchesExpected": true,
+      "savedVerdict": "PASS"
+    },
+    {
+      "caseId": "T1-C2",
+      "calculatorMatchesSavedExpected": true,
+      "savedActualMatchesExpected": true,
+      "savedVerdict": "PASS"
+    },
+    {
+      "caseId": "T2-C1",
+      "calculatorMatchesSavedExpected": true,
+      "savedActualMatchesExpected": true,
+      "savedVerdict": "PASS"
+    },
+    {
+      "caseId": "T3-C1",
+      "calculatorMatchesSavedExpected": true,
+      "savedActualMatchesExpected": true,
+      "savedVerdict": "PASS"
+    },
+    {
+      "caseId": "T4-C1",
+      "calculatorMatchesSavedExpected": true,
+      "savedActualMatchesExpected": true,
+      "savedVerdict": "PASS"
+    },
+    {
+      "caseId": "T5-C1",
+      "calculatorMatchesSavedExpected": true,
+      "savedActualMatchesExpected": true,
+      "savedVerdict": "PASS"
+    },
+    {
+      "caseId": "T6-C1",
+      "calculatorMatchesSavedExpected": true,
+      "savedActualMatchesExpected": true,
+      "savedVerdict": "PASS"
+    },
+    {
+      "caseId": "T7-C1",
+      "calculatorMatchesSavedExpected": true,
+      "savedActualMatchesExpected": true,
+      "savedVerdict": "PASS"
+    },
+    {
+      "caseId": "T7-C2",
+      "calculatorMatchesSavedExpected": true,
+      "savedActualMatchesExpected": true,
+      "savedVerdict": "PASS"
+    },
+    {
+      "caseId": "T7-C3",
+      "calculatorMatchesSavedExpected": true,
+      "savedActualMatchesExpected": true,
+      "savedVerdict": "PASS"
+    },
+    {
+      "caseId": "T7-C4",
+      "calculatorMatchesSavedExpected": true,
+      "savedActualMatchesExpected": true,
+      "savedVerdict": "PASS"
+    },
+    {
+      "caseId": "T8-C1",
+      "calculatorMatchesSavedExpected": true,
+      "savedActualMatchesExpected": true,
+      "savedVerdict": "PASS"
+    },
+    {
+      "caseId": "T8-C2",
+      "calculatorMatchesSavedExpected": true,
+      "savedActualMatchesExpected": true,
+      "savedVerdict": "PASS"
+    },
+    {
+      "caseId": "T9-C1",
+      "calculatorMatchesSavedExpected": true,
+      "savedActualMatchesExpected": true,
+      "savedVerdict": "PASS"
+    },
+    {
+      "caseId": "T9-C2",
+      "calculatorMatchesSavedExpected": true,
+      "savedActualMatchesExpected": true,
+      "savedVerdict": "PASS"
+    }
+  ]
+}

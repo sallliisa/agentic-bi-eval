@@ -1,0 +1,99 @@
+{
+  "retrievedAt": "2026-11-03T08:26:12.899Z",
+  "source": "Cloudflare OS through Carta API management client",
+  "scope": "Collections enabled for the current Cloudflare OS account",
+  "collectionCount": 1,
+  "itemCount": 7,
+  "collections": [
+    {
+      "id": "9ef7e2e7-9c04-4f84-9923-d2b07be88722",
+      "title": "HKA TROM Business Context",
+      "description": "Interpret HKA TROM operational data and analytical requests involving transaction monitoring, traffic volume and LHR, incidents and accident causes, inspection damage, or transaction SPM/SLA compliance.",
+      "icon": null,
+      "visibility": "private",
+      "source": "web",
+      "documentCount": 7,
+      "createdAt": "2026-10-29T19:00:25.104Z",
+      "updatedAt": "2026-10-29T19:00:29.063Z",
+      "items": [
+        {
+          "path": "SKILL.md",
+          "name": "SKILL.md",
+          "description": "Interpret HKA TROM operational data and analytical requests involving transaction monitoring, traffic volume and LHR, incidents and accident causes, inspection damage, or transaction SPM/SLA compliance.",
+          "contentType": "text/markdown",
+          "skillName": "hka-trom-business-context",
+          "lastUpdated": "2026-10-29T19:00:25.721Z",
+          "archivePath": "collection-9ef7e2e7-9c04-4f84-9923-d2b07be88722/SKILL.md",
+          "bytes": 3155,
+          "sha256": "fbbb18aac305104a85c4fe891188563a1b5b96c92a169f39811885cfbdc9b187"
+        },
+        {
+          "path": "references/incidents.md",
+          "name": "incidents.md",
+          "description": "incidents",
+          "contentType": "text/markdown",
+          "skillName": null,
+          "lastUpdated": "2026-10-29T19:00:26.318Z",
+          "archivePath": "collection-9ef7e2e7-9c04-4f84-9923-d2b07be88722/references/incidents.md",
+          "bytes": 2507,
+          "sha256": "a86a4056353b42df6a100ce0f7d82a084d7e3d76194bf6f49b969598692a9297"
+        },
+        {
+          "path": "references/inspections.md",
+          "name": "inspections.md",
+          "description": "inspections",
+          "contentType": "text/markdown",
+          "skillName": null,
+          "lastUpdated": "2026-10-29T19:00:26.815Z",
+          "archivePath": "collection-9ef7e2e7-9c04-4f84-9923-d2b07be88722/references/inspections.md",
+          "bytes": 2800,
+          "sha256": "0b8fe3214c4c128b401d9022610bf3970b41f2067bfdb0bd093132e0bf1424fb"
+        },
+        {
+          "path": "references/spm-sla.md",
+          "name": "spm-sla.md",
+          "description": "spm-sla",
+          "contentType": "text/markdown",
+          "skillName": null,
+          "lastUpdated": "2026-10-29T19:00:27.364Z",
+          "archivePath": "collection-9ef7e2e7-9c04-4f84-9923-d2b07be88722/references/spm-sla.md",
+          "bytes": 4513,
+          "sha256": "9fb49273b1350e2cea6a2237871e2dc3c67d1d070b711d7ab8337b2338ebf409"
+        },
+        {
+          "path": "references/terminology.md",
+          "name": "terminology.md",
+          "description": "terminology",
+          "contentType": "text/markdown",
+          "skillName": null,
+          "lastUpdated": "2026-10-29T19:00:28.046Z",
+          "archivePath": "collection-9ef7e2e7-9c04-4f84-9923-d2b07be88722/references/terminology.md",
+          "bytes": 3156,
+          "sha256": "59ab11bff0871962d8a5f99c29acfbb58a985ed4299a2afb580d51ef7acef456"
+        },
+        {
+          "path": "references/traffic.md",
+          "name": "traffic.md",
+          "description": "traffic",
+          "contentType": "text/markdown",
+          "skillName": null,
+          "lastUpdated": "2026-10-29T19:00:28.570Z",
+          "archivePath": "collection-9ef7e2e7-9c04-4f84-9923-d2b07be88722/references/traffic.md",
+          "bytes": 2192,
+          "sha256": "fd2d6a633f15919cb80cb7edd08ad172bc231f9bf8aa5e316dea37fb8cdbd455"
+        },
+        {
+          "path": "references/transactions.md",
+          "name": "transactions.md",
+          "description": "transactions",
+          "contentType": "text/markdown",
+          "skillName": null,
+          "lastUpdated": "2026-10-29T19:00:29.063Z",
+          "archivePath": "collection-9ef7e2e7-9c04-4f84-9923-d2b07be88722/references/transactions.md",
+          "bytes": 1975,
+          "sha256": "e18ed1a2c030c7be43a80e21bb30c787156746486cd3af4da37a82e06e463157"
+        }
+      ]
+    }
+  ]
+}

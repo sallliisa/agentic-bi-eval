@@ -1,0 +1,63 @@
+{
+  "createdAt": "2026-11-04T19:57:33.037Z",
+  "package": "HKA TROM requested FINAL run exports",
+  "evidenceMode": "Read-only Carta retrieval; parsed JSON and summary counts are derived from saved values.",
+  "fileCount": 6,
+  "files": [
+    {
+      "path": "README.md",
+      "sizeBytes": 2250,
+      "sha256": "a6c55da3fd8a62c2d5c1f9fec9bdd710381269cc4db866d1e939f0354226fc80",
+      "source": "Written for this package.",
+      "contents": "Export guide and run summary.",
+      "classification": "documentation",
+      "redactions": []
+    },
+    {
+      "path": "runs/run-inventory.json",
+      "sizeBytes": 4494,
+      "sha256": "0fc36f1d0bef1069e6bd92fd1b84f882fd810f6cd8627f8e90ce9c8bce888e2a",
+      "source": "Read-only Carta test_runs and test_run_results snapshot.",
+      "contents": "Requested run inventory and summary counts.",
+      "classification": "execution-inventory",
+      "redactions": []
+    },
+    {
+      "path": "runs/00fc2064-b38b-40f4-afb1-e739c853adc7.json",
+      "sizeBytes": 832934,
+      "sha256": "0896cb88d6ba7f4ebe27209694603ade1e75e6bee10bf856c57aed5ad6564c64",
+      "source": "Read-only Carta test_runs and test_run_results snapshot.",
+      "contents": "Run metadata and saved repetition results with raw and parsed values.",
+      "classification": "execution-record",
+      "redactions": []
+    },
+    {
+      "path": "runs/91d09b19-6bda-4149-892a-351879c1c4c8.json",
+      "sizeBytes": 833746,
+      "sha256": "d5504c6fadc73e8102225a2439d84fc0afc6435518d707d8753797f180f3ce2e",
+      "source": "Read-only Carta test_runs and test_run_results snapshot.",
+      "contents": "Run metadata and saved repetition results with raw and parsed values.",
+      "classification": "execution-record",
+      "redactions": []
+    },
+    {
+      "path": "runs/d3f70d6e-2cb0-43b9-8a64-6f67328ccfa8.json",
+      "sizeBytes": 832241,
+      "sha256": "dacac565b77a88f20f276d48e654119f1f4b8a5ee70cd3f49cabcf1dde75d937",
+      "source": "Read-only Carta test_runs and test_run_results snapshot.",
+      "contents": "Run metadata and saved repetition results with raw and parsed values.",
+      "classification": "execution-record",
+      "redactions": []
+    },
+    {
+      "path": "runs/0579fadf-0d14-4c49-917c-88829c7874e0.json",
+      "sizeBytes": 834385,
+      "sha256": "d314533fc6503d4774be1975d345ee17697603a0ccb153b4caecbea323bc7776",
+      "source": "Read-only Carta test_runs and test_run_results snapshot.",
+      "contents": "Run metadata and saved repetition results with raw and parsed values.",
+      "classification": "execution-record",
+      "redactions": []
+    }
+  ],
+  "note": "The manifest lists every package file except itself. No saved prompt or response was changed."
+}

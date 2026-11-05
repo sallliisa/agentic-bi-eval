@@ -1,0 +1,39 @@
+{
+  "runId": "24afb5a8-d776-4e96-b4ca-111f2ffc0646",
+  "setId": "b5d5cf86-d8f4-4698-b2d0-a2f6daa81036",
+  "setName": "Set 1",
+  "status": "completed",
+  "runError": null,
+  "startedAt": "2026-10-27 07:26:50.014",
+  "finishedAt": "2026-10-27 07:26:57.629",
+  "createdAt": "2026-10-27 07:26:50.014",
+  "timestampNote": "The Carta columns are timestamp without time zone. The exact stored text is preserved; no time zone conversion was applied.",
+  "category": "unrelated-single-case-run",
+  "summary": {
+    "resultCount": 1,
+    "passCount": 1,
+    "failCount": 0,
+    "pendingCount": 0,
+    "chatRefsPresent": 1
+  },
+  "results": [
+    {
+      "resultRowId": "5159301b-741f-4894-a784-41160a51098d",
+      "caseId": "Test",
+      "caseName": "Test",
+      "position": 0,
+      "prompt": "Hi! Please answer with just the word \"Hello\".",
+      "expectedResultRaw": "Hello",
+      "expectedResult": null,
+      "expectedResultIsJson": false,
+      "actualResponseRaw": "Hello",
+      "actualResponse": null,
+      "actualResponseIsJson": false,
+      "verdict": "PASS",
+      "error": null,
+      "chatRef": "66",
+      "caseStartedAt": "2026-10-27 07:26:51.031",
+      "caseFinishedAt": "2026-10-27 07:26:57.605"
+    }
+  ]
+}

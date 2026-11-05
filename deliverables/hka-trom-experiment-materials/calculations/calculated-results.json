@@ -1,0 +1,1878 @@
+{
+  "sourceDatabase": "hkatrom_bi",
+  "schema": "public",
+  "inputSnapshot": "2026-11-01T16:39:35.615458+00:00",
+  "results": [
+    {
+      "caseId": "T1-C1",
+      "result": {
+        "section_id": 1,
+        "section_name": "PEKANBARU -  BANGKINANG (PEKBANG)",
+        "period": {
+          "start": "2026-02-01",
+          "end": "2026-02-07"
+        },
+        "average_transaction_duration": 23.09,
+        "unit": "second"
+      }
+    },
+    {
+      "caseId": "T1-C2",
+      "result": {
+        "section_id": 10,
+        "section_name": "BINJAI STABAT (BINSTA)",
+        "period": {
+          "start": "2030-01-25",
+          "end": "2030-01-30"
+        },
+        "average_transaction_duration": 8.86,
+        "unit": "second"
+      }
+    },
+    {
+      "caseId": "T2-C1",
+      "result": {
+        "section_id": 1,
+        "section_name": "PEKANBARU -  BANGKINANG (PEKBANG)",
+        "period": {
+          "start": "2030-03-01",
+          "end": "2030-03-07"
+        },
+        "total_volume": 67,
+        "lhr": 10,
+        "by_vehicle_class": [
+          {
+            "vehicle_class_id": 1,
+            "vehicle_class_name": "Gol. 1",
+            "volume": 45
+          },
+          {
+            "vehicle_class_id": 2,
+            "vehicle_class_name": "Gol. 2",
+            "volume": 18
+          },
+          {
+            "vehicle_class_id": 3,
+            "vehicle_class_name": "Gol. 3",
+            "volume": 3
+          },
+          {
+            "vehicle_class_id": 4,
+            "vehicle_class_name": "Gol. 4",
+            "volume": 0
+          },
+          {
+            "vehicle_class_id": 5,
+            "vehicle_class_name": "Gol. 5",
+            "volume": 1
+          }
+        ]
+      }
+    },
+    {
+      "caseId": "T3-C1",
+      "result": {
+        "section_id": 1,
+        "section_name": "PEKANBARU -  BANGKINANG (PEKBANG)",
+        "months": [
+          {
+            "month": "2026-01",
+            "by_vehicle_class": [
+              {
+                "vehicle_class_id": 1,
+                "vehicle_class_name": "Gol. 1",
+                "volume": 80,
+                "lhr": 3
+              },
+              {
+                "vehicle_class_id": 2,
+                "vehicle_class_name": "Gol. 2",
+                "volume": 20,
+                "lhr": 1
+              },
+              {
+                "vehicle_class_id": 3,
+                "vehicle_class_name": "Gol. 3",
+                "volume": 4,
+                "lhr": 0
+              },
+              {
+                "vehicle_class_id": 4,
+                "vehicle_class_name": "Gol. 4",
+                "volume": 0,
+                "lhr": 0
+              },
+              {
+                "vehicle_class_id": 5,
+                "vehicle_class_name": "Gol. 5",
+                "volume": 0,
+                "lhr": 0
+              }
+            ]
+          },
+          {
+            "month": "2026-02",
+            "by_vehicle_class": [
+              {
+                "vehicle_class_id": 1,
+                "vehicle_class_name": "Gol. 1",
+                "volume": 30,
+                "lhr": 1
+              },
+              {
+                "vehicle_class_id": 2,
+                "vehicle_class_name": "Gol. 2",
+                "volume": 15,
+                "lhr": 1
+              },
+              {
+                "vehicle_class_id": 3,
+                "vehicle_class_name": "Gol. 3",
+                "volume": 1,
+                "lhr": 0
+              },
+              {
+                "vehicle_class_id": 4,
+                "vehicle_class_name": "Gol. 4",
+                "volume": 0,
+                "lhr": 0
+              },
+              {
+                "vehicle_class_id": 5,
+                "vehicle_class_name": "Gol. 5",
+                "volume": 0,
+                "lhr": 0
+              }
+            ]
+          },
+          {
+            "month": "2026-03",
+            "by_vehicle_class": [
+              {
+                "vehicle_class_id": 1,
+                "vehicle_class_name": "Gol. 1",
+                "volume": 45,
+                "lhr": 1
+              },
+              {
+                "vehicle_class_id": 2,
+                "vehicle_class_name": "Gol. 2",
+                "volume": 18,
+                "lhr": 1
+              },
+              {
+                "vehicle_class_id": 3,
+                "vehicle_class_name": "Gol. 3",
+                "volume": 3,
+                "lhr": 0
+              },
+              {
+                "vehicle_class_id": 4,
+                "vehicle_class_name": "Gol. 4",
+                "volume": 0,
+                "lhr": 0
+              },
+              {
+                "vehicle_class_id": 5,
+                "vehicle_class_name": "Gol. 5",
+                "volume": 1,
+                "lhr": 0
+              }
+            ]
+          },
+          {
+            "month": "2026-04",
+            "by_vehicle_class": [
+              {
+                "vehicle_class_id": 1,
+                "vehicle_class_name": "Gol. 1",
+                "volume": 70,
+                "lhr": 2
+              },
+              {
+                "vehicle_class_id": 2,
+                "vehicle_class_name": "Gol. 2",
+                "volume": 10,
+                "lhr": 0
+              },
+              {
+                "vehicle_class_id": 3,
+                "vehicle_class_name": "Gol. 3",
+                "volume": 2,
+                "lhr": 0
+              },
+              {
+                "vehicle_class_id": 4,
+                "vehicle_class_name": "Gol. 4",
+                "volume": 0,
+                "lhr": 0
+              },
+              {
+                "vehicle_class_id": 5,
+                "vehicle_class_name": "Gol. 5",
+                "volume": 1,
+                "lhr": 0
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "caseId": "T4-C1",
+      "result": {
+        "section_id": 1,
+        "section_name": "PEKANBARU -  BANGKINANG (PEKBANG)",
+        "period": {
+          "start": "2026-04-01",
+          "end": "2026-04-30"
+        },
+        "total_incidents": 4,
+        "under_investigation_count": 3,
+        "closed_count": 1,
+        "unresolved_incidents": [
+          {
+            "incident_id": 1600500001,
+            "incident_date": "2026-04-02",
+            "status": "under_investigation"
+          },
+          {
+            "incident_id": 1600500002,
+            "incident_date": "2026-04-08",
+            "status": "under_investigation"
+          },
+          {
+            "incident_id": 1600500004,
+            "incident_date": "2026-04-21",
+            "status": "under_investigation"
+          }
+        ]
+      }
+    },
+    {
+      "caseId": "T5-C1",
+      "result": {
+        "section_id": 1,
+        "section_name": "PEKANBARU -  BANGKINANG (PEKBANG)",
+        "period": {
+          "start": "2030-04-01",
+          "end": "2030-04-30"
+        },
+        "total_cause_assignments": 5,
+        "causes": [
+          {
+            "cause_id": 49,
+            "cause_name": "Mengantuk",
+            "assignment_count": 4
+          },
+          {
+            "cause_id": 50,
+            "cause_name": "Kelalaian Pengemudi",
+            "assignment_count": 1
+          }
+        ]
+      }
+    },
+    {
+      "caseId": "T6-C1",
+      "result": {
+        "section_id": 1,
+        "section_name": "PEKANBARU -  BANGKINANG (PEKBANG)",
+        "period": {
+          "start": "2026-05-01",
+          "end": "2026-05-31"
+        },
+        "damaged_item_count": 4,
+        "by_damage_category": {
+          "r1": 1,
+          "r2": 1,
+          "r3": 1
+        },
+        "by_repair_priority": {
+          "p1": 1,
+          "p2": 2
+        },
+        "by_asset": [
+          {
+            "asset_id": 1,
+            "asset_name": "Bahu",
+            "damaged_item_count": 3
+          },
+          {
+            "asset_id": 2,
+            "asset_name": "Lajur 1",
+            "damaged_item_count": 1
+          }
+        ]
+      }
+    },
+    {
+      "caseId": "T7-C1",
+      "result": {
+        "monitoring_transaction_id": 1600800001,
+        "section_id": 1,
+        "section_name": "PEKANBARU -  BANGKINANG (PEKBANG)",
+        "gate_id": 33,
+        "gate_name": "Bangkinang",
+        "date": "2026-06-01",
+        "shift": 1,
+        "evaluations": [
+          {
+            "booth_number": 1,
+            "spm_code": "kecepatan-transaksi-1",
+            "average_transaction_duration": 4.0,
+            "spm_parameter": 6,
+            "spm_passed": true,
+            "sla_applicable": true,
+            "sla_parameter": 6,
+            "sla_passed": true
+          },
+          {
+            "booth_number": 1,
+            "spm_code": "kecepatan-transaksi-2",
+            "average_transaction_duration": 4.0,
+            "spm_parameter": 5,
+            "spm_passed": true,
+            "sla_applicable": true,
+            "sla_parameter": 5,
+            "sla_passed": true
+          },
+          {
+            "booth_number": 1,
+            "spm_code": "kecepatan-transaksi-3",
+            "average_transaction_duration": 4.0,
+            "spm_parameter": 9,
+            "spm_passed": true,
+            "sla_applicable": true,
+            "sla_parameter": 9,
+            "sla_passed": true
+          },
+          {
+            "booth_number": 1,
+            "spm_code": "kecepatan-transaksi-4",
+            "average_transaction_duration": 4.0,
+            "spm_parameter": 4,
+            "spm_passed": true,
+            "sla_applicable": true,
+            "sla_parameter": 4,
+            "sla_passed": true
+          },
+          {
+            "booth_number": 1,
+            "spm_code": "kecepatan-transaksi-5",
+            "average_transaction_duration": 4.0,
+            "spm_parameter": 5,
+            "spm_passed": true,
+            "sla_applicable": true,
+            "sla_parameter": 5,
+            "sla_passed": true
+          },
+          {
+            "booth_number": 2,
+            "spm_code": "kecepatan-transaksi-1",
+            "average_transaction_duration": 5.0,
+            "spm_parameter": 6,
+            "spm_passed": true,
+            "sla_applicable": true,
+            "sla_parameter": 6,
+            "sla_passed": true
+          },
+          {
+            "booth_number": 2,
+            "spm_code": "kecepatan-transaksi-2",
+            "average_transaction_duration": 5.0,
+            "spm_parameter": 5,
+            "spm_passed": true,
+            "sla_applicable": true,
+            "sla_parameter": 5,
+            "sla_passed": true
+          },
+          {
+            "booth_number": 2,
+            "spm_code": "kecepatan-transaksi-3",
+            "average_transaction_duration": 5.0,
+            "spm_parameter": 9,
+            "spm_passed": true,
+            "sla_applicable": true,
+            "sla_parameter": 9,
+            "sla_passed": true
+          },
+          {
+            "booth_number": 2,
+            "spm_code": "kecepatan-transaksi-4",
+            "average_transaction_duration": 5.0,
+            "spm_parameter": 4,
+            "spm_passed": false,
+            "sla_applicable": true,
+            "sla_parameter": 4,
+            "sla_passed": false
+          },
+          {
+            "booth_number": 2,
+            "spm_code": "kecepatan-transaksi-5",
+            "average_transaction_duration": 5.0,
+            "spm_parameter": 5,
+            "spm_passed": true,
+            "sla_applicable": true,
+            "sla_parameter": 5,
+            "sla_passed": true
+          },
+          {
+            "booth_number": 3,
+            "spm_code": "kecepatan-transaksi-1",
+            "average_transaction_duration": 6.0,
+            "spm_parameter": 6,
+            "spm_passed": false,
+            "sla_applicable": true,
+            "sla_parameter": 6,
+            "sla_passed": false
+          },
+          {
+            "booth_number": 3,
+            "spm_code": "kecepatan-transaksi-2",
+            "average_transaction_duration": 6.0,
+            "spm_parameter": 5,
+            "spm_passed": false,
+            "sla_applicable": true,
+            "sla_parameter": 5,
+            "sla_passed": false
+          },
+          {
+            "booth_number": 3,
+            "spm_code": "kecepatan-transaksi-3",
+            "average_transaction_duration": 6.0,
+            "spm_parameter": 9,
+            "spm_passed": true,
+            "sla_applicable": true,
+            "sla_parameter": 9,
+            "sla_passed": true
+          },
+          {
+            "booth_number": 3,
+            "spm_code": "kecepatan-transaksi-4",
+            "average_transaction_duration": 6.0,
+            "spm_parameter": 4,
+            "spm_passed": false,
+            "sla_applicable": true,
+            "sla_parameter": 4,
+            "sla_passed": false
+          },
+          {
+            "booth_number": 3,
+            "spm_code": "kecepatan-transaksi-5",
+            "average_transaction_duration": 6.0,
+            "spm_parameter": 5,
+            "spm_passed": false,
+            "sla_applicable": true,
+            "sla_parameter": 5,
+            "sla_passed": false
+          },
+          {
+            "booth_number": 4,
+            "spm_code": "kecepatan-transaksi-1",
+            "average_transaction_duration": 9.0,
+            "spm_parameter": 6,
+            "spm_passed": false,
+            "sla_applicable": true,
+            "sla_parameter": 6,
+            "sla_passed": false
+          },
+          {
+            "booth_number": 4,
+            "spm_code": "kecepatan-transaksi-2",
+            "average_transaction_duration": 9.0,
+            "spm_parameter": 5,
+            "spm_passed": false,
+            "sla_applicable": true,
+            "sla_parameter": 5,
+            "sla_passed": false
+          },
+          {
+            "booth_number": 4,
+            "spm_code": "kecepatan-transaksi-3",
+            "average_transaction_duration": 9.0,
+            "spm_parameter": 9,
+            "spm_passed": true,
+            "sla_applicable": true,
+            "sla_parameter": 9,
+            "sla_passed": true
+          },
+          {
+            "booth_number": 4,
+            "spm_code": "kecepatan-transaksi-4",
+            "average_transaction_duration": 9.0,
+            "spm_parameter": 4,
+            "spm_passed": false,
+            "sla_applicable": true,
+            "sla_parameter": 4,
+            "sla_passed": false
+          },
+          {
+            "booth_number": 4,
+            "spm_code": "kecepatan-transaksi-5",
+            "average_transaction_duration": 9.0,
+            "spm_parameter": 5,
+            "spm_passed": false,
+            "sla_applicable": true,
+            "sla_parameter": 5,
+            "sla_passed": false
+          }
+        ]
+      }
+    },
+    {
+      "caseId": "T7-C2",
+      "result": {
+        "monitoring_transaction_id": 1600900001,
+        "section_id": 10,
+        "section_name": "BINJAI STABAT (BINSTA)",
+        "gate_id": 48,
+        "gate_name": "Stabat",
+        "date": "2030-06-02",
+        "shift": 1,
+        "evaluations": [
+          {
+            "booth_number": 1,
+            "spm_code": "kecepatan-transaksi-1",
+            "average_transaction_duration": 4.0,
+            "spm_parameter": 6,
+            "spm_passed": true,
+            "sla_applicable": false,
+            "sla_parameter": null,
+            "sla_passed": null
+          },
+          {
+            "booth_number": 1,
+            "spm_code": "kecepatan-transaksi-2",
+            "average_transaction_duration": 4.0,
+            "spm_parameter": 5,
+            "spm_passed": true,
+            "sla_applicable": false,
+            "sla_parameter": null,
+            "sla_passed": null
+          },
+          {
+            "booth_number": 1,
+            "spm_code": "kecepatan-transaksi-3",
+            "average_transaction_duration": 4.0,
+            "spm_parameter": 9,
+            "spm_passed": true,
+            "sla_applicable": true,
+            "sla_parameter": 9,
+            "sla_passed": true
+          },
+          {
+            "booth_number": 1,
+            "spm_code": "kecepatan-transaksi-4",
+            "average_transaction_duration": 4.0,
+            "spm_parameter": 4,
+            "spm_passed": true,
+            "sla_applicable": false,
+            "sla_parameter": null,
+            "sla_passed": null
+          },
+          {
+            "booth_number": 1,
+            "spm_code": "kecepatan-transaksi-5",
+            "average_transaction_duration": 4.0,
+            "spm_parameter": 5,
+            "spm_passed": true,
+            "sla_applicable": false,
+            "sla_parameter": null,
+            "sla_passed": null
+          },
+          {
+            "booth_number": 2,
+            "spm_code": "kecepatan-transaksi-1",
+            "average_transaction_duration": 5.0,
+            "spm_parameter": 6,
+            "spm_passed": true,
+            "sla_applicable": false,
+            "sla_parameter": null,
+            "sla_passed": null
+          },
+          {
+            "booth_number": 2,
+            "spm_code": "kecepatan-transaksi-2",
+            "average_transaction_duration": 5.0,
+            "spm_parameter": 5,
+            "spm_passed": true,
+            "sla_applicable": false,
+            "sla_parameter": null,
+            "sla_passed": null
+          },
+          {
+            "booth_number": 2,
+            "spm_code": "kecepatan-transaksi-3",
+            "average_transaction_duration": 5.0,
+            "spm_parameter": 9,
+            "spm_passed": true,
+            "sla_applicable": true,
+            "sla_parameter": 9,
+            "sla_passed": true
+          },
+          {
+            "booth_number": 2,
+            "spm_code": "kecepatan-transaksi-4",
+            "average_transaction_duration": 5.0,
+            "spm_parameter": 4,
+            "spm_passed": false,
+            "sla_applicable": false,
+            "sla_parameter": null,
+            "sla_passed": null
+          },
+          {
+            "booth_number": 2,
+            "spm_code": "kecepatan-transaksi-5",
+            "average_transaction_duration": 5.0,
+            "spm_parameter": 5,
+            "spm_passed": true,
+            "sla_applicable": false,
+            "sla_parameter": null,
+            "sla_passed": null
+          },
+          {
+            "booth_number": 3,
+            "spm_code": "kecepatan-transaksi-1",
+            "average_transaction_duration": 9.0,
+            "spm_parameter": 6,
+            "spm_passed": false,
+            "sla_applicable": false,
+            "sla_parameter": null,
+            "sla_passed": null
+          },
+          {
+            "booth_number": 3,
+            "spm_code": "kecepatan-transaksi-2",
+            "average_transaction_duration": 9.0,
+            "spm_parameter": 5,
+            "spm_passed": false,
+            "sla_applicable": false,
+            "sla_parameter": null,
+            "sla_passed": null
+          },
+          {
+            "booth_number": 3,
+            "spm_code": "kecepatan-transaksi-3",
+            "average_transaction_duration": 9.0,
+            "spm_parameter": 9,
+            "spm_passed": true,
+            "sla_applicable": true,
+            "sla_parameter": 9,
+            "sla_passed": true
+          },
+          {
+            "booth_number": 3,
+            "spm_code": "kecepatan-transaksi-4",
+            "average_transaction_duration": 9.0,
+            "spm_parameter": 4,
+            "spm_passed": false,
+            "sla_applicable": false,
+            "sla_parameter": null,
+            "sla_passed": null
+          },
+          {
+            "booth_number": 3,
+            "spm_code": "kecepatan-transaksi-5",
+            "average_transaction_duration": 9.0,
+            "spm_parameter": 5,
+            "spm_passed": false,
+            "sla_applicable": false,
+            "sla_parameter": null,
+            "sla_passed": null
+          },
+          {
+            "booth_number": 4,
+            "spm_code": "kecepatan-transaksi-1",
+            "average_transaction_duration": 9.0,
+            "spm_parameter": 6,
+            "spm_passed": false,
+            "sla_applicable": false,
+            "sla_parameter": null,
+            "sla_passed": null
+          },
+          {
+            "booth_number": 4,
+            "spm_code": "kecepatan-transaksi-2",
+            "average_transaction_duration": 9.0,
+            "spm_parameter": 5,
+            "spm_passed": false,
+            "sla_applicable": false,
+            "sla_parameter": null,
+            "sla_passed": null
+          },
+          {
+            "booth_number": 4,
+            "spm_code": "kecepatan-transaksi-3",
+            "average_transaction_duration": 9.0,
+            "spm_parameter": 9,
+            "spm_passed": false,
+            "sla_applicable": true,
+            "sla_parameter": 9,
+            "sla_passed": false
+          },
+          {
+            "booth_number": 4,
+            "spm_code": "kecepatan-transaksi-4",
+            "average_transaction_duration": 9.0,
+            "spm_parameter": 4,
+            "spm_passed": false,
+            "sla_applicable": false,
+            "sla_parameter": null,
+            "sla_passed": null
+          },
+          {
+            "booth_number": 4,
+            "spm_code": "kecepatan-transaksi-5",
+            "average_transaction_duration": 9.0,
+            "spm_parameter": 5,
+            "spm_passed": false,
+            "sla_applicable": false,
+            "sla_parameter": null,
+            "sla_passed": null
+          }
+        ]
+      }
+    },
+    {
+      "caseId": "T7-C3",
+      "result": {
+        "monitoring_transaction_id": 1601000001,
+        "section_id": 16,
+        "section_name": "INDRAPURA - KISARAN (INKIS)",
+        "gate_id": 51,
+        "gate_name": "Limapuluh",
+        "date": "2026-06-03",
+        "shift": 1,
+        "evaluations": [
+          {
+            "booth_number": 1,
+            "spm_code": "kecepatan-transaksi-1",
+            "average_transaction_duration": 4.0,
+            "spm_parameter": 6,
+            "spm_passed": true,
+            "sla_applicable": false,
+            "sla_parameter": null,
+            "sla_passed": null
+          },
+          {
+            "booth_number": 1,
+            "spm_code": "kecepatan-transaksi-2",
+            "average_transaction_duration": 4.0,
+            "spm_parameter": 5,
+            "spm_passed": true,
+            "sla_applicable": false,
+            "sla_parameter": null,
+            "sla_passed": null
+          },
+          {
+            "booth_number": 1,
+            "spm_code": "kecepatan-transaksi-3",
+            "average_transaction_duration": 4.0,
+            "spm_parameter": 9,
+            "spm_passed": true,
+            "sla_applicable": false,
+            "sla_parameter": null,
+            "sla_passed": null
+          },
+          {
+            "booth_number": 1,
+            "spm_code": "kecepatan-transaksi-4",
+            "average_transaction_duration": 4.0,
+            "spm_parameter": 4,
+            "spm_passed": true,
+            "sla_applicable": false,
+            "sla_parameter": null,
+            "sla_passed": null
+          },
+          {
+            "booth_number": 1,
+            "spm_code": "kecepatan-transaksi-5",
+            "average_transaction_duration": 4.0,
+            "spm_parameter": 5,
+            "spm_passed": true,
+            "sla_applicable": false,
+            "sla_parameter": null,
+            "sla_passed": null
+          },
+          {
+            "booth_number": 2,
+            "spm_code": "kecepatan-transaksi-1",
+            "average_transaction_duration": 5.0,
+            "spm_parameter": 6,
+            "spm_passed": true,
+            "sla_applicable": false,
+            "sla_parameter": null,
+            "sla_passed": null
+          },
+          {
+            "booth_number": 2,
+            "spm_code": "kecepatan-transaksi-2",
+            "average_transaction_duration": 5.0,
+            "spm_parameter": 5,
+            "spm_passed": true,
+            "sla_applicable": false,
+            "sla_parameter": null,
+            "sla_passed": null
+          },
+          {
+            "booth_number": 2,
+            "spm_code": "kecepatan-transaksi-3",
+            "average_transaction_duration": 5.0,
+            "spm_parameter": 9,
+            "spm_passed": true,
+            "sla_applicable": false,
+            "sla_parameter": null,
+            "sla_passed": null
+          },
+          {
+            "booth_number": 2,
+            "spm_code": "kecepatan-transaksi-4",
+            "average_transaction_duration": 5.0,
+            "spm_parameter": 4,
+            "spm_passed": false,
+            "sla_applicable": false,
+            "sla_parameter": null,
+            "sla_passed": null
+          },
+          {
+            "booth_number": 2,
+            "spm_code": "kecepatan-transaksi-5",
+            "average_transaction_duration": 5.0,
+            "spm_parameter": 5,
+            "spm_passed": true,
+            "sla_applicable": false,
+            "sla_parameter": null,
+            "sla_passed": null
+          },
+          {
+            "booth_number": 3,
+            "spm_code": "kecepatan-transaksi-1",
+            "average_transaction_duration": 6.0,
+            "spm_parameter": 6,
+            "spm_passed": true,
+            "sla_applicable": false,
+            "sla_parameter": null,
+            "sla_passed": null
+          },
+          {
+            "booth_number": 3,
+            "spm_code": "kecepatan-transaksi-2",
+            "average_transaction_duration": 6.0,
+            "spm_parameter": 5,
+            "spm_passed": false,
+            "sla_applicable": false,
+            "sla_parameter": null,
+            "sla_passed": null
+          },
+          {
+            "booth_number": 3,
+            "spm_code": "kecepatan-transaksi-3",
+            "average_transaction_duration": 6.0,
+            "spm_parameter": 9,
+            "spm_passed": true,
+            "sla_applicable": false,
+            "sla_parameter": null,
+            "sla_passed": null
+          },
+          {
+            "booth_number": 3,
+            "spm_code": "kecepatan-transaksi-4",
+            "average_transaction_duration": 6.0,
+            "spm_parameter": 4,
+            "spm_passed": false,
+            "sla_applicable": false,
+            "sla_parameter": null,
+            "sla_passed": null
+          },
+          {
+            "booth_number": 3,
+            "spm_code": "kecepatan-transaksi-5",
+            "average_transaction_duration": 6.0,
+            "spm_parameter": 5,
+            "spm_passed": false,
+            "sla_applicable": false,
+            "sla_parameter": null,
+            "sla_passed": null
+          },
+          {
+            "booth_number": 4,
+            "spm_code": "kecepatan-transaksi-1",
+            "average_transaction_duration": 9.0,
+            "spm_parameter": 6,
+            "spm_passed": false,
+            "sla_applicable": false,
+            "sla_parameter": null,
+            "sla_passed": null
+          },
+          {
+            "booth_number": 4,
+            "spm_code": "kecepatan-transaksi-2",
+            "average_transaction_duration": 9.0,
+            "spm_parameter": 5,
+            "spm_passed": false,
+            "sla_applicable": false,
+            "sla_parameter": null,
+            "sla_passed": null
+          },
+          {
+            "booth_number": 4,
+            "spm_code": "kecepatan-transaksi-3",
+            "average_transaction_duration": 9.0,
+            "spm_parameter": 9,
+            "spm_passed": true,
+            "sla_applicable": false,
+            "sla_parameter": null,
+            "sla_passed": null
+          },
+          {
+            "booth_number": 4,
+            "spm_code": "kecepatan-transaksi-4",
+            "average_transaction_duration": 9.0,
+            "spm_parameter": 4,
+            "spm_passed": false,
+            "sla_applicable": false,
+            "sla_parameter": null,
+            "sla_passed": null
+          },
+          {
+            "booth_number": 4,
+            "spm_code": "kecepatan-transaksi-5",
+            "average_transaction_duration": 9.0,
+            "spm_parameter": 5,
+            "spm_passed": false,
+            "sla_applicable": false,
+            "sla_parameter": null,
+            "sla_passed": null
+          }
+        ]
+      }
+    },
+    {
+      "caseId": "T7-C4",
+      "result": {
+        "monitoring_transaction_id": 1601100001,
+        "section_id": 1,
+        "section_name": "PEKANBARU -  BANGKINANG (PEKBANG)",
+        "gate_id": 33,
+        "gate_name": "Bangkinang",
+        "date": "2026-01-26",
+        "shift": 1,
+        "evaluations": [
+          {
+            "booth_number": 1,
+            "spm_code": "kecepatan-transaksi-1",
+            "average_transaction_duration": 5.5,
+            "spm_parameter": 6,
+            "spm_passed": true,
+            "sla_applicable": true,
+            "sla_parameter": 6,
+            "sla_passed": true
+          },
+          {
+            "booth_number": 1,
+            "spm_code": "kecepatan-transaksi-2",
+            "average_transaction_duration": 5.5,
+            "spm_parameter": 5,
+            "spm_passed": false,
+            "sla_applicable": true,
+            "sla_parameter": 5,
+            "sla_passed": false
+          },
+          {
+            "booth_number": 1,
+            "spm_code": "kecepatan-transaksi-3",
+            "average_transaction_duration": 5.5,
+            "spm_parameter": 9,
+            "spm_passed": true,
+            "sla_applicable": true,
+            "sla_parameter": 9,
+            "sla_passed": true
+          },
+          {
+            "booth_number": 1,
+            "spm_code": "kecepatan-transaksi-4",
+            "average_transaction_duration": 5.5,
+            "spm_parameter": 4,
+            "spm_passed": false,
+            "sla_applicable": true,
+            "sla_parameter": 4,
+            "sla_passed": false
+          },
+          {
+            "booth_number": 1,
+            "spm_code": "kecepatan-transaksi-5",
+            "average_transaction_duration": 5.5,
+            "spm_parameter": 5,
+            "spm_passed": false,
+            "sla_applicable": true,
+            "sla_parameter": 5,
+            "sla_passed": false
+          },
+          {
+            "booth_number": 2,
+            "spm_code": "kecepatan-transaksi-1",
+            "average_transaction_duration": 5.5,
+            "spm_parameter": 6,
+            "spm_passed": true,
+            "sla_applicable": true,
+            "sla_parameter": 6,
+            "sla_passed": true
+          },
+          {
+            "booth_number": 2,
+            "spm_code": "kecepatan-transaksi-2",
+            "average_transaction_duration": 5.5,
+            "spm_parameter": 5,
+            "spm_passed": false,
+            "sla_applicable": true,
+            "sla_parameter": 5,
+            "sla_passed": false
+          },
+          {
+            "booth_number": 2,
+            "spm_code": "kecepatan-transaksi-3",
+            "average_transaction_duration": 5.5,
+            "spm_parameter": 9,
+            "spm_passed": true,
+            "sla_applicable": true,
+            "sla_parameter": 9,
+            "sla_passed": true
+          },
+          {
+            "booth_number": 2,
+            "spm_code": "kecepatan-transaksi-4",
+            "average_transaction_duration": 5.5,
+            "spm_parameter": 4,
+            "spm_passed": false,
+            "sla_applicable": true,
+            "sla_parameter": 4,
+            "sla_passed": false
+          },
+          {
+            "booth_number": 2,
+            "spm_code": "kecepatan-transaksi-5",
+            "average_transaction_duration": 5.5,
+            "spm_parameter": 5,
+            "spm_passed": false,
+            "sla_applicable": true,
+            "sla_parameter": 5,
+            "sla_passed": false
+          },
+          {
+            "booth_number": 3,
+            "spm_code": "kecepatan-transaksi-1",
+            "average_transaction_duration": 5.5,
+            "spm_parameter": 6,
+            "spm_passed": true,
+            "sla_applicable": true,
+            "sla_parameter": 6,
+            "sla_passed": true
+          },
+          {
+            "booth_number": 3,
+            "spm_code": "kecepatan-transaksi-2",
+            "average_transaction_duration": 5.5,
+            "spm_parameter": 5,
+            "spm_passed": false,
+            "sla_applicable": true,
+            "sla_parameter": 5,
+            "sla_passed": false
+          },
+          {
+            "booth_number": 3,
+            "spm_code": "kecepatan-transaksi-3",
+            "average_transaction_duration": 5.5,
+            "spm_parameter": 9,
+            "spm_passed": true,
+            "sla_applicable": true,
+            "sla_parameter": 9,
+            "sla_passed": true
+          },
+          {
+            "booth_number": 3,
+            "spm_code": "kecepatan-transaksi-4",
+            "average_transaction_duration": 5.5,
+            "spm_parameter": 4,
+            "spm_passed": false,
+            "sla_applicable": true,
+            "sla_parameter": 4,
+            "sla_passed": false
+          },
+          {
+            "booth_number": 3,
+            "spm_code": "kecepatan-transaksi-5",
+            "average_transaction_duration": 5.5,
+            "spm_parameter": 5,
+            "spm_passed": false,
+            "sla_applicable": true,
+            "sla_parameter": 5,
+            "sla_passed": false
+          },
+          {
+            "booth_number": 4,
+            "spm_code": "kecepatan-transaksi-1",
+            "average_transaction_duration": 5.5,
+            "spm_parameter": 6,
+            "spm_passed": true,
+            "sla_applicable": true,
+            "sla_parameter": 6,
+            "sla_passed": true
+          },
+          {
+            "booth_number": 4,
+            "spm_code": "kecepatan-transaksi-2",
+            "average_transaction_duration": 5.5,
+            "spm_parameter": 5,
+            "spm_passed": false,
+            "sla_applicable": true,
+            "sla_parameter": 5,
+            "sla_passed": false
+          },
+          {
+            "booth_number": 4,
+            "spm_code": "kecepatan-transaksi-3",
+            "average_transaction_duration": 5.5,
+            "spm_parameter": 9,
+            "spm_passed": true,
+            "sla_applicable": true,
+            "sla_parameter": 9,
+            "sla_passed": true
+          },
+          {
+            "booth_number": 4,
+            "spm_code": "kecepatan-transaksi-4",
+            "average_transaction_duration": 5.5,
+            "spm_parameter": 4,
+            "spm_passed": false,
+            "sla_applicable": true,
+            "sla_parameter": 4,
+            "sla_passed": false
+          },
+          {
+            "booth_number": 4,
+            "spm_code": "kecepatan-transaksi-5",
+            "average_transaction_duration": 5.5,
+            "spm_parameter": 5,
+            "spm_passed": false,
+            "sla_applicable": true,
+            "sla_parameter": 5,
+            "sla_passed": false
+          }
+        ]
+      }
+    },
+    {
+      "caseId": "T8-C1",
+      "result": {
+        "section_id": 10,
+        "section_name": "BINJAI STABAT (BINSTA)",
+        "period": {
+          "start": "2026-06-01",
+          "end": "2026-06-07"
+        },
+        "failures": [
+          {
+            "monitoring_transaction_id": 1601200001,
+            "date": "2026-06-01",
+            "gate_id": 48,
+            "booth_number": 1,
+            "spm_code": "kecepatan-transaksi-4",
+            "average_transaction_duration": 4.5,
+            "spm_parameter": 4,
+            "spm_passed": false,
+            "sla_applicable": false,
+            "sla_parameter": null,
+            "sla_passed": null
+          },
+          {
+            "monitoring_transaction_id": 1601200001,
+            "date": "2026-06-01",
+            "gate_id": 48,
+            "booth_number": 2,
+            "spm_code": "kecepatan-transaksi-4",
+            "average_transaction_duration": 4.5,
+            "spm_parameter": 4,
+            "spm_passed": false,
+            "sla_applicable": false,
+            "sla_parameter": null,
+            "sla_passed": null
+          },
+          {
+            "monitoring_transaction_id": 1601200001,
+            "date": "2026-06-01",
+            "gate_id": 48,
+            "booth_number": 3,
+            "spm_code": "kecepatan-transaksi-4",
+            "average_transaction_duration": 4.5,
+            "spm_parameter": 4,
+            "spm_passed": false,
+            "sla_applicable": false,
+            "sla_parameter": null,
+            "sla_passed": null
+          },
+          {
+            "monitoring_transaction_id": 1601200001,
+            "date": "2026-06-01",
+            "gate_id": 48,
+            "booth_number": 4,
+            "spm_code": "kecepatan-transaksi-4",
+            "average_transaction_duration": 4.5,
+            "spm_parameter": 4,
+            "spm_passed": false,
+            "sla_applicable": false,
+            "sla_parameter": null,
+            "sla_passed": null
+          },
+          {
+            "monitoring_transaction_id": 1601200003,
+            "date": "2026-06-07",
+            "gate_id": 48,
+            "booth_number": 2,
+            "spm_code": "kecepatan-transaksi-2",
+            "average_transaction_duration": 5.5,
+            "spm_parameter": 5,
+            "spm_passed": false,
+            "sla_applicable": false,
+            "sla_parameter": null,
+            "sla_passed": null
+          },
+          {
+            "monitoring_transaction_id": 1601200003,
+            "date": "2026-06-07",
+            "gate_id": 48,
+            "booth_number": 2,
+            "spm_code": "kecepatan-transaksi-4",
+            "average_transaction_duration": 5.5,
+            "spm_parameter": 4,
+            "spm_passed": false,
+            "sla_applicable": false,
+            "sla_parameter": null,
+            "sla_passed": null
+          },
+          {
+            "monitoring_transaction_id": 1601200003,
+            "date": "2026-06-07",
+            "gate_id": 48,
+            "booth_number": 2,
+            "spm_code": "kecepatan-transaksi-5",
+            "average_transaction_duration": 5.5,
+            "spm_parameter": 5,
+            "spm_passed": false,
+            "sla_applicable": false,
+            "sla_parameter": null,
+            "sla_passed": null
+          },
+          {
+            "monitoring_transaction_id": 1601200003,
+            "date": "2026-06-07",
+            "gate_id": 48,
+            "booth_number": 4,
+            "spm_code": "kecepatan-transaksi-2",
+            "average_transaction_duration": 5.5,
+            "spm_parameter": 5,
+            "spm_passed": false,
+            "sla_applicable": false,
+            "sla_parameter": null,
+            "sla_passed": null
+          },
+          {
+            "monitoring_transaction_id": 1601200003,
+            "date": "2026-06-07",
+            "gate_id": 48,
+            "booth_number": 4,
+            "spm_code": "kecepatan-transaksi-4",
+            "average_transaction_duration": 5.5,
+            "spm_parameter": 4,
+            "spm_passed": false,
+            "sla_applicable": false,
+            "sla_parameter": null,
+            "sla_passed": null
+          },
+          {
+            "monitoring_transaction_id": 1601200003,
+            "date": "2026-06-07",
+            "gate_id": 48,
+            "booth_number": 4,
+            "spm_code": "kecepatan-transaksi-5",
+            "average_transaction_duration": 5.5,
+            "spm_parameter": 5,
+            "spm_passed": false,
+            "sla_applicable": false,
+            "sla_parameter": null,
+            "sla_passed": null
+          }
+        ],
+        "indicators": [
+          {
+            "spm_code": "kecepatan-transaksi-1",
+            "spm_evaluation_count": 12,
+            "spm_failed_count": 0,
+            "spm_period_status": "pass",
+            "sla_applicable": false,
+            "sla_evaluation_count": 0,
+            "sla_failed_count": 0,
+            "sla_period_status": "not_applicable"
+          },
+          {
+            "spm_code": "kecepatan-transaksi-2",
+            "spm_evaluation_count": 12,
+            "spm_failed_count": 2,
+            "spm_period_status": "fail",
+            "sla_applicable": false,
+            "sla_evaluation_count": 0,
+            "sla_failed_count": 0,
+            "sla_period_status": "not_applicable"
+          },
+          {
+            "spm_code": "kecepatan-transaksi-3",
+            "spm_evaluation_count": 12,
+            "spm_failed_count": 0,
+            "spm_period_status": "pass",
+            "sla_applicable": true,
+            "sla_evaluation_count": 12,
+            "sla_failed_count": 0,
+            "sla_period_status": "pass"
+          },
+          {
+            "spm_code": "kecepatan-transaksi-4",
+            "spm_evaluation_count": 12,
+            "spm_failed_count": 6,
+            "spm_period_status": "fail",
+            "sla_applicable": false,
+            "sla_evaluation_count": 0,
+            "sla_failed_count": 0,
+            "sla_period_status": "not_applicable"
+          },
+          {
+            "spm_code": "kecepatan-transaksi-5",
+            "spm_evaluation_count": 12,
+            "spm_failed_count": 2,
+            "spm_period_status": "fail",
+            "sla_applicable": false,
+            "sla_evaluation_count": 0,
+            "sla_failed_count": 0,
+            "sla_period_status": "not_applicable"
+          }
+        ]
+      }
+    },
+    {
+      "caseId": "T8-C2",
+      "result": {
+        "section_id": 10,
+        "section_name": "BINJAI STABAT (BINSTA)",
+        "period": {
+          "start": "2026-01-20",
+          "end": "2026-01-30"
+        },
+        "failures": [
+          {
+            "monitoring_transaction_id": 1601300001,
+            "date": "2026-01-25",
+            "gate_id": 49,
+            "booth_number": 1,
+            "spm_code": "kecepatan-transaksi-1",
+            "average_transaction_duration": 8.5,
+            "spm_parameter": 6,
+            "spm_passed": false,
+            "sla_applicable": false,
+            "sla_parameter": null,
+            "sla_passed": null
+          },
+          {
+            "monitoring_transaction_id": 1601300001,
+            "date": "2026-01-25",
+            "gate_id": 49,
+            "booth_number": 1,
+            "spm_code": "kecepatan-transaksi-2",
+            "average_transaction_duration": 8.5,
+            "spm_parameter": 5,
+            "spm_passed": false,
+            "sla_applicable": false,
+            "sla_parameter": null,
+            "sla_passed": null
+          },
+          {
+            "monitoring_transaction_id": 1601300001,
+            "date": "2026-01-25",
+            "gate_id": 49,
+            "booth_number": 1,
+            "spm_code": "kecepatan-transaksi-4",
+            "average_transaction_duration": 8.5,
+            "spm_parameter": 4,
+            "spm_passed": false,
+            "sla_applicable": false,
+            "sla_parameter": null,
+            "sla_passed": null
+          },
+          {
+            "monitoring_transaction_id": 1601300001,
+            "date": "2026-01-25",
+            "gate_id": 49,
+            "booth_number": 1,
+            "spm_code": "kecepatan-transaksi-5",
+            "average_transaction_duration": 8.5,
+            "spm_parameter": 5,
+            "spm_passed": false,
+            "sla_applicable": false,
+            "sla_parameter": null,
+            "sla_passed": null
+          },
+          {
+            "monitoring_transaction_id": 1601300001,
+            "date": "2026-01-25",
+            "gate_id": 49,
+            "booth_number": 2,
+            "spm_code": "kecepatan-transaksi-1",
+            "average_transaction_duration": 8.5,
+            "spm_parameter": 6,
+            "spm_passed": false,
+            "sla_applicable": false,
+            "sla_parameter": null,
+            "sla_passed": null
+          },
+          {
+            "monitoring_transaction_id": 1601300001,
+            "date": "2026-01-25",
+            "gate_id": 49,
+            "booth_number": 2,
+            "spm_code": "kecepatan-transaksi-2",
+            "average_transaction_duration": 8.5,
+            "spm_parameter": 5,
+            "spm_passed": false,
+            "sla_applicable": false,
+            "sla_parameter": null,
+            "sla_passed": null
+          },
+          {
+            "monitoring_transaction_id": 1601300001,
+            "date": "2026-01-25",
+            "gate_id": 49,
+            "booth_number": 2,
+            "spm_code": "kecepatan-transaksi-4",
+            "average_transaction_duration": 8.5,
+            "spm_parameter": 4,
+            "spm_passed": false,
+            "sla_applicable": false,
+            "sla_parameter": null,
+            "sla_passed": null
+          },
+          {
+            "monitoring_transaction_id": 1601300001,
+            "date": "2026-01-25",
+            "gate_id": 49,
+            "booth_number": 2,
+            "spm_code": "kecepatan-transaksi-5",
+            "average_transaction_duration": 8.5,
+            "spm_parameter": 5,
+            "spm_passed": false,
+            "sla_applicable": false,
+            "sla_parameter": null,
+            "sla_passed": null
+          },
+          {
+            "monitoring_transaction_id": 1601300001,
+            "date": "2026-01-25",
+            "gate_id": 49,
+            "booth_number": 3,
+            "spm_code": "kecepatan-transaksi-1",
+            "average_transaction_duration": 8.5,
+            "spm_parameter": 6,
+            "spm_passed": false,
+            "sla_applicable": false,
+            "sla_parameter": null,
+            "sla_passed": null
+          },
+          {
+            "monitoring_transaction_id": 1601300001,
+            "date": "2026-01-25",
+            "gate_id": 49,
+            "booth_number": 3,
+            "spm_code": "kecepatan-transaksi-2",
+            "average_transaction_duration": 8.5,
+            "spm_parameter": 5,
+            "spm_passed": false,
+            "sla_applicable": false,
+            "sla_parameter": null,
+            "sla_passed": null
+          },
+          {
+            "monitoring_transaction_id": 1601300001,
+            "date": "2026-01-25",
+            "gate_id": 49,
+            "booth_number": 3,
+            "spm_code": "kecepatan-transaksi-4",
+            "average_transaction_duration": 8.5,
+            "spm_parameter": 4,
+            "spm_passed": false,
+            "sla_applicable": false,
+            "sla_parameter": null,
+            "sla_passed": null
+          },
+          {
+            "monitoring_transaction_id": 1601300001,
+            "date": "2026-01-25",
+            "gate_id": 49,
+            "booth_number": 3,
+            "spm_code": "kecepatan-transaksi-5",
+            "average_transaction_duration": 8.5,
+            "spm_parameter": 5,
+            "spm_passed": false,
+            "sla_applicable": false,
+            "sla_parameter": null,
+            "sla_passed": null
+          },
+          {
+            "monitoring_transaction_id": 1601300001,
+            "date": "2026-01-25",
+            "gate_id": 49,
+            "booth_number": 4,
+            "spm_code": "kecepatan-transaksi-1",
+            "average_transaction_duration": 8.5,
+            "spm_parameter": 6,
+            "spm_passed": false,
+            "sla_applicable": false,
+            "sla_parameter": null,
+            "sla_passed": null
+          },
+          {
+            "monitoring_transaction_id": 1601300001,
+            "date": "2026-01-25",
+            "gate_id": 49,
+            "booth_number": 4,
+            "spm_code": "kecepatan-transaksi-2",
+            "average_transaction_duration": 8.5,
+            "spm_parameter": 5,
+            "spm_passed": false,
+            "sla_applicable": false,
+            "sla_parameter": null,
+            "sla_passed": null
+          },
+          {
+            "monitoring_transaction_id": 1601300001,
+            "date": "2026-01-25",
+            "gate_id": 49,
+            "booth_number": 4,
+            "spm_code": "kecepatan-transaksi-4",
+            "average_transaction_duration": 8.5,
+            "spm_parameter": 4,
+            "spm_passed": false,
+            "sla_applicable": false,
+            "sla_parameter": null,
+            "sla_passed": null
+          },
+          {
+            "monitoring_transaction_id": 1601300001,
+            "date": "2026-01-25",
+            "gate_id": 49,
+            "booth_number": 4,
+            "spm_code": "kecepatan-transaksi-5",
+            "average_transaction_duration": 8.5,
+            "spm_parameter": 5,
+            "spm_passed": false,
+            "sla_applicable": false,
+            "sla_parameter": null,
+            "sla_passed": null
+          }
+        ],
+        "indicators": [
+          {
+            "spm_code": "kecepatan-transaksi-1",
+            "spm_evaluation_count": 4,
+            "spm_failed_count": 4,
+            "spm_period_status": "fail",
+            "sla_applicable": false,
+            "sla_evaluation_count": 0,
+            "sla_failed_count": 0,
+            "sla_period_status": "not_applicable"
+          },
+          {
+            "spm_code": "kecepatan-transaksi-2",
+            "spm_evaluation_count": 4,
+            "spm_failed_count": 4,
+            "spm_period_status": "fail",
+            "sla_applicable": false,
+            "sla_evaluation_count": 0,
+            "sla_failed_count": 0,
+            "sla_period_status": "not_applicable"
+          },
+          {
+            "spm_code": "kecepatan-transaksi-3",
+            "spm_evaluation_count": 4,
+            "spm_failed_count": 0,
+            "spm_period_status": "pass",
+            "sla_applicable": true,
+            "sla_evaluation_count": 4,
+            "sla_failed_count": 0,
+            "sla_period_status": "pass"
+          },
+          {
+            "spm_code": "kecepatan-transaksi-4",
+            "spm_evaluation_count": 4,
+            "spm_failed_count": 4,
+            "spm_period_status": "fail",
+            "sla_applicable": false,
+            "sla_evaluation_count": 0,
+            "sla_failed_count": 0,
+            "sla_period_status": "not_applicable"
+          },
+          {
+            "spm_code": "kecepatan-transaksi-5",
+            "spm_evaluation_count": 4,
+            "spm_failed_count": 4,
+            "spm_period_status": "fail",
+            "sla_applicable": false,
+            "sla_evaluation_count": 0,
+            "sla_failed_count": 0,
+            "sla_period_status": "not_applicable"
+          }
+        ]
+      }
+    },
+    {
+      "caseId": "T9-C1",
+      "result": {
+        "section_id": 1,
+        "section_name": "PEKANBARU -  BANGKINANG (PEKBANG)",
+        "period_a": {
+          "start": "2026-07-01",
+          "end": "2026-07-07"
+        },
+        "period_b": {
+          "start": "2026-07-08",
+          "end": "2026-07-14"
+        },
+        "indicators": [
+          {
+            "spm_code": "kecepatan-transaksi-1",
+            "period_a": {
+              "spm_evaluation_count": 4,
+              "spm_failed_count": 0,
+              "spm_status": "pass",
+              "sla_evaluation_count": 4,
+              "sla_failed_count": 0,
+              "sla_status": "pass"
+            },
+            "period_b": {
+              "spm_evaluation_count": 4,
+              "spm_failed_count": 0,
+              "spm_status": "pass",
+              "sla_evaluation_count": 4,
+              "sla_failed_count": 0,
+              "sla_status": "pass"
+            },
+            "spm_transition": "pass_to_pass",
+            "sla_transition": "pass_to_pass"
+          },
+          {
+            "spm_code": "kecepatan-transaksi-2",
+            "period_a": {
+              "spm_evaluation_count": 4,
+              "spm_failed_count": 4,
+              "spm_status": "fail",
+              "sla_evaluation_count": 4,
+              "sla_failed_count": 4,
+              "sla_status": "fail"
+            },
+            "period_b": {
+              "spm_evaluation_count": 4,
+              "spm_failed_count": 0,
+              "spm_status": "pass",
+              "sla_evaluation_count": 4,
+              "sla_failed_count": 0,
+              "sla_status": "pass"
+            },
+            "spm_transition": "fail_to_pass",
+            "sla_transition": "fail_to_pass"
+          },
+          {
+            "spm_code": "kecepatan-transaksi-3",
+            "period_a": {
+              "spm_evaluation_count": 4,
+              "spm_failed_count": 0,
+              "spm_status": "pass",
+              "sla_evaluation_count": 4,
+              "sla_failed_count": 0,
+              "sla_status": "pass"
+            },
+            "period_b": {
+              "spm_evaluation_count": 4,
+              "spm_failed_count": 0,
+              "spm_status": "pass",
+              "sla_evaluation_count": 4,
+              "sla_failed_count": 0,
+              "sla_status": "pass"
+            },
+            "spm_transition": "pass_to_pass",
+            "sla_transition": "pass_to_pass"
+          },
+          {
+            "spm_code": "kecepatan-transaksi-4",
+            "period_a": {
+              "spm_evaluation_count": 4,
+              "spm_failed_count": 4,
+              "spm_status": "fail",
+              "sla_evaluation_count": 4,
+              "sla_failed_count": 4,
+              "sla_status": "fail"
+            },
+            "period_b": {
+              "spm_evaluation_count": 4,
+              "spm_failed_count": 4,
+              "spm_status": "fail",
+              "sla_evaluation_count": 4,
+              "sla_failed_count": 4,
+              "sla_status": "fail"
+            },
+            "spm_transition": "fail_to_fail",
+            "sla_transition": "fail_to_fail"
+          },
+          {
+            "spm_code": "kecepatan-transaksi-5",
+            "period_a": {
+              "spm_evaluation_count": 4,
+              "spm_failed_count": 4,
+              "spm_status": "fail",
+              "sla_evaluation_count": 4,
+              "sla_failed_count": 4,
+              "sla_status": "fail"
+            },
+            "period_b": {
+              "spm_evaluation_count": 4,
+              "spm_failed_count": 0,
+              "spm_status": "pass",
+              "sla_evaluation_count": 4,
+              "sla_failed_count": 0,
+              "sla_status": "pass"
+            },
+            "spm_transition": "fail_to_pass",
+            "sla_transition": "fail_to_pass"
+          }
+        ]
+      }
+    },
+    {
+      "caseId": "T9-C2",
+      "result": {
+        "section_id": 1,
+        "section_name": "PEKANBARU -  BANGKINANG (PEKBANG)",
+        "period_a": {
+          "start": "2026-01-05",
+          "end": "2026-01-10"
+        },
+        "period_b": {
+          "start": "2026-01-12",
+          "end": "2026-01-17"
+        },
+        "indicators": [
+          {
+            "spm_code": "kecepatan-transaksi-1",
+            "period_a": {
+              "spm_evaluation_count": 8,
+              "spm_failed_count": 0,
+              "spm_status": "pass",
+              "sla_evaluation_count": 8,
+              "sla_failed_count": 0,
+              "sla_status": "pass"
+            },
+            "period_b": {
+              "spm_evaluation_count": 8,
+              "spm_failed_count": 4,
+              "spm_status": "fail",
+              "sla_evaluation_count": 8,
+              "sla_failed_count": 4,
+              "sla_status": "fail"
+            },
+            "spm_transition": "pass_to_fail",
+            "sla_transition": "pass_to_fail"
+          },
+          {
+            "spm_code": "kecepatan-transaksi-2",
+            "period_a": {
+              "spm_evaluation_count": 8,
+              "spm_failed_count": 0,
+              "spm_status": "pass",
+              "sla_evaluation_count": 8,
+              "sla_failed_count": 0,
+              "sla_status": "pass"
+            },
+            "period_b": {
+              "spm_evaluation_count": 8,
+              "spm_failed_count": 8,
+              "spm_status": "fail",
+              "sla_evaluation_count": 8,
+              "sla_failed_count": 8,
+              "sla_status": "fail"
+            },
+            "spm_transition": "pass_to_fail",
+            "sla_transition": "pass_to_fail"
+          },
+          {
+            "spm_code": "kecepatan-transaksi-3",
+            "period_a": {
+              "spm_evaluation_count": 8,
+              "spm_failed_count": 0,
+              "spm_status": "pass",
+              "sla_evaluation_count": 8,
+              "sla_failed_count": 0,
+              "sla_status": "pass"
+            },
+            "period_b": {
+              "spm_evaluation_count": 8,
+              "spm_failed_count": 0,
+              "spm_status": "pass",
+              "sla_evaluation_count": 8,
+              "sla_failed_count": 0,
+              "sla_status": "pass"
+            },
+            "spm_transition": "pass_to_pass",
+            "sla_transition": "pass_to_pass"
+          },
+          {
+            "spm_code": "kecepatan-transaksi-4",
+            "period_a": {
+              "spm_evaluation_count": 8,
+              "spm_failed_count": 4,
+              "spm_status": "fail",
+              "sla_evaluation_count": 8,
+              "sla_failed_count": 4,
+              "sla_status": "fail"
+            },
+            "period_b": {
+              "spm_evaluation_count": 8,
+              "spm_failed_count": 8,
+              "spm_status": "fail",
+              "sla_evaluation_count": 8,
+              "sla_failed_count": 8,
+              "sla_status": "fail"
+            },
+            "spm_transition": "fail_to_fail",
+            "sla_transition": "fail_to_fail"
+          },
+          {
+            "spm_code": "kecepatan-transaksi-5",
+            "period_a": {
+              "spm_evaluation_count": 8,
+              "spm_failed_count": 0,
+              "spm_status": "pass",
+              "sla_evaluation_count": 8,
+              "sla_failed_count": 0,
+              "sla_status": "pass"
+            },
+            "period_b": {
+              "spm_evaluation_count": 8,
+              "spm_failed_count": 8,
+              "spm_status": "fail",
+              "sla_evaluation_count": 8,
+              "sla_failed_count": 8,
+              "sla_status": "fail"
+            },
+            "spm_transition": "pass_to_fail",
+            "sla_transition": "pass_to_fail"
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,4257 @@
+{
+  "sourceDatabase": "hkatrom_bi",
+  "schema": "public",
+  "capturedAt": "2026-11-01T16:39:35.615458+00:00",
+  "entityCount": 22,
+  "columnCount": 365,
+  "relationships": [
+    {
+      "table": "accident_reports",
+      "columns": [
+        "incident_id"
+      ],
+      "target": "incidents",
+      "targetColumns": [
+        "id"
+      ],
+      "kind": "declared-foreign-key"
+    },
+    {
+      "table": "accident_reports",
+      "columns": [
+        "lane_closure_id"
+      ],
+      "target": "m_accident_attributes",
+      "targetColumns": [
+        "id"
+      ],
+      "kind": "declared-foreign-key"
+    },
+    {
+      "table": "accident_reports",
+      "columns": [
+        "weather_id"
+      ],
+      "target": "m_accident_attributes",
+      "targetColumns": [
+        "id"
+      ],
+      "kind": "declared-foreign-key"
+    },
+    {
+      "table": "accident_reports",
+      "columns": [
+        "wind_id"
+      ],
+      "target": "m_accident_attributes",
+      "targetColumns": [
+        "id"
+      ],
+      "kind": "declared-foreign-key"
+    },
+    {
+      "table": "employees",
+      "columns": [
+        "section_id"
+      ],
+      "target": "toll_sections",
+      "targetColumns": [
+        "id"
+      ],
+      "kind": "declared-foreign-key"
+    },
+    {
+      "table": "incident_actions",
+      "columns": [
+        "officer_id"
+      ],
+      "target": "employees",
+      "targetColumns": [
+        "id"
+      ],
+      "kind": "declared-foreign-key"
+    },
+    {
+      "table": "incident_actions",
+      "columns": [
+        "incident_id"
+      ],
+      "target": "incidents",
+      "targetColumns": [
+        "id"
+      ],
+      "kind": "declared-foreign-key"
+    },
+    {
+      "table": "incidents",
+      "columns": [
+        "source_id"
+      ],
+      "target": "m_accident_attributes",
+      "targetColumns": [
+        "id"
+      ],
+      "kind": "declared-foreign-key"
+    },
+    {
+      "table": "incidents",
+      "columns": [
+        "section_id"
+      ],
+      "target": "toll_sections",
+      "targetColumns": [
+        "id"
+      ],
+      "kind": "declared-foreign-key"
+    },
+    {
+      "table": "inspection_elements",
+      "columns": [
+        "inspection_id"
+      ],
+      "target": "inspections",
+      "targetColumns": [
+        "id"
+      ],
+      "kind": "declared-foreign-key"
+    },
+    {
+      "table": "inspection_items",
+      "columns": [
+        "pic_id"
+      ],
+      "target": "employees",
+      "targetColumns": [
+        "id"
+      ],
+      "kind": "declared-foreign-key"
+    },
+    {
+      "table": "inspection_items",
+      "columns": [
+        "inspection_element_id"
+      ],
+      "target": "inspection_elements",
+      "targetColumns": [
+        "id"
+      ],
+      "kind": "declared-foreign-key"
+    },
+    {
+      "table": "inspection_schedule_assets",
+      "columns": [
+        "schedule_id"
+      ],
+      "target": "inspection_schedules",
+      "targetColumns": [
+        "id"
+      ],
+      "kind": "declared-foreign-key"
+    },
+    {
+      "table": "inspection_schedule_assets",
+      "columns": [
+        "asset_id"
+      ],
+      "target": "maintenance_asset_types",
+      "targetColumns": [
+        "id"
+      ],
+      "kind": "declared-foreign-key"
+    },
+    {
+      "table": "inspection_schedules",
+      "columns": [
+        "section_id"
+      ],
+      "target": "toll_sections",
+      "targetColumns": [
+        "id"
+      ],
+      "kind": "declared-foreign-key"
+    },
+    {
+      "table": "inspections",
+      "columns": [
+        "inspector_id"
+      ],
+      "target": "employees",
+      "targetColumns": [
+        "id"
+      ],
+      "kind": "declared-foreign-key"
+    },
+    {
+      "table": "inspections",
+      "columns": [
+        "schedule_asset_id"
+      ],
+      "target": "inspection_schedule_assets",
+      "targetColumns": [
+        "id"
+      ],
+      "kind": "declared-foreign-key"
+    },
+    {
+      "table": "inspections",
+      "columns": [
+        "section_id"
+      ],
+      "target": "toll_sections",
+      "targetColumns": [
+        "id"
+      ],
+      "kind": "declared-foreign-key"
+    },
+    {
+      "table": "m_section_shifts",
+      "columns": [
+        "section_id"
+      ],
+      "target": "toll_sections",
+      "targetColumns": [
+        "id"
+      ],
+      "kind": "declared-foreign-key"
+    },
+    {
+      "table": "maintenance_asset_types",
+      "columns": [
+        "section_id"
+      ],
+      "target": "toll_sections",
+      "targetColumns": [
+        "id"
+      ],
+      "kind": "declared-foreign-key"
+    },
+    {
+      "table": "monitoring_transaction_details",
+      "columns": [
+        "transaction_id"
+      ],
+      "target": "monitoring_transactions",
+      "targetColumns": [
+        "id"
+      ],
+      "kind": "declared-foreign-key"
+    },
+    {
+      "table": "monitoring_transactions",
+      "columns": [
+        "officer_id"
+      ],
+      "target": "employees",
+      "targetColumns": [
+        "id"
+      ],
+      "kind": "declared-foreign-key"
+    },
+    {
+      "table": "monitoring_transactions",
+      "columns": [
+        "schedule_id"
+      ],
+      "target": "shift_schedules",
+      "targetColumns": [
+        "id"
+      ],
+      "kind": "declared-foreign-key"
+    },
+    {
+      "table": "monitoring_transactions",
+      "columns": [
+        "gate_id"
+      ],
+      "target": "toll_gates",
+      "targetColumns": [
+        "id"
+      ],
+      "kind": "declared-foreign-key"
+    },
+    {
+      "table": "monitoring_transactions",
+      "columns": [
+        "section_id"
+      ],
+      "target": "toll_sections",
+      "targetColumns": [
+        "id"
+      ],
+      "kind": "declared-foreign-key"
+    },
+    {
+      "table": "shift_schedule_personel",
+      "columns": [
+        "employee_id"
+      ],
+      "target": "employees",
+      "targetColumns": [
+        "id"
+      ],
+      "kind": "declared-foreign-key"
+    },
+    {
+      "table": "shift_schedule_personel",
+      "columns": [
+        "schedule_id"
+      ],
+      "target": "shift_schedules",
+      "targetColumns": [
+        "id"
+      ],
+      "kind": "declared-foreign-key"
+    },
+    {
+      "table": "shift_schedules",
+      "columns": [
+        "section_id"
+      ],
+      "target": "toll_sections",
+      "targetColumns": [
+        "id"
+      ],
+      "kind": "declared-foreign-key"
+    },
+    {
+      "table": "toll_gates",
+      "columns": [
+        "section_id"
+      ],
+      "target": "toll_sections",
+      "targetColumns": [
+        "id"
+      ],
+      "kind": "declared-foreign-key"
+    },
+    {
+      "table": "toll_traffic_volumes",
+      "columns": [
+        "vehicle_class_id"
+      ],
+      "target": "m_vehicle_class",
+      "targetColumns": [
+        "id"
+      ],
+      "kind": "declared-foreign-key"
+    },
+    {
+      "table": "toll_traffic_volumes",
+      "columns": [
+        "transaction_id"
+      ],
+      "target": "toll_volume_revenue",
+      "targetColumns": [
+        "id"
+      ],
+      "kind": "declared-foreign-key"
+    },
+    {
+      "table": "toll_volume_revenue",
+      "columns": [
+        "officer_id"
+      ],
+      "target": "employees",
+      "targetColumns": [
+        "id"
+      ],
+      "kind": "declared-foreign-key"
+    },
+    {
+      "table": "toll_volume_revenue",
+      "columns": [
+        "schedule_id"
+      ],
+      "target": "shift_schedules",
+      "targetColumns": [
+        "id"
+      ],
+      "kind": "declared-foreign-key"
+    },
+    {
+      "table": "toll_volume_revenue",
+      "columns": [
+        "gate_id"
+      ],
+      "target": "toll_gates",
+      "targetColumns": [
+        "id"
+      ],
+      "kind": "declared-foreign-key"
+    },
+    {
+      "table": "toll_volume_revenue",
+      "columns": [
+        "section_id"
+      ],
+      "target": "toll_sections",
+      "targetColumns": [
+        "id"
+      ],
+      "kind": "declared-foreign-key"
+    },
+    {
+      "table": "inspections",
+      "columns": [
+        "schedule_id"
+      ],
+      "target": "inspection_schedules",
+      "targetColumns": [
+        "id"
+      ],
+      "kind": "logical",
+      "basis": "fixture verifier relationship mapping; not a declared PostgreSQL foreign key"
+    },
+    {
+      "table": "shift_schedules",
+      "columns": [
+        "shift_id"
+      ],
+      "target": "m_section_shifts",
+      "targetColumns": [
+        "id"
+      ],
+      "kind": "logical",
+      "basis": "fixture verifier relationship mapping; not a declared PostgreSQL foreign key"
+    },
+    {
+      "table": "view_section_spm_sla",
+      "columns": [
+        "section_id"
+      ],
+      "target": "toll_sections",
+      "targetColumns": [
+        "id"
+      ],
+      "kind": "logical",
+      "basis": "logical view scope relationship; not a declared PostgreSQL foreign key"
+    }
+  ],
+  "tables": [
+    {
+      "name": "employees",
+      "primaryKey": [
+        "id"
+      ],
+      "columns": [
+        {
+          "name": "id",
+          "dataType": "bigint",
+          "udtName": "int8",
+          "nullable": false,
+          "ordinalPosition": 1,
+          "maxLength": null,
+          "numericPrecision": 64,
+          "numericScale": 0
+        },
+        {
+          "name": "fullname",
+          "dataType": "character varying",
+          "udtName": "varchar",
+          "nullable": false,
+          "ordinalPosition": 2,
+          "maxLength": 255,
+          "numericPrecision": null,
+          "numericScale": null
+        },
+        {
+          "name": "nik",
+          "dataType": "character varying",
+          "udtName": "varchar",
+          "nullable": true,
+          "ordinalPosition": 3,
+          "maxLength": 255,
+          "numericPrecision": null,
+          "numericScale": null
+        },
+        {
+          "name": "nationality_type",
+          "dataType": "character varying",
+          "udtName": "varchar",
+          "nullable": false,
+          "ordinalPosition": 4,
+          "maxLength": 255,
+          "numericPrecision": null,
+          "numericScale": null
+        },
+        {
+          "name": "identity_number",
+          "dataType": "character varying",
+          "udtName": "varchar",
+          "nullable": true,
+          "ordinalPosition": 5,
+          "maxLength": 255,
+          "numericPrecision": null,
+          "numericScale": null
+        },
+        {
+          "name": "gender",
+          "dataType": "character varying",
+          "udtName": "varchar",
+          "nullable": false,
+          "ordinalPosition": 6,
+          "maxLength": 255,
+          "numericPrecision": null,
+          "numericScale": null
+        },
+        {
+          "name": "address",
+          "dataType": "text",
+          "udtName": "text",
+          "nullable": true,
+          "ordinalPosition": 7,
+          "maxLength": null,
+          "numericPrecision": null,
+          "numericScale": null
+        },
+        {
+          "name": "city_id",
+          "dataType": "bigint",
+          "udtName": "int8",
+          "nullable": true,
+          "ordinalPosition": 8,
+          "maxLength": null,
+          "numericPrecision": 64,
+          "numericScale": 0
+        },
+        {
+          "name": "email",
+          "dataType": "character varying",
+          "udtName": "varchar",
+          "nullable": true,
+          "ordinalPosition": 9,
+          "maxLength": 255,
+          "numericPrecision": null,
+          "numericScale": null
+        },
+        {
+          "name": "telephone",
+          "dataType": "character varying",
+          "udtName": "varchar",
+          "nullable": true,
+          "ordinalPosition": 10,
+          "maxLength": 255,
+          "numericPrecision": null,
+          "numericScale": null
+        },
+        {
+          "name": "birthdate",
+          "dataType": "date",
+          "udtName": "date",
+          "nullable": true,
+          "ordinalPosition": 11,
+          "maxLength": null,
+          "numericPrecision": null,
+          "numericScale": null
+        },
+        {
+          "name": "description",
+          "dataType": "text",
+          "udtName": "text",
+          "nullable": true,
+          "ordinalPosition": 12,
+          "maxLength": null,
+          "numericPrecision": null,
+          "numericScale": null
+        },
+        {
+          "name": "img_photo",
+          "dataType": "text",
+          "udtName": "text",
+          "nullable": true,
+          "ordinalPosition": 13,
+          "maxLength": null,
+          "numericPrecision": null,
+          "numericScale": null
+        },
+        {
+          "name": "job_position_id",
+          "dataType": "bigint",
+          "udtName": "int8",
+          "nullable": true,
+          "ordinalPosition": 14,
+          "maxLength": null,
+          "numericPrecision": 64,
+          "numericScale": 0
+        },
+        {
+          "name": "section_id",
+          "dataType": "bigint",
+          "udtName": "int8",
+          "nullable": true,
+          "ordinalPosition": 15,
+          "maxLength": null,
+          "numericPrecision": 64,
+          "numericScale": 0
+        },
+        {
+          "name": "join_date",
+          "dataType": "date",
+          "udtName": "date",
+          "nullable": true,
+          "ordinalPosition": 16,
+          "maxLength": null,
+          "numericPrecision": null,
+          "numericScale": null
+        },
+        {
+          "name": "resign_date",
+          "dataType": "date",
+          "udtName": "date",
+          "nullable": true,
+          "ordinalPosition": 17,
+          "maxLength": null,
+          "numericPrecision": null,
+          "numericScale": null
+        },
+        {
+          "name": "start_date_on_section",
+          "dataType": "date",
+          "udtName": "date",
+          "nullable": true,
+          "ordinalPosition": 18,
+          "maxLength": null,
+          "numericPrecision": null,
+          "numericScale": null
+        },
+        {
+          "name": "status_code",
+          "dataType": "character varying",
+          "udtName": "varchar",
+          "nullable": false,
+          "ordinalPosition": 19,
+          "maxLength": 255,
+          "numericPrecision": null,
+          "numericScale": null
+        },
+        {
+          "name": "active",
+          "dataType": "boolean",
+          "udtName": "bool",
+          "nullable": true,
+          "ordinalPosition": 20,
+          "maxLength": null,
+          "numericPrecision": null,
+          "numericScale": null
+        },
+        {
+          "name": "user_id",
+          "dataType": "bigint",
+          "udtName": "int8",
+          "nullable": true,
+          "ordinalPosition": 21,
+          "maxLength": null,
+          "numericPrecision": 64,
+          "numericScale": 0
+        },
+        {
+          "name": "created_by",
+          "dataType": "bigint",
+          "udtName": "int8",
+          "nullable": true,
+          "ordinalPosition": 22,
+          "maxLength": null,
+          "numericPrecision": 64,
+          "numericScale": 0
+        },
+        {
+          "name": "updated_by",
+          "dataType": "bigint",
+          "udtName": "int8",
+          "nullable": true,
+          "ordinalPosition": 23,
+          "maxLength": null,
+          "numericPrecision": 64,
+          "numericScale": 0
+        },
+        {
+          "name": "created_at",
+          "dataType": "timestamp with time zone",
+          "udtName": "timestamptz",
+          "nullable": true,
+          "ordinalPosition": 24,
+          "maxLength": null,
+          "numericPrecision": null,
+          "numericScale": null
+        },
+        {
+          "name": "updated_at",
+          "dataType": "timestamp with time zone",
+          "udtName": "timestamptz",
+          "nullable": true,
+          "ordinalPosition": 25,
+          "maxLength": null,
+          "numericPrecision": null,
+          "numericScale": null
+        },
+        {
+          "name": "employment_id",
+          "dataType": "bigint",
+          "udtName": "int8",
+          "nullable": true,
+          "ordinalPosition": 26,
+          "maxLength": null,
+          "numericPrecision": 64,
+          "numericScale": 0
+        },
+        {
+          "name": "shifting",
+          "dataType": "boolean",
+          "udtName": "bool",
+          "nullable": false,
+          "ordinalPosition": 27,
+          "maxLength": null,
+          "numericPrecision": null,
+          "numericScale": null
+        },
+        {
+          "name": "ranting_id",
+          "dataType": "bigint",
+          "udtName": "int8",
+          "nullable": true,
+          "ordinalPosition": 28,
+          "maxLength": null,
+          "numericPrecision": 64,
+          "numericScale": 0
+        },
+        {
+          "name": "ranting_group_id",
+          "dataType": "bigint",
+          "udtName": "int8",
+          "nullable": true,
+          "ordinalPosition": 29,
+          "maxLength": null,
+          "numericPrecision": 64,
+          "numericScale": 0
+        },
+        {
+          "name": "npwp",
+          "dataType": "character varying",
+          "udtName": "varchar",
+          "nullable": true,
+          "ordinalPosition": 30,
+          "maxLength": 255,
+          "numericPrecision": null,
+          "numericScale": null
+        },
+        {
+          "name": "bank_id",
+          "dataType": "bigint",
+          "udtName": "int8",
+          "nullable": true,
+          "ordinalPosition": 31,
+          "maxLength": null,
+          "numericPrecision": 64,
+          "numericScale": 0
+        },
+        {
+          "name": "account_number",
+          "dataType": "character varying",
+          "udtName": "varchar",
+          "nullable": true,
+          "ordinalPosition": 32,
+          "maxLength": 255,
+          "numericPrecision": null,
+          "numericScale": null
+        }
+      ]
+    },
+    {
+      "name": "shift_schedules",
+      "primaryKey": [
+        "id"
+      ],
+      "columns": [
+        {
+          "name": "id",
+          "dataType": "bigint",
+          "udtName": "int8",
+          "nullable": false,
+          "ordinalPosition": 1,
+          "maxLength": null,
+          "numericPrecision": 64,
+          "numericScale": 0
+        },
+        {
+          "name": "section_id",
+          "dataType": "bigint",
+          "udtName": "int8",
+          "nullable": false,
+          "ordinalPosition": 2,
+          "maxLength": null,
+          "numericPrecision": 64,
+          "numericScale": 0
+        },
+        {
+          "name": "shift",
+          "dataType": "integer",
+          "udtName": "int4",
+          "nullable": false,
+          "ordinalPosition": 3,
+          "maxLength": null,
+          "numericPrecision": 32,
+          "numericScale": 0
+        },
+        {
+          "name": "shift_id",
+          "dataType": "integer",
+          "udtName": "int4",
+          "nullable": true,
+          "ordinalPosition": 4,
+          "maxLength": null,
+          "numericPrecision": 32,
+          "numericScale": 0
+        },
+        {
+          "name": "date",
+          "dataType": "date",
+          "udtName": "date",
+          "nullable": false,
+          "ordinalPosition": 5,
+          "maxLength": null,
+          "numericPrecision": null,
+          "numericScale": null
+        },
+        {
+          "name": "start_hour",
+          "dataType": "time without time zone",
+          "udtName": "time",
+          "nullable": false,
+          "ordinalPosition": 6,
+          "maxLength": null,
+          "numericPrecision": null,
+          "numericScale": null
+        },
+        {
+          "name": "end_hour",
+          "dataType": "time without time zone",
+          "udtName": "time",
+          "nullable": false,
+          "ordinalPosition": 7,
+          "maxLength": null,
+          "numericPrecision": null,
+          "numericScale": null
+        },
+        {
+          "name": "description",
+          "dataType": "text",
+          "udtName": "text",
+          "nullable": true,
+          "ordinalPosition": 8,
+          "maxLength": null,
+          "numericPrecision": null,
+          "numericScale": null
+        },
+        {
+          "name": "created_by",
+          "dataType": "bigint",
+          "udtName": "int8",
+          "nullable": true,
+          "ordinalPosition": 9,
+          "maxLength": null,
+          "numericPrecision": 64,
+          "numericScale": 0
+        },
+        {
+          "name": "updated_by",
+          "dataType": "bigint",
+          "udtName": "int8",
+          "nullable": true,
+          "ordinalPosition": 10,
+          "maxLength": null,
+          "numericPrecision": 64,
+          "numericScale": 0
+        },
+        {
+          "name": "created_at",
+          "dataType": "timestamp with time zone",
+          "udtName": "timestamptz",
+          "nullable": true,
+          "ordinalPosition": 11,
+          "maxLength": null,
+          "numericPrecision": null,
+          "numericScale": null
+        },
+        {
+          "name": "updated_at",
+          "dataType": "timestamp with time zone",
+          "udtName": "timestamptz",
+          "nullable": true,
+          "ordinalPosition": 12,
+          "maxLength": null,
+          "numericPrecision": null,
+          "numericScale": null
+        },
+        {
+          "name": "do_routine_activity",
+          "dataType": "boolean",
+          "udtName": "bool",
+          "nullable": true,
+          "ordinalPosition": 13,
+          "maxLength": null,
+          "numericPrecision": null,
+          "numericScale": null
+        }
+      ]
+    },
+    {
+      "name": "shift_schedule_personel",
+      "primaryKey": [
+        "id"
+      ],
+      "columns": [
+        {
+          "name": "id",
+          "dataType": "bigint",
+          "udtName": "int8",
+          "nullable": false,
+          "ordinalPosition": 1,
+          "maxLength": null,
+          "numericPrecision": 64,
+          "numericScale": 0
+        },
+        {
+          "name": "schedule_id",
+          "dataType": "bigint",
+          "udtName": "int8",
+          "nullable": false,
+          "ordinalPosition": 2,
+          "maxLength": null,
+          "numericPrecision": 64,
+          "numericScale": 0
+        },
+        {
+          "name": "employee_id",
+          "dataType": "bigint",
+          "udtName": "int8",
+          "nullable": false,
+          "ordinalPosition": 3,
+          "maxLength": null,
+          "numericPrecision": 64,
+          "numericScale": 0
+        },
+        {
+          "name": "is_koreg",
+          "dataType": "boolean",
+          "udtName": "bool",
+          "nullable": true,
+          "ordinalPosition": 4,
+          "maxLength": null,
+          "numericPrecision": null,
+          "numericScale": null
+        },
+        {
+          "name": "created_by",
+          "dataType": "bigint",
+          "udtName": "int8",
+          "nullable": true,
+          "ordinalPosition": 5,
+          "maxLength": null,
+          "numericPrecision": 64,
+          "numericScale": 0
+        },
+        {
+          "name": "updated_by",
+          "dataType": "bigint",
+          "udtName": "int8",
+          "nullable": true,
+          "ordinalPosition": 6,
+          "maxLength": null,
+          "numericPrecision": 64,
+          "numericScale": 0
+        },
+        {
+          "name": "created_at",
+          "dataType": "timestamp with time zone",
+          "udtName": "timestamptz",
+          "nullable": true,
+          "ordinalPosition": 7,
+          "maxLength": null,
+          "numericPrecision": null,
+          "numericScale": null
+        },
+        {
+          "name": "updated_at",
+          "dataType": "timestamp with time zone",
+          "udtName": "timestamptz",
+          "nullable": true,
+          "ordinalPosition": 8,
+          "maxLength": null,
+          "numericPrecision": null,
+          "numericScale": null
+        },
+        {
+          "name": "ranting_group_id",
+          "dataType": "bigint",
+          "udtName": "int8",
+          "nullable": true,
+          "ordinalPosition": 9,
+          "maxLength": null,
+          "numericPrecision": 64,
+          "numericScale": 0
+        }
+      ]
+    },
+    {
+      "name": "monitoring_transactions",
+      "primaryKey": [
+        "id"
+      ],
+      "columns": [
+        {
+          "name": "id",
+          "dataType": "bigint",
+          "udtName": "int8",
+          "nullable": false,
+          "ordinalPosition": 1,
+          "maxLength": null,
+          "numericPrecision": 64,
+          "numericScale": 0
+        },
+        {
+          "name": "section_id",
+          "dataType": "bigint",
+          "udtName": "int8",
+          "nullable": false,
+          "ordinalPosition": 2,
+          "maxLength": null,
+          "numericPrecision": 64,
+          "numericScale": 0
+        },
+        {
+          "name": "gate_id",
+          "dataType": "bigint",
+          "udtName": "int8",
+          "nullable": false,
+          "ordinalPosition": 3,
+          "maxLength": null,
+          "numericPrecision": 64,
+          "numericScale": 0
+        },
+        {
+          "name": "date",
+          "dataType": "date",
+          "udtName": "date",
+          "nullable": true,
+          "ordinalPosition": 4,
+          "maxLength": null,
+          "numericPrecision": null,
+          "numericScale": null
+        },
+        {
+          "name": "schedule_id",
+          "dataType": "bigint",
+          "udtName": "int8",
+          "nullable": true,
+          "ordinalPosition": 5,
+          "maxLength": null,
+          "numericPrecision": 64,
+          "numericScale": 0
+        },
+        {
+          "name": "activity_id",
+          "dataType": "bigint",
+          "udtName": "int8",
+          "nullable": true,
+          "ordinalPosition": 6,
+          "maxLength": null,
+          "numericPrecision": 64,
+          "numericScale": 0
+        },
+        {
+          "name": "description",
+          "dataType": "text",
+          "udtName": "text",
+          "nullable": true,
+          "ordinalPosition": 7,
+          "maxLength": null,
+          "numericPrecision": null,
+          "numericScale": null
+        },
+        {
+          "name": "officer_id",
+          "dataType": "bigint",
+          "udtName": "int8",
+          "nullable": false,
+          "ordinalPosition": 8,
+          "maxLength": null,
+          "numericPrecision": 64,
+          "numericScale": 0
+        },
+        {
+          "name": "total_booth",
+          "dataType": "integer",
+          "udtName": "int4",
+          "nullable": false,
+          "ordinalPosition": 9,
+          "maxLength": null,
+          "numericPrecision": 32,
+          "numericScale": 0
+        },
+        {
+          "name": "total_longbooth",
+          "dataType": "integer",
+          "udtName": "int4",
+          "nullable": false,
+          "ordinalPosition": 10,
+          "maxLength": null,
+          "numericPrecision": 32,
+          "numericScale": 0
+        },
+        {
+          "name": "status_code",
+          "dataType": "character varying",
+          "udtName": "varchar",
+          "nullable": true,
+          "ordinalPosition": 11,
+          "maxLength": 255,
+          "numericPrecision": null,
+          "numericScale": null
+        },
+        {
+          "name": "verified_by",
+          "dataType": "bigint",
+          "udtName": "int8",
+          "nullable": true,
+          "ordinalPosition": 12,
+          "maxLength": null,
+          "numericPrecision": 64,
+          "numericScale": 0
+        },
+        {
+          "name": "verified_at",
+          "dataType": "timestamp with time zone",
+          "udtName": "timestamptz",
+          "nullable": true,
+          "ordinalPosition": 13,
+          "maxLength": null,
+          "numericPrecision": null,
+          "numericScale": null
+        },
+        {
+          "name": "verified_description",
+          "dataType": "text",
+          "udtName": "text",
+          "nullable": true,
+          "ordinalPosition": 14,
+          "maxLength": null,
+          "numericPrecision": null,
+          "numericScale": null
+        },
+        {
+          "name": "created_by",
+          "dataType": "bigint",
+          "udtName": "int8",
+          "nullable": true,
+          "ordinalPosition": 15,
+          "maxLength": null,
+          "numericPrecision": 64,
+          "numericScale": 0
+        },
+        {
+          "name": "updated_by",
+          "dataType": "bigint",
+          "udtName": "int8",
+          "nullable": true,
+          "ordinalPosition": 16,
+          "maxLength": null,
+          "numericPrecision": 64,
+          "numericScale": 0
+        },
+        {
+          "name": "created_at",
+          "dataType": "timestamp with time zone",
+          "udtName": "timestamptz",
+          "nullable": true,
+          "ordinalPosition": 17,
+          "maxLength": null,
+          "numericPrecision": null,
+          "numericScale": null
+        },
+        {
+          "name": "updated_at",
+          "dataType": "timestamp with time zone",
+          "udtName": "timestamptz",
+          "nullable": true,
+          "ordinalPosition": 18,
+          "maxLength": null,
+          "numericPrecision": null,
+          "numericScale": null
+        },
+        {
+          "name": "ranting_id",
+          "dataType": "bigint",
+          "udtName": "int8",
+          "nullable": true,
+          "ordinalPosition": 19,
+          "maxLength": null,
+          "numericPrecision": 64,
+          "numericScale": 0
+        }
+      ]
+    },
+    {
+      "name": "monitoring_transaction_details",
+      "primaryKey": [
+        "id"
+      ],
+      "columns": [
+        {
+          "name": "id",
+          "dataType": "bigint",
+          "udtName": "int8",
+          "nullable": false,
+          "ordinalPosition": 1,
+          "maxLength": null,
+          "numericPrecision": 64,
+          "numericScale": 0
+        },
+        {
+          "name": "transaction_id",
+          "dataType": "bigint",
+          "udtName": "int8",
+          "nullable": false,
+          "ordinalPosition": 2,
+          "maxLength": null,
+          "numericPrecision": 64,
+          "numericScale": 0
+        },
+        {
+          "name": "type",
+          "dataType": "character varying",
+          "udtName": "varchar",
+          "nullable": false,
+          "ordinalPosition": 3,
+          "maxLength": 255,
+          "numericPrecision": null,
+          "numericScale": null
+        },
+        {
+          "name": "booth_number",
+          "dataType": "integer",
+          "udtName": "int4",
+          "nullable": false,
+          "ordinalPosition": 4,
+          "maxLength": null,
+          "numericPrecision": 32,
+          "numericScale": 0
+        },
+        {
+          "name": "sample_number",
+          "dataType": "integer",
+          "udtName": "int4",
+          "nullable": false,
+          "ordinalPosition": 5,
+          "maxLength": null,
+          "numericPrecision": 32,
+          "numericScale": 0
+        },
+        {
+          "name": "vehicle_queue",
+          "dataType": "integer",
+          "udtName": "int4",
+          "nullable": true,
+          "ordinalPosition": 6,
+          "maxLength": null,
+          "numericPrecision": 32,
+          "numericScale": 0
+        },
+        {
+          "name": "transaction_duration",
+          "dataType": "double precision",
+          "udtName": "float8",
+          "nullable": true,
+          "ordinalPosition": 7,
+          "maxLength": null,
+          "numericPrecision": 53,
+          "numericScale": null
+        },
+        {
+          "name": "vehicle_type",
+          "dataType": "character varying",
+          "udtName": "varchar",
+          "nullable": true,
+          "ordinalPosition": 8,
+          "maxLength": 255,
+          "numericPrecision": null,
+          "numericScale": null
+        },
+        {
+          "name": "vehicle_class_id",
+          "dataType": "bigint",
+          "udtName": "int8",
+          "nullable": true,
+          "ordinalPosition": 9,
+          "maxLength": null,
+          "numericPrecision": 64,
+          "numericScale": 0
+        },
+        {
+          "name": "payment_id",
+          "dataType": "bigint",
+          "udtName": "int8",
+          "nullable": true,
+          "ordinalPosition": 10,
+          "maxLength": null,
+          "numericPrecision": 64,
+          "numericScale": 0
+        },
+        {
+          "name": "description",
+          "dataType": "text",
+          "udtName": "text",
+          "nullable": true,
+          "ordinalPosition": 11,
+          "maxLength": null,
+          "numericPrecision": null,
+          "numericScale": null
+        },
+        {
+          "name": "created_by",
+          "dataType": "bigint",
+          "udtName": "int8",
+          "nullable": true,
+          "ordinalPosition": 12,
+          "maxLength": null,
+          "numericPrecision": 64,
+          "numericScale": 0
+        },
+        {
+          "name": "updated_by",
+          "dataType": "bigint",
+          "udtName": "int8",
+          "nullable": true,
+          "ordinalPosition": 13,
+          "maxLength": null,
+          "numericPrecision": 64,
+          "numericScale": 0
+        },
+        {
+          "name": "created_at",
+          "dataType": "timestamp with time zone",
+          "udtName": "timestamptz",
+          "nullable": true,
+          "ordinalPosition": 14,
+          "maxLength": null,
+          "numericPrecision": null,
+          "numericScale": null
+        },
+        {
+          "name": "updated_at",
+          "dataType": "timestamp with time zone",
+          "udtName": "timestamptz",
+          "nullable": true,
+          "ordinalPosition": 15,
+          "maxLength": null,
+          "numericPrecision": null,
+          "numericScale": null
+        }
+      ]
+    },
+    {
+      "name": "toll_volume_revenue",
+      "primaryKey": [
+        "id"
+      ],
+      "columns": [
+        {
+          "name": "id",
+          "dataType": "bigint",
+          "udtName": "int8",
+          "nullable": false,
+          "ordinalPosition": 1,
+          "maxLength": null,
+          "numericPrecision": 64,
+          "numericScale": 0
+        },
+        {
+          "name": "section_id",
+          "dataType": "bigint",
+          "udtName": "int8",
+          "nullable": false,
+          "ordinalPosition": 2,
+          "maxLength": null,
+          "numericPrecision": 64,
+          "numericScale": 0
+        },
+        {
+          "name": "gate_id",
+          "dataType": "bigint",
+          "udtName": "int8",
+          "nullable": true,
+          "ordinalPosition": 3,
+          "maxLength": null,
+          "numericPrecision": 64,
+          "numericScale": 0
+        },
+        {
+          "name": "date",
+          "dataType": "date",
+          "udtName": "date",
+          "nullable": true,
+          "ordinalPosition": 4,
+          "maxLength": null,
+          "numericPrecision": null,
+          "numericScale": null
+        },
+        {
+          "name": "schedule_id",
+          "dataType": "bigint",
+          "udtName": "int8",
+          "nullable": true,
+          "ordinalPosition": 5,
+          "maxLength": null,
+          "numericPrecision": 64,
+          "numericScale": 0
+        },
+        {
+          "name": "activity_id",
+          "dataType": "bigint",
+          "udtName": "int8",
+          "nullable": true,
+          "ordinalPosition": 6,
+          "maxLength": null,
+          "numericPrecision": 64,
+          "numericScale": 0
+        },
+        {
+          "name": "description",
+          "dataType": "text",
+          "udtName": "text",
+          "nullable": true,
+          "ordinalPosition": 7,
+          "maxLength": null,
+          "numericPrecision": null,
+          "numericScale": null
+        },
+        {
+          "name": "officer_id",
+          "dataType": "bigint",
+          "udtName": "int8",
+          "nullable": false,
+          "ordinalPosition": 8,
+          "maxLength": null,
+          "numericPrecision": 64,
+          "numericScale": 0
+        },
+        {
+          "name": "status_code",
+          "dataType": "character varying",
+          "udtName": "varchar",
+          "nullable": true,
+          "ordinalPosition": 9,
+          "maxLength": 255,
+          "numericPrecision": null,
+          "numericScale": null
+        },
+        {
+          "name": "verified_by",
+          "dataType": "bigint",
+          "udtName": "int8",
+          "nullable": true,
+          "ordinalPosition": 10,
+          "maxLength": null,
+          "numericPrecision": 64,
+          "numericScale": 0
+        },
+        {
+          "name": "verified_at",
+          "dataType": "timestamp with time zone",
+          "udtName": "timestamptz",
+          "nullable": true,
+          "ordinalPosition": 11,
+          "maxLength": null,
+          "numericPrecision": null,
+          "numericScale": null
+        },
+        {
+          "name": "verified_description",
+          "dataType": "text",
+          "udtName": "text",
+          "nullable": true,
+          "ordinalPosition": 12,
+          "maxLength": null,
+          "numericPrecision": null,
+          "numericScale": null
+        },
+        {
+          "name": "created_by",
+          "dataType": "bigint",
+          "udtName": "int8",
+          "nullable": true,
+          "ordinalPosition": 13,
+          "maxLength": null,
+          "numericPrecision": 64,
+          "numericScale": 0
+        },
+        {
+          "name": "updated_by",
+          "dataType": "bigint",
+          "udtName": "int8",
+          "nullable": true,
+          "ordinalPosition": 14,
+          "maxLength": null,
+          "numericPrecision": 64,
+          "numericScale": 0
+        },
+        {
+          "name": "created_at",
+          "dataType": "timestamp with time zone",
+          "udtName": "timestamptz",
+          "nullable": true,
+          "ordinalPosition": 15,
+          "maxLength": null,
+          "numericPrecision": null,
+          "numericScale": null
+        },
+        {
+          "name": "updated_at",
+          "dataType": "timestamp with time zone",
+          "udtName": "timestamptz",
+          "nullable": true,
+          "ordinalPosition": 16,
+          "maxLength": null,
+          "numericPrecision": null,
+          "numericScale": null
+        },
+        {
+          "name": "ranting_id",
+          "dataType": "bigint",
+          "udtName": "int8",
+          "nullable": true,
+          "ordinalPosition": 17,
+          "maxLength": null,
+          "numericPrecision": 64,
+          "numericScale": 0
+        },
+        {
+          "name": "total_weighted_traffic",
+          "dataType": "bigint",
+          "udtName": "int8",
+          "nullable": true,
+          "ordinalPosition": 18,
+          "maxLength": null,
+          "numericPrecision": 64,
+          "numericScale": 0
+        },
+        {
+          "name": "total_traffic",
+          "dataType": "bigint",
+          "udtName": "int8",
+          "nullable": true,
+          "ordinalPosition": 19,
+          "maxLength": null,
+          "numericPrecision": 64,
+          "numericScale": 0
+        },
+        {
+          "name": "total_revenue",
+          "dataType": "double precision",
+          "udtName": "float8",
+          "nullable": true,
+          "ordinalPosition": 20,
+          "maxLength": null,
+          "numericPrecision": 53,
+          "numericScale": null
+        }
+      ]
+    },
+    {
+      "name": "toll_traffic_volumes",
+      "primaryKey": [
+        "id"
+      ],
+      "columns": [
+        {
+          "name": "id",
+          "dataType": "bigint",
+          "udtName": "int8",
+          "nullable": false,
+          "ordinalPosition": 1,
+          "maxLength": null,
+          "numericPrecision": 64,
+          "numericScale": 0
+        },
+        {
+          "name": "transaction_id",
+          "dataType": "bigint",
+          "udtName": "int8",
+          "nullable": false,
+          "ordinalPosition": 2,
+          "maxLength": null,
+          "numericPrecision": 64,
+          "numericScale": 0
+        },
+        {
+          "name": "vehicle_class_id",
+          "dataType": "bigint",
+          "udtName": "int8",
+          "nullable": true,
+          "ordinalPosition": 3,
+          "maxLength": null,
+          "numericPrecision": 64,
+          "numericScale": 0
+        },
+        {
+          "name": "total",
+          "dataType": "bigint",
+          "udtName": "int8",
+          "nullable": true,
+          "ordinalPosition": 4,
+          "maxLength": null,
+          "numericPrecision": 64,
+          "numericScale": 0
+        },
+        {
+          "name": "created_by",
+          "dataType": "bigint",
+          "udtName": "int8",
+          "nullable": true,
+          "ordinalPosition": 5,
+          "maxLength": null,
+          "numericPrecision": 64,
+          "numericScale": 0
+        },
+        {
+          "name": "updated_by",
+          "dataType": "bigint",
+          "udtName": "int8",
+          "nullable": true,
+          "ordinalPosition": 6,
+          "maxLength": null,
+          "numericPrecision": 64,
+          "numericScale": 0
+        },
+        {
+          "name": "created_at",
+          "dataType": "timestamp with time zone",
+          "udtName": "timestamptz",
+          "nullable": true,
+          "ordinalPosition": 7,
+          "maxLength": null,
+          "numericPrecision": null,
+          "numericScale": null
+        },
+        {
+          "name": "updated_at",
+          "dataType": "timestamp with time zone",
+          "udtName": "timestamptz",
+          "nullable": true,
+          "ordinalPosition": 8,
+          "maxLength": null,
+          "numericPrecision": null,
+          "numericScale": null
+        }
+      ]
+    },
+    {
+      "name": "incidents",
+      "primaryKey": [
+        "id"
+      ],
+      "columns": [
+        {
+          "name": "id",
+          "dataType": "bigint",
+          "udtName": "int8",
+          "nullable": false,
+          "ordinalPosition": 1,
+          "maxLength": null,
+          "numericPrecision": 64,
+          "numericScale": 0
+        },
+        {
+          "name": "section_id",
+          "dataType": "bigint",
+          "udtName": "int8",
+          "nullable": true,
+          "ordinalPosition": 2,
+          "maxLength": null,
+          "numericPrecision": 64,
+          "numericScale": 0
+        },
+        {
+          "name": "report_number",
+          "dataType": "character varying",
+          "udtName": "varchar",
+          "nullable": true,
+          "ordinalPosition": 3,
+          "maxLength": 255,
+          "numericPrecision": null,
+          "numericScale": null
+        },
+        {
+          "name": "incident_name",
+          "dataType": "character varying",
+          "udtName": "varchar",
+          "nullable": false,
+          "ordinalPosition": 4,
+          "maxLength": 255,
+          "numericPrecision": null,
+          "numericScale": null
+        },
+        {
+          "name": "accident_date",
+          "dataType": "date",
+          "udtName": "date",
+          "nullable": false,
+          "ordinalPosition": 5,
+          "maxLength": null,
+          "numericPrecision": null,
+          "numericScale": null
+        },
+        {
+          "name": "accident_time",
+          "dataType": "time without time zone",
+          "udtName": "time",
+          "nullable": true,
+          "ordinalPosition": 6,
+          "maxLength": null,
+          "numericPrecision": null,
+          "numericScale": null
+        },
+        {
+          "name": "shift",
+          "dataType": "integer",
+          "udtName": "int4",
+          "nullable": true,
+          "ordinalPosition": 7,
+          "maxLength": null,
+          "numericPrecision": 32,
+          "numericScale": 0
+        },
+        {
+          "name": "call_sign",
+          "dataType": "character varying",
+          "udtName": "varchar",
+          "nullable": true,
+          "ordinalPosition": 8,
+          "maxLength": 255,
+          "numericPrecision": null,
+          "numericScale": null
+        },
+        {
+          "name": "source_id",
+          "dataType": "bigint",
+          "udtName": "int8",
+          "nullable": true,
+          "ordinalPosition": 9,
+          "maxLength": null,
+          "numericPrecision": 64,
+          "numericScale": 0
+        },
+        {
+          "name": "is_accident",
+          "dataType": "boolean",
+          "udtName": "bool",
+          "nullable": false,
+          "ordinalPosition": 10,
+          "maxLength": null,
+          "numericPrecision": null,
+          "numericScale": null
+        },
+        {
+          "name": "description",
+          "dataType": "text",
+          "udtName": "text",
+          "nullable": true,
+          "ordinalPosition": 11,
+          "maxLength": null,
+          "numericPrecision": null,
+          "numericScale": null
+        },
+        {
+          "name": "service_type_ids",
+          "dataType": "json",
+          "udtName": "json",
+          "nullable": true,
+          "ordinalPosition": 12,
+          "maxLength": null,
+          "numericPrecision": null,
+          "numericScale": null
+        },
+        {
+          "name": "created_by",
+          "dataType": "bigint",
+          "udtName": "int8",
+          "nullable": true,
+          "ordinalPosition": 13,
+          "maxLength": null,
+          "numericPrecision": 64,
+          "numericScale": 0
+        },
+        {
+          "name": "updated_by",
+          "dataType": "bigint",
+          "udtName": "int8",
+          "nullable": true,
+          "ordinalPosition": 14,
+          "maxLength": null,
+          "numericPrecision": 64,
+          "numericScale": 0
+        },
+        {
+          "name": "created_at",
+          "dataType": "timestamp with time zone",
+          "udtName": "timestamptz",
+          "nullable": true,
+          "ordinalPosition": 15,
+          "maxLength": null,
+          "numericPrecision": null,
+          "numericScale": null
+        },
+        {
+          "name": "updated_at",
+          "dataType": "timestamp with time zone",
+          "udtName": "timestamptz",
+          "nullable": true,
+          "ordinalPosition": 16,
+          "maxLength": null,
+          "numericPrecision": null,
+          "numericScale": null
+        },
+        {
+          "name": "longitude",
+          "dataType": "character varying",
+          "udtName": "varchar",
+          "nullable": true,
+          "ordinalPosition": 17,
+          "maxLength": 255,
+          "numericPrecision": null,
+          "numericScale": null
+        },
+        {
+          "name": "latitude",
+          "dataType": "character varying",
+          "udtName": "varchar",
+          "nullable": true,
+          "ordinalPosition": 18,
+          "maxLength": 255,
+          "numericPrecision": null,
+          "numericScale": null
+        },
+        {
+          "name": "km_location",
+          "dataType": "character varying",
+          "udtName": "varchar",
+          "nullable": false,
+          "ordinalPosition": 19,
+          "maxLength": 255,
+          "numericPrecision": null,
+          "numericScale": null
+        },
+        {
+          "name": "track_a_to",
+          "dataType": "character varying",
+          "udtName": "varchar",
+          "nullable": true,
+          "ordinalPosition": 20,
+          "maxLength": 255,
+          "numericPrecision": null,
+          "numericScale": null
+        },
+        {
+          "name": "track_b_to",
+          "dataType": "character varying",
+          "udtName": "varchar",
+          "nullable": true,
+          "ordinalPosition": 21,
+          "maxLength": 255,
+          "numericPrecision": null,
+          "numericScale": null
+        },
+        {
+          "name": "track",
+          "dataType": "character varying",
+          "udtName": "varchar",
+          "nullable": false,
+          "ordinalPosition": 22,
+          "maxLength": 255,
+          "numericPrecision": null,
+          "numericScale": null
+        },
+        {
+          "name": "is_shared",
+          "dataType": "boolean",
+          "udtName": "bool",
+          "nullable": true,
+          "ordinalPosition": 23,
+          "maxLength": null,
+          "numericPrecision": null,
+          "numericScale": null
+        },
+        {
+          "name": "has_victim",
+          "dataType": "boolean",
+          "udtName": "bool",
+          "nullable": true,
+          "ordinalPosition": 24,
+          "maxLength": null,
+          "numericPrecision": null,
+          "numericScale": null
+        }
+      ]
+    },
+    {
+      "name": "incident_actions",
+      "primaryKey": [
+        "id"
+      ],
+      "columns": [
+        {
+          "name": "id",
+          "dataType": "bigint",
+          "udtName": "int8",
+          "nullable": false,
+          "ordinalPosition": 1,
+          "maxLength": null,
+          "numericPrecision": 64,
+          "numericScale": 0
+        },
+        {
+          "name": "incident_id",
+          "dataType": "bigint",
+          "udtName": "int8",
+          "nullable": false,
+          "ordinalPosition": 2,
+          "maxLength": null,
+          "numericPrecision": 64,
+          "numericScale": 0
+        },
+        {
+          "name": "service_type_id",
+          "dataType": "bigint",
+          "udtName": "int8",
+          "nullable": true,
+          "ordinalPosition": 3,
+          "maxLength": null,
+          "numericPrecision": 64,
+          "numericScale": 0
+        },
+        {
+          "name": "vehicle_id",
+          "dataType": "bigint",
+          "udtName": "int8",
+          "nullable": true,
+          "ordinalPosition": 4,
+          "maxLength": null,
+          "numericPrecision": 64,
+          "numericScale": 0
+        },
+        {
+          "name": "officer_id",
+          "dataType": "bigint",
+          "udtName": "int8",
+          "nullable": true,
+          "ordinalPosition": 5,
+          "maxLength": null,
+          "numericPrecision": 64,
+          "numericScale": 0
+        },
+        {
+          "name": "stage",
+          "dataType": "integer",
+          "udtName": "int4",
+          "nullable": true,
+          "ordinalPosition": 6,
+          "maxLength": null,
+          "numericPrecision": 32,
+          "numericScale": 0
+        },
+        {
+          "name": "created_by",
+          "dataType": "bigint",
+          "udtName": "int8",
+          "nullable": true,
+          "ordinalPosition": 7,
+          "maxLength": null,
+          "numericPrecision": 64,
+          "numericScale": 0
+        },
+        {
+          "name": "updated_by",
+          "dataType": "bigint",
+          "udtName": "int8",
+          "nullable": true,
+          "ordinalPosition": 8,
+          "maxLength": null,
+          "numericPrecision": 64,
+          "numericScale": 0
+        },
+        {
+          "name": "created_at",
+          "dataType": "timestamp with time zone",
+          "udtName": "timestamptz",
+          "nullable": true,
+          "ordinalPosition": 9,
+          "maxLength": null,
+          "numericPrecision": null,
+          "numericScale": null
+        },
+        {
+          "name": "updated_at",
+          "dataType": "timestamp with time zone",
+          "udtName": "timestamptz",
+          "nullable": true,
+          "ordinalPosition": 10,
+          "maxLength": null,
+          "numericPrecision": null,
+          "numericScale": null
+        }
+      ]
+    },
+    {
+      "name": "accident_reports",
+      "primaryKey": [
+        "id"
+      ],
+      "columns": [
+        {
+          "name": "id",
+          "dataType": "bigint",
+          "udtName": "int8",
+          "nullable": false,
+          "ordinalPosition": 1,
+          "maxLength": null,
+          "numericPrecision": 64,
+          "numericScale": 0
+        },
+        {
+          "name": "incident_id",
+          "dataType": "bigint",
+          "udtName": "int8",
+          "nullable": false,
+          "ordinalPosition": 2,
+          "maxLength": null,
+          "numericPrecision": 64,
+          "numericScale": 0
+        },
+        {
+          "name": "report_number",
+          "dataType": "character varying",
+          "udtName": "varchar",
+          "nullable": true,
+          "ordinalPosition": 3,
+          "maxLength": 255,
+          "numericPrecision": null,
+          "numericScale": null
+        },
+        {
+          "name": "arrived_time",
+          "dataType": "time without time zone",
+          "udtName": "time",
+          "nullable": true,
+          "ordinalPosition": 4,
+          "maxLength": null,
+          "numericPrecision": null,
+          "numericScale": null
+        },
+        {
+          "name": "handle_completed_time",
+          "dataType": "time without time zone",
+          "udtName": "time",
+          "nullable": true,
+          "ordinalPosition": 5,
+          "maxLength": null,
+          "numericPrecision": null,
+          "numericScale": null
+        },
+        {
+          "name": "lane_open_time",
+          "dataType": "time without time zone",
+          "udtName": "time",
+          "nullable": true,
+          "ordinalPosition": 6,
+          "maxLength": null,
+          "numericPrecision": null,
+          "numericScale": null
+        },
+        {
+          "name": "left_location_time",
+          "dataType": "time without time zone",
+          "udtName": "time",
+          "nullable": true,
+          "ordinalPosition": 7,
+          "maxLength": null,
+          "numericPrecision": null,
+          "numericScale": null
+        },
+        {
+          "name": "wind_id",
+          "dataType": "bigint",
+          "udtName": "int8",
+          "nullable": true,
+          "ordinalPosition": 8,
+          "maxLength": null,
+          "numericPrecision": 64,
+          "numericScale": 0
+        },
+        {
+          "name": "weather_id",
+          "dataType": "bigint",
+          "udtName": "int8",
+          "nullable": true,
+          "ordinalPosition": 9,
+          "maxLength": null,
+          "numericPrecision": 64,
+          "numericScale": 0
+        },
+        {
+          "name": "is_lighting_exist",
+          "dataType": "boolean",
+          "udtName": "bool",
+          "nullable": false,
+          "ordinalPosition": 10,
+          "maxLength": null,
+          "numericPrecision": null,
+          "numericScale": null
+        },
+        {
+          "name": "road_surface_ids",
+          "dataType": "json",
+          "udtName": "json",
+          "nullable": true,
+          "ordinalPosition": 11,
+          "maxLength": null,
+          "numericPrecision": null,
+          "numericScale": null
+        },
+        {
+          "name": "road_geometry_ids",
+          "dataType": "json",
+          "udtName": "json",
+          "nullable": true,
+          "ordinalPosition": 12,
+          "maxLength": null,
+          "numericPrecision": null,
+          "numericScale": null
+        },
+        {
+          "name": "lane_closure_id",
+          "dataType": "bigint",
+          "udtName": "int8",
+          "nullable": true,
+          "ordinalPosition": 13,
+          "maxLength": null,
+          "numericPrecision": 64,
+          "numericScale": 0
+        },
+        {
+          "name": "damage_type_ids",
+          "dataType": "json",
+          "udtName": "json",
+          "nullable": true,
+          "ordinalPosition": 14,
+          "maxLength": null,
+          "numericPrecision": null,
+          "numericScale": null
+        },
+        {
+          "name": "description",
+          "dataType": "text",
+          "udtName": "text",
+          "nullable": true,
+          "ordinalPosition": 15,
+          "maxLength": null,
+          "numericPrecision": null,
+          "numericScale": null
+        },
+        {
+          "name": "status_code",
+          "dataType": "character varying",
+          "udtName": "varchar",
+          "nullable": false,
+          "ordinalPosition": 16,
+          "maxLength": 255,
+          "numericPrecision": null,
+          "numericScale": null
+        },
+        {
+          "name": "verified_by",
+          "dataType": "bigint",
+          "udtName": "int8",
+          "nullable": true,
+          "ordinalPosition": 17,
+          "maxLength": null,
+          "numericPrecision": 64,
+          "numericScale": 0
+        },
+        {
+          "name": "verified_at",
+          "dataType": "timestamp with time zone",
+          "udtName": "timestamptz",
+          "nullable": true,
+          "ordinalPosition": 18,
+          "maxLength": null,
+          "numericPrecision": null,
+          "numericScale": null
+        },
+        {
+          "name": "verified_description",
+          "dataType": "text",
+          "udtName": "text",
+          "nullable": true,
+          "ordinalPosition": 19,
+          "maxLength": null,
+          "numericPrecision": null,
+          "numericScale": null
+        },
+        {
+          "name": "created_by",
+          "dataType": "bigint",
+          "udtName": "int8",
+          "nullable": true,
+          "ordinalPosition": 20,
+          "maxLength": null,
+          "numericPrecision": 64,
+          "numericScale": 0
+        },
+        {
+          "name": "updated_by",
+          "dataType": "bigint",
+          "udtName": "int8",
+          "nullable": true,
+          "ordinalPosition": 21,
+          "maxLength": null,
+          "numericPrecision": 64,
+          "numericScale": 0
+        },
+        {
+          "name": "created_at",
+          "dataType": "timestamp with time zone",
+          "udtName": "timestamptz",
+          "nullable": true,
+          "ordinalPosition": 22,
+          "maxLength": null,
+          "numericPrecision": null,
+          "numericScale": null
+        },
+        {
+          "name": "updated_at",
+          "dataType": "timestamp with time zone",
+          "udtName": "timestamptz",
+          "nullable": true,
+          "ordinalPosition": 23,
+          "maxLength": null,
+          "numericPrecision": null,
+          "numericScale": null
+        },
+        {
+          "name": "accident_causes_ids",
+          "dataType": "json",
+          "udtName": "json",
+          "nullable": true,
+          "ordinalPosition": 24,
+          "maxLength": null,
+          "numericPrecision": null,
+          "numericScale": null
+        }
+      ]
+    },
+    {
+      "name": "inspection_schedules",
+      "primaryKey": [
+        "id"
+      ],
+      "columns": [
+        {
+          "name": "id",
+          "dataType": "bigint",
+          "udtName": "int8",
+          "nullable": false,
+          "ordinalPosition": 1,
+          "maxLength": null,
+          "numericPrecision": 64,
+          "numericScale": 0
+        },
+        {
+          "name": "section_id",
+          "dataType": "bigint",
+          "udtName": "int8",
+          "nullable": false,
+          "ordinalPosition": 2,
+          "maxLength": null,
+          "numericPrecision": 64,
+          "numericScale": 0
+        },
+        {
+          "name": "start_date",
+          "dataType": "date",
+          "udtName": "date",
+          "nullable": false,
+          "ordinalPosition": 3,
+          "maxLength": null,
+          "numericPrecision": null,
+          "numericScale": null
+        },
+        {
+          "name": "end_date",
+          "dataType": "date",
+          "udtName": "date",
+          "nullable": false,
+          "ordinalPosition": 4,
+          "maxLength": null,
+          "numericPrecision": null,
+          "numericScale": null
+        },
+        {
+          "name": "description",
+          "dataType": "text",
+          "udtName": "text",
+          "nullable": true,
+          "ordinalPosition": 5,
+          "maxLength": null,
+          "numericPrecision": null,
+          "numericScale": null
+        },
+        {
+          "name": "created_by",
+          "dataType": "bigint",
+          "udtName": "int8",
+          "nullable": true,
+          "ordinalPosition": 6,
+          "maxLength": null,
+          "numericPrecision": 64,
+          "numericScale": 0
+        },
+        {
+          "name": "updated_by",
+          "dataType": "bigint",
+          "udtName": "int8",
+          "nullable": true,
+          "ordinalPosition": 7,
+          "maxLength": null,
+          "numericPrecision": 64,
+          "numericScale": 0
+        },
+        {
+          "name": "created_at",
+          "dataType": "timestamp with time zone",
+          "udtName": "timestamptz",
+          "nullable": true,
+          "ordinalPosition": 8,
+          "maxLength": null,
+          "numericPrecision": null,
+          "numericScale": null
+        },
+        {
+          "name": "updated_at",
+          "dataType": "timestamp with time zone",
+          "udtName": "timestamptz",
+          "nullable": true,
+          "ordinalPosition": 9,
+          "maxLength": null,
+          "numericPrecision": null,
+          "numericScale": null
+        },
+        {
+          "name": "ranting_id",
+          "dataType": "bigint",
+          "udtName": "int8",
+          "nullable": true,
+          "ordinalPosition": 10,
+          "maxLength": null,
+          "numericPrecision": 64,
+          "numericScale": 0
+        },
+        {
+          "name": "inspection_form_id",
+          "dataType": "bigint",
+          "udtName": "int8",
+          "nullable": true,
+          "ordinalPosition": 11,
+          "maxLength": null,
+          "numericPrecision": 64,
+          "numericScale": 0
+        },
+        {
+          "name": "schedule_type",
+          "dataType": "character varying",
+          "udtName": "varchar",
+          "nullable": false,
+          "ordinalPosition": 12,
+          "maxLength": 255,
+          "numericPrecision": null,
+          "numericScale": null
+        }
+      ]
+    },
+    {
+      "name": "inspection_schedule_assets",
+      "primaryKey": [
+        "id"
+      ],
+      "columns": [
+        {
+          "name": "id",
+          "dataType": "bigint",
+          "udtName": "int8",
+          "nullable": false,
+          "ordinalPosition": 1,
+          "maxLength": null,
+          "numericPrecision": 64,
+          "numericScale": 0
+        },
+        {
+          "name": "schedule_id",
+          "dataType": "bigint",
+          "udtName": "int8",
+          "nullable": false,
+          "ordinalPosition": 2,
+          "maxLength": null,
+          "numericPrecision": 64,
+          "numericScale": 0
+        },
+        {
+          "name": "asset_id",
+          "dataType": "bigint",
+          "udtName": "int8",
+          "nullable": false,
+          "ordinalPosition": 3,
+          "maxLength": null,
+          "numericPrecision": 64,
+          "numericScale": 0
+        },
+        {
+          "name": "sta_start",
+          "dataType": "double precision",
+          "udtName": "float8",
+          "nullable": false,
+          "ordinalPosition": 4,
+          "maxLength": null,
+          "numericPrecision": 53,
+          "numericScale": null
+        },
+        {
+          "name": "sta_end",
+          "dataType": "double precision",
+          "udtName": "float8",
+          "nullable": false,
+          "ordinalPosition": 5,
+          "maxLength": null,
+          "numericPrecision": 53,
+          "numericScale": null
+        },
+        {
+          "name": "description",
+          "dataType": "text",
+          "udtName": "text",
+          "nullable": true,
+          "ordinalPosition": 6,
+          "maxLength": null,
+          "numericPrecision": null,
+          "numericScale": null
+        },
+        {
+          "name": "created_by",
+          "dataType": "bigint",
+          "udtName": "int8",
+          "nullable": true,
+          "ordinalPosition": 7,
+          "maxLength": null,
+          "numericPrecision": 64,
+          "numericScale": 0
+        },
+        {
+          "name": "updated_by",
+          "dataType": "bigint",
+          "udtName": "int8",
+          "nullable": true,
+          "ordinalPosition": 8,
+          "maxLength": null,
+          "numericPrecision": 64,
+          "numericScale": 0
+        },
+        {
+          "name": "created_at",
+          "dataType": "timestamp with time zone",
+          "udtName": "timestamptz",
+          "nullable": true,
+          "ordinalPosition": 9,
+          "maxLength": null,
+          "numericPrecision": null,
+          "numericScale": null
+        },
+        {
+          "name": "updated_at",
+          "dataType": "timestamp with time zone",
+          "udtName": "timestamptz",
+          "nullable": true,
+          "ordinalPosition": 10,
+          "maxLength": null,
+          "numericPrecision": null,
+          "numericScale": null
+        }
+      ]
+    },
+    {
+      "name": "inspections",
+      "primaryKey": [
+        "id"
+      ],
+      "columns": [
+        {
+          "name": "id",
+          "dataType": "bigint",
+          "udtName": "int8",
+          "nullable": false,
+          "ordinalPosition": 1,
+          "maxLength": null,
+          "numericPrecision": 64,
+          "numericScale": 0
+        },
+        {
+          "name": "section_id",
+          "dataType": "bigint",
+          "udtName": "int8",
+          "nullable": false,
+          "ordinalPosition": 2,
+          "maxLength": null,
+          "numericPrecision": 64,
+          "numericScale": 0
+        },
+        {
+          "name": "inspection_form_id",
+          "dataType": "bigint",
+          "udtName": "int8",
+          "nullable": false,
+          "ordinalPosition": 3,
+          "maxLength": null,
+          "numericPrecision": 64,
+          "numericScale": 0
+        },
+        {
+          "name": "inspection_number",
+          "dataType": "character varying",
+          "udtName": "varchar",
+          "nullable": true,
+          "ordinalPosition": 4,
+          "maxLength": 255,
+          "numericPrecision": null,
+          "numericScale": null
+        },
+        {
+          "name": "schedule_id",
+          "dataType": "bigint",
+          "udtName": "int8",
+          "nullable": true,
+          "ordinalPosition": 5,
+          "maxLength": null,
+          "numericPrecision": 64,
+          "numericScale": 0
+        },
+        {
+          "name": "date",
+          "dataType": "date",
+          "udtName": "date",
+          "nullable": false,
+          "ordinalPosition": 6,
+          "maxLength": null,
+          "numericPrecision": null,
+          "numericScale": null
+        },
+        {
+          "name": "inspector_id",
+          "dataType": "bigint",
+          "udtName": "int8",
+          "nullable": false,
+          "ordinalPosition": 7,
+          "maxLength": null,
+          "numericPrecision": 64,
+          "numericScale": 0
+        },
+        {
+          "name": "area_id",
+          "dataType": "bigint",
+          "udtName": "int8",
+          "nullable": true,
+          "ordinalPosition": 8,
+          "maxLength": null,
+          "numericPrecision": 64,
+          "numericScale": 0
+        },
+        {
+          "name": "detail_area_id",
+          "dataType": "bigint",
+          "udtName": "int8",
+          "nullable": true,
+          "ordinalPosition": 9,
+          "maxLength": null,
+          "numericPrecision": 64,
+          "numericScale": 0
+        },
+        {
+          "name": "form_name",
+          "dataType": "character varying",
+          "udtName": "varchar",
+          "nullable": false,
+          "ordinalPosition": 10,
+          "maxLength": 255,
+          "numericPrecision": null,
+          "numericScale": null
+        },
+        {
+          "name": "form_description",
+          "dataType": "text",
+          "udtName": "text",
+          "nullable": true,
+          "ordinalPosition": 11,
+          "maxLength": null,
+          "numericPrecision": null,
+          "numericScale": null
+        },
+        {
+          "name": "all_good",
+          "dataType": "boolean",
+          "udtName": "bool",
+          "nullable": false,
+          "ordinalPosition": 12,
+          "maxLength": null,
+          "numericPrecision": null,
+          "numericScale": null
+        },
+        {
+          "name": "status_code",
+          "dataType": "character varying",
+          "udtName": "varchar",
+          "nullable": true,
+          "ordinalPosition": 13,
+          "maxLength": 255,
+          "numericPrecision": null,
+          "numericScale": null
+        },
+        {
+          "name": "verified_by",
+          "dataType": "bigint",
+          "udtName": "int8",
+          "nullable": true,
+          "ordinalPosition": 14,
+          "maxLength": null,
+          "numericPrecision": 64,
+          "numericScale": 0
+        },
+        {
+          "name": "verified_at",
+          "dataType": "timestamp with time zone",
+          "udtName": "timestamptz",
+          "nullable": true,
+          "ordinalPosition": 15,
+          "maxLength": null,
+          "numericPrecision": null,
+          "numericScale": null
+        },
+        {
+          "name": "verified_description",
+          "dataType": "text",
+          "udtName": "text",
+          "nullable": true,
+          "ordinalPosition": 16,
+          "maxLength": null,
+          "numericPrecision": null,
+          "numericScale": null
+        },
+        {
+          "name": "submitted_by",
+          "dataType": "bigint",
+          "udtName": "int8",
+          "nullable": true,
+          "ordinalPosition": 17,
+          "maxLength": null,
+          "numericPrecision": 64,
+          "numericScale": 0
+        },
+        {
+          "name": "submitted_at",
+          "dataType": "timestamp with time zone",
+          "udtName": "timestamptz",
+          "nullable": true,
+          "ordinalPosition": 18,
+          "maxLength": null,
+          "numericPrecision": null,
+          "numericScale": null
+        },
+        {
+          "name": "created_by",
+          "dataType": "bigint",
+          "udtName": "int8",
+          "nullable": true,
+          "ordinalPosition": 19,
+          "maxLength": null,
+          "numericPrecision": 64,
+          "numericScale": 0
+        },
+        {
+          "name": "updated_by",
+          "dataType": "bigint",
+          "udtName": "int8",
+          "nullable": true,
+          "ordinalPosition": 20,
+          "maxLength": null,
+          "numericPrecision": 64,
+          "numericScale": 0
+        },
+        {
+          "name": "created_at",
+          "dataType": "timestamp with time zone",
+          "udtName": "timestamptz",
+          "nullable": true,
+          "ordinalPosition": 21,
+          "maxLength": null,
+          "numericPrecision": null,
+          "numericScale": null
+        },
+        {
+          "name": "updated_at",
+          "dataType": "timestamp with time zone",
+          "udtName": "timestamptz",
+          "nullable": true,
+          "ordinalPosition": 22,
+          "maxLength": null,
+          "numericPrecision": null,
+          "numericScale": null
+        },
+        {
+          "name": "detail_location",
+          "dataType": "character varying",
+          "udtName": "varchar",
+          "nullable": true,
+          "ordinalPosition": 23,
+          "maxLength": 255,
+          "numericPrecision": null,
+          "numericScale": null
+        },
+        {
+          "name": "schedule_asset_id",
+          "dataType": "bigint",
+          "udtName": "int8",
+          "nullable": true,
+          "ordinalPosition": 24,
+          "maxLength": null,
+          "numericPrecision": 64,
+          "numericScale": 0
+        },
+        {
+          "name": "sta_start",
+          "dataType": "double precision",
+          "udtName": "float8",
+          "nullable": true,
+          "ordinalPosition": 25,
+          "maxLength": null,
+          "numericPrecision": 53,
+          "numericScale": null
+        },
+        {
+          "name": "description",
+          "dataType": "text",
+          "udtName": "text",
+          "nullable": true,
+          "ordinalPosition": 26,
+          "maxLength": null,
+          "numericPrecision": null,
+          "numericScale": null
+        },
+        {
+          "name": "sta_end",
+          "dataType": "double precision",
+          "udtName": "float8",
+          "nullable": true,
+          "ordinalPosition": 27,
+          "maxLength": null,
+          "numericPrecision": 53,
+          "numericScale": null
+        }
+      ]
+    },
+    {
+      "name": "inspection_elements",
+      "primaryKey": [
+        "id"
+      ],
+      "columns": [
+        {
+          "name": "id",
+          "dataType": "bigint",
+          "udtName": "int8",
+          "nullable": false,
+          "ordinalPosition": 1,
+          "maxLength": null,
+          "numericPrecision": 64,
+          "numericScale": 0
+        },
+        {
+          "name": "inspection_id",
+          "dataType": "bigint",
+          "udtName": "int8",
+          "nullable": false,
+          "ordinalPosition": 2,
+          "maxLength": null,
+          "numericPrecision": 64,
+          "numericScale": 0
+        },
+        {
+          "name": "element_name",
+          "dataType": "character varying",
+          "udtName": "varchar",
+          "nullable": false,
+          "ordinalPosition": 3,
+          "maxLength": 255,
+          "numericPrecision": null,
+          "numericScale": null
+        },
+        {
+          "name": "created_by",
+          "dataType": "bigint",
+          "udtName": "int8",
+          "nullable": true,
+          "ordinalPosition": 4,
+          "maxLength": null,
+          "numericPrecision": 64,
+          "numericScale": 0
+        },
+        {
+          "name": "updated_by",
+          "dataType": "bigint",
+          "udtName": "int8",
+          "nullable": true,
+          "ordinalPosition": 5,
+          "maxLength": null,
+          "numericPrecision": 64,
+          "numericScale": 0
+        },
+        {
+          "name": "created_at",
+          "dataType": "timestamp with time zone",
+          "udtName": "timestamptz",
+          "nullable": true,
+          "ordinalPosition": 6,
+          "maxLength": null,
+          "numericPrecision": null,
+          "numericScale": null
+        },
+        {
+          "name": "updated_at",
+          "dataType": "timestamp with time zone",
+          "udtName": "timestamptz",
+          "nullable": true,
+          "ordinalPosition": 7,
+          "maxLength": null,
+          "numericPrecision": null,
+          "numericScale": null
+        },
+        {
+          "name": "element_id",
+          "dataType": "bigint",
+          "udtName": "int8",
+          "nullable": true,
+          "ordinalPosition": 8,
+          "maxLength": null,
+          "numericPrecision": 64,
+          "numericScale": 0
+        }
+      ]
+    },
+    {
+      "name": "inspection_items",
+      "primaryKey": [
+        "id"
+      ],
+      "columns": [
+        {
+          "name": "id",
+          "dataType": "bigint",
+          "udtName": "int8",
+          "nullable": false,
+          "ordinalPosition": 1,
+          "maxLength": null,
+          "numericPrecision": 64,
+          "numericScale": 0
+        },
+        {
+          "name": "inspection_element_id",
+          "dataType": "bigint",
+          "udtName": "int8",
+          "nullable": false,
+          "ordinalPosition": 2,
+          "maxLength": null,
+          "numericPrecision": 64,
+          "numericScale": 0
+        },
+        {
+          "name": "damage_name",
+          "dataType": "character varying",
+          "udtName": "varchar",
+          "nullable": false,
+          "ordinalPosition": 3,
+          "maxLength": 255,
+          "numericPrecision": null,
+          "numericScale": null
+        },
+        {
+          "name": "maintenance",
+          "dataType": "text",
+          "udtName": "text",
+          "nullable": true,
+          "ordinalPosition": 4,
+          "maxLength": null,
+          "numericPrecision": null,
+          "numericScale": null
+        },
+        {
+          "name": "description",
+          "dataType": "text",
+          "udtName": "text",
+          "nullable": true,
+          "ordinalPosition": 5,
+          "maxLength": null,
+          "numericPrecision": null,
+          "numericScale": null
+        },
+        {
+          "name": "is_damage",
+          "dataType": "boolean",
+          "udtName": "bool",
+          "nullable": false,
+          "ordinalPosition": 6,
+          "maxLength": null,
+          "numericPrecision": null,
+          "numericScale": null
+        },
+        {
+          "name": "damage_category",
+          "dataType": "character varying",
+          "udtName": "varchar",
+          "nullable": true,
+          "ordinalPosition": 7,
+          "maxLength": 255,
+          "numericPrecision": null,
+          "numericScale": null
+        },
+        {
+          "name": "repair_priority",
+          "dataType": "character varying",
+          "udtName": "varchar",
+          "nullable": true,
+          "ordinalPosition": 8,
+          "maxLength": 255,
+          "numericPrecision": null,
+          "numericScale": null
+        },
+        {
+          "name": "inspection_description",
+          "dataType": "text",
+          "udtName": "text",
+          "nullable": true,
+          "ordinalPosition": 9,
+          "maxLength": null,
+          "numericPrecision": null,
+          "numericScale": null
+        },
+        {
+          "name": "created_by",
+          "dataType": "bigint",
+          "udtName": "int8",
+          "nullable": true,
+          "ordinalPosition": 10,
+          "maxLength": null,
+          "numericPrecision": 64,
+          "numericScale": 0
+        },
+        {
+          "name": "updated_by",
+          "dataType": "bigint",
+          "udtName": "int8",
+          "nullable": true,
+          "ordinalPosition": 11,
+          "maxLength": null,
+          "numericPrecision": 64,
+          "numericScale": 0
+        },
+        {
+          "name": "created_at",
+          "dataType": "timestamp with time zone",
+          "udtName": "timestamptz",
+          "nullable": true,
+          "ordinalPosition": 12,
+          "maxLength": null,
+          "numericPrecision": null,
+          "numericScale": null
+        },
+        {
+          "name": "updated_at",
+          "dataType": "timestamp with time zone",
+          "udtName": "timestamptz",
+          "nullable": true,
+          "ordinalPosition": 13,
+          "maxLength": null,
+          "numericPrecision": null,
+          "numericScale": null
+        },
+        {
+          "name": "item_id",
+          "dataType": "bigint",
+          "udtName": "int8",
+          "nullable": true,
+          "ordinalPosition": 14,
+          "maxLength": null,
+          "numericPrecision": 64,
+          "numericScale": 0
+        },
+        {
+          "name": "stage",
+          "dataType": "integer",
+          "udtName": "int4",
+          "nullable": true,
+          "ordinalPosition": 15,
+          "maxLength": null,
+          "numericPrecision": 32,
+          "numericScale": 0
+        },
+        {
+          "name": "status_code",
+          "dataType": "character varying",
+          "udtName": "varchar",
+          "nullable": true,
+          "ordinalPosition": 16,
+          "maxLength": 255,
+          "numericPrecision": null,
+          "numericScale": null
+        },
+        {
+          "name": "verified_by",
+          "dataType": "bigint",
+          "udtName": "int8",
+          "nullable": true,
+          "ordinalPosition": 17,
+          "maxLength": null,
+          "numericPrecision": 64,
+          "numericScale": 0
+        },
+        {
+          "name": "verified_at",
+          "dataType": "timestamp with time zone",
+          "udtName": "timestamptz",
+          "nullable": true,
+          "ordinalPosition": 18,
+          "maxLength": null,
+          "numericPrecision": null,
+          "numericScale": null
+        },
+        {
+          "name": "verified_description",
+          "dataType": "text",
+          "udtName": "text",
+          "nullable": true,
+          "ordinalPosition": 19,
+          "maxLength": null,
+          "numericPrecision": null,
+          "numericScale": null
+        },
+        {
+          "name": "activity_type",
+          "dataType": "character varying",
+          "udtName": "varchar",
+          "nullable": true,
+          "ordinalPosition": 20,
+          "maxLength": 255,
+          "numericPrecision": null,
+          "numericScale": null
+        },
+        {
+          "name": "maintenance_activity_id",
+          "dataType": "bigint",
+          "udtName": "int8",
+          "nullable": true,
+          "ordinalPosition": 21,
+          "maxLength": null,
+          "numericPrecision": 64,
+          "numericScale": 0
+        },
+        {
+          "name": "uom_type",
+          "dataType": "character varying",
+          "udtName": "varchar",
+          "nullable": true,
+          "ordinalPosition": 22,
+          "maxLength": 255,
+          "numericPrecision": null,
+          "numericScale": null
+        },
+        {
+          "name": "length",
+          "dataType": "double precision",
+          "udtName": "float8",
+          "nullable": true,
+          "ordinalPosition": 23,
+          "maxLength": null,
+          "numericPrecision": 53,
+          "numericScale": null
+        },
+        {
+          "name": "width",
+          "dataType": "double precision",
+          "udtName": "float8",
+          "nullable": true,
+          "ordinalPosition": 24,
+          "maxLength": null,
+          "numericPrecision": 53,
+          "numericScale": null
+        },
+        {
+          "name": "height",
+          "dataType": "double precision",
+          "udtName": "float8",
+          "nullable": true,
+          "ordinalPosition": 25,
+          "maxLength": null,
+          "numericPrecision": 53,
+          "numericScale": null
+        },
+        {
+          "name": "volume",
+          "dataType": "double precision",
+          "udtName": "float8",
+          "nullable": true,
+          "ordinalPosition": 26,
+          "maxLength": null,
+          "numericPrecision": 53,
+          "numericScale": null
+        },
+        {
+          "name": "pic_id",
+          "dataType": "bigint",
+          "udtName": "int8",
+          "nullable": true,
+          "ordinalPosition": 27,
+          "maxLength": null,
+          "numericPrecision": 64,
+          "numericScale": 0
+        },
+        {
+          "name": "repair_length",
+          "dataType": "double precision",
+          "udtName": "float8",
+          "nullable": true,
+          "ordinalPosition": 28,
+          "maxLength": null,
+          "numericPrecision": 53,
+          "numericScale": null
+        },
+        {
+          "name": "repair_width",
+          "dataType": "double precision",
+          "udtName": "float8",
+          "nullable": true,
+          "ordinalPosition": 29,
+          "maxLength": null,
+          "numericPrecision": 53,
+          "numericScale": null
+        },
+        {
+          "name": "repair_height",
+          "dataType": "double precision",
+          "udtName": "float8",
+          "nullable": true,
+          "ordinalPosition": 30,
+          "maxLength": null,
+          "numericPrecision": 53,
+          "numericScale": null
+        },
+        {
+          "name": "repair_volume",
+          "dataType": "double precision",
+          "udtName": "float8",
+          "nullable": true,
+          "ordinalPosition": 31,
+          "maxLength": null,
+          "numericPrecision": 53,
+          "numericScale": null
+        },
+        {
+          "name": "realized_cost",
+          "dataType": "double precision",
+          "udtName": "float8",
+          "nullable": true,
+          "ordinalPosition": 32,
+          "maxLength": null,
+          "numericPrecision": 53,
+          "numericScale": null
+        },
+        {
+          "name": "verify_code",
+          "dataType": "character varying",
+          "udtName": "varchar",
+          "nullable": true,
+          "ordinalPosition": 33,
+          "maxLength": 65,
+          "numericPrecision": null,
+          "numericScale": null
+        },
+        {
+          "name": "damage_source_code",
+          "dataType": "character varying",
+          "udtName": "varchar",
+          "nullable": true,
+          "ordinalPosition": 34,
+          "maxLength": 255,
+          "numericPrecision": null,
+          "numericScale": null
+        },
+        {
+          "name": "img_inspection",
+          "dataType": "text",
+          "udtName": "text",
+          "nullable": true,
+          "ordinalPosition": 35,
+          "maxLength": null,
+          "numericPrecision": null,
+          "numericScale": null
+        },
+        {
+          "name": "repair_recommendation_id",
+          "dataType": "bigint",
+          "udtName": "int8",
+          "nullable": true,
+          "ordinalPosition": 36,
+          "maxLength": null,
+          "numericPrecision": 64,
+          "numericScale": 0
+        },
+        {
+          "name": "asset_damage_id",
+          "dataType": "bigint",
+          "udtName": "int8",
+          "nullable": true,
+          "ordinalPosition": 37,
+          "maxLength": null,
+          "numericPrecision": 64,
+          "numericScale": 0
+        }
+      ]
+    },
+    {
+      "name": "toll_sections",
+      "primaryKey": [
+        "id"
+      ],
+      "columns": [
+        {
+          "name": "id",
+          "dataType": "bigint",
+          "udtName": "int8",
+          "nullable": false,
+          "ordinalPosition": 1,
+          "maxLength": null,
+          "numericPrecision": 64,
+          "numericScale": 0
+        },
+        {
+          "name": "section_code",
+          "dataType": "character varying",
+          "udtName": "varchar",
+          "nullable": false,
+          "ordinalPosition": 2,
+          "maxLength": 255,
+          "numericPrecision": null,
+          "numericScale": null
+        },
+        {
+          "name": "section_name",
+          "dataType": "character varying",
+          "udtName": "varchar",
+          "nullable": false,
+          "ordinalPosition": 3,
+          "maxLength": 255,
+          "numericPrecision": null,
+          "numericScale": null
+        },
+        {
+          "name": "owner_id",
+          "dataType": "bigint",
+          "udtName": "int8",
+          "nullable": false,
+          "ordinalPosition": 4,
+          "maxLength": null,
+          "numericPrecision": 64,
+          "numericScale": 0
+        },
+        {
+          "name": "pic_contact",
+          "dataType": "character varying",
+          "udtName": "varchar",
+          "nullable": true,
+          "ordinalPosition": 5,
+          "maxLength": 255,
+          "numericPrecision": null,
+          "numericScale": null
+        },
+        {
+          "name": "start_km",
+          "dataType": "double precision",
+          "udtName": "float8",
+          "nullable": true,
+          "ordinalPosition": 6,
+          "maxLength": null,
+          "numericPrecision": 53,
+          "numericScale": null
+        },
+        {
+          "name": "end_km",
+          "dataType": "double precision",
+          "udtName": "float8",
+          "nullable": true,
+          "ordinalPosition": 7,
+          "maxLength": null,
+          "numericPrecision": 53,
+          "numericScale": null
+        },
+        {
+          "name": "long_road",
+          "dataType": "double precision",
+          "udtName": "float8",
+          "nullable": true,
+          "ordinalPosition": 8,
+          "maxLength": null,
+          "numericPrecision": 53,
+          "numericScale": null
+        },
+        {
+          "name": "img_section",
+          "dataType": "text",
+          "udtName": "text",
+          "nullable": true,
+          "ordinalPosition": 9,
+          "maxLength": null,
+          "numericPrecision": null,
+          "numericScale": null
+        },
+        {
+          "name": "description",
+          "dataType": "text",
+          "udtName": "text",
+          "nullable": true,
+          "ordinalPosition": 10,
+          "maxLength": null,
+          "numericPrecision": null,
+          "numericScale": null
+        },
+        {
+          "name": "active",
+          "dataType": "boolean",
+          "udtName": "bool",
+          "nullable": true,
+          "ordinalPosition": 11,
+          "maxLength": null,
+          "numericPrecision": null,
+          "numericScale": null
+        },
+        {
+          "name": "created_by",
+          "dataType": "bigint",
+          "udtName": "int8",
+          "nullable": true,
+          "ordinalPosition": 12,
+          "maxLength": null,
+          "numericPrecision": 64,
+          "numericScale": 0
+        },
+        {
+          "name": "updated_by",
+          "dataType": "bigint",
+          "udtName": "int8",
+          "nullable": true,
+          "ordinalPosition": 13,
+          "maxLength": null,
+          "numericPrecision": 64,
+          "numericScale": 0
+        },
+        {
+          "name": "created_at",
+          "dataType": "timestamp with time zone",
+          "udtName": "timestamptz",
+          "nullable": true,
+          "ordinalPosition": 14,
+          "maxLength": null,
+          "numericPrecision": null,
+          "numericScale": null
+        },
+        {
+          "name": "updated_at",
+          "dataType": "timestamp with time zone",
+          "udtName": "timestamptz",
+          "nullable": true,
+          "ordinalPosition": 15,
+          "maxLength": null,
+          "numericPrecision": null,
+          "numericScale": null
+        },
+        {
+          "name": "contract_id",
+          "dataType": "bigint",
+          "udtName": "int8",
+          "nullable": true,
+          "ordinalPosition": 16,
+          "maxLength": null,
+          "numericPrecision": 64,
+          "numericScale": 0
+        },
+        {
+          "name": "contract_start_date",
+          "dataType": "date",
+          "udtName": "date",
+          "nullable": true,
+          "ordinalPosition": 17,
+          "maxLength": null,
+          "numericPrecision": null,
+          "numericScale": null
+        },
+        {
+          "name": "contract_end_date",
+          "dataType": "date",
+          "udtName": "date",
+          "nullable": true,
+          "ordinalPosition": 18,
+          "maxLength": null,
+          "numericPrecision": null,
+          "numericScale": null
+        },
+        {
+          "name": "section_type_id",
+          "dataType": "bigint",
+          "udtName": "int8",
+          "nullable": true,
+          "ordinalPosition": 19,
+          "maxLength": null,
+          "numericPrecision": 64,
+          "numericScale": 0
+        },
+        {
+          "name": "short_name",
+          "dataType": "character varying",
+          "udtName": "varchar",
+          "nullable": true,
+          "ordinalPosition": 20,
+          "maxLength": 255,
+          "numericPrecision": null,
+          "numericScale": null
+        },
+        {
+          "name": "avg_fuel_usage",
+          "dataType": "double precision",
+          "udtName": "float8",
+          "nullable": true,
+          "ordinalPosition": 21,
+          "maxLength": null,
+          "numericPrecision": 53,
+          "numericScale": null
+        },
+        {
+          "name": "is_excluded_from_dashboard",
+          "dataType": "boolean",
+          "udtName": "bool",
+          "nullable": false,
+          "ordinalPosition": 22,
+          "maxLength": null,
+          "numericPrecision": null,
+          "numericScale": null
+        }
+      ]
+    },
+    {
+      "name": "toll_gates",
+      "primaryKey": [
+        "id"
+      ],
+      "columns": [
+        {
+          "name": "id",
+          "dataType": "bigint",
+          "udtName": "int8",
+          "nullable": false,
+          "ordinalPosition": 1,
+          "maxLength": null,
+          "numericPrecision": 64,
+          "numericScale": 0
+        },
+        {
+          "name": "gate_name",
+          "dataType": "character varying",
+          "udtName": "varchar",
+          "nullable": false,
+          "ordinalPosition": 2,
+          "maxLength": 255,
+          "numericPrecision": null,
+          "numericScale": null
+        },
+        {
+          "name": "section_id",
+          "dataType": "bigint",
+          "udtName": "int8",
+          "nullable": false,
+          "ordinalPosition": 3,
+          "maxLength": null,
+          "numericPrecision": 64,
+          "numericScale": 0
+        },
+        {
+          "name": "total_booth",
+          "dataType": "integer",
+          "udtName": "int4",
+          "nullable": true,
+          "ordinalPosition": 4,
+          "maxLength": null,
+          "numericPrecision": 32,
+          "numericScale": 0
+        },
+        {
+          "name": "total_longbooth",
+          "dataType": "integer",
+          "udtName": "int4",
+          "nullable": true,
+          "ordinalPosition": 5,
+          "maxLength": null,
+          "numericPrecision": 32,
+          "numericScale": 0
+        },
+        {
+          "name": "description",
+          "dataType": "text",
+          "udtName": "text",
+          "nullable": true,
+          "ordinalPosition": 6,
+          "maxLength": null,
+          "numericPrecision": null,
+          "numericScale": null
+        },
+        {
+          "name": "active",
+          "dataType": "boolean",
+          "udtName": "bool",
+          "nullable": true,
+          "ordinalPosition": 7,
+          "maxLength": null,
+          "numericPrecision": null,
+          "numericScale": null
+        },
+        {
+          "name": "created_by",
+          "dataType": "bigint",
+          "udtName": "int8",
+          "nullable": true,
+          "ordinalPosition": 8,
+          "maxLength": null,
+          "numericPrecision": 64,
+          "numericScale": 0
+        },
+        {
+          "name": "updated_by",
+          "dataType": "bigint",
+          "udtName": "int8",
+          "nullable": true,
+          "ordinalPosition": 9,
+          "maxLength": null,
+          "numericPrecision": 64,
+          "numericScale": 0
+        },
+        {
+          "name": "created_at",
+          "dataType": "timestamp with time zone",
+          "udtName": "timestamptz",
+          "nullable": true,
+          "ordinalPosition": 10,
+          "maxLength": null,
+          "numericPrecision": null,
+          "numericScale": null
+        },
+        {
+          "name": "updated_at",
+          "dataType": "timestamp with time zone",
+          "udtName": "timestamptz",
+          "nullable": true,
+          "ordinalPosition": 11,
+          "maxLength": null,
+          "numericPrecision": null,
+          "numericScale": null
+        },
+        {
+          "name": "ranting_id",
+          "dataType": "bigint",
+          "udtName": "int8",
+          "nullable": true,
+          "ordinalPosition": 12,
+          "maxLength": null,
+          "numericPrecision": 64,
+          "numericScale": 0
+        }
+      ]
+    },
+    {
+      "name": "m_section_shifts",
+      "primaryKey": [
+        "id"
+      ],
+      "columns": [
+        {
+          "name": "id",
+          "dataType": "bigint",
+          "udtName": "int8",
+          "nullable": false,
+          "ordinalPosition": 1,
+          "maxLength": null,
+          "numericPrecision": 64,
+          "numericScale": 0
+        },
+        {
+          "name": "section_id",
+          "dataType": "bigint",
+          "udtName": "int8",
+          "nullable": false,
+          "ordinalPosition": 2,
+          "maxLength": null,
+          "numericPrecision": 64,
+          "numericScale": 0
+        },
+        {
+          "name": "shift",
+          "dataType": "integer",
+          "udtName": "int4",
+          "nullable": false,
+          "ordinalPosition": 3,
+          "maxLength": null,
+          "numericPrecision": 32,
+          "numericScale": 0
+        },
+        {
+          "name": "default_start_hour",
+          "dataType": "time without time zone",
+          "udtName": "time",
+          "nullable": false,
+          "ordinalPosition": 4,
+          "maxLength": null,
+          "numericPrecision": null,
+          "numericScale": null
+        },
+        {
+          "name": "default_end_hour",
+          "dataType": "time without time zone",
+          "udtName": "time",
+          "nullable": false,
+          "ordinalPosition": 5,
+          "maxLength": null,
+          "numericPrecision": null,
+          "numericScale": null
+        },
+        {
+          "name": "description",
+          "dataType": "text",
+          "udtName": "text",
+          "nullable": true,
+          "ordinalPosition": 6,
+          "maxLength": null,
+          "numericPrecision": null,
+          "numericScale": null
+        },
+        {
+          "name": "active",
+          "dataType": "boolean",
+          "udtName": "bool",
+          "nullable": true,
+          "ordinalPosition": 7,
+          "maxLength": null,
+          "numericPrecision": null,
+          "numericScale": null
+        },
+        {
+          "name": "created_by",
+          "dataType": "bigint",
+          "udtName": "int8",
+          "nullable": true,
+          "ordinalPosition": 8,
+          "maxLength": null,
+          "numericPrecision": 64,
+          "numericScale": 0
+        },
+        {
+          "name": "updated_by",
+          "dataType": "bigint",
+          "udtName": "int8",
+          "nullable": true,
+          "ordinalPosition": 9,
+          "maxLength": null,
+          "numericPrecision": 64,
+          "numericScale": 0
+        },
+        {
+          "name": "created_at",
+          "dataType": "timestamp with time zone",
+          "udtName": "timestamptz",
+          "nullable": true,
+          "ordinalPosition": 10,
+          "maxLength": null,
+          "numericPrecision": null,
+          "numericScale": null
+        },
+        {
+          "name": "updated_at",
+          "dataType": "timestamp with time zone",
+          "udtName": "timestamptz",
+          "nullable": true,
+          "ordinalPosition": 11,
+          "maxLength": null,
+          "numericPrecision": null,
+          "numericScale": null
+        },
+        {
+          "name": "do_routine_activity",
+          "dataType": "boolean",
+          "udtName": "bool",
+          "nullable": true,
+          "ordinalPosition": 12,
+          "maxLength": null,
+          "numericPrecision": null,
+          "numericScale": null
+        }
+      ]
+    },
+    {
+      "name": "m_vehicle_class",
+      "primaryKey": [
+        "id"
+      ],
+      "columns": [
+        {
+          "name": "id",
+          "dataType": "bigint",
+          "udtName": "int8",
+          "nullable": false,
+          "ordinalPosition": 1,
+          "maxLength": null,
+          "numericPrecision": 64,
+          "numericScale": 0
+        },
+        {
+          "name": "name",
+          "dataType": "character varying",
+          "udtName": "varchar",
+          "nullable": false,
+          "ordinalPosition": 2,
+          "maxLength": 255,
+          "numericPrecision": null,
+          "numericScale": null
+        },
+        {
+          "name": "active",
+          "dataType": "boolean",
+          "udtName": "bool",
+          "nullable": true,
+          "ordinalPosition": 3,
+          "maxLength": null,
+          "numericPrecision": null,
+          "numericScale": null
+        },
+        {
+          "name": "created_by",
+          "dataType": "bigint",
+          "udtName": "int8",
+          "nullable": true,
+          "ordinalPosition": 4,
+          "maxLength": null,
+          "numericPrecision": 64,
+          "numericScale": 0
+        },
+        {
+          "name": "updated_by",
+          "dataType": "bigint",
+          "udtName": "int8",
+          "nullable": true,
+          "ordinalPosition": 5,
+          "maxLength": null,
+          "numericPrecision": 64,
+          "numericScale": 0
+        },
+        {
+          "name": "created_at",
+          "dataType": "timestamp with time zone",
+          "udtName": "timestamptz",
+          "nullable": true,
+          "ordinalPosition": 6,
+          "maxLength": null,
+          "numericPrecision": null,
+          "numericScale": null
+        },
+        {
+          "name": "updated_at",
+          "dataType": "timestamp with time zone",
+          "udtName": "timestamptz",
+          "nullable": true,
+          "ordinalPosition": 7,
+          "maxLength": null,
+          "numericPrecision": null,
+          "numericScale": null
+        }
+      ]
+    },
+    {
+      "name": "m_accident_attributes",
+      "primaryKey": [
+        "id"
+      ],
+      "columns": [
+        {
+          "name": "id",
+          "dataType": "bigint",
+          "udtName": "int8",
+          "nullable": false,
+          "ordinalPosition": 1,
+          "maxLength": null,
+          "numericPrecision": 64,
+          "numericScale": 0
+        },
+        {
+          "name": "category_code",
+          "dataType": "character varying",
+          "udtName": "varchar",
+          "nullable": false,
+          "ordinalPosition": 2,
+          "maxLength": 255,
+          "numericPrecision": null,
+          "numericScale": null
+        },
+        {
+          "name": "name",
+          "dataType": "character varying",
+          "udtName": "varchar",
+          "nullable": false,
+          "ordinalPosition": 3,
+          "maxLength": 255,
+          "numericPrecision": null,
+          "numericScale": null
+        },
+        {
+          "name": "description",
+          "dataType": "text",
+          "udtName": "text",
+          "nullable": true,
+          "ordinalPosition": 4,
+          "maxLength": null,
+          "numericPrecision": null,
+          "numericScale": null
+        },
+        {
+          "name": "display_order",
+          "dataType": "integer",
+          "udtName": "int4",
+          "nullable": true,
+          "ordinalPosition": 5,
+          "maxLength": null,
+          "numericPrecision": 32,
+          "numericScale": 0
+        },
+        {
+          "name": "active",
+          "dataType": "boolean",
+          "udtName": "bool",
+          "nullable": false,
+          "ordinalPosition": 6,
+          "maxLength": null,
+          "numericPrecision": null,
+          "numericScale": null
+        },
+        {
+          "name": "created_by",
+          "dataType": "bigint",
+          "udtName": "int8",
+          "nullable": true,
+          "ordinalPosition": 7,
+          "maxLength": null,
+          "numericPrecision": 64,
+          "numericScale": 0
+        },
+        {
+          "name": "updated_by",
+          "dataType": "bigint",
+          "udtName": "int8",
+          "nullable": true,
+          "ordinalPosition": 8,
+          "maxLength": null,
+          "numericPrecision": 64,
+          "numericScale": 0
+        },
+        {
+          "name": "created_at",
+          "dataType": "timestamp with time zone",
+          "udtName": "timestamptz",
+          "nullable": true,
+          "ordinalPosition": 9,
+          "maxLength": null,
+          "numericPrecision": null,
+          "numericScale": null
+        },
+        {
+          "name": "updated_at",
+          "dataType": "timestamp with time zone",
+          "udtName": "timestamptz",
+          "nullable": true,
+          "ordinalPosition": 10,
+          "maxLength": null,
+          "numericPrecision": null,
+          "numericScale": null
+        }
+      ]
+    },
+    {
+      "name": "maintenance_asset_types",
+      "primaryKey": [
+        "id"
+      ],
+      "columns": [
+        {
+          "name": "id",
+          "dataType": "bigint",
+          "udtName": "int8",
+          "nullable": false,
+          "ordinalPosition": 1,
+          "maxLength": null,
+          "numericPrecision": 64,
+          "numericScale": 0
+        },
+        {
+          "name": "location_id",
+          "dataType": "bigint",
+          "udtName": "int8",
+          "nullable": true,
+          "ordinalPosition": 2,
+          "maxLength": null,
+          "numericPrecision": 64,
+          "numericScale": 0
+        },
+        {
+          "name": "name",
+          "dataType": "character varying",
+          "udtName": "varchar",
+          "nullable": true,
+          "ordinalPosition": 3,
+          "maxLength": 255,
+          "numericPrecision": null,
+          "numericScale": null
+        },
+        {
+          "name": "active",
+          "dataType": "boolean",
+          "udtName": "bool",
+          "nullable": false,
+          "ordinalPosition": 4,
+          "maxLength": null,
+          "numericPrecision": null,
+          "numericScale": null
+        },
+        {
+          "name": "description",
+          "dataType": "text",
+          "udtName": "text",
+          "nullable": true,
+          "ordinalPosition": 5,
+          "maxLength": null,
+          "numericPrecision": null,
+          "numericScale": null
+        },
+        {
+          "name": "created_by",
+          "dataType": "bigint",
+          "udtName": "int8",
+          "nullable": true,
+          "ordinalPosition": 6,
+          "maxLength": null,
+          "numericPrecision": 64,
+          "numericScale": 0
+        },
+        {
+          "name": "updated_by",
+          "dataType": "bigint",
+          "udtName": "int8",
+          "nullable": true,
+          "ordinalPosition": 7,
+          "maxLength": null,
+          "numericPrecision": 64,
+          "numericScale": 0
+        },
+        {
+          "name": "created_at",
+          "dataType": "timestamp with time zone",
+          "udtName": "timestamptz",
+          "nullable": true,
+          "ordinalPosition": 8,
+          "maxLength": null,
+          "numericPrecision": null,
+          "numericScale": null
+        },
+        {
+          "name": "updated_at",
+          "dataType": "timestamp with time zone",
+          "udtName": "timestamptz",
+          "nullable": true,
+          "ordinalPosition": 9,
+          "maxLength": null,
+          "numericPrecision": null,
+          "numericScale": null
+        },
+        {
+          "name": "section_id",
+          "dataType": "bigint",
+          "udtName": "int8",
+          "nullable": true,
+          "ordinalPosition": 10,
+          "maxLength": null,
+          "numericPrecision": 64,
+          "numericScale": 0
+        },
+        {
+          "name": "asset_type_id",
+          "dataType": "bigint",
+          "udtName": "int8",
+          "nullable": true,
+          "ordinalPosition": 11,
+          "maxLength": null,
+          "numericPrecision": 64,
+          "numericScale": 0
+        },
+        {
+          "name": "sta_start",
+          "dataType": "double precision",
+          "udtName": "float8",
+          "nullable": true,
+          "ordinalPosition": 12,
+          "maxLength": null,
+          "numericPrecision": 53,
+          "numericScale": null
+        },
+        {
+          "name": "sta_end",
+          "dataType": "double precision",
+          "udtName": "float8",
+          "nullable": true,
+          "ordinalPosition": 13,
+          "maxLength": null,
+          "numericPrecision": 53,
+          "numericScale": null
+        },
+        {
+          "name": "lane",
+          "dataType": "character varying",
+          "udtName": "varchar",
+          "nullable": true,
+          "ordinalPosition": 14,
+          "maxLength": 255,
+          "numericPrecision": null,
+          "numericScale": null
+        },
+        {
+          "name": "track",
+          "dataType": "character varying",
+          "udtName": "varchar",
+          "nullable": true,
+          "ordinalPosition": 15,
+          "maxLength": 255,
+          "numericPrecision": null,
+          "numericScale": null
+        },
+        {
+          "name": "length",
+          "dataType": "double precision",
+          "udtName": "float8",
+          "nullable": true,
+          "ordinalPosition": 16,
+          "maxLength": null,
+          "numericPrecision": 53,
+          "numericScale": null
+        },
+        {
+          "name": "width",
+          "dataType": "double precision",
+          "udtName": "float8",
+          "nullable": true,
+          "ordinalPosition": 17,
+          "maxLength": null,
+          "numericPrecision": 53,
+          "numericScale": null
+        },
+        {
+          "name": "height",
+          "dataType": "double precision",
+          "udtName": "float8",
+          "nullable": true,
+          "ordinalPosition": 18,
+          "maxLength": null,
+          "numericPrecision": 53,
+          "numericScale": null
+        }
+      ]
+    },
+    {
+      "name": "view_section_spm_sla",
+      "primaryKey": [],
+      "columns": [
+        {
+          "name": "section_id",
+          "dataType": "bigint",
+          "udtName": "int8",
+          "nullable": true,
+          "ordinalPosition": 1,
+          "maxLength": null,
+          "numericPrecision": 64,
+          "numericScale": 0
+        },
+        {
+          "name": "spm_id",
+          "dataType": "bigint",
+          "udtName": "int8",
+          "nullable": true,
+          "ordinalPosition": 2,
+          "maxLength": null,
+          "numericPrecision": 64,
+          "numericScale": 0
+        },
+        {
+          "name": "service_substance_id",
+          "dataType": "bigint",
+          "udtName": "int8",
+          "nullable": true,
+          "ordinalPosition": 3,
+          "maxLength": null,
+          "numericPrecision": 64,
+          "numericScale": 0
+        },
+        {
+          "name": "code",
+          "dataType": "character varying",
+          "udtName": "varchar",
+          "nullable": true,
+          "ordinalPosition": 4,
+          "maxLength": 255,
+          "numericPrecision": null,
+          "numericScale": null
+        },
+        {
+          "name": "indicator",
+          "dataType": "character varying",
+          "udtName": "varchar",
+          "nullable": true,
+          "ordinalPosition": 5,
+          "maxLength": 255,
+          "numericPrecision": null,
+          "numericScale": null
+        },
+        {
+          "name": "sub_indicator",
+          "dataType": "character varying",
+          "udtName": "varchar",
+          "nullable": true,
+          "ordinalPosition": 6,
+          "maxLength": 255,
+          "numericPrecision": null,
+          "numericScale": null
+        },
+        {
+          "name": "description",
+          "dataType": "text",
+          "udtName": "text",
+          "nullable": true,
+          "ordinalPosition": 7,
+          "maxLength": null,
+          "numericPrecision": null,
+          "numericScale": null
+        },
+        {
+          "name": "is_static",
+          "dataType": "boolean",
+          "udtName": "bool",
+          "nullable": true,
+          "ordinalPosition": 8,
+          "maxLength": null,
+          "numericPrecision": null,
+          "numericScale": null
+        },
+        {
+          "name": "spm_specification",
+          "dataType": "text",
+          "udtName": "text",
+          "nullable": true,
+          "ordinalPosition": 9,
+          "maxLength": null,
+          "numericPrecision": null,
+          "numericScale": null
+        },
+        {
+          "name": "sla_specification",
+          "dataType": "text",
+          "udtName": "text",
+          "nullable": true,
+          "ordinalPosition": 10,
+          "maxLength": null,
+          "numericPrecision": null,
+          "numericScale": null
+        },
+        {
+          "name": "operator",
+          "dataType": "character varying",
+          "udtName": "varchar",
+          "nullable": true,
+          "ordinalPosition": 11,
+          "maxLength": 255,
+          "numericPrecision": null,
+          "numericScale": null
+        },
+        {
+          "name": "spm_parameter",
+          "dataType": "integer",
+          "udtName": "int4",
+          "nullable": true,
+          "ordinalPosition": 12,
+          "maxLength": null,
+          "numericPrecision": 32,
+          "numericScale": 0
+        },
+        {
+          "name": "sla_parameter",
+          "dataType": "integer",
+          "udtName": "int4",
+          "nullable": true,
+          "ordinalPosition": 13,
+          "maxLength": null,
+          "numericPrecision": 32,
+          "numericScale": 0
+        },
+        {
+          "name": "unit",
+          "dataType": "character varying",
+          "udtName": "varchar",
+          "nullable": true,
+          "ordinalPosition": 14,
+          "maxLength": 255,
+          "numericPrecision": null,
+          "numericScale": null
+        },
+        {
+          "name": "is_applicable",
+          "dataType": "boolean",
+          "udtName": "bool",
+          "nullable": true,
+          "ordinalPosition": 15,
+          "maxLength": null,
+          "numericPrecision": null,
+          "numericScale": null
+        },
+        {
+          "name": "score_default",
+          "dataType": "boolean",
+          "udtName": "bool",
+          "nullable": true,
+          "ordinalPosition": 16,
+          "maxLength": null,
+          "numericPrecision": null,
+          "numericScale": null
+        }
+      ]
+    }
+  ],
+  "scopeNote": "This is the focused schema for entities used by the 15 cases. It is not a complete HKA TROM ERD."
+}

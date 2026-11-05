@@ -1,0 +1,26 @@
+{
+  "T7-C4": [
+    {
+      "code": "kecepatan-transaksi-1",
+      "field": "sla_parameter",
+      "old": 5,
+      "current": 6
+    }
+  ],
+  "T8-C2": [
+    {
+      "code": "kecepatan-transaksi-3",
+      "field": "sla_parameter",
+      "old": 8,
+      "current": 9
+    }
+  ],
+  "T9-C2": [
+    {
+      "code": "kecepatan-transaksi-1",
+      "field": "sla_parameter",
+      "old": 5,
+      "current": 6
+    }
+  ]
+}

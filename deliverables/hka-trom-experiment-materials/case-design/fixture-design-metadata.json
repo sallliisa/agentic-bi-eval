@@ -1,0 +1,409 @@
+{
+  "source": "fixtures/hka-trom/cases.json",
+  "note": "This file records case construction notes such as scope and semantic branches. The live saved prompt and expectedResult are in cases/current-test-set.json. It does not include the historicalExpected field. Some wrong-alternative rationale records case construction. For current threshold values, use database/current-effective-configuration.json.",
+  "cases": [
+    {
+      "caseId": "T1-C1",
+      "definition": {
+        "id": "T1-C1",
+        "task_id": "T1",
+        "section_alias": "PEKBANG",
+        "start": "2026-02-01",
+        "end": "2026-02-07",
+        "prompt": "Berapa rata-rata durasi transaksi di Ruas PEKBANG selama 1–7 Februari 2026? Kembalikan hasil sesuai format terstruktur yang diminta.",
+        "semantic_branches": [
+          "multiple reports",
+          "multiple booths",
+          "unequal detail sample counts",
+          "null duration excluded from observation mean"
+        ]
+      },
+      "source": "fixtures/hka-trom/cases.json",
+      "excludedFields": [
+        "historicalExpected: prior fixture-provenance value, not current saved expectation"
+      ]
+    },
+    {
+      "caseId": "T1-C2",
+      "definition": {
+        "id": "T1-C2",
+        "task_id": "T1",
+        "section": "BINSTA",
+        "start": "2030-01-25",
+        "end": "2030-01-30",
+        "schema": "docs/schemas/t1_transaction_duration.json",
+        "gate_name": "Stabat",
+        "semantic_branches": [
+          "matching booth and longbooth durations have equal observation weight"
+        ],
+        "wrong_alternatives": [
+          {
+            "id": "booth_only_filter",
+            "wrong_rule": "Average booth details and silently discard longbooth details.",
+            "evidence_basis": "Routine capture stores both booth and longbooth observations; the reviewed transaction business reference defines the population as matching non-null duration details without a booth-only filter.",
+            "construction": "Recompute the requested average using only details whose type is booth."
+          }
+        ],
+        "prompt_template": "Berapa rata-rata durasi transaksi di Ruas BINSTA selama 25–30 Januari 2030? Kembalikan hasil sesuai format terstruktur yang diminta.",
+        "section_alias": "BINSTA"
+      },
+      "source": "fixtures/hka-trom/cases.json",
+      "excludedFields": [
+        "historicalExpected: prior fixture-provenance value, not current saved expectation"
+      ]
+    },
+    {
+      "caseId": "T2-C1",
+      "definition": {
+        "id": "T2-C1",
+        "task_id": "T2",
+        "section_alias": "PEKBANG",
+        "start": "2030-03-01",
+        "end": "2030-03-07",
+        "prompt": "Berikan ringkasan lalu lintas Ruas PEKBANG untuk 1–7 Maret 2030: total volume, LHR, dan volume per golongan kendaraan. Kembalikan hasil sesuai format terstruktur yang diminta.",
+        "semantic_branches": [
+          "missing calendar day",
+          "zero-volume configured vehicle class",
+          "multiple active vehicle classes"
+        ]
+      },
+      "source": "fixtures/hka-trom/cases.json",
+      "excludedFields": [
+        "historicalExpected: prior fixture-provenance value, not current saved expectation"
+      ]
+    },
+    {
+      "caseId": "T3-C1",
+      "definition": {
+        "id": "T3-C1",
+        "task_id": "T3",
+        "section_alias": "PEKBANG",
+        "start": "2026-01-01",
+        "end": "2026-04-30",
+        "prompt": "Tampilkan tren volume dan LHR bulanan Ruas PEKBANG dari Januari sampai April 2026 berdasarkan golongan kendaraan. Kembalikan hasil sesuai format terstruktur yang diminta.",
+        "semantic_branches": [
+          "different month lengths",
+          "missing report days",
+          "non-monotonic trend",
+          "multiple vehicle classes"
+        ]
+      },
+      "source": "fixtures/hka-trom/cases.json",
+      "excludedFields": [
+        "historicalExpected: prior fixture-provenance value, not current saved expectation"
+      ]
+    },
+    {
+      "caseId": "T4-C1",
+      "definition": {
+        "id": "T4-C1",
+        "task_id": "T4",
+        "section_alias": "PEKBANG",
+        "start": "2026-04-01",
+        "end": "2026-04-30",
+        "prompt": "Ringkas status insiden di Ruas PEKBANG selama April 2026 dan tampilkan insiden yang masih dalam penanganan. Kembalikan hasil sesuai format terstruktur yang diminta.",
+        "semantic_branches": [
+          "zero actions",
+          "unfinished action",
+          "all actions complete",
+          "mixed complete/unfinished actions",
+          "null action stage is incomplete"
+        ]
+      },
+      "source": "fixtures/hka-trom/cases.json",
+      "excludedFields": [
+        "historicalExpected: prior fixture-provenance value, not current saved expectation"
+      ]
+    },
+    {
+      "caseId": "T5-C1",
+      "definition": {
+        "id": "T5-C1",
+        "task_id": "T5",
+        "section_alias": "PEKBANG",
+        "start": "2030-04-01",
+        "end": "2030-04-30",
+        "prompt": "Bagaimana distribusi penyebab kecelakaan di Ruas PEKBANG selama April 2030? Tampilkan setiap penyebab dan jumlah pencatatannya. Kembalikan hasil sesuai format terstruktur yang diminta.",
+        "semantic_branches": [
+          "single cause",
+          "multiple causes",
+          "repeated cause across accidents",
+          "non-accident incident",
+          "cause assignments on non-accident incidents are excluded"
+        ]
+      },
+      "source": "fixtures/hka-trom/cases.json",
+      "excludedFields": [
+        "historicalExpected: prior fixture-provenance value, not current saved expectation"
+      ]
+    },
+    {
+      "caseId": "T6-C1",
+      "definition": {
+        "id": "T6-C1",
+        "task_id": "T6",
+        "section_alias": "PEKBANG",
+        "start": "2026-05-01",
+        "end": "2026-05-31",
+        "prompt": "Berikan ringkasan kondisi hasil inspeksi Ruas PEKBANG selama Mei 2026: jumlah item rusak, distribusi kategori kerusakan, prioritas perbaikan, dan aset yang terdampak. Kembalikan hasil sesuai format terstruktur yang diminta.",
+        "semantic_branches": [
+          "undamaged items",
+          "r1/r2/r3",
+          "p1/p2/no-priority",
+          "multiple assets",
+          "unknown non-null damage category remains in total only"
+        ]
+      },
+      "source": "fixtures/hka-trom/cases.json",
+      "excludedFields": [
+        "historicalExpected: prior fixture-provenance value, not current saved expectation"
+      ]
+    },
+    {
+      "caseId": "T7-C1",
+      "definition": {
+        "id": "T7-C1",
+        "task_id": "T7",
+        "section_alias": "PEKBANG",
+        "date": "2026-06-01",
+        "prompt": "Evaluasi pemenuhan SPM/SLA kecepatan transaksi untuk monitoring di Ruas PEKBANG, Gerbang Bangkinang, shift 1, tanggal 1 Juni 2026. Tampilkan hasil per gardu dan indikator. Kembalikan hasil sesuai format terstruktur yang diminta.",
+        "semantic_branches": [
+          "all five SLA rules applicable",
+          "threshold equality",
+          "SPM/SLA failures"
+        ]
+      },
+      "source": "fixtures/hka-trom/cases.json",
+      "excludedFields": [
+        "historicalExpected: prior fixture-provenance value, not current saved expectation"
+      ]
+    },
+    {
+      "caseId": "T7-C2",
+      "definition": {
+        "id": "T7-C2",
+        "task_id": "T7",
+        "section_alias": "BINSTA",
+        "date": "2030-06-02",
+        "prompt": "Evaluasi pemenuhan SPM/SLA kecepatan transaksi untuk monitoring di Ruas BINSTA, Gerbang Stabat, shift 1, tanggal 2 Juni 2030. Tampilkan hasil per gardu dan indikator. Kembalikan hasil sesuai format terstruktur yang diminta.",
+        "semantic_branches": [
+          "only kecepatan-transaksi-3 SLA-applicable",
+          "threshold equality",
+          "SPM failures"
+        ]
+      },
+      "source": "fixtures/hka-trom/cases.json",
+      "excludedFields": [
+        "historicalExpected: prior fixture-provenance value, not current saved expectation"
+      ]
+    },
+    {
+      "caseId": "T7-C3",
+      "definition": {
+        "id": "T7-C3",
+        "task_id": "T7",
+        "section_alias": "INKIS",
+        "date": "2026-06-03",
+        "prompt": "Evaluasi pemenuhan SPM/SLA kecepatan transaksi untuk monitoring di Ruas INKIS, Gerbang Limapuluh, shift 1, tanggal 3 Juni 2026. Tampilkan hasil per gardu dan indikator. Kembalikan hasil sesuai format terstruktur yang diminta.",
+        "semantic_branches": [
+          "all five SLA rules non-applicable",
+          "threshold equality",
+          "SPM failures"
+        ]
+      },
+      "source": "fixtures/hka-trom/cases.json",
+      "excludedFields": [
+        "historicalExpected: prior fixture-provenance value, not current saved expectation"
+      ]
+    },
+    {
+      "caseId": "T7-C4",
+      "definition": {
+        "id": "T7-C4",
+        "task_id": "T7",
+        "section": "PEKBANG",
+        "date": "2026-01-26",
+        "schema": "docs/schemas/t7_spm_sla_event.json",
+        "gate_name": "Bangkinang",
+        "shift_number": 1,
+        "semantic_branches": [
+          "applicable SLA target is independently overridden from SPM",
+          "requested event is scoped by section, gate, operational date, and dated shift",
+          "same-date other-gate, other-date same-gate, and other-shift same-gate reports are valid competing events"
+        ],
+        "wrong_alternatives": [
+          {
+            "id": "sla_copied_from_spm",
+            "wrong_rule": "Copy the SPM threshold into an applicable SLA instead of using its independently configured section override.",
+            "evidence_basis": "The retained section SLA writer upserts m_sla by section_id and spm_id; the effective view uses those source rows independently from m_spm.",
+            "construction": "Set the event's applicable code-1 SLA threshold equal to its SPM threshold and recompute the full T7 output."
+          },
+          {
+            "id": "ignore_gate_scope",
+            "wrong_rule": "Select an event by section, date, and shift while ignoring the requested gate.",
+            "evidence_basis": "The routine writer permits one report per dated schedule and gate, so a different gate may report on the same section/date/shift.",
+            "construction": "Evaluate the same-date, same-shift Sungai Pinang report as the requested Bangkinang event."
+          },
+          {
+            "id": "ignore_date_scope",
+            "wrong_rule": "Select an event by section, gate, and shift while ignoring the requested date.",
+            "evidence_basis": "A separate dated schedule permits a distinct report for the same section/gate/shift on another contracted date.",
+            "construction": "Evaluate the next-date Bangkinang report as the requested January 26 event."
+          },
+          {
+            "id": "ignore_shift_scope",
+            "wrong_rule": "Select an event by section, gate, and date while ignoring the requested shift.",
+            "evidence_basis": "A separate dated schedule permits a distinct same-gate report in another active shift on the same contracted date.",
+            "construction": "Evaluate the same-date, shift-2 Bangkinang report as the requested shift-1 event."
+          }
+        ],
+        "prompt_template": "Evaluasi pemenuhan SPM/SLA kecepatan transaksi untuk monitoring di Ruas PEKBANG, Gerbang Bangkinang, shift 1, tanggal 26 Januari 2026. Tampilkan hasil per gardu dan indikator. Kembalikan hasil sesuai format terstruktur yang diminta.",
+        "section_alias": "PEKBANG"
+      },
+      "source": "fixtures/hka-trom/cases.json",
+      "excludedFields": [
+        "historicalExpected: prior fixture-provenance value, not current saved expectation"
+      ]
+    },
+    {
+      "caseId": "T8-C1",
+      "definition": {
+        "id": "T8-C1",
+        "task_id": "T8",
+        "section_alias": "BINSTA",
+        "prompt": "Untuk Ruas BINSTA tanggal 1–7 Juni 2026, identifikasi evaluasi kecepatan transaksi yang gagal memenuhi SPM atau SLA dan ringkas status pemenuhan setiap indikator selama periode tersebut. Kembalikan hasil sesuai format terstruktur yang diminta.",
+        "semantic_branches": [
+          "multiple monitoring events",
+          "mixed SPM period statuses",
+          "partial SLA applicability",
+          "individual failures"
+        ],
+        "start": "2026-06-01",
+        "end": "2026-06-07"
+      },
+      "source": "fixtures/hka-trom/cases.json",
+      "excludedFields": [
+        "historicalExpected: prior fixture-provenance value, not current saved expectation"
+      ]
+    },
+    {
+      "caseId": "T8-C2",
+      "definition": {
+        "id": "T8-C2",
+        "task_id": "T8",
+        "section": "BINSTA",
+        "start": "2026-01-20",
+        "end": "2026-01-30",
+        "schema": "docs/schemas/t8_spm_sla_period.json",
+        "gate_name": "Kuala Bingai",
+        "semantic_branches": [
+          "applicable SLA target is independently overridden from SPM",
+          "SLA applicability remains independent of its numeric threshold",
+          "SPM/SLA use booth observations while longbooth observations remain outside compliance"
+        ],
+        "wrong_alternatives": [
+          {
+            "id": "sla_copied_from_spm",
+            "wrong_rule": "Use the SPM threshold for the applicable SLA even when m_sla stores a separate target.",
+            "evidence_basis": "The retained section SLA writer updates m_sla independently and the effective view resolves the SLA fields from that row.",
+            "construction": "Copy code-3 SPM's 9-second threshold to the applicable SLA, then recompute all T8 rows."
+          },
+          {
+            "id": "infer_inapplicable_from_target_difference",
+            "wrong_rule": "Treat an SLA as not applicable because its numeric threshold differs from SPM.",
+            "evidence_basis": "The effective view exposes is_applicable independently from sla_parameter; the source SLA writer accepts both fields separately.",
+            "construction": "Set code-3 SLA applicability false while retaining the requested section's independently stored SLA threshold."
+          },
+          {
+            "id": "include_longbooth_as_booths",
+            "wrong_rule": "Treat longbooth rows as additional ordinary booth evaluations, numbered after the regular booths.",
+            "evidence_basis": "The transaction compliance source evaluates report/booth observations; routine capture retains booth type and separate booth numbers.",
+            "construction": "Relabel the two longbooth details as booth 5 and booth 6, assume six ordinary booths, then recompute all per-booth compliance results."
+          }
+        ],
+        "prompt_template": "Untuk Ruas BINSTA tanggal 20–30 Januari 2026, identifikasi evaluasi kecepatan transaksi yang gagal memenuhi SPM atau SLA dan ringkas status pemenuhan setiap indikator selama periode tersebut. Kembalikan hasil sesuai format terstruktur yang diminta.",
+        "section_alias": "BINSTA"
+      },
+      "source": "fixtures/hka-trom/cases.json",
+      "excludedFields": [
+        "historicalExpected: prior fixture-provenance value, not current saved expectation"
+      ]
+    },
+    {
+      "caseId": "T9-C1",
+      "definition": {
+        "id": "T9-C1",
+        "task_id": "T9",
+        "section_alias": "PEKBANG",
+        "prompt": "Bandingkan status pemenuhan setiap indikator SPM/SLA kecepatan transaksi Ruas PEKBANG antara 1–7 Juli 2026 dan 8–14 Juli 2026. Kembalikan status kedua periode dan perubahannya sesuai format terstruktur yang diminta.",
+        "semantic_branches": [
+          "unchanged pass",
+          "improved to pass",
+          "unchanged fail",
+          "all SLA applicable"
+        ],
+        "period_a": {
+          "start": "2026-07-01",
+          "end": "2026-07-07"
+        },
+        "period_b": {
+          "start": "2026-07-08",
+          "end": "2026-07-14"
+        }
+      },
+      "source": "fixtures/hka-trom/cases.json",
+      "excludedFields": [
+        "historicalExpected: prior fixture-provenance value, not current saved expectation"
+      ]
+    },
+    {
+      "caseId": "T9-C2",
+      "definition": {
+        "id": "T9-C2",
+        "task_id": "T9",
+        "section": "PEKBANG",
+        "period_a": {
+          "start": "2026-01-05",
+          "end": "2026-01-10"
+        },
+        "period_b": {
+          "start": "2026-01-12",
+          "end": "2026-01-17"
+        },
+        "schema": "docs/schemas/t9_spm_sla_comparison.json",
+        "gate_name": "Bangkinang",
+        "semantic_branches": [
+          "two distinct routine reports contribute in each period",
+          "each period status fails when any report/booth evaluation fails",
+          "SPM and independently overridden SLA both deteriorate from pass to fail"
+        ],
+        "wrong_alternatives": [
+          {
+            "id": "one_report_per_period",
+            "wrong_rule": "Use only the first routine report in each requested period instead of aggregating every scoped report.",
+            "evidence_basis": "Routine capture permits reports on distinct dated schedules; the reviewed recap/trend semantics aggregate observations over the requested period.",
+            "construction": "Recompute each period from its earliest report only."
+          },
+          {
+            "id": "period_mean_replaces_any_failure",
+            "wrong_rule": "Aggregate the period-wide mean of rounded report/booth means, then apply it independently to SPM and applicable SLA across all period evaluations, allowing passing observations to offset failing observations.",
+            "evidence_basis": "The reviewed SPM/SLA business reference defines period status as fail when any report/booth evaluation fails.",
+            "construction": "For each requested period, average non-null ordinary-booth samples within each scoped report/booth and round each evaluation mean to hundredths; take an equally weighted mean of those evaluations and round it to hundredths. Compare that one period mean independently with each effective SPM threshold and each applicable effective SLA threshold, applying the result to every observed evaluation slot (failed count is zero or the evaluation count). Keep non-applicable SLA count/status at zero/not_applicable and recompute both transitions."
+          },
+          {
+            "id": "sla_copied_from_spm",
+            "wrong_rule": "Use the SPM threshold for the applicable SLA rather than the independent section override.",
+            "evidence_basis": "The retained section SLA writer persists the target in m_sla, independently of m_spm; the effective view derives the two values separately.",
+            "construction": "Copy code-1 SPM's 6-second threshold to SLA and recompute the full two-period output."
+          }
+        ],
+        "prompt_template": "Bandingkan status pemenuhan setiap indikator SPM/SLA kecepatan transaksi Ruas PEKBANG antara 5–10 Januari 2026 dan 12–17 Januari 2026. Kembalikan status kedua periode dan perubahannya sesuai format terstruktur yang diminta.",
+        "section_alias": "PEKBANG"
+      },
+      "source": "fixtures/hka-trom/cases.json",
+      "excludedFields": [
+        "historicalExpected: prior fixture-provenance value, not current saved expectation"
+      ]
+    }
+  ]
+}

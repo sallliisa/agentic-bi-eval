@@ -1,0 +1,65 @@
+{
+  "retrievedAt": "2026-11-01T16:38:24.101320+00:00",
+  "collection": {
+    "id": "9ef7e2e7-9c04-4f84-9923-d2b07be88722",
+    "title": "HKA TROM Business Context",
+    "description": "Interpret HKA TROM operational data and analytical requests involving transaction monitoring, traffic volume and LHR, incidents and accident causes, inspection damage, or transaction SPM/SLA compliance.",
+    "source": "private",
+    "lastUpdated": "2026-10-29T19:00:29.063Z",
+    "membership": {
+      "role": "owner",
+      "shared": false
+    }
+  },
+  "documents": [
+    {
+      "path": "configuration/context/SKILL.md",
+      "name": "SKILL.md",
+      "description": "Interpret HKA TROM operational data and analytical requests involving transaction monitoring, traffic volume and LHR, incidents and accident causes, inspection damage, or transaction SPM/SLA compliance.",
+      "lastUpdated": "2026-10-29T19:00:25.721Z",
+      "characters": 3155
+    },
+    {
+      "path": "configuration/context/references/incidents.md",
+      "name": "incidents.md",
+      "description": "incidents",
+      "lastUpdated": "2026-10-29T19:00:26.318Z",
+      "characters": 2495
+    },
+    {
+      "path": "configuration/context/references/inspections.md",
+      "name": "inspections.md",
+      "description": "inspections",
+      "lastUpdated": "2026-10-29T19:00:26.815Z",
+      "characters": 2800
+    },
+    {
+      "path": "configuration/context/references/spm-sla.md",
+      "name": "spm-sla.md",
+      "description": "spm-sla",
+      "lastUpdated": "2026-10-29T19:00:27.364Z",
+      "characters": 4513
+    },
+    {
+      "path": "configuration/context/references/terminology.md",
+      "name": "terminology.md",
+      "description": "terminology",
+      "lastUpdated": "2026-10-29T19:00:28.046Z",
+      "characters": 3156
+    },
+    {
+      "path": "configuration/context/references/traffic.md",
+      "name": "traffic.md",
+      "description": "traffic",
+      "lastUpdated": "2026-10-29T19:00:28.570Z",
+      "characters": 2188
+    },
+    {
+      "path": "configuration/context/references/transactions.md",
+      "name": "transactions.md",
+      "description": "transactions",
+      "lastUpdated": "2026-10-29T19:00:29.063Z",
+      "characters": 1971
+    }
+  ]
+}

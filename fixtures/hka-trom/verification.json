@@ -1,0 +1,44 @@
+{
+  "committed": true,
+  "cases_verified": [
+    "T1-C1",
+    "T1-C2",
+    "T2-C1",
+    "T3-C1",
+    "T4-C1",
+    "T5-C1",
+    "T6-C1",
+    "T7-C1",
+    "T7-C2",
+    "T7-C3",
+    "T7-C4",
+    "T8-C1",
+    "T8-C2",
+    "T9-C1",
+    "T9-C2"
+  ],
+  "inserted_rows": {
+    "employees": 1,
+    "shift_schedules": 17,
+    "shift_schedule_personel": 9,
+    "monitoring_transactions": 23,
+    "monitoring_transaction_details": 93,
+    "toll_volume_revenue": 12,
+    "toll_traffic_volumes": 37,
+    "incidents": 11,
+    "incident_actions": 7,
+    "accident_reports": 5,
+    "inspection_schedules": 3,
+    "inspection_schedule_assets": 4,
+    "inspections": 4,
+    "inspection_elements": 4,
+    "inspection_items": 7
+  },
+  "historical_answer_changes": [
+    "T7-C4",
+    "T8-C2",
+    "T9-C2"
+  ],
+  "existing_rows_unchanged": true,
+  "checked_at": "2026-10-29T14:19:52.193444+00:00"
+}

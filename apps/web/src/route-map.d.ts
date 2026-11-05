@@ -38,6 +38,41 @@ declare module 'vue-router/auto-routes' {
       Record<never, never>,
       | never
     >,
+    'settings-agent-instructions': RouteRecordInfo<
+      'settings-agent-instructions',
+      '/settings/agent-instructions',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
+    'settings-connectors': RouteRecordInfo<
+      'settings-connectors',
+      '/settings/connectors',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
+    'settings-connectors-detail': RouteRecordInfo<
+      'settings-connectors-detail',
+      '/settings/connectors/:vendorId/detail',
+      { vendorId: ParamValue<true> },
+      { vendorId: ParamValue<false> },
+      | never
+    >,
+    'settings-model-providers': RouteRecordInfo<
+      'settings-model-providers',
+      '/settings/model-providers',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
+    'settings-model-providers-detail': RouteRecordInfo<
+      'settings-model-providers-detail',
+      '/settings/model-providers/:modelKey/detail',
+      { modelKey: ParamValue<true> },
+      { modelKey: ParamValue<false> },
+      | never
+    >,
     'settings-permissions': RouteRecordInfo<
       'settings-permissions',
       '/settings/permissions',
@@ -122,6 +157,130 @@ declare module 'vue-router/auto-routes' {
       Record<never, never>,
       | never
     >,
+    'skills-context': RouteRecordInfo<
+      'skills-context',
+      '/skills-context',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
+    'skills-context-detail': RouteRecordInfo<
+      'skills-context-detail',
+      '/skills-context/:collectionId/detail',
+      { collectionId: ParamValue<true> },
+      { collectionId: ParamValue<false> },
+      | 'skills-context-detail-documents-create'
+      | 'skills-context-detail-documents-detail'
+      | 'skills-context-detail-documents-edit'
+      | 'skills-context-detail-edit'
+    >,
+    'skills-context-detail-documents-detail': RouteRecordInfo<
+      'skills-context-detail-documents-detail',
+      '/skills-context/:collectionId/detail/documents/:documentKey/detail',
+      { collectionId: ParamValue<true>, documentKey: ParamValue<true> },
+      { collectionId: ParamValue<false>, documentKey: ParamValue<false> },
+      | never
+    >,
+    'skills-context-detail-documents-edit': RouteRecordInfo<
+      'skills-context-detail-documents-edit',
+      '/skills-context/:collectionId/detail/documents/:documentKey/edit',
+      { collectionId: ParamValue<true>, documentKey: ParamValue<true> },
+      { collectionId: ParamValue<false>, documentKey: ParamValue<false> },
+      | never
+    >,
+    'skills-context-detail-documents-create': RouteRecordInfo<
+      'skills-context-detail-documents-create',
+      '/skills-context/:collectionId/detail/documents/create',
+      { collectionId: ParamValue<true> },
+      { collectionId: ParamValue<false> },
+      | never
+    >,
+    'skills-context-detail-edit': RouteRecordInfo<
+      'skills-context-detail-edit',
+      '/skills-context/:collectionId/detail/edit',
+      { collectionId: ParamValue<true> },
+      { collectionId: ParamValue<false> },
+      | never
+    >,
+    'skills-context-create': RouteRecordInfo<
+      'skills-context-create',
+      '/skills-context/create',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
+    'test-runner-test-runs': RouteRecordInfo<
+      'test-runner-test-runs',
+      '/test-runner/test-runs',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
+    'test-runner-test-runs-detail': RouteRecordInfo<
+      'test-runner-test-runs-detail',
+      '/test-runner/test-runs/:runId/detail',
+      { runId: ParamValue<true> },
+      { runId: ParamValue<false> },
+      | never
+    >,
+    'test-runner-test-runs-edit': RouteRecordInfo<
+      'test-runner-test-runs-edit',
+      '/test-runner/test-runs/:runId/edit',
+      { runId: ParamValue<true> },
+      { runId: ParamValue<false> },
+      | never
+    >,
+    'test-runner-test-sets': RouteRecordInfo<
+      'test-runner-test-sets',
+      '/test-runner/test-sets',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
+    'test-runner-test-sets-detail': RouteRecordInfo<
+      'test-runner-test-sets-detail',
+      '/test-runner/test-sets/:setId/detail',
+      { setId: ParamValue<true> },
+      { setId: ParamValue<false> },
+      | 'test-runner-test-sets-detail-cases-create'
+      | 'test-runner-test-sets-detail-cases-detail'
+      | 'test-runner-test-sets-detail-cases-edit'
+    >,
+    'test-runner-test-sets-detail-cases-detail': RouteRecordInfo<
+      'test-runner-test-sets-detail-cases-detail',
+      '/test-runner/test-sets/:setId/detail/cases/:caseId/detail',
+      { setId: ParamValue<true>, caseId: ParamValue<true> },
+      { setId: ParamValue<false>, caseId: ParamValue<false> },
+      | never
+    >,
+    'test-runner-test-sets-detail-cases-edit': RouteRecordInfo<
+      'test-runner-test-sets-detail-cases-edit',
+      '/test-runner/test-sets/:setId/detail/cases/:caseId/edit',
+      { setId: ParamValue<true>, caseId: ParamValue<true> },
+      { setId: ParamValue<false>, caseId: ParamValue<false> },
+      | never
+    >,
+    'test-runner-test-sets-detail-cases-create': RouteRecordInfo<
+      'test-runner-test-sets-detail-cases-create',
+      '/test-runner/test-sets/:setId/detail/cases/create',
+      { setId: ParamValue<true> },
+      { setId: ParamValue<false> },
+      | never
+    >,
+    'test-runner-test-sets-edit': RouteRecordInfo<
+      'test-runner-test-sets-edit',
+      '/test-runner/test-sets/:setId/edit',
+      { setId: ParamValue<true> },
+      { setId: ParamValue<false> },
+      | never
+    >,
+    'test-runner-test-sets-create': RouteRecordInfo<
+      'test-runner-test-sets-create',
+      '/test-runner/test-sets/create',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
     'auth-login': RouteRecordInfo<
       'auth-login',
       '/auth/login',
@@ -152,6 +311,11 @@ declare module 'vue-router/auto-routes' {
     'src/routes/(authenticated)/authenticated.layout.vue': {
       routes:
         | 'dashboard'
+        | 'settings-agent-instructions'
+        | 'settings-connectors'
+        | 'settings-connectors-detail'
+        | 'settings-model-providers'
+        | 'settings-model-providers-detail'
         | 'settings-permissions'
         | 'settings-permissions-detail'
         | 'settings-roles'
@@ -164,6 +328,23 @@ declare module 'vue-router/auto-routes' {
         | 'settings-users-detail'
         | 'settings-users-detail-role-assignments'
         | 'settings-users-edit'
+        | 'skills-context'
+        | 'skills-context-create'
+        | 'skills-context-detail'
+        | 'skills-context-detail-documents-create'
+        | 'skills-context-detail-documents-detail'
+        | 'skills-context-detail-documents-edit'
+        | 'skills-context-detail-edit'
+        | 'test-runner-test-runs'
+        | 'test-runner-test-runs-detail'
+        | 'test-runner-test-runs-edit'
+        | 'test-runner-test-sets'
+        | 'test-runner-test-sets-create'
+        | 'test-runner-test-sets-detail'
+        | 'test-runner-test-sets-detail-cases-create'
+        | 'test-runner-test-sets-detail-cases-detail'
+        | 'test-runner-test-sets-detail-cases-edit'
+        | 'test-runner-test-sets-edit'
       views:
         | 'default'
       pathParamNames:
@@ -172,6 +353,46 @@ declare module 'vue-router/auto-routes' {
     'src/routes/(authenticated)/dashboard/index.route.vue': {
       routes:
         | 'dashboard'
+      views:
+        | never
+      pathParamNames:
+        | never
+    }
+    'src/routes/(authenticated)/settings/agent-instructions/index.route.vue': {
+      routes:
+        | 'settings-agent-instructions'
+      views:
+        | never
+      pathParamNames:
+        | never
+    }
+    'src/routes/(authenticated)/settings/connectors/index.route.vue': {
+      routes:
+        | 'settings-connectors'
+      views:
+        | never
+      pathParamNames:
+        | never
+    }
+    'src/routes/(authenticated)/settings/connectors/[vendorId]/detail.route.vue': {
+      routes:
+        | 'settings-connectors-detail'
+      views:
+        | never
+      pathParamNames:
+        | never
+    }
+    'src/routes/(authenticated)/settings/model-providers/index.route.vue': {
+      routes:
+        | 'settings-model-providers'
+      views:
+        | never
+      pathParamNames:
+        | never
+    }
+    'src/routes/(authenticated)/settings/model-providers/[modelKey]/detail.route.vue': {
+      routes:
+        | 'settings-model-providers-detail'
       views:
         | never
       pathParamNames:
@@ -270,6 +491,149 @@ declare module 'vue-router/auto-routes' {
     'src/routes/(authenticated)/settings/users/create.route.vue': {
       routes:
         | 'settings-users-create'
+      views:
+        | never
+      pathParamNames:
+        | never
+    }
+    'src/routes/(authenticated)/skills-context/index.route.vue': {
+      routes:
+        | 'skills-context'
+      views:
+        | never
+      pathParamNames:
+        | never
+    }
+    'src/routes/(authenticated)/skills-context/[collectionId]/detail.route.vue': {
+      routes:
+        | 'skills-context-detail'
+        | 'skills-context-detail-documents-create'
+        | 'skills-context-detail-documents-detail'
+        | 'skills-context-detail-documents-edit'
+        | 'skills-context-detail-edit'
+      views:
+        | 'default'
+      pathParamNames:
+        | never
+    }
+    'src/routes/(authenticated)/skills-context/[collectionId]/detail/documents/[documentKey]/detail.route.vue': {
+      routes:
+        | 'skills-context-detail-documents-detail'
+      views:
+        | never
+      pathParamNames:
+        | never
+    }
+    'src/routes/(authenticated)/skills-context/[collectionId]/detail/documents/[documentKey]/edit.route.vue': {
+      routes:
+        | 'skills-context-detail-documents-edit'
+      views:
+        | never
+      pathParamNames:
+        | never
+    }
+    'src/routes/(authenticated)/skills-context/[collectionId]/detail/documents/create.route.vue': {
+      routes:
+        | 'skills-context-detail-documents-create'
+      views:
+        | never
+      pathParamNames:
+        | never
+    }
+    'src/routes/(authenticated)/skills-context/[collectionId]/detail/edit.route.vue': {
+      routes:
+        | 'skills-context-detail-edit'
+      views:
+        | never
+      pathParamNames:
+        | never
+    }
+    'src/routes/(authenticated)/skills-context/create.route.vue': {
+      routes:
+        | 'skills-context-create'
+      views:
+        | never
+      pathParamNames:
+        | never
+    }
+    'src/routes/(authenticated)/test-runner/test-runs/index.route.vue': {
+      routes:
+        | 'test-runner-test-runs'
+      views:
+        | never
+      pathParamNames:
+        | never
+    }
+    'src/routes/(authenticated)/test-runner/test-runs/[runId]/detail.route.vue': {
+      routes:
+        | 'test-runner-test-runs-detail'
+      views:
+        | never
+      pathParamNames:
+        | never
+    }
+    'src/routes/(authenticated)/test-runner/test-runs/[runId]/edit.route.vue': {
+      routes:
+        | 'test-runner-test-runs-edit'
+      views:
+        | never
+      pathParamNames:
+        | never
+    }
+    'src/routes/(authenticated)/test-runner/test-sets/index.route.vue': {
+      routes:
+        | 'test-runner-test-sets'
+      views:
+        | never
+      pathParamNames:
+        | never
+    }
+    'src/routes/(authenticated)/test-runner/test-sets/[setId]/detail.route.vue': {
+      routes:
+        | 'test-runner-test-sets-detail'
+        | 'test-runner-test-sets-detail-cases-create'
+        | 'test-runner-test-sets-detail-cases-detail'
+        | 'test-runner-test-sets-detail-cases-edit'
+      views:
+        | 'default'
+      pathParamNames:
+        | never
+    }
+    'src/routes/(authenticated)/test-runner/test-sets/[setId]/detail/cases/[caseId]/detail.route.vue': {
+      routes:
+        | 'test-runner-test-sets-detail-cases-detail'
+      views:
+        | never
+      pathParamNames:
+        | never
+    }
+    'src/routes/(authenticated)/test-runner/test-sets/[setId]/detail/cases/[caseId]/edit.route.vue': {
+      routes:
+        | 'test-runner-test-sets-detail-cases-edit'
+      views:
+        | never
+      pathParamNames:
+        | never
+    }
+    'src/routes/(authenticated)/test-runner/test-sets/[setId]/detail/cases/create.route.vue': {
+      routes:
+        | 'test-runner-test-sets-detail-cases-create'
+      views:
+        | never
+      pathParamNames:
+        | never
+    }
+    'src/routes/(authenticated)/test-runner/test-sets/[setId]/edit.route.vue': {
+      routes:
+        | 'test-runner-test-sets-edit'
+      views:
+        | never
+      pathParamNames:
+        | never
+    }
+    'src/routes/(authenticated)/test-runner/test-sets/create.route.vue': {
+      routes:
+        | 'test-runner-test-sets-create'
       views:
         | never
       pathParamNames:

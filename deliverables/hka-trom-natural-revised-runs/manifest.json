@@ -1,0 +1,63 @@
+{
+  "createdAt": "2026-11-05T05:29:13.010Z",
+  "package": "HKA TROM NATURAL-REVISED run exports",
+  "evidenceMode": "Read-only, repeatable-read database snapshot; parsed JSON and summary counts are derived from saved values.",
+  "fileCount": 6,
+  "files": [
+    {
+      "path": "README.md",
+      "sizeBytes": 2129,
+      "sha256": "571e8ef1af48dd98fd7a9577c04af51555c15feb999ada3ee2d6e9e9cc03c1af",
+      "source": "Written for this package.",
+      "contents": "Export guide and run summary.",
+      "classification": "documentation",
+      "redactions": []
+    },
+    {
+      "path": "runs/run-inventory.json",
+      "sizeBytes": 4706,
+      "sha256": "dcb87f94fb2d41333596b8a876f1e17f7f0cb011f58d7c9ad32eafa93304f942",
+      "source": "Read-only application database snapshot of test_runs and test_run_results.",
+      "contents": "Requested NATURAL-REVISED run inventory and summary counts.",
+      "classification": "execution-inventory",
+      "redactions": []
+    },
+    {
+      "path": "runs/914c3235-4f10-442c-943e-5590caf4940a.json",
+      "sizeBytes": 774036,
+      "sha256": "8f957bcc66c0e476d2f12149ab6cedab0775a42239f3ff8db3acb15c290c1189",
+      "source": "Read-only application database snapshot of test_runs and test_run_results.",
+      "contents": "Run metadata and saved repetition results with raw and parsed values.",
+      "classification": "execution-record",
+      "redactions": []
+    },
+    {
+      "path": "runs/fc74c650-4320-4a14-81b9-f290dad69014.json",
+      "sizeBytes": 769620,
+      "sha256": "850269cd6529c95a8c072febe41d03e2830dbcada3128af7f4dad8372a15cc31",
+      "source": "Read-only application database snapshot of test_runs and test_run_results.",
+      "contents": "Run metadata and saved repetition results with raw and parsed values.",
+      "classification": "execution-record",
+      "redactions": []
+    },
+    {
+      "path": "runs/b340097c-be13-40d6-bff0-87e408a11e96.json",
+      "sizeBytes": 772794,
+      "sha256": "ad0ca98737073382fc33a8f168d17f52c9e481b8254e04f47c27f8196d77ba05",
+      "source": "Read-only application database snapshot of test_runs and test_run_results.",
+      "contents": "Run metadata and saved repetition results with raw and parsed values.",
+      "classification": "execution-record",
+      "redactions": []
+    },
+    {
+      "path": "runs/ce90d492-d366-45e5-9b42-a968a27b51b1.json",
+      "sizeBytes": 774604,
+      "sha256": "0ed53dd33c714fb03e2e0789bb28925998c4e426f449c2419bac2dd930927b7a",
+      "source": "Read-only application database snapshot of test_runs and test_run_results.",
+      "contents": "Run metadata and saved repetition results with raw and parsed values.",
+      "classification": "execution-record",
+      "redactions": []
+    }
+  ],
+  "note": "Includes the current 4-run, 180-result snapshot. The two user-authorized response cleanups and their PASS verdicts are reflected in the exports."
+}

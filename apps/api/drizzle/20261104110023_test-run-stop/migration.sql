@@ -1,0 +1,1 @@
+ALTER TABLE "test_runs" DROP CONSTRAINT "test_runs_status_check", ADD CONSTRAINT "test_runs_status_check" CHECK ("status" in ('running', 'completed', 'failed', 'stopped'));

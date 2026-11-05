@@ -1,0 +1,395 @@
+{
+  "case": "T1-C2",
+  "chatId": 39,
+  "metadata": {
+    "id": 39,
+    "title": "New Chat",
+    "started": "2026-10-29T14:29:15.878Z",
+    "lastActive": "2026-10-29T14:29:46.524Z",
+    "totalTokens": 23421,
+    "promptTokens": 140036,
+    "cacheReadTokens": 115735,
+    "cacheWriteTokens": 0
+  },
+  "pages": 1,
+  "messages": [
+    {
+      "chatId": 39,
+      "sequence": 0,
+      "timestamp": "2026-10-29T14:29:15.878Z",
+      "author": {
+        "type": "user",
+        "name": "admin",
+        "id": "admin"
+      },
+      "type": "message",
+      "message": "Berapa rata-rata durasi transaksi di Ruas BINSTA selama 25–30 Januari 2030? Kembalikan hasil sesuai format terstruktur yang diminta.\n\nKirim tepat satu objek JSON, tanpa Markdown. Ikuti skema berikut:\n{\"$schema\": \"https://json-schema.org/draft/2020-12/schema\", \"title\": \"T1 Average transaction duration\", \"type\": \"object\", \"properties\": {\"section_id\": {\"type\": \"integer\"}, \"section_name\": {\"type\": \"string\"}, \"period\": {\"type\": \"object\", \"properties\": {\"start\": {\"type\": \"string\", \"format\": \"date\"}, \"end\": {\"type\": \"string\", \"format\": \"date\"}}, \"required\": [\"start\", \"end\"], \"additionalProperties\": false}, \"average_transaction_duration\": {\"type\": \"number\", \"description\": \"Arithmetic mean of matching non-null duration observations in seconds, rounded to two decimal places with ties away from zero; zero for an empty population.\"}, \"unit\": {\"const\": \"second\"}}, \"required\": [\"section_id\", \"section_name\", \"period\", \"average_transaction_duration\", \"unit\"], \"additionalProperties\": false}\n\nGunakan tabel aktual: m_vehicle_class (golongan kendaraan), m_accident_attributes (atribut kecelakaan), maintenance_asset_types (master aset inspeksi), dan view_section_spm_sla (konfigurasi efektif; filter code kecepatan-transaksi-1 sampai kecepatan-transaksi-5). accident_causes_ids adalah array JSON; hitung setiap kemunculan termasuk duplikat. Gunakan konfigurasi yang tersedia saat ini. Bandingkan durasi sebelum pembulatan; bulatkan hasil durasi dua desimal dengan nilai tengah menjauh dari nol. Untuk T1 gunakan seluruh tipe detail tidak null; evaluasi SPM/SLA menggunakan detail type=booth per gardu. LHR dibulatkan ke integer terdekat dengan nilai tengah menjauh dari nol. Urutkan array: golongan berdasarkan ID; bulan kronologis; insiden berdasarkan tanggal lalu ID; penyebab/aset berdasarkan jumlah menurun lalu ID; evaluasi berdasarkan nomor gardu lalu kode; kegagalan berdasarkan tanggal, ID monitoring, nomor gardu, kode; indikator berdasarkan kode."
+    },
+    {
+      "chatId": 39,
+      "sequence": 1,
+      "timestamp": "2026-10-29T14:29:18.047Z",
+      "author": {
+        "type": "agent",
+        "id": "muse-spark-1.3-contributor-variant-4ddfa039f9b7",
+        "name": "Muse Spark 1.3"
+      },
+      "type": "message",
+      "message": "",
+      "toolCalls": [
+        {
+          "toolCallId": "call_658b6c9f-1abd-4a09-989b-b49de58f4aa0",
+          "toolName": "describeBinding",
+          "input": {
+            "name": "TROM"
+          },
+          "output": "Binding: env.TROM\nTitle: TROM BI\nTypeScript type: Trom\n\nThe binding comes with the following bundle of TypeScript type definitions:\n\n```\nexport interface EntitySummary {\n  /** PostgreSQL relation name in the public schema. */\n  name: string;\n  /** Human-readable name derived from the relation name. */\n  label: string;\n  /** PostgreSQL relation comment, or an empty string when no comment exists. */\n  description: string;\n}\n\n/** A field exposed by a TROM entity. */\nexport interface FieldDescription {\n  /** PostgreSQL column name. */\n  name: string;\n  /** PostgreSQL type formatted with modifiers such as varchar length. */\n  type: string;\n  /** Whether the column can contain SQL NULL. */\n  nullable: boolean;\n  /** PostgreSQL column comment, or an empty string when no comment exists. */\n  description: string;\n}\n\n/** A declared outbound PostgreSQL foreign key. */\nexport interface Relationship {\n  /** PostgreSQL constraint name. */\n  name: string;\n  /** Source columns in constraint order. */\n  fields: string[];\n  /** Referenced relation in the public schema. */\n  referenced_entity: string;\n  /** Referenced columns paired by position with `fields`. */\n  referenced_fields: string[];\n}\n\n/** Operators supported by `read_records`. */\nexport type FilterOperator =\n  | \"eq\"\n  | \"neq\"\n  | \"gt\"\n  | \"gte\"\n  | \"lt\"\n  | \"lte\"\n  | \"in\"\n  | \"not_in\"\n  | \"contains\"\n  | \"starts_with\"\n  | \"ends_with\"\n  | \"is_null\"\n  | \"is_not_null\";\n\n/** A scalar JSON value accepted by a value-bearing filter. */\nexport type FilterScalar = string | number | boolean;\n\n/** A filter that checks whether a field is null. */\nexport interface NullFilter {\n  /** Entity column name. */\n  field: string;\n  /** Match SQL NULL or non-NULL values. */\n  operator: \"is_null\" | \"is_not_null\";\n}\n\n/** A filter that compares a field with one scalar value. */\nexport interface ScalarFilter {\n  /** Entity column name. */\n  field: string;\n  /** Comparison operator. The entity's `allowed_filters` lists valid choices. */\n  operator: \"eq\" | \"neq\" | \"gt\" | \"gte\" | \"lt\" | \"lte\" | \"contains\" | \"starts_with\" | \"ends_with\";\n  /** Scalar value matched against the column's PostgreSQL type. */\n  value: FilterScalar;\n}\n\n/** A filter that compares a field with a non-empty set of scalar values. */\nexport interface SetFilter {\n  /** Entity column name. */\n  field: string;\n  /** Match a value in, or outside, the supplied set. */\n  operator: \"in\" | \"not_in\";\n  /** At least one scalar value compatible with the field's PostgreSQL type. */\n  value: [FilterScalar, ...FilterScalar[]];\n}\n\n/** One AND-combined field filter. */\nexport type RecordFilter = NullFilter | ScalarFilter | SetFilter;\n\n/** A field and direction used to order records. */\nexport interface RecordSort {\n  /** Entity column name. */\n  field: string;\n  /** Sort direction. */\n  direction: \"asc\" | \"desc\";\n}\n\n/** JSON-compatible record values returned by TROM. */\nexport type JsonValue =\n  | null\n  | boolean\n  | number\n  | string\n  | JsonValue[]\n  | { [key: string]: JsonValue };\n\n/** Read-only schema metadata for a TROM entity. */\nexport interface EntityDescription extends EntitySummary {\n  /** Primary-key columns in PostgreSQL constraint order. */\n  primary_key: string[];\n  /** Columns in PostgreSQL ordinal order. */\n  fields: FieldDescription[];\n  /** Declared outbound foreign keys to public-schema relations. */\n  relationships: Relationship[];\n  /** Allowed `read_records` filters for each field. */\n  allowed_filters: Record<string, FilterOperator[]>;\n}\n\n/** One page of projected records. */\nexport interface RecordPage {\n  /** PostgreSQL relation name in the public schema. */\n  entity: string;\n  /** Records containing exactly the requested fields. */\n  records: Array<Record<string, JsonValue>>;\n  /** Opaque cursor for the next page, or null when no page remains. */\n  next_cursor: string | null;\n}\n\n/** Read-only metadata and record access through TROM. */\nexport interface Trom {\n  /**\n   * List public-schema tables, partitioned-table parents, views, and materialized views.\n   *\n   * @returns The entities available through TROM.\n   */\n  list_entities(): Promise<EntitySummary[]>;\n\n  /**\n   * Describe a public TROM entity, including PostgreSQL fields, primary keys,\n   * declared foreign keys, and the filters available to `read_records`.\n   * Unknown entities fail with HTTP 404.\n   *\n   * @param entity Exact relation name returned by `list_entities()`.\n   * @returns The entity's schema and relationship metadata.\n   */\n  describe_entity(entity: string): Promise<EntityDescription>;\n\n  /**\n   * Read a projected page of records. Filters are combined with AND. The\n   * default filters and sort are empty, the default limit is 100, and limits\n   * must be from 1 through 500. Use `describe_entity` to see allowed filters.\n   * Fields accept column names only. SQL expressions and joins are not supported.\n   * Operators are `eq`, `neq`, `gt`, `gte`, `lt`, `lte`, `in`, `not_in`,\n   * `contains`, `starts_with`, `ends_with`, `is_null`, and `is_not_null`.\n   * Null operators omit `value`; set operators need a non-empty scalar array.\n   * The cursor belongs to the exact entity, fields, filters, sort, and limit.\n   * Bigint values beyond JavaScript's safe integer range and PostgreSQL numeric\n   * values are returned as strings. Non-finite floating-point values are also\n   * returned as strings. Invalid entities, fields, filters, sorts,\n   * limits, and cursors fail with an HTTP 4xx error. Keep the dataset unchanged\n   * between offset pages. Rows with identical sort values may repeat when an\n   * entity has no primary key.\n   *\n   * @param entity Exact relation name returned by `list_entities()`.\n   * @param fields Non-empty list of column names to return. No wildcard is supported.\n   * @param filters AND-combined filters. Omit to read without filters.\n   * @param sort Requested sort fields and directions. Omit for the entity's stable default order.\n   * @param limit Page size from 1 through 500. Defaults to 100.\n   * @param cursor Cursor from the previous page for the same query. Defaults to null.\n   * @returns One projected page and a cursor when another page remains.\n   */\n  read_records(\n    entity: string,\n    fields: string[],\n    filters?: RecordFilter[],\n    sort?: RecordSort[],\n    limit?: number,\n    cursor?: string | null,\n  ): Promise<RecordPage>;\n}\n\n```\n"
+        }
+      ]
+    },
+    {
+      "chatId": 39,
+      "sequence": 2,
+      "timestamp": "2026-10-29T14:29:19.701Z",
+      "author": {
+        "type": "agent",
+        "id": "muse-spark-1.3-contributor-variant-4ddfa039f9b7",
+        "name": "Muse Spark 1.3"
+      },
+      "type": "message",
+      "message": "",
+      "toolCalls": [
+        {
+          "toolCallId": "call_b2d2ea7d-a265-4b08-936d-fa5ec4c70047",
+          "toolName": "executeCode",
+          "input": {
+            "code": "export default async function(self, env, ctx) {\n  const ents = await env.TROM.list_entities();\n  console.log(JSON.stringify(ents.map(e=>e.name)));\n}\n"
+          },
+          "output": "[\"absence_attachments\",\"absence_categories\",\"absence_evidence_categories\",\"absences\",\"accident_asset_damage_attachments\",\"accident_asset_damages\",\"accident_attachments\",\"accident_reports\",\"accident_service_vehicle_arrived\",\"accident_teams\",\"accident_towings\",\"accident_vehicle_involved\",\"accident_victims\",\"activity_period_types\",\"annual_leaves\",\"app_configs\",\"app_versions\",\"applicant_status_codes\",\"area_types\",\"asset_inspection_attachments\",\"asset_inspections\",\"asset_lane\",\"asset_locations\",\"asset_types\",\"assets\",\"attandance_recap\",\"attendance_recap\",\"backup_raw_presences\",\"bank\",\"banners\",\"bbm_types\",\"broadcast_categories\",\"cities\",\"config_annual_leave\",\"config_handover_forms\",\"config_handover_item_categories\",\"config_inspection_elements\",\"config_inspection_forms\",\"config_inspection_items\",\"config_lattol_handover\",\"config_presence\",\"config_questioner_choice_label\",\"config_questioner_items\",\"config_questioners\",\"config_radius_presence\",\"config_spm_manual_forms\",\"config_spm_manual_items\",\"config_verificators\",\"configs\",\"contracts\",\"cost_plans\",\"damage_categories\",\"damage_sources\",\"default_employee_salary\",\"employee_certifications\",\"employee_diseases\",\"employee_documents\",\"employee_educations\",\"employee_emergency_contacts\",\"employee_salary\",\"employee_salary_components\",\"employee_skills\",\"employees\",\"employment_status\",\"equipment_availability\",\"expense_categories\",\"expenses\",\"face_registrations\",\"failed_jobs\",\"fuel_distributors\",\"fuel_types\",\"fuel_voucher_attachments\",\"fuel_voucher_status_codes\",\"fuel_vouchers\",\"gas_station_deposits\",\"gas_station_fuel_types\",\"gas_station_owners\",\"gas_stations\",\"general_transaction_attachments\",\"general_transaction_progress\",\"general_transactions\",\"handover_categories\",\"handover_items\",\"handover_transactions\",\"highway_patrol_attachments\",\"highway_patrol_personel\",\"highway_patrols\",\"history_employee_section\",\"history_verifications\",\"hse_permit_attachments\",\"hse_permit_attribute_categories\",\"hse_permit_attributes\",\"hse_permits\",\"hse_transaction_attachments\",\"hse_transaction_progress\",\"hse_transactions\",\"incident_action_attachments\",\"incident_action_progress\",\"incident_actions\",\"incident_attachments\",\"incidents\",\"index_performance_adjustments\",\"inspection_categories\",\"inspection_damages\",\"inspection_elements\",\"inspection_form_areas\",\"inspection_item_progress\",\"inspection_item_progress_attachments\",\"inspection_item_progress_history\",\"inspection_item_repair_history\",\"inspection_items\",\"inspection_repair_progress\",\"inspection_repair_progress_attachments\",\"inspection_schedule_assets\",\"inspection_schedule_forms\",\"inspection_schedule_personel\",\"inspection_schedules\",\"inspections\",\"issue_categories\",\"job_application_additional_questions\",\"job_application_documents\",\"job_applications\",\"job_positions\",\"job_vacancies\",\"job_vacancy_additional_question_options\",\"job_vacancy_additional_questions\",\"job_vacancy_documents\",\"job_vacancy_positions\",\"jobs\",\"lattol_handover_items\",\"lattol_handovers\",\"leaderboard_parameters\",\"leave_categories\",\"leave_evidence_categories\",\"library\",\"log_activity\",\"log_deposits\",\"log_failed_login\",\"log_fuel_vouchers\",\"log_inspection_damage_repair\",\"log_login\",\"log_reports\",\"log_routine_maintenances\",\"log_verifications\",\"m_accident_attribute_categories\",\"m_accident_attributes\",\"m_accident_victim_attribute_categories\",\"m_accident_victim_attributes\",\"m_activities\",\"m_diseases\",\"m_educations\",\"m_employee_documents\",\"m_form_groups\",\"m_inventories\",\"m_payment_methods\",\"m_poc\",\"m_section_groups\",\"m_section_rantings\",\"m_section_shifts\",\"m_service_substances\",\"m_service_vehicles\",\"m_skills\",\"m_sla\",\"m_spm\",\"m_spm_operators\",\"m_spm_units\",\"m_uoms\",\"m_vehicle_class\",\"m_vehicle_ownership_types\",\"maintenance_activities\",\"maintenance_asset_types\",\"maintenance_locations\",\"maintenance_schedule_assets\",\"maintenance_schedule_personel\",\"maintenance_schedules\",\"mapping_activity_area\",\"mapping_asset_maintenance_activity\",\"mapping_asset_type_damage_category\",\"mapping_asset_type_repair_type\",\"mapping_contract_activity\",\"mapping_contract_poc\",\"mapping_job_positions_activities\",\"mapping_library_job_positions\",\"mapping_roles_permissions\",\"mapping_section_salary_components\",\"mapping_section_vehicle\",\"mapping_sections_maintenance_assets\",\"mapping_users_roles\",\"migrations\",\"minor_asset_damages\",\"monitoring_transaction_details\",\"monitoring_transactions\",\"notification_types\",\"notifications\",\"notifications2\",\"officer_types\",\"overtimes\",\"owner_categories\",\"password_histories\",\"password_resets\",\"permissions\",\"personal_access_tokens\",\"presences\",\"provinces\",\"public_assets\",\"questioner_items\",\"questioners\",\"raw_presences\",\"repair_types\",\"report_groups\",\"report_types\",\"role_groups\",\"roles\",\"rollpaper_mutation\",\"rollpaper_usages\",\"routine_maintenance_attachments\",\"routine_maintenance_history\",\"routine_maintenance_progress\",\"routine_maintenances\",\"salary_components\",\"section_broadcast_attachments\",\"section_broadcast_job_positions\",\"section_broadcast_push_notifs\",\"section_broadcasts\",\"section_payroll\",\"section_types\",\"shift_changes\",\"shift_routine_activity\",\"shift_schedule_activity\",\"shift_schedule_personel\",\"shift_schedules\",\"spm_manual_period_types\",\"spm_sla\",\"spm_sla_manual\",\"tbl_attendance_execution\",\"toll_gates\",\"toll_owners\",\"toll_rest_areas\",\"toll_revenues\",\"toll_sections\",\"toll_traffic_volumes\",\"toll_traffic_weighted_volumes\",\"toll_volume_revenue\",\"user_chat_ids\",\"user_devices\",\"user_status_code\",\"user_verify_emails\",\"users\",\"vehicle_brands\",\"vehicle_categories\",\"vehicle_issue_attachments\",\"vehicle_issue_categories\",\"vehicle_issues\",\"vehicle_types\",\"vehicles\",\"view_accident_covers\",\"view_general_transaction_covers\",\"view_highway_patrol_covers\",\"view_hse_transaction_covers\",\"view_incident_covers\",\"view_reminder_actions\",\"view_section_active_activities\",\"view_section_active_contracts\",\"view_section_activity_based_on_contracts\",\"view_section_spm_sla\",\"work_leaves\"]"
+        }
+      ]
+    },
+    {
+      "chatId": 39,
+      "sequence": 3,
+      "timestamp": "2026-10-29T14:29:19.702Z",
+      "author": {
+        "type": "agent",
+        "id": "muse-spark-1.3-contributor-variant-4ddfa039f9b7",
+        "name": "Muse Spark 1.3"
+      },
+      "type": "action",
+      "actionId": 1060,
+      "actionLog": {
+        "id": 1060,
+        "gatekeeperId": 3,
+        "resourceTitle": "TROM BI",
+        "resourceUrl": "http://127.0.0.1:8091/api/agentic-bi/entities",
+        "createdAt": "2026-10-29T14:29:19.401Z",
+        "state": "approved",
+        "type": "observation",
+        "description": {
+          "title": "List TROM entities",
+          "description": "Read the public BI entity catalog from TROM."
+        }
+      }
+    },
+    {
+      "chatId": 39,
+      "sequence": 4,
+      "timestamp": "2026-10-29T14:29:25.403Z",
+      "author": {
+        "type": "agent",
+        "id": "muse-spark-1.3-contributor-variant-4ddfa039f9b7",
+        "name": "Muse Spark 1.3"
+      },
+      "type": "message",
+      "message": "",
+      "toolCalls": [
+        {
+          "toolCallId": "call_2f5cf4f4-bf58-4f59-b041-19aed20a2196",
+          "toolName": "executeCode",
+          "input": {
+            "code": "export default async function(self, env, ctx) {\n  for (let e of [\"toll_sections\",\"monitoring_transactions\",\"monitoring_transaction_details\",\"view_section_spm_sla\"]) {\n    try {\n      const d = await env.TROM.describe_entity(e);\n      console.log(\"=== \"+e+\" ===\");\n      console.log(JSON.stringify(d, null, 1).slice(0,8000));\n    } catch(err){ console.log(\"ERR \"+e+\": \"+err); }\n  }\n}\n"
+          },
+          "output": "=== toll_sections ===\n{\n \"name\": \"toll_sections\",\n \"label\": \"Toll Sections\",\n \"description\": \"\",\n \"primary_key\": [\n  \"id\"\n ],\n \"fields\": [\n  {\n   \"name\": \"id\",\n   \"type\": \"bigint\",\n   \"nullable\": false,\n   \"description\": \"\"\n  },\n  {\n   \"name\": \"section_code\",\n   \"type\": \"character varying(255)\",\n   \"nullable\": false,\n   \"description\": \"\"\n  },\n  {\n   \"name\": \"section_name\",\n   \"type\": \"character varying(255)\",\n   \"nullable\": false,\n   \"description\": \"\"\n  },\n  {\n   \"name\": \"owner_id\",\n   \"type\": \"bigint\",\n   \"nullable\": false,\n   \"description\": \"\"\n  },\n  {\n   \"name\": \"pic_contact\",\n   \"type\": \"character varying(255)\",\n   \"nullable\": true,\n   \"description\": \"\"\n  },\n  {\n   \"name\": \"start_km\",\n   \"type\": \"double precision\",\n   \"nullable\": true,\n   \"description\": \"\"\n  },\n  {\n   \"name\": \"end_km\",\n   \"type\": \"double precision\",\n   \"nullable\": true,\n   \"description\": \"\"\n  },\n  {\n   \"name\": \"long_road\",\n   \"type\": \"double precision\",\n   \"nullable\": true,\n   \"description\": \"\"\n  },\n  {\n   \"name\": \"img_section\",\n   \"type\": \"text\",\n   \"nullable\": true,\n   \"description\": \"\"\n  },\n  {\n   \"name\": \"description\",\n   \"type\": \"text\",\n   \"nullable\": true,\n   \"description\": \"\"\n  },\n  {\n   \"name\": \"active\",\n   \"type\": \"boolean\",\n   \"nullable\": true,\n   \"description\": \"\"\n  },\n  {\n   \"name\": \"created_by\",\n   \"type\": \"bigint\",\n   \"nullable\": true,\n   \"description\": \"\"\n  },\n  {\n   \"name\": \"updated_by\",\n   \"type\": \"bigint\",\n   \"nullable\": true,\n   \"description\": \"\"\n  },\n  {\n   \"name\": \"created_at\",\n   \"type\": \"timestamp(0) with time zone\",\n   \"nullable\": true,\n   \"description\": \"\"\n  },\n  {\n   \"name\": \"updated_at\",\n   \"type\": \"timestamp(0) with time zone\",\n   \"nullable\": true,\n   \"description\": \"\"\n  },\n  {\n   \"name\": \"contract_id\",\n   \"type\": \"bigint\",\n   \"nullable\": true,\n   \"description\": \"\"\n  },\n  {\n   \"name\": \"contract_start_date\",\n   \"type\": \"date\",\n   \"nullable\": true,\n   \"description\": \"\"\n  },\n  {\n   \"name\": \"contract_end_date\",\n   \"type\": \"date\",\n   \"nullable\": true,\n   \"description\": \"\"\n  },\n  {\n   \"name\": \"section_type_id\",\n   \"type\": \"bigint\",\n   \"nullable\": true,\n   \"description\": \"\"\n  },\n  {\n   \"name\": \"short_name\",\n   \"type\": \"character varying(255)\",\n   \"nullable\": true,\n   \"description\": \"\"\n  },\n  {\n   \"name\": \"avg_fuel_usage\",\n   \"type\": \"double precision\",\n   \"nullable\": true,\n   \"description\": \"Rata-rata penggunaan harian (rupiah)\"\n  },\n  {\n   \"name\": \"is_excluded_from_dashboard\",\n   \"type\": \"boolean\",\n   \"nullable\": false,\n   \"description\": \"\"\n  }\n ],\n \"relationships\": [\n  {\n   \"name\": \"toll_sections_created_by_foreign\",\n   \"fields\": [\n    \"created_by\"\n   ],\n   \"referenced_entity\": \"users\",\n   \"referenced_fields\": [\n    \"id\"\n   ]\n  },\n  {\n   \"name\": \"toll_sections_owner_id_foreign\",\n   \"fields\": [\n    \"owner_id\"\n   ],\n   \"referenced_entity\": \"toll_owners\",\n   \"referenced_fields\": [\n    \"id\"\n   ]\n  },\n  {\n   \"name\": \"toll_sections_section_type_id_foreign\",\n   \"fields\": [\n    \"section_type_id\"\n   ],\n   \"referenced_entity\": \"section_types\",\n   \"referenced_fields\": [\n    \"id\"\n   ]\n  },\n  {\n   \"name\": \"toll_sections_updated_by_foreign\",\n   \"fields\": [\n    \"updated_by\"\n   ],\n   \"referenced_entity\": \"users\",\n   \"referenced_fields\": [\n    \"id\"\n   ]\n  }\n ],\n \"allowed_filters\": {\n  \"id\": [\n   \"eq\",\n   \"neq\",\n   \"gt\",\n   \"gte\",\n   \"lt\",\n   \"lte\",\n   \"in\",\n   \"not_in\",\n   \"is_null\",\n   \"is_not_null\"\n  ],\n  \"section_code\": [\n   \"eq\",\n   \"neq\",\n   \"gt\",\n   \"gte\",\n   \"lt\",\n   \"lte\",\n   \"in\",\n   \"not_in\",\n   \"contains\",\n   \"starts_with\",\n   \"ends_with\",\n   \"is_null\",\n   \"is_not_null\"\n  ],\n  \"section_name\": [\n   \"eq\",\n   \"neq\",\n   \"gt\",\n   \"gte\",\n   \"lt\",\n   \"lte\",\n   \"in\",\n   \"not_in\",\n   \"contains\",\n   \"starts_with\",\n   \"ends_with\",\n   \"is_null\",\n   \"is_not_null\"\n  ],\n  \"owner_id\": [\n   \"eq\",\n   \"neq\",\n   \"gt\",\n   \"gte\",\n   \"lt\",\n   \"lte\",\n   \"in\",\n   \"not_in\",\n   \"is_null\",\n   \"is_not_null\"\n  ],\n  \"pic_contact\": [\n   \"eq\",\n   \"neq\",\n   \"gt\",\n   \"gte\",\n   \"lt\",\n   \"lte\",\n   \"in\",\n   \"not_in\",\n   \"contains\",\n   \"starts_with\",\n   \"ends_with\",\n   \"is_null\",\n   \"is_not_null\"\n  ],\n  \"start_km\": [\n   \"eq\",\n   \"neq\",\n   \"gt\",\n   \"gte\",\n   \"lt\",\n   \"lte\",\n   \"in\",\n   \"not_in\",\n   \"is_null\",\n   \"is_not_null\"\n  ],\n  \"end_km\": [\n   \"eq\",\n   \"neq\",\n   \"gt\",\n   \"gte\",\n   \"lt\",\n   \"lte\",\n   \"in\",\n   \"not_in\",\n   \"is_null\",\n   \"is_not_null\"\n  ],\n  \"long_road\": [\n   \"eq\",\n   \"neq\",\n   \"gt\",\n   \"gte\",\n   \"lt\",\n   \"lte\",\n   \"in\",\n   \"not_in\",\n   \"is_null\",\n   \"is_not_null\"\n  ],\n  \"img_section\": [\n   \"eq\",\n   \"neq\",\n   \"gt\",\n   \"gte\",\n   \"lt\",\n   \"lte\",\n   \"in\",\n   \"not_in\",\n   \"contains\",\n   \"starts_with\",\n   \"ends_with\",\n   \"is_null\",\n   \"is_not_null\"\n  ],\n  \"description\": [\n   \"eq\",\n   \"neq\",\n   \"gt\",\n   \"gte\",\n   \"lt\",\n   \"lte\",\n   \"in\",\n   \"not_in\",\n   \"contains\",\n   \"starts_with\",\n   \"ends_with\",\n   \"is_null\",\n   \"is_not_null\"\n  ],\n  \"active\": [\n   \"eq\",\n   \"neq\",\n   \"in\",\n   \"not_in\",\n   \"is_null\",\n   \"is_not_null\"\n  ],\n  \"created_by\": [\n   \"eq\",\n   \"neq\",\n   \"gt\",\n   \"gte\",\n   \"lt\",\n   \"lte\",\n   \"in\",\n   \"not_in\",\n   \"is_null\",\n   \"is_not_null\"\n  ],\n  \"updated_by\": [\n   \"eq\",\n   \"neq\",\n   \"gt\",\n   \"gte\",\n   \"lt\",\n   \"lte\",\n   \"in\",\n   \"not_in\",\n   \"is_null\",\n   \"is_not_null\"\n  ],\n  \"created_at\": [\n   \"eq\",\n   \"neq\",\n   \"gt\",\n   \"gte\",\n   \"lt\",\n   \"lte\",\n   \"in\",\n   \"not_in\",\n   \"is_null\",\n   \"is_not_null\"\n  ],\n  \"updated_at\": [\n   \"eq\",\n   \"neq\",\n   \"gt\",\n   \"gte\",\n   \"lt\",\n   \"lte\",\n   \"in\",\n   \"not_in\",\n   \"is_null\",\n   \"is_not_null\"\n  ],\n  \"contract_id\": [\n   \"eq\",\n   \"neq\",\n   \"gt\",\n   \"gte\",\n   \"lt\",\n   \"lte\",\n   \"in\",\n   \"not_in\",\n   \"is_null\",\n   \"is_not_null\"\n  ],\n  \"contract_start_date\": [\n   \"eq\",\n   \"neq\",\n   \"gt\",\n   \"gte\",\n   \"lt\",\n   \"lte\",\n   \"in\",\n   \"not_in\",\n   \"is_null\",\n   \"is_not_null\"\n  ],\n  \"contract_end_date\": [\n   \"eq\",\n   \"neq\",\n   \"gt\",\n   \"gte\",\n   \"lt\",\n   \"lte\",\n   \"in\",\n   \"not_in\",\n   \"is_null\",\n   \"is_not_null\"\n  ],\n  \"section_type_id\": [\n   \"eq\",\n   \"neq\",\n   \"gt\",\n   \"gte\",\n   \"lt\",\n   \"lte\",\n   \"in\",\n   \"not_in\",\n   \"is_null\",\n   \"is_not_null\"\n  ],\n  \"short_name\": [\n   \"eq\",\n   \"neq\",\n   \"gt\",\n   \"gte\",\n   \"lt\",\n   \"lte\",\n   \"in\",\n   \"not_in\",\n   \"contains\",\n   \"starts_with\",\n   \"ends_with\",\n   \"is_null\",\n   \"is_not_null\"\n  ],\n  \"avg_fuel_usage\": [\n   \"eq\",\n   \"neq\",\n   \"gt\",\n   \"gte\",\n   \"lt\",\n   \"lte\",\n   \"in\",\n   \"not_in\",\n   \"is_null\",\n   \"is_not_null\"\n  ],\n  \"is_excluded_from_dashboard\": [\n   \"eq\",\n   \"neq\",\n   \"in\",\n   \"not_in\",\n   \"is_null\",\n   \"is_not_null\"\n  ]\n }\n}\n=== monitoring_transactions ===\n{\n \"name\": \"monitoring_transactions\",\n \"label\": \"Monitoring Transactions\",\n \"description\": \"\",\n \"primary_key\": [\n  \"id\"\n ],\n \"fields\": [\n  {\n   \"name\": \"id\",\n   \"type\": \"bigint\",\n   \"nullable\": false,\n   \"description\": \"\"\n  },\n  {\n   \"name\": \"section_id\",\n   \"type\": \"bigint\",\n   \"nullable\": false,\n   \"description\": \"\"\n  },\n  {\n   \"name\": \"gate_id\",\n   \"type\": \"bigint\",\n   \"nullable\": false,\n   \"description\": \"\"\n  },\n  {\n   \"name\": \"date\",\n   \"type\": \"date\",\n   \"nullable\": true,\n   \"description\": \"\"\n  },\n  {\n   \"name\": \"schedule_id\",\n   \"type\": \"bigint\",\n   \"nullable\": true,\n   \"description\": \"\"\n  },\n  {\n   \"name\": \"activity_id\",\n   \"type\": \"bigint\",\n   \"nullable\": true,\n   \"description\": \"\"\n  },\n  {\n   \"name\": \"description\",\n   \"type\": \"text\",\n   \"nullable\": true,\n   \"description\": \"\"\n  },\n  {\n   \"name\": \"officer_id\",\n   \"type\": \"bigint\",\n   \"nullable\": false,\n   \"description\": \"\"\n  },\n  {\n   \"name\": \"total_booth\",\n   \"type\": \"integer\",\n   \"nullable\": false,\n   \"description\": \"\"\n  },\n  {\n   \"name\": \"total_longbooth\",\n   \"type\": \"integer\",\n   \"nullable\": false,\n   \"description\": \"\"\n  },\n  {\n   \"name\": \"status_code\",\n   \"type\": \"character varying(255)\",\n   \"nullable\": true,\n   \"description\": \"on_verification/verified\"\n  },\n  {\n   \"name\": \"verified_by\",\n   \"type\": \"bigint\",\n   \"nullable\": true,\n   \"description\": \"\"\n  },\n  {\n   \"name\": \"verified_at\",\n   \"type\": \"timestamp(0) with time zone\",\n   \"nullable\": true,\n   \"description\": \"\"\n  },\n  {\n   \"name\": \"verified_description\",\n   \"type\": \"text\",\n   \"nullable\": true,\n   \"description\": \"\"\n  },\n  {\n   \"name\": \"created_by\",\n   \"type\": \"bigint\",\n   \"nullable\": true,\n   \"description\": \"\"\n  },\n  {\n   \"name\": \"updated_by\",\n   \"type\": \"bigint\",\n   \"nullable\": true,\n   \"description\": \"\"\n  },\n  {\n   \"name\": \"created_at\",\n   \"type\": \"timestamp(0) with time zone\",\n   \"nullable\": true,\n   \"description\": \"\"\n  },\n  {\n   \"name\": \"updated_at\",\n   \"type\": \"timestamp(0) with time zone\",\n   \"nullable\": true,\n   \"description\": \"\"\n  },\n  {\n   \"name\": \"ranting_id\",\n   \"type\": \"bigint\",\n   \"nullable\": true,\n   \"description\": \"\"\n  }\n ],\n \"relationships\": [\n  {\n   \"name\": \"monitoring_transactions_activity_id_foreign\",\n   \"fields\": [\n    \"activity_id\"\n   ],\n   \"referenced_entity\": \"m_activities\",\n   \"referenced_fields\": [\n    \"id\"\n   ]\n  },\n  {\n   \"name\": \"monitoring_transactions_created_by_foreign\",\n   \"fields\": [\n    \"created_by\"\n   ],\n   \"referenced_entity\": \"users\",\n   \"referenced_fields\": [\n    \"id\"\n   ]\n  },\n  {\n   \"name\": \"monitoring_transactions_gate_id_foreign\",\n   \"fields\": [\n    \"gate_id\"\n   ],\n   \"referenced_entity\": \"toll_gates\",\n   \"referenced_fields\": [\n    \"id\"\n   ]\n  },\n  {\n   \"name\": \"monitoring_transactions_officer_id_foreign\",\n   \"fields\": [\n    \"officer_id\"\n   ],\n   \"referenced_entity\": \"employees\",\n   \"referenced_fields\": [\n    \"id\"\n   ]\n  },\n  {\n   \"name\": \"monitoring_transactions_ranting_id_foreign\",\n   \"fields\": [\n    \"ranting_id\"\n   ],\n   \"referenced_entity\": \"m_section_rantings\",\n   \"referenced_fields\": [\n    \"id\"\n   ]\n  },\n  {\n   \"name\": \"monitoring_transactions_schedule_id_foreign\",\n   \"fields\": [\n    \"schedule_id\"\n   ],\n   \"referenced_entity\": \"shift_schedules\",\n   \"referenced_fields\": [\n    \"id\"\n   ]\n  },\n  {\n   \"name\": \"monitoring_transactions_section_id_foreign\",\n   \"fields\": [\n    \"section_id\"\n   ],\n   \"referenced_entity\": \"toll_sections\",\n   \"referenced_fields\": [\n    \"id\"\n   ]\n  },\n  {\n   \"name\": \"monitoring_transactions_updated_by_foreign\",\n   \"fields\": [\n    \"updated_by\"\n   ],\n   \"referenced_entity\": \"users\",\n   \"referenced_fields\": [\n    \"id\"\n   ]\n  },\n  {\n   \"name\": \"monitoring_transactions_verified_by_foreign\",\n   \"fields\": [\n    \"verified_by\"\n   ],\n   \"referenced_entity\": \"users\",\n   \"referenced_fields\": [\n    \"id\"\n   ]\n  }\n ],\n \"allowed_filters\": {\n  \"id\": [\n   \"eq\",\n   \"neq\",\n   \"gt\",\n   \"gte\",\n   \"lt\",\n   \"lte\",\n   \"in\",\n   \"not_in\",\n   \"is_null\",\n   \"is_not_null\"\n  ],\n  \"section_id\": [\n   \"eq\",\n   \"neq\",\n   \"gt\",\n   \"gte\",\n   \"lt\",\n   \"lte\",\n   \"in\",\n   \"not_in\",\n   \"is_null\",\n   \"is_not_null\"\n  ],\n  \"gate_id\": [\n   \"eq\",\n   \"neq\",\n   \"gt\",\n   \"gte\",\n   \"lt\",\n   \"lte\",\n   \"in\",\n   \"not_in\",\n   \"is_null\",\n   \"is_not_null\"\n  ],\n  \"date\": [\n   \"eq\",\n   \"neq\",\n   \"gt\",\n   \"gte\",\n   \"lt\",\n   \"lte\",\n   \"in\",\n   \"not_in\",\n   \"is_null\",\n   \"is_not_null\"\n  ],\n  \"schedule_id\": [\n   \"eq\",\n   \"neq\",\n   \"gt\",\n   \"gte\",\n   \"lt\",\n   \"lte\",\n   \"in\",\n   \"not_in\",\n   \"is_null\",\n   \"is_not_null\"\n  ],\n  \"activity_id\": [\n   \"eq\",\n   \"neq\",\n   \"gt\",\n   \"gte\",\n   \"lt\",\n   \"lte\",\n   \"in\",\n   \"not_in\",\n   \"is_null\",\n   \"is_not_null\"\n  ],\n  \"description\": [\n   \"eq\",\n   \"neq\",\n   \"gt\",\n   \"gte\",\n   \"lt\",\n   \"lte\",\n   \"in\",\n   \"not_in\",\n   \"contains\",\n   \"starts_with\",\n   \"ends_with\",\n   \"is_null\",\n   \"is_not_null\"\n  ],\n  \"officer_id\": [\n   \"eq\",\n   \"neq\",\n   \"gt\",\n   \"gte\",\n   \"lt\",\n   \"lte\",\n   \"in\",\n   \"not_in\",\n   \"is_null\",\n   \"is_not_null\"\n  ],\n  \"total_booth\": [\n   \"eq\",\n   \"neq\",\n   \"gt\",\n   \"gte\",\n   \"lt\",\n   \"lte\",\n   \"in\",\n   \"not_in\",\n   \"is_null\",\n   \"is_not_null\"\n  ],\n  \"total_longbooth\": [\n   \"eq\",\n   \"neq\",\n   \"gt\",\n   \"gte\",\n   \"lt\",\n   \"lte\",\n   \"in\",\n   \"not_in\",\n   \"is_null\",\n   \"is_not_null\"\n  ],\n  \"status_code\": [\n   \"eq\",\n   \"neq\",\n   \"gt\",\n   \"gte\",\n   \"lt\",\n   \"lte\",\n   \"in\",\n   \"not_in\",\n   \"contains\",\n   \"starts_with\",\n   \"ends_with\",\n   \"is_null\",\n   \"is_not_null\"\n  ],\n  \"verified_by\": [\n   \"eq\",\n   \"neq\",\n   \"gt\",\n   \"gte\",\n   \"lt\",\n   \"lte\",\n   \"in\",\n   \"not_in\",\n   \"is_null\",\n   \"is_not_null\"\n  ],\n  \"verified_at\": [\n   \"eq\",\n   \"neq\",\n   \"gt\",\n   \"gte\",\n   \"lt\",\n   \"lte\",\n   \"in\",\n   \"not_in\",\n   \"is_null\",\n   \"is_not_null\"\n  ],\n  \"verified_description\": [\n   \"eq\",\n   \"neq\",\n   \"gt\",\n   \"gte\",\n   \"lt\",\n   \"lte\",\n   \"in\",\n   \"not_in\",\n   \"contains\",\n   \"starts_with\",\n   \"ends_with\",\n   \"is_null\",\n   \"is_not_null\"\n  ],\n  \"created_by\": [\n   \"eq\",\n   \"neq\",\n   \"gt\",\n   \"gte\",\n   \"lt\",\n   \"lte\",\n   \"in\",\n   \"not_in\",\n   \"is_null\",\n   \"is_not_null\"\n  ],\n  \"updated_by\": [\n   \"eq\",\n   \"neq\",\n   \"gt\",\n   \"gte\",\n   \"lt\",\n   \"lte\",\n   \"in\",\n   \"not_in\",\n   \"is_null\",\n   \"is_not_null\"\n  ],\n  \"created_at\": [\n   \"eq\",\n   \"neq\",\n   \"gt\",\n   \"gte\",\n   \"lt\",\n   \"lte\",\n   \"in\",\n   \"not_in\",\n   \"is_null\",\n   \"is_not_null\"\n  ],\n  \"updated_at\": [\n   \"eq\",\n   \"neq\",\n   \"gt\",\n   \"gte\",\n   \"lt\",\n   \"lte\",\n   \"in\",\n   \"not_in\",\n   \"is_null\",\n   \"is_not_null\"\n  ],\n  \"ranting_id\": [\n   \"eq\",\n   \"neq\",\n   \"gt\",\n   \"gte\",\n   \"lt\",\n   \"lte\",\n   \"in\",\n   \"not_in\",\n   \"is_null\",\n   \"is_not_null\"\n  ]\n }\n}\n=== monitoring_transaction_details ===\n{\n \"name\": \"monitoring_transaction_details\",\n \"label\": \"Monitoring Transaction Details\",\n \"description\": \"\",\n \"primary_key\": [\n  \"id\"\n ],\n \"fields\": [\n  {\n   \"name\": \"id\",\n   \"type\": \"bigint\",\n   \"nullable\": false,\n   \"description\": \"\"\n  },\n  {\n   \"name\": \"transaction_id\",\n   \"type\": \"bigint\",\n   \"nullable\": false,\n   \"description\": \"\"\n  },\n  {\n   \"name\": \"type\",\n   \"type\": \"character varying(255)\",\n   \"nullable\": false,\n   \"description\": \"booth/longbooth\"\n  },\n  {\n   \"name\": \"booth_number\",\n   \"type\": \"integer\",\n   \"nullable\": false,\n   \"description\": \"\"\n  },\n  {\n   \"name\": \"sample_number\",\n   \"type\": \"integer\",\n   \"nullable\": false,\n   \"description\": \"\"\n  },\n  {\n   \"name\": \"vehicle_queue\",\n   \"type\": \"integer\",\n   \"nullable\": true,\n   \"description\": \"antrian\"\n  },\n  {\n   \"name\": \"transaction_duration\",\n   \"type\": \"double precision\",\n   \"nullable\": true,\n   \"description\": \"lama transaksi, in second\"\n  },\n  {\n   \"name\": \"vehicle_type\",\n   \"type\": \"character varying(255)\",\n   \"nullable\": true,\n   \"description\": \"\"\n  },\n  {\n   \"name\": \"vehicle_class_id\",\n   \"type\": \"bigint\",\n   \"nullable\": true,\n   \"description\": \"\"\n  },\n  {\n   \"name\": \"payment_id\",\n   \"type\": \"bigint\",\n   \"nullable\": true,\n   \"description\": \"\"\n  },\n  {\n   \"name\": \"description\",\n   \"type\": \"text\",\n   \"nullable\": true,\n   \"description\": \"\"\n  },\n  {\n   \"name\": \"created_by\",\n   \"type\": \"bigint\",\n   \"nullable\": true,\n   \"description\": \"\"\n  },\n  {\n   \"name\": \"updated_by\",\n   \"type\": \"bigint\",\n   \"nullable\": true,\n   \"description\": \"\"\n  },\n  {\n   \"name\": \"created_at\",\n   \"type\": \"timestamp(0) with time zone\",\n   \"nullable\": true,\n   \"description\": \"\"\n  },\n  {\n   \"name\": \"updated_at\",\n   \"type\": \"timestamp(0) with time zone\",\n   \"nullable\": true,\n   \"description\": \"\"\n  }\n ],\n \"relationships\": [\n  {\n   \"name\": \"monitoring_transaction_details_created_by_foreign\",\n   \"fields\": [\n    \"created_by\"\n   ],\n   \"referenced_entity\": \"users\",\n   \"referenced_fields\": [\n    \"id\"\n   ]\n  },\n  {\n   \"name\": \"monitoring_transaction_details_transaction_id_foreign\",\n   \"fields\": [\n    \"transaction_id\"\n   ],\n   \"referenced_entity\": \"monitoring_transactions\",\n   \"referenced_fields\": [\n    \"id\"\n   ]\n  },\n  {\n   \"name\": \"monitoring_transaction_details_updated_by_foreign\",\n   \"fields\": [\n    \"updated_by\"\n   ],\n   \"referenced_entity\": \"users\",\n   \"referenced_fields\": [\n    \"id\"\n   ]\n  }\n ],\n \"allowed_filters\": {\n  \"id\": [\n   \"eq\",\n   \"neq\",\n   \"gt\",\n   \"gte\",\n   \"lt\",\n   \"lte\",\n   \"in\",\n   \"not_in\",\n   \"is_null\",\n   \"is_not_null\"\n  ],\n  \"transaction_id\": [\n   \"eq\",\n   \"neq\",\n   \"gt\",\n   \"gte\",\n   \"lt\",\n   \"lte\",\n   \"in\",\n   \"not_in\",\n   \"is_null\",\n   \"is_not_null\"\n  ],\n  \"type\": [\n   \"eq\",\n   \"neq\",\n   \"gt\",\n   \"gte\",\n   \"lt\",\n   \"lte\",\n   \"in\",\n   \"not_in\",\n   \"contains\",\n   \"starts_with\",\n   \"ends_with\",\n   \"is_null\",\n   \"is_not_null\"\n  ],\n  \"booth_number\": [\n   \"eq\",\n   \"neq\",\n   \"gt\",\n   \"gte\",\n   \"lt\",\n   \"lte\",\n   \"in\",\n   \"not_in\",\n   \"is_null\",\n   \"is_not_null\"\n  ],\n  \"sample_number\": [\n   \"eq\",\n   \"neq\",\n   \"gt\",\n   \"gte\",\n   \"lt\",\n   \"lte\",\n   \"in\",\n   \"not_in\",\n   \"is_null\",\n   \"is_not_null\"\n  ],\n  \"vehicle_queue\": [\n   \"eq\",\n   \"neq\",\n   \"gt\",\n   \"gte\",\n   \"lt\",\n   \"lte\",\n   \"in\",\n   \"not_in\",\n   \"is_null\",\n   \"is_not_null\"\n  ],\n  \"transaction_duration\": [\n   \"eq\",\n   \"neq\",\n   \"gt\",\n   \"gte\",\n   \"lt\",\n   \"lte\",\n   \"in\",\n   \"not_in\",\n   \"is_null\",\n   \"is_not_null\"\n  ],\n  \"vehicle_type\": [\n   \"eq\",\n   \"neq\",\n   \"gt\",\n   \"gte\",\n   \"lt\",\n   \"lte\",\n   \"in\",\n   \"not_in\",\n   \"contains\",\n   \"starts_with\",\n   \"ends_with\",\n   \"is_null\",\n   \"is_not_null\"\n  ],\n  \"vehicle_class_id\": [\n   \"eq\",\n   \"neq\",\n   \"gt\",\n   \"gte\",\n   \"lt\",\n   \"lte\",\n   \"in\",\n   \"not_in\",\n   \"is_null\",\n   \"is_not_null\"\n  ],\n  \"payment_id\": [\n   \"eq\",\n   \"neq\",\n   \"gt\",\n   \"gte\",\n   \"lt\",\n   \"lte\",\n   \"in\",\n   \"not_in\",\n   \"is_null\",\n   \"is_not_null\"\n  ],\n  \"description\": [\n   \"eq\",\n   \"neq\",\n   \"gt\",\n   \"gte\",\n   \"lt\",\n   \"lte\",\n   \"in\",\n   \"not_in\",\n   \"contains\",\n   \"starts_with\",\n   \"ends_with\",\n   \"is_null\",\n   \"is_not_null\"\n  ],\n  \"created_by\": [\n   \"eq\",\n   \"neq\",\n   \"gt\",\n   \"gte\",\n   \"lt\",\n   \"lte\",\n   \"in\",\n   \"not_in\",\n   \"is_null\",\n   \"is_not_null\"\n  ],\n  \"updated_by\": [\n   \"eq\",\n   \"neq\",\n   \"gt\",\n   \"gte\",\n   \"lt\",\n   \"lte\",\n   \"in\",\n   \"not_in\",\n   \"is_null\",\n   \"is_not_null\"\n  ],\n  \"created_at\": [\n   \"eq\",\n   \"neq\",\n   \"gt\",\n   \"gte\",\n   \"lt\",\n   \"lte\",\n   \"in\",\n   \"not_in\",\n   \"is_null\",\n   \"is_not_null\"\n  ],\n  \"updated_at\": [\n   \"eq\",\n   \"neq\",\n   \"gt\",\n   \"gte\",\n   \"lt\",\n   \"lte\",\n   \"in\",\n   \"not_in\",\n   \"is_null\",\n   \"is_not_null\"\n  ]\n }\n}\n=== view_section_spm_sla ===\n{\n \"name\": \"view_section_spm_sla\",\n \"label\": \"View Section Spm Sla\",\n \"description\": \"\",\n \"primary_key\": [],\n \"fields\": [\n  {\n   \"name\": \"section_id\",\n   \"type\": \"bigint\",\n   \"nullable\": true,\n   \"description\": \"\"\n  },\n  {\n   \"name\": \"spm_id\",\n   \"type\": \"bigint\",\n   \"nullable\": true,\n   \"description\": \"\"\n  },\n  {\n   \"name\": \"service_substance_id\",\n   \"type\": \"bigint\",\n   \"nullable\": true,\n   \"description\": \"\"\n  },\n  {\n   \"name\": \"code\",\n   \"type\": \"character varying(255)\",\n   \"nullable\": true,\n   \"description\": \"\"\n  },\n  {\n   \"name\": \"indicator\",\n   \"type\": \"character varying(255)\",\n   \"nullable\": true,\n   \"description\": \"\"\n  },\n  {\n   \"name\": \"sub_indicator\",\n   \"type\": \"character varying(255)\",\n   \"nullable\": true,\n   \"description\": \"\"\n  },\n  {\n   \"name\": \"description\",\n   \"type\": \"text\",\n   \"nullable\": true,\n   \"description\": \"\"\n  },\n  {\n   \"name\": \"is_static\",\n   \"type\": \"boolean\",\n   \"nullable\": true,\n   \"description\": \"\"\n  },\n  {\n   \"name\": \"spm_specification\",\n   \"type\": \"text\",\n   \"nullable\": true,\n   \"description\": \"\"\n  },\n  {\n   \"name\": \"sla_specification\",\n   \"type\": \"text\",\n   \"nullable\": true,\n   \"description\": \"\"\n  },\n  {\n   \"name\": \"operator\",\n   \"type\": \"character varying(255)\",\n   \"nullable\": true,\n   \"description\": \"\"\n  },\n  {\n   \"name\": \"spm_parameter\",\n   \"type\": \"integer\",\n   \"nullable\": true,\n   \"description\": \"\"\n  },\n  {\n   \"name\": \"sla_parameter\",\n   \"type\": \"integer\",\n   \"nullable\": true,\n   \"description\": \"\"\n  },\n  {\n   \"name\": \"unit\",\n   \"type\": \"character varying(255)\",\n   \"nullable\": true,\n   \"description\": \"\"\n  },\n  {\n   \"name\": \"is_applicable\",\n   \"type\": \"boolean\",\n   \"nullable\": true,\n   \"description\": \"\"\n  },\n  {\n   \"name\": \"score_default\",\n   \"type\": \"boolean\",\n   \"nullable\": true,\n   \"description\": \"\"\n  }\n ],\n \"relationships\": [],\n \"allowed_filters\": {\n  \"section_id\": [\n   \"eq\",\n   \"neq\",\n   \"gt\",\n   \"gte\",\n   \"lt\",\n   \"lte\",\n   \"in\",\n   \"not_in\",\n   \"is_null\",\n   \"is_not_null\"\n  ],\n  \"spm_id\": [\n   \"eq\",\n   \"neq\",\n   \"gt\",\n   \"gte\",\n   \"lt\",\n   \"lte\",\n   \"in\",\n   \"not_in\",\n   \"is_null\",\n   \"is_not_null\"\n  ],\n  \"service_substance_id\": [\n   \"eq\",\n   \"neq\",\n   \"gt\",\n   \"gte\",\n   \"lt\",\n   \"lte\",\n   \"in\",\n   \"not_in\",\n   \"is_null\",\n   \"is_not_null\"\n  ],\n  \"code\": [\n   \"eq\",\n   \"neq\",\n   \"gt\",\n   \"gte\",\n   \"lt\",\n   \"lte\",\n   \"in\",\n   \"not_in\",\n   \"contains\",\n   \"starts_with\",\n   \"ends_with\",\n   \"is_null\",\n   \"is_not_null\"\n  ],\n  \"indicator\": [\n   \"eq\",\n   \"neq\",\n   \"gt\",\n   \"gte\",\n   \"lt\",\n   \"lte\",\n   \"in\",\n   \"not_in\",\n   \"contains\",\n   \"starts_with\",\n   \"ends_with\",\n   \"is_null\",\n   \"is_not_null\"\n  ],\n  \"sub_indicator\": [\n   \"eq\",\n   \"neq\",\n   \"gt\",\n   \"gte\",\n   \"lt\",\n   \"lte\",\n   \"in\",\n   \"not_in\",\n   \"contains\",\n   \"starts_with\",\n   \"ends_with\",\n   \"is_null\",\n   \"is_not_null\"\n  ],\n  \"description\": [\n   \"eq\",\n   \"neq\",\n   \"gt\",\n   \"gte\",\n   \"lt\",\n   \"lte\",\n   \"in\",\n   \"not_in\",\n   \"contains\",\n   \"starts_with\",\n   \"ends_with\",\n   \"is_null\",\n   \"is_not_null\"\n  ],\n  \"is_static\": [\n   \"eq\",\n   \"neq\",\n   \"in\",\n   \"not_in\",\n   \"is_null\",\n   \"is_not_null\"\n  ],\n  \"spm_specification\": [\n   \"eq\",\n   \"neq\",\n   \"gt\",\n   \"gte\",\n   \"lt\",\n   \"lte\",\n   \"in\",\n   \"not_in\",\n   \"contains\",\n   \"starts_with\",\n   \"ends_with\",\n   \"is_null\",\n   \"is_not_null\"\n  ],\n  \"sla_specification\": [\n   \"eq\",\n   \"neq\",\n   \"gt\",\n   \"gte\",\n   \"lt\",\n   \"lte\",\n   \"in\",\n   \"not_in\",\n   \"contains\",\n   \"starts_with\",\n   \"ends_with\",\n   \"is_null\",\n   \"is_not_null\"\n  ],\n  \"operator\": [\n   \"eq\",\n   \"neq\",\n   \"gt\",\n   \"gte\",\n   \"lt\",\n   \"lte\",\n   \"in\",\n   \"not_in\",\n   \"contains\",\n   \"starts_with\",\n   \"ends_with\",\n   \"is_null\",\n   \"is_not_null\"\n  ],\n  \"spm_parameter\": [\n   \"eq\",\n   \"neq\",\n   \"gt\",\n   \"gte\",\n   \"lt\",\n   \"lte\",\n   \"in\",\n   \"not_in\",\n   \"is_null\",\n   \"is_not_null\"\n  ],\n  \"sla_parameter\": [\n   \"eq\",\n   \"neq\",\n   \"gt\",\n   \"gte\",\n   \"lt\",\n   \"lte\",\n   \"in\",\n   \"not_in\",\n   \"is_null\",\n   \"is_not_null\"\n  ],\n  \"unit\": [\n   \"eq\",\n   \"neq\",\n   \"gt\",\n   \"gte\",\n   \"lt\",\n   \"lte\",\n   \"in\",\n   \"not_in\",\n   \"contains\",\n   \"starts_with\",\n   \"ends_with\",\n   \"is_null\",\n   \"is_not_null\"\n  ],\n  \"is_applicable\": [\n   \"eq\",\n   \"neq\",\n   \"in\",\n   \"not_in\",\n   \"is_null\",\n   \"is_not_null\"\n  ],\n  \"score_default\": [\n   \"eq\",\n   \"neq\",\n   \"in\",\n   \"not_in\",\n   \"is_null\",\n   \"is_not_null\"\n  ]\n }\n}"
+        }
+      ]
+    },
+    {
+      "chatId": 39,
+      "sequence": 5,
+      "timestamp": "2026-10-29T14:29:25.404Z",
+      "author": {
+        "type": "agent",
+        "id": "muse-spark-1.3-contributor-variant-4ddfa039f9b7",
+        "name": "Muse Spark 1.3"
+      },
+      "type": "action",
+      "actionId": 1061,
+      "actionLog": {
+        "id": 1061,
+        "gatekeeperId": 3,
+        "resourceTitle": "TROM BI",
+        "resourceUrl": "http://127.0.0.1:8091/api/agentic-bi/entities",
+        "createdAt": "2026-10-29T14:29:23.673Z",
+        "state": "approved",
+        "type": "observation",
+        "description": {
+          "title": "Describe a TROM entity",
+          "description": "Read schema metadata for the public TROM entity toll_sections."
+        }
+      }
+    },
+    {
+      "chatId": 39,
+      "sequence": 6,
+      "timestamp": "2026-10-29T14:29:25.405Z",
+      "author": {
+        "type": "agent",
+        "id": "muse-spark-1.3-contributor-variant-4ddfa039f9b7",
+        "name": "Muse Spark 1.3"
+      },
+      "type": "action",
+      "actionId": 1062,
+      "actionLog": {
+        "id": 1062,
+        "gatekeeperId": 3,
+        "resourceTitle": "TROM BI",
+        "resourceUrl": "http://127.0.0.1:8091/api/agentic-bi/entities",
+        "createdAt": "2026-10-29T14:29:24.105Z",
+        "state": "approved",
+        "type": "observation",
+        "description": {
+          "title": "Describe a TROM entity",
+          "description": "Read schema metadata for the public TROM entity monitoring_transactions."
+        }
+      }
+    },
+    {
+      "chatId": 39,
+      "sequence": 7,
+      "timestamp": "2026-10-29T14:29:25.406Z",
+      "author": {
+        "type": "agent",
+        "id": "muse-spark-1.3-contributor-variant-4ddfa039f9b7",
+        "name": "Muse Spark 1.3"
+      },
+      "type": "action",
+      "actionId": 1063,
+      "actionLog": {
+        "id": 1063,
+        "gatekeeperId": 3,
+        "resourceTitle": "TROM BI",
+        "resourceUrl": "http://127.0.0.1:8091/api/agentic-bi/entities",
+        "createdAt": "2026-10-29T14:29:24.544Z",
+        "state": "approved",
+        "type": "observation",
+        "description": {
+          "title": "Describe a TROM entity",
+          "description": "Read schema metadata for the public TROM entity monitoring_transaction_details."
+        }
+      }
+    },
+    {
+      "chatId": 39,
+      "sequence": 8,
+      "timestamp": "2026-10-29T14:29:25.407Z",
+      "author": {
+        "type": "agent",
+        "id": "muse-spark-1.3-contributor-variant-4ddfa039f9b7",
+        "name": "Muse Spark 1.3"
+      },
+      "type": "action",
+      "actionId": 1064,
+      "actionLog": {
+        "id": 1064,
+        "gatekeeperId": 3,
+        "resourceTitle": "TROM BI",
+        "resourceUrl": "http://127.0.0.1:8091/api/agentic-bi/entities",
+        "createdAt": "2026-10-29T14:29:24.961Z",
+        "state": "approved",
+        "type": "observation",
+        "description": {
+          "title": "Describe a TROM entity",
+          "description": "Read schema metadata for the public TROM entity view_section_spm_sla."
+        }
+      }
+    },
+    {
+      "chatId": 39,
+      "sequence": 9,
+      "timestamp": "2026-10-29T14:29:29.336Z",
+      "author": {
+        "type": "agent",
+        "id": "muse-spark-1.3-contributor-variant-4ddfa039f9b7",
+        "name": "Muse Spark 1.3"
+      },
+      "type": "message",
+      "message": "",
+      "toolCalls": [
+        {
+          "toolCallId": "call_81e8ef00-dc75-4072-8faf-2ded2d1fc58f",
+          "toolName": "executeCode",
+          "input": {
+            "code": "export default async function(self, env, ctx) {\n  // find BINSTA section\n  let page = await env.TROM.read_records(\"toll_sections\", [\"id\",\"section_code\",\"section_name\",\"short_name\"], [], null, 500, null);\n  console.log(JSON.stringify(page.records, null, 2));\n}\n"
+          },
+          "output": "\n\nUncaught exception: TypeError: capnweb-validate: at TromSession.read_records[3]: expected union, got null\n    at async default (agent.js:3:14)\n    at async default.run (harness.js:27:18)"
+        }
+      ]
+    },
+    {
+      "chatId": 39,
+      "sequence": 10,
+      "timestamp": "2026-10-29T14:29:31.896Z",
+      "author": {
+        "type": "agent",
+        "id": "muse-spark-1.3-contributor-variant-4ddfa039f9b7",
+        "name": "Muse Spark 1.3"
+      },
+      "type": "message",
+      "message": "",
+      "toolCalls": [
+        {
+          "toolCallId": "call_2e7fa1f1-7a12-4d51-9b75-225e2bef8c0f",
+          "toolName": "executeCode",
+          "input": {
+            "code": "export default async function(self, env, ctx) {\n  let page = await env.TROM.read_records(\"toll_sections\", [\"id\",\"section_code\",\"section_name\",\"short_name\"]);\n  console.log(JSON.stringify(page.records, null, 2));\n}\n"
+          },
+          "output": "[\n  {\n    \"id\": 1,\n    \"section_code\": \"3901\",\n    \"section_name\": \"PEKANBARU -  BANGKINANG (PEKBANG)\",\n    \"short_name\": \"PEKBANG\"\n  },\n  {\n    \"id\": 2,\n    \"section_code\": \"3902\",\n    \"section_name\": \"BENGKULU - TABA PENANJUNG (BENGTABA)\",\n    \"short_name\": \"BENGTABA\"\n  },\n  {\n    \"id\": 5,\n    \"section_code\": \"3905\",\n    \"section_name\": \"PEKANBARU - DUMAI (PERMAI)\",\n    \"short_name\": \"PERMAI\"\n  },\n  {\n    \"id\": 6,\n    \"section_code\": \"3906\",\n    \"section_name\": \"SIGLI - BANDA ACEH (SIBANCEH)\",\n    \"short_name\": \"SIBANCEH\"\n  },\n  {\n    \"id\": 7,\n    \"section_code\": \"3907\",\n    \"section_name\": \"BAKAUHENI - TERBANGGI BESAR (BAKTER)\",\n    \"short_name\": \"BAKTER\"\n  },\n  {\n    \"id\": 8,\n    \"section_code\": \"3908\",\n    \"section_name\": \"TERBANGGI BESAR - PEMATANG PANGGANG - KAYU AGUNG (TBPPKA)\",\n    \"short_name\": \"TBPPKA\"\n  },\n  {\n    \"id\": 9,\n    \"section_code\": \"3909\",\n    \"section_name\": \"MEDAN - BINJAI (MEDBIN)\",\n    \"short_name\": \"MEDBIN\"\n  },\n  {\n    \"id\": 10,\n    \"section_code\": \"3910\",\n    \"section_name\": \"BINJAI STABAT (BINSTA)\",\n    \"short_name\": \"BINSTA\"\n  },\n  {\n    \"id\": 11,\n    \"section_code\": \"3911\",\n    \"section_name\": \"AKSES TANJUNG PRIOK (ATP)\",\n    \"short_name\": \"ATP\"\n  },\n  {\n    \"id\": 13,\n    \"section_code\": \"3917\",\n    \"section_name\": \"JAKARTA OUTER RING ROAD \\\"SEKSI S\\\" (JORR'S)\",\n    \"short_name\": \"JORRS\"\n  },\n  {\n    \"id\": 14,\n    \"section_code\": \"3915\",\n    \"section_name\": \"PALEMBANG - INDRALAYA (PALINDRA)\",\n    \"short_name\": \"PALINDRA\"\n  },\n  {\n    \"id\": 15,\n    \"section_code\": \"3915 - PIP\",\n    \"section_name\": \"INDRALAYA - PRABUMULIH (INDPRAB)\",\n    \"short_name\": \"INDRAB\"\n  },\n  {\n    \"id\": 16,\n    \"section_code\": \"3913\",\n    \"section_name\": \"INDRAPURA - KISARAN (INKIS)\",\n    \"short_name\": \"INKIS\"\n  },\n  {\n    \"id\": 17,\n    \"section_code\": \"3912\",\n    \"section_name\": \"KUALA TANJUNG - TEBING TINGGI - PARAPAT (KUTEPAT)\",\n    \"short_name\": \"KUTEPAT\"\n  },\n  {\n    \"id\": 18,\n    \"section_code\": \"3918\",\n    \"section_name\": \"BETUNG - TEMPINO - JAMBI (BETJAM)\",\n    \"short_name\": \"BETJAM\"\n  },\n  {\n    \"id\": 20,\n    \"section_code\": \"16\",\n    \"section_name\": \"PADANG - SICINCIN (SICIPA)\",\n    \"short_name\": \"SICIPA\"\n  }\n]"
+        }
+      ]
+    },
+    {
+      "chatId": 39,
+      "sequence": 11,
+      "timestamp": "2026-10-29T14:29:31.897Z",
+      "author": {
+        "type": "agent",
+        "id": "muse-spark-1.3-contributor-variant-4ddfa039f9b7",
+        "name": "Muse Spark 1.3"
+      },
+      "type": "action",
+      "actionId": 1065,
+      "actionLog": {
+        "id": 1065,
+        "gatekeeperId": 3,
+        "resourceTitle": "TROM BI",
+        "resourceUrl": "http://127.0.0.1:8091/api/agentic-bi/entities",
+        "createdAt": "2026-10-29T14:29:31.484Z",
+        "state": "approved",
+        "type": "observation",
+        "description": {
+          "title": "Read TROM records",
+          "description": "Read a projected page from the public TROM entity toll_sections."
+        }
+      }
+    },
+    {
+      "chatId": 39,
+      "sequence": 12,
+      "timestamp": "2026-10-29T14:29:34.932Z",
+      "author": {
+        "type": "agent",
+        "id": "muse-spark-1.3-contributor-variant-4ddfa039f9b7",
+        "name": "Muse Spark 1.3"
+      },
+      "type": "message",
+      "message": "",
+      "toolCalls": [
+        {
+          "toolCallId": "call_a8979abe-694f-4fc3-8165-e30e6de87715",
+          "toolName": "executeCode",
+          "input": {
+            "code": "export default async function(self, env, ctx) {\n  // monitoring_transactions for section 10, date range\n  const filters = [\n    {field: \"section_id\", operator: \"eq\", value: 10},\n    {field: \"date\", operator: \"gte\", value: \"2030-01-25\"},\n    {field: \"date\", operator: \"lte\", value: \"2030-01-30\"}\n  ];\n  let cursor = null;\n  let all = [];\n  do {\n    const p = await env.TROM.read_records(\"monitoring_transactions\", [\"id\",\"section_id\",\"gate_id\",\"date\"], filters, [{field:\"date\",direction:\"asc\"},{field:\"id\",direction:\"asc\"}], 500, cursor);\n    all.push(...p.records);\n    cursor = p.next_cursor;\n  } while(cursor);\n  console.log(\"count tx: \"+all.length);\n  console.log(JSON.stringify(all.slice(0,200), null, 1));\n}\n"
+          },
+          "output": "count tx: 1\n[\n {\n  \"id\": 1600200001,\n  \"section_id\": 10,\n  \"gate_id\": 48,\n  \"date\": \"2030-01-27\"\n }\n]"
+        }
+      ]
+    },
+    {
+      "chatId": 39,
+      "sequence": 13,
+      "timestamp": "2026-10-29T14:29:34.933Z",
+      "author": {
+        "type": "agent",
+        "id": "muse-spark-1.3-contributor-variant-4ddfa039f9b7",
+        "name": "Muse Spark 1.3"
+      },
+      "type": "action",
+      "actionId": 1066,
+      "actionLog": {
+        "id": 1066,
+        "gatekeeperId": 3,
+        "resourceTitle": "TROM BI",
+        "resourceUrl": "http://127.0.0.1:8091/api/agentic-bi/entities",
+        "createdAt": "2026-10-29T14:29:34.516Z",
+        "state": "approved",
+        "type": "observation",
+        "description": {
+          "title": "Read TROM records",
+          "description": "Read a projected page from the public TROM entity monitoring_transactions."
+        }
+      }
+    },
+    {
+      "chatId": 39,
+      "sequence": 14,
+      "timestamp": "2026-10-29T14:29:42.957Z",
+      "author": {
+        "type": "agent",
+        "id": "muse-spark-1.3-contributor-variant-4ddfa039f9b7",
+        "name": "Muse Spark 1.3"
+      },
+      "type": "message",
+      "message": "",
+      "toolCalls": [
+        {
+          "toolCallId": "call_f8ace467-c186-4682-a5a8-4737cedea7ff",
+          "toolName": "executeCode",
+          "input": {
+            "code": "export default async function(self, env, ctx) {\n  const filters = [{field: \"transaction_id\", operator: \"eq\", value: 1600200001}];\n  let cursor=null;\n  let all=[];\n  do {\n    const p = await env.TROM.read_records(\"monitoring_transaction_details\", [\"id\",\"transaction_id\",\"type\",\"booth_number\",\"sample_number\",\"transaction_duration\",\"vehicle_class_id\",\"vehicle_type\"], filters, [{field:\"id\",direction:\"asc\"}], 500, cursor);\n    all.push(...p.records);\n    cursor=p.next_cursor;\n  } while(cursor);\n  console.log(\"count details: \"+all.length);\n  console.log(JSON.stringify(all, null, 1));\n}\n"
+          },
+          "output": "count details: 7\n[\n {\n  \"id\": 1600200001,\n  \"transaction_id\": 1600200001,\n  \"type\": \"booth\",\n  \"booth_number\": 1,\n  \"sample_number\": 1,\n  \"transaction_duration\": 10,\n  \"vehicle_class_id\": 1,\n  \"vehicle_type\": null\n },\n {\n  \"id\": 1600200002,\n  \"transaction_id\": 1600200001,\n  \"type\": \"booth\",\n  \"booth_number\": 2,\n  \"sample_number\": 1,\n  \"transaction_duration\": 10,\n  \"vehicle_class_id\": 1,\n  \"vehicle_type\": null\n },\n {\n  \"id\": 1600200003,\n  \"transaction_id\": 1600200001,\n  \"type\": \"booth\",\n  \"booth_number\": 3,\n  \"sample_number\": 1,\n  \"transaction_duration\": 10,\n  \"vehicle_class_id\": 1,\n  \"vehicle_type\": null\n },\n {\n  \"id\": 1600200004,\n  \"transaction_id\": 1600200001,\n  \"type\": \"booth\",\n  \"booth_number\": 4,\n  \"sample_number\": 1,\n  \"transaction_duration\": 10,\n  \"vehicle_class_id\": 1,\n  \"vehicle_type\": null\n },\n {\n  \"id\": 1600200005,\n  \"transaction_id\": 1600200001,\n  \"type\": \"booth\",\n  \"booth_number\": 5,\n  \"sample_number\": 1,\n  \"transaction_duration\": 10,\n  \"vehicle_class_id\": 1,\n  \"vehicle_type\": null\n },\n {\n  \"id\": 1600200006,\n  \"transaction_id\": 1600200001,\n  \"type\": \"booth\",\n  \"booth_number\": 6,\n  \"sample_number\": 1,\n  \"transaction_duration\": 10,\n  \"vehicle_class_id\": 1,\n  \"vehicle_type\": null\n },\n {\n  \"id\": 1600200007,\n  \"transaction_id\": 1600200001,\n  \"type\": \"longbooth\",\n  \"booth_number\": 1,\n  \"sample_number\": 1,\n  \"transaction_duration\": 2,\n  \"vehicle_class_id\": 1,\n  \"vehicle_type\": null\n }\n]"
+        }
+      ]
+    },
+    {
+      "chatId": 39,
+      "sequence": 15,
+      "timestamp": "2026-10-29T14:29:42.958Z",
+      "author": {
+        "type": "agent",
+        "id": "muse-spark-1.3-contributor-variant-4ddfa039f9b7",
+        "name": "Muse Spark 1.3"
+      },
+      "type": "action",
+      "actionId": 1067,
+      "actionLog": {
+        "id": 1067,
+        "gatekeeperId": 3,
+        "resourceTitle": "TROM BI",
+        "resourceUrl": "http://127.0.0.1:8091/api/agentic-bi/entities",
+        "createdAt": "2026-10-29T14:29:42.546Z",
+        "state": "approved",
+        "type": "observation",
+        "description": {
+          "title": "Read TROM records",
+          "description": "Read a projected page from the public TROM entity monitoring_transaction_details."
+        }
+      }
+    },
+    {
+      "chatId": 39,
+      "sequence": 16,
+      "timestamp": "2026-10-29T14:29:46.521Z",
+      "author": {
+        "type": "agent",
+        "id": "muse-spark-1.3-contributor-variant-4ddfa039f9b7",
+        "name": "Muse Spark 1.3"
+      },
+      "type": "message",
+      "message": "{\"section_id\":10,\"section_name\":\"BINJAI STABAT (BINSTA)\",\"period\":{\"start\":\"2030-01-25\",\"end\":\"2030-01-30\"},\"average_transaction_duration\":8.86,\"unit\":\"second\"}"
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "new_set_id": "ebb5c42f-0a27-458a-a970-7d8c95a679ff",
+  "source_set_id": "5af778e5-2637-4b5e-8b8c-4e13b3f25dc6",
+  "case_count": 15,
+  "expected_answers_unchanged": true,
+  "source_set_unchanged": true,
+  "source_cases_unchanged": true,
+  "runs_unchanged": true,
+  "results_unchanged": true,
+  "source_cases_sha256": "a19ea865901948ed402735a26c5d6cda8983940d2bd8797c3676dcb1f6ab835b",
+  "results_sha256": "a38963385cd26d35a0e1eb20f404d4637c8856ce5927f149fb0e79e98b246424",
+  "shared_instructions_verified": true,
+  "enabled_context_collections": 0,
+  "evaluations_started": 0
+}

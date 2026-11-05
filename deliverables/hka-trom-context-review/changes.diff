@@ -1,0 +1,79 @@
+--- snapshot/references/incidents.md
++++ reviewed/references/incidents.md
+@@ -7,7 +7,7 @@
+ | `incidents` | One operational incident, carrying section, incident date, identity, description, and accident flag. |
+ | `incident_actions` | A handling action belonging to an incident through `incident_id`; an incident can have zero or several actions. |
+ | `accident_reports` | Accident detail associated with an incident through `incident_id`, including recorded cause IDs. |
+-| `accident_attributes` | Identities and labels for accident attributes referenced by the report's cause assignments. |
++| `m_accident_attributes` | Identities and labels for accident attributes referenced by the report's cause assignments. |
+ 
+ Incident and accident-cause reporting use the parent incident's section and operational date. `is_accident` is a boolean classification, not an accident category or cause.
+ 
+--- snapshot/references/inspections.md
++++ reviewed/references/inspections.md
+@@ -8,9 +8,9 @@
+ | `inspection_elements` | Element recorded within an inspection, linked through `inspection_id`. |
+ | `inspection_items` | Item observation within an element, linked through `inspection_element_id`; carries damage category and repair priority. |
+ | `inspection_schedule_assets` | Scheduled asset assignment referenced by the inspection; `asset_id` identifies its asset. |
+-| `assets` | Governed inspection/maintenance asset-master identity and label used in asset-level reporting. |
++| `maintenance_asset_types` | Legacy inspection/maintenance asset-master identities and labels referenced by scheduled asset assignments. |
+ 
+-The public `assets` entity represents the legacy inspection/maintenance asset master. It does not identify individual physical asset instances. Its ID and name are the identities used in this reporting domain.
++`inspection_schedule_assets.asset_id` references `maintenance_asset_types.id` in this environment. The separate `assets` entity is not the master referenced by this relationship. Resolve the asset ID and name from the referenced master. An asset-level count measures item observations grouped by that master identity; it does not establish a count of distinct physical objects.
+ 
+ The item inherits section and date from its inspection. Its asset attribution comes from the inspection's scheduled asset assignment. An element or item label alone does not identify the asset.
+ 
+--- snapshot/references/spm-sla.md
++++ reviewed/references/spm-sla.md
+@@ -16,11 +16,13 @@
+ 
+ ## Governed configuration
+ 
+-`effective_spm_sla_config` supplies each section's rule identity, descriptions, comparison operator, SPM threshold, SLA threshold, SLA applicability, and unit. Thresholds and applicability belong to that effective configuration, not to a universal table of constants in this package.
++`view_section_spm_sla` supplies each section's rule identity (`spm_id`, `code`), descriptions, comparison operator (`operator`), SPM threshold (`spm_parameter`), SLA threshold (`sla_parameter`), SLA applicability (`is_applicable`), and unit (`unit`). Thresholds and applicability belong to that effective configuration, not to a universal table of constants in this package.
+ 
+ SPM and SLA are separate targets for the same measurement. SLA applicability is per section and indicator: all, some, or none of a section's indicators can have an applicable SLA. A numeric SLA parameter alone does not establish applicability. Missing configuration is not the same as explicitly non-applicable SLA.
+ 
+-When a section has no SLA override for an active indicator, the effective configuration uses the SPM parameter and specification as the SLA defaults and marks SLA applicable. An explicit section override controls its own threshold and applicability. These defaults are already resolved in `effective_spm_sla_config`; an absent effective rule or an applicable rule without a threshold remains a configuration gap.
++When a section has no SLA override for an active indicator, the effective configuration uses the SPM parameter and specification as the SLA defaults and marks SLA applicable. An explicit section override controls its own threshold and applicability. These defaults are already resolved in `view_section_spm_sla`; an absent effective rule or an applicable rule without a threshold remains a configuration gap.
++
++This view contains the current section configuration. It has no validity-date range or rule-version field. In this reporting environment, the current configuration applies to observations in the requested period, including a past period. A request for the rules that were in force at the event date needs a separate historical configuration source; the operational date alone cannot reconstruct that history.
+ 
+ ## Measurement and evaluation grain
+ 
+--- snapshot/references/terminology.md
++++ reviewed/references/terminology.md
+@@ -20,9 +20,9 @@
+ 
+ ## Master identities
+ 
+-`toll_sections` and `toll_gates` identify the managed scope. `shift_schedules` identifies monitoring shifts; `vehicle_classes` identifies traffic classifications. Names, short names, and codes are labels for their master IDs, not independent entities. Current master records determine the available sections, gates, shifts, and classes.
++`toll_sections` and `toll_gates` identify the managed scope. `shift_schedules` identifies dated monitoring shifts; `m_section_shifts` defines section shift numbers and default hours; `m_vehicle_class` identifies traffic classifications. Names, short names, and codes are labels for their master IDs, not independent entities. Current master records determine the available sections, gates, shifts, and classes.
+ 
+-A shift number can recur on different dates and in different sections. The schedule ID identifies that dated assignment; the shift number alone does not identify a monitoring event.
++A shift number can recur on different dates and in different sections. `monitoring_transactions.schedule_id` identifies the dated `shift_schedules.id` assignment. Its `shift` field is the operational shift number. `shift_schedules.shift_id` is a logical link to `m_section_shifts.id`; the catalogue does not declare it as a foreign key. A shift number alone does not identify a monitoring event.
+ 
+ Entity names in this package refer to the governed data catalogue. Available fields and their exact spellings come from that catalogue; production storage names can differ.
+ 
+--- snapshot/references/traffic.md
++++ reviewed/references/traffic.md
+@@ -6,7 +6,7 @@
+ |---|---|
+ | `toll_volume_revenue` | Parent traffic report identifying section, gate, and operational `date`. |
+ | `toll_traffic_volumes` | Vehicle count `total` for a `vehicle_class_id`, belonging to a traffic report through `transaction_id`. |
+-| `vehicle_classes` | Current class identities and labels, including classes with no volume in a requested period. |
++| `m_vehicle_class` | Current class identities and labels, including classes with no volume in a requested period. |
+ 
+ **Total volume** is the sum of recorded vehicle counts in the requested scope, measured in **vehicles**. A count row can represent many vehicles; counting rows measures something else. Despite the parent report's name, these volume details represent vehicle counts rather than revenue.
+ 
+--- snapshot/references/transactions.md
++++ reviewed/references/transactions.md
+@@ -17,7 +17,7 @@
+ 
+ This quantity differs from an equally weighted mean of report averages or booth averages when sample counts differ. A request explicitly asking for those other grains has a different meaning.
+ 
+-The standard duration summary is reported to two decimal places. It uses `0.00` when there are no duration observations; this is an empty-summary convention, not evidence of instantaneous service.
++The standard duration summary uses numeric zero when there are no duration observations. This is an empty-summary convention, not evidence of instantaneous service. Display precision belongs to the requested output contract.
+ 
+ ## Booth compliance
+ 

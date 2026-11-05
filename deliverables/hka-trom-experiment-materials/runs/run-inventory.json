@@ -1,0 +1,75 @@
+{
+  "retrievedAt": "2026-11-01T16:38:24.084029+00:00",
+  "foundRunCount": 4,
+  "runs": [
+    {
+      "runId": "24afb5a8-d776-4e96-b4ca-111f2ffc0646",
+      "setId": "b5d5cf86-d8f4-4698-b2d0-a2f6daa81036",
+      "setName": "Set 1",
+      "status": "completed",
+      "runError": null,
+      "startedAt": "2026-10-27 07:26:50.014",
+      "finishedAt": "2026-10-27 07:26:57.629",
+      "category": "unrelated-single-case-run",
+      "summary": {
+        "resultCount": 1,
+        "passCount": 1,
+        "failCount": 0,
+        "pendingCount": 0,
+        "chatRefsPresent": 1
+      }
+    },
+    {
+      "runId": "ec5191cf-a2a2-439e-8e26-f40ade7bd3c4",
+      "setId": "02690384-886c-4044-bd13-3db8c247b6a2",
+      "setName": "HKA TROM — Original cases",
+      "status": "failed",
+      "runError": "'openGadget' is not a function.",
+      "startedAt": "2026-10-29 11:57:15.492",
+      "finishedAt": "2026-10-29 11:57:16.135",
+      "category": "older-11-case-run",
+      "summary": {
+        "resultCount": 11,
+        "passCount": 0,
+        "failCount": 11,
+        "pendingCount": 0,
+        "chatRefsPresent": 0
+      }
+    },
+    {
+      "runId": "fa5bb126-55d8-4413-aa07-7d43b6d50852",
+      "setId": "02690384-886c-4044-bd13-3db8c247b6a2",
+      "setName": "HKA TROM — Original cases",
+      "status": "completed",
+      "runError": null,
+      "startedAt": "2026-10-29 12:00:23.728",
+      "finishedAt": "2026-10-29 12:28:11.061",
+      "category": "older-11-case-run",
+      "summary": {
+        "resultCount": 11,
+        "passCount": 0,
+        "failCount": 11,
+        "pendingCount": 0,
+        "chatRefsPresent": 8
+      }
+    },
+    {
+      "runId": "e3353347-8ac0-4ca0-b5d6-b46ac78dac13",
+      "setId": "5af778e5-2637-4b5e-8b8c-4e13b3f25dc6",
+      "setName": "HKA TROM — Revised cases",
+      "status": "completed",
+      "runError": null,
+      "startedAt": "2026-10-29 14:28:28.418",
+      "finishedAt": "2026-10-29 19:20:03.496",
+      "category": "latest-15-case-run",
+      "summary": {
+        "resultCount": 15,
+        "passCount": 15,
+        "failCount": 0,
+        "pendingCount": 0,
+        "chatRefsPresent": 15
+      }
+    }
+  ],
+  "note": "Only one saved run contains the current 15-case set. The other run records belong to an older 11-case set or an unrelated one-case set."
+}

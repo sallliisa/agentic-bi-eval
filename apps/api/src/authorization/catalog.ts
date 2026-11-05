@@ -73,6 +73,30 @@ export const authorizationModules = [
       { code: "delete-role-assignments", name: "Unassign Role", description: "Remove a role from a user.", targetType: "global", active: true },
     ],
   },
+  {
+    code: "test-runner",
+    name: "Test Runner",
+    active: true,
+    permissions: [
+      { code: "view-test-sets", name: "View Test Sets", description: "View test sets and cases.", targetType: "global", active: true },
+      { code: "manage-test-sets", name: "Manage Test Sets", description: "Create and edit test sets and cases.", targetType: "global", active: true },
+      { code: "execute-test-runs", name: "Execute Test Runs", description: "Run test sets.", targetType: "global", active: true },
+      { code: "view-test-runs", name: "View Test Runs", description: "View test run results.", targetType: "global", active: true },
+    ],
+  },
+  {
+    code: "cloudflare-os-management",
+    name: "Cloudflare OS Management",
+    active: true,
+    permissions: [
+      { code: "view-agent-instructions", name: "View Agent Instructions", description: "View deployment-wide agent instructions.", targetType: "global", active: true },
+      { code: "manage-agent-instructions", name: "Manage Agent Instructions", description: "Edit deployment-wide agent instructions.", targetType: "global", active: true },
+      { code: "view-skills-context", name: "View Skills and Context", description: "View context collections, documents, and skills.", targetType: "global", active: true },
+      { code: "manage-skills-context", name: "Manage Skills and Context", description: "Manage web context collections, documents, and skills.", targetType: "global", active: true },
+      { code: "view-model-providers", name: "View Model Providers", description: "View account models and deployment model metadata.", targetType: "global", active: true },
+      { code: "view-connectors", name: "View Connectors", description: "View deployment connector availability and resource types.", targetType: "global", active: true },
+    ],
+  },
 ] as const satisfies readonly ModuleDefinition[];
 
 export type AuthorizationModuleCode = (typeof authorizationModules)[number]["code"];
